@@ -1,0 +1,52 @@
+1)02,31,31,03,01,(megawin temperature)
+2)02,31,33,03,03,(pressure)
+3)02,31,34,03,04,(TILT pos)
+4)02,31,35,03,05,(PAN pos)
+5)02,31,50,03,60,(Megawin version)
+6)02,31,4F,03,7F,(Camerq version)
+7)02,33,31,03,03,(recorder temperature)
+
+if((SC16_Com[1]==0x37)&&((SC16_Com[2]==0x31)||(SC16_Com[2]==0x34)||(SC16_Com[2]==0x53))){
+
+		if(SC16_Com[2]==0x31) //ryan@20150416
+			{
+			Camera_flag=((Camera_flag&0x30)|0x01);//set/clear  up move
+			RS_tx(ACK);
+			}
+		else if(SC16_Com[2]==0x34)
+			{
+			Camera_flag=((Camera_flag&0x30)|0x02);//set/clear down move
+			RS_tx(ACK);			
+			}
+		else
+			Camera_flag=0x00; //clear all move
+
+		
+	Com_flag=camera_com_flag;  
+	return TRUE;
+}
+
+if((SC16_Com[1]==0x37)&&(SC16_Com[2]>=0x41)&&(SC16_Com[2]<=0x47)) {
+
+		if(SC16_Com[2]==0x41)//ryan@20150416
+			{
+			Camera_flag=((Camera_flag&0x03)|0x10);//set/clear CCW move
+			RS_tx(ACK);
+			}
+		else if(SC16_Com[2]==0x42)
+			{
+			Camera_flag=((Camera_flag&0x03)|0x20);//set/clear CW move
+			RS_tx(ACK);
+			}
+
+	Com_flag=camera_com_flag;  
+	return TRUE;
+}
+
+
+Got Camera ready
+Got Camera ready
+Got Camera ready
+Got Camera ready
+Got Camera ready
+Got Camera ready

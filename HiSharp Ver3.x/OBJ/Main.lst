@@ -1,0 +1,1560 @@
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 1   
+
+
+C51 COMPILER V9.50a, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\OBJ\Main.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Main.c LARGE OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\OBJ\Main.l
+                    -st) TABS(2) OBJECT(.\OBJ\Main.obj)
+
+line level    source
+
+   1          //  **************************************************************************
+   2          //
+   3          //       Copyright (c) 1992-2006 Professonal Computer Technology Co., Ltd
+   4          //
+   5          //      All rights are reserved. Reproduction in whole or in parts is
+   6          //  prohibited without the prior written consent of the copyright owner.
+   7          //  --------------------------------------------------------------------------
+   8          //
+   9          //  Module: Main.C
+  10          //
+  11          //  Purpose: Implementation of Main.
+  12          //
+  13          //  Version: 0.01                                   2006/10/22 10:39下午
+  14          //
+  15          //  Compiler: Keil 8051 C Compiler v7.2
+  16          //
+  17          //  Reference:
+  18          //
+  19          //
+  20          //
+  21          //  --------------------------------------------------------------------------
+  22          //  Modification:
+  23          //
+  24          //  R0.01 2006/10/22 10:39下午 Phoenix Chuang
+  25          //  Reason:
+  26          //    1. Original.
+  27          //  Solution:
+  28          //  
+  29          //  **************************************************************************
+  30          //  -----------------------------------
+  31          //      Header Files
+  32          //  ----------------------------------- 
+  33          #include "types.h"
+  34          #include "Main.h"
+  35          #include "Timer.h"
+  36          #include "UART.h"
+  37          #include "BusCtrl.h"
+  38          #include "TW2835_Init.h"
+  39          #include "CommandShell.h"
+  40          #include "OSDAction.h"
+  41          #include "NED.h"    //add by ryan.
+*** WARNING C320 IN LINE 70 OF NED.h: "NED-5M-Sensor-Camera V0.a.4"
+  42          #include "Printf.h"
+  43          //#include "SST89x5xxRD2.H"
+  44          
+  45          //  ------------------------------------
+  46          //      Macro Definitions
+  47          //  ------------------------------------ 
+  48          
+  49          
+  50          //  ------------------------------------
+  51          //      Type Definitions
+  52          //  ------------------------------------
+  53          
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 2   
+
+  54          
+  55          //  ------------------------------------
+  56          //      Variables Definitions
+  57          //  ------------------------------------
+  58            U16 _delay;
+  59            U8 bdata commFlag;
+  60            sbit comm_chk_flag = commFlag^0;
+  61            sbit osd_chk_flag = commFlag^1;
+  62            COMMAND_BUFFER RScommand;
+  63            bit VlossFlag;
+  64          //------------------------------
+  65          bit data_chk_flag=0;    //ryan..
+  66            
+  67          U16 ADC_Val[2]={0,0};
+  68          U8 m_current=0;
+  69          U8 PIP_flag=0;
+  70          U8 Main_f=1;
+  71          U8 Small_f=2;
+  72          U8 timer2_loop;
+  73          U8 boot_flag=1;
+  74          extern U8 Temp_timeout;
+  75          extern U8 Com_pos;
+  76          extern U8 Com_Addr;
+  77          extern U8 Com_start;
+  78          extern U8 Com_end;
+  79          extern U8 Com_run;
+  80          extern U8 Monitor_current;
+  81          extern U8 Monitor_mode;
+  82          extern U8 Monitor_state;
+  83          extern U8 Back_f;
+  84          extern U8 Shrink_f;
+  85          extern  U8 Crop_f;//20150413
+  86          extern  U8 DRP_ID[9];
+  87          extern BYTE RsRxRp,RsRxWp;
+  88          extern U8 Camera_temp0;
+  89          extern U8 Camera_temp1;
+  90          extern U8 Camera_press0;
+  91          extern U8 Camera_press1;
+  92          extern U8 Camera_press2;
+  93          extern U8 Camera_press3;
+  94          extern U16 SC16_busy_flag;
+  95          extern  U8 work_flag=0;//20150814
+  96           U8 SC16_com_state=0;
+  97          extern U8 Camera_ver0;
+  98          extern U8 Camera_ver1;
+  99          extern U8 Camera_ver2;
+ 100          
+ 101          extern U8 get_data_addr;
+ 102          extern U8 get_data_val;
+ 103          
+ 104          extern U8 Camera_flag;
+ 105          
+ 106          U16 timerout1=0;  
+ 107          U16 timerout2=0;  
+ 108          U16 timerout3=0; 
+ 109          U16 timerout4=0;
+ 110          U8 Temp_timeout=1;
+ 111          U8 CB_flag=0;
+ 112          U8 CB_timeout=0;
+ 113          //extern U16 USERTMVAL6;
+ 114          //-------------------------------
+ 115          
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 3   
+
+ 116          //data U8 *mode="mode 0\r\n";
+ 117          // char *test="hscom 1 1 ch0:1%1bx ch1:0%1bx ch2:0%1bx ch3:0%1bx\n\r";
+ 118          
+ 119          //code U8 *test="hscom 1 1 ch1:12 ch0:02 ch2:02 ch3:03\r\n";  //camA
+ 120           //char *test="hscom 1 1 ch1:12 ch0:02 ch2:02 ch3:03\n\r";  //camB
+ 121           //char *test="hscom 2 2 ch0:12 ch1:02 ch2:02 ch3:03\n\r";  //camB+A
+ 122           //char *test="hscom 2 2 ch2:02 ch3:13 ch0:02 ch1:02\n\r";  //camR+C
+ 123           
+ 124          //  ------------------------------------
+ 125          //      Function Prototypes
+ 126          //  ------------------------------------
+ 127          
+ 128          
+ 129          
+ 130          // ===========================================================================
+ 131          //                      Parallel function description
+ 132          // ===========================================================================
+ 133          //
+ 134          //  Command Shell for Debug
+ 135          //
+ 136          
+ 137          
+ 138          void CommandShell(void)
+ 139          {
+ 140   1      
+ 141   1          data BYTE ch;
+ 142   1          static BYTE etx_flag=0;//ryan@20150605
+ 143   1      
+ 144   1          if( RS_RxReady() == true )
+ 145   1          { 
+ 146   2          
+ 147   2          WDTCR|=0x10;
+ 148   2              ch=RS_rx();
+ 149   2      
+ 150   2                  #ifdef  UART_debug
+                          printf("%x",(U16)(ch));
+                          #endif
+ 153   2                        
+ 154   2              #if 1        
+ 155   2                
+ 156   2                if(ch==STX&&Com_start==0)
+ 157   2                {
+ 158   3                Com_pos=1;
+ 159   3                //RScommand.WritePtr=1;
+ 160   3                SC16_Com[0]=ch; 
+ 161   3                  #ifdef  SC16IS750_DEBUG_PRINT 
+                          printf("\r\nCom_pos=%x  data=%x",(U16) (Com_pos-1), (U16) SC16_Com[Com_pos-1]);
+                          printf("\r\nCom_start");
+                          #endif  
+ 165   3                Com_start=1;
+ 166   3                }
+ 167   2                ///ryan@20150605
+ 168   2              else if((ch==ETX)&&((SC16_Com[1]==0x52)||(SC16_Com[1]==0x53))&&(etx_flag==0)&&Com_pos<=3)
+ 169   2                  {
+ 170   3                  etx_flag=1;
+ 171   3                  SC16_Com[Com_pos]=ch;           
+ 172   3                  Com_pos++;
+ 173   3                  }
+ 174   2                else if(ch==ETX&&Com_end==0)
+ 175   2                {
+ 176   3      
+ 177   3                  SC16_Com[Com_pos]=ch;           
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 4   
+
+ 178   3                  Com_pos++;
+ 179   3                  Com_end=1;
+ 180   3                  etx_flag=0;///end of loop
+ 181   3                  #ifdef  SC16IS750_DEBUG_PRINT 
+                          printf("\r\nCom_pos=%x  data=%x",(U16) (Com_pos-1), (U16) SC16_Com[Com_pos-1]);
+                          printf("\r\nCom_end");
+                          #endif  
+ 185   3                }
+ 186   2                else if(Com_end==1)
+ 187   2                {
+ 188   3                  
+ 189   3                SC16_Com[Com_pos]=ch; 
+ 190   3      
+ 191   3                  #ifdef  SC16IS750_DEBUG_PRINT 
+                          printf("\r\nCom_pos=%x  data=%x",(U16) (Com_pos), (U16) SC16_Com[Com_pos]);
+                          printf("\r\nBCC check..");
+                          #endif  
+ 195   3                          #ifdef  UART_debug
+                          printf("*");
+                          #endif
+ 198   3                    
+ 199   3                  if(SC16_BCC_Check(&SC16_Com[0],4))
+ 200   3                  {
+ 201   4                  RScommand.commFlage = true;
+ 202   4      
+ 203   4                    RScommand.commBuf[0]=SC16_Com[1];  
+ 204   4                    RScommand.commBuf[1]='\0';
+ 205   4                  
+ 206   4                  Com_run=SC16_Com[2];
+ 207   4              
+ 208   4                  RScommand.WritePtr=2;
+ 209   4                  }
+ 210   3                  else  
+ 211   3                  {             
+ 212   4                  ResetCommSell();
+ 213   4                  }
+ 214   3          
+ 215   3                }
+ 216   2                else
+ 217   2                  {
+ 218   3                  SC16_Com[Com_pos]=ch;           
+ 219   3                  Com_pos++;
+ 220   3                  if(Com_pos>8) ResetCommSell();
+ 221   3        
+ 222   3                  #ifdef  SC16IS750_DEBUG_PRINT 
+                          printf("\r\nCom_pos=%x  data=%x",(U16) (Com_pos-1), (U16) SC16_Com[Com_pos-1]);
+                          #endif  
+ 225   3                  }
+ 226   2      
+ 227   2      #else
+                  switch(ch) {
+                        #if 1
+                      
+                    case 0x03:
+                      RScommand.commBuf[RScommand.WritePtr] = '\0';
+                      RScommand.commFlage = true;
+                      chkStartCommShell(RScommand.commBuf);
+                      if( comm_chk_flag ) NewLine();
+              
+                      #ifdef  SC16IS750_DEBUG_PRINT 
+                   printf("\r\nget data=%x %x %x %x",(U16)RScommand.commBuf[0],(U16)RScommand.commBuf[1]\
+                     ,(U16)RScommand.commBuf[2],(U16)RScommand.commBuf[3]);
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 5   
+
+                      
+                        #endif  
+                      
+                      break;
+                      #elif 0
+                      
+                    case '\r':
+                      RScommand.commBuf[RScommand.WritePtr] = '\0';
+                      RScommand.commFlage = true;
+                      chkStartCommShell(RScommand.commBuf);
+                      if( comm_chk_flag ) NewLine();
+                      break;
+                      #endif  
+                    case 0x08:
+                      RScommand.WritePtr--;
+                      break;
+              
+                    default:
+                      RScommand.commBuf[RScommand.WritePtr] = ch;
+                      RScommand.WritePtr++;
+                      break;
+              
+                      
+                  }
+                  #endif
+ 265   2      
+ 266   2        }
+ 267   1           else
+ 268   1            {
+ 269   2      timerout4=0;
+ 270   2            }
+ 271   1           
+ 272   1      
+ 273   1           
+ 274   1      }
+ 275          
+ 276          
+ 277          // ===========================================================================
+ 278          //
+ 279          //
+ 280          //
+ 281          void NewLine(void)
+ 282          {
+ 283   1        puts("\r\n");                   
+ 284   1      }
+ 285          
+ 286          // ===========================================================================
+ 287          //
+ 288          //
+ 289          //
+ 290          void PutsP(BYTE *ptr)
+ 291          {
+ 292   1        data BYTE ch;
+ 293   1        
+ 294   1        while(*ptr!='\0') {
+ 295   2          ch = *ptr++;
+ 296   2          RS_tx(ch);
+ 297   2        }
+ 298   1      }
+ 299          
+ 300          // ===========================================================================
+ 301          //
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 6   
+
+ 302          //  Restart Command Shell 
+ 303          //
+ 304          void ResetCommSell(void)
+ 305          {
+ 306   1        //if( comm_chk_flag ) PutsP("Debug Program >");
+ 307   1        
+ 308   1        Com_start=0;  //ryan..
+ 309   1        Com_end=0;
+ 310   1        Com_pos=0;
+ 311   1        SC16_Com[0]=0;
+ 312   1        SC16_Com[1]=0;
+ 313   1        SC16_Com[2]=0;
+ 314   1        SC16_Com[3]=0;
+ 315   1        SC16_Com[4]=0;
+ 316   1        SC16_Com[5]=0;
+ 317   1        SC16_Com[6]=0;
+ 318   1        SC16_Com[7]=0;
+ 319   1        SC16_Com[8]=0;
+ 320   1        
+ 321   1        RScommand.WritePtr = 0;
+ 322   1        RScommand.commFlage = false;
+ 323   1        RScommand.commBuf[0] = '\0';
+ 324   1      }
+ 325          
+ 326          // ===========================================================================
+ 327          //
+ 328          //  Falsh OSD Contril
+ 329          //
+ 330          void PCT_FlashOSDCtrl(U8 _on)
+ 331          {
+ 332   1        if(_on) osd_chk_flag=false;
+ 333   1        else osd_chk_flag=true;
+ 334   1      }
+ 335          
+ 336          
+ 337          // ===========================================================================
+ 338          //
+ 339          //  Initial Command Shell 
+ 340          //
+ 341          void InitialCommShell(void)
+ 342          {
+ 343   1        comm_chk_flag=false;
+ 344   1        osd_chk_flag=false;
+ 345   1      
+ 346   1        //VlossState=0;
+ 347   1        VlossFlag=0;
+ 348   1        VlossCount=0;
+ 349   1      }
+ 350          
+ 351          // ===========================================================================
+ 352          //
+ 353          //  Start Command Shell 
+ 354          //
+ 355          void chkStartCommShell(char *ptr)
+ 356          {
+ 357   1        if( comm_chk_flag ) return;
+ 358   1        if( strcmp(ptr,"PCT")==0 ) comm_chk_flag=true;
+ 359   1      }
+ 360          
+ 361          void Wait_ms(U16 Tms)
+ 362          
+ 363          {
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 7   
+
+ 364   1      //  #define CPU_CLK_KHZ   40000
+ 365   1      #define CPU_CLK_KHZ   22118
+ 366   1      #define CPU_SPEED 1
+ 367   1      #define CountStick      (1000000U/((CPU_CLK_KHZ*CPU_SPEED)/12))/20    
+ 368   1      
+ 369   1      //#define CountStick      (1000000U/((CPU_CLK_KHZ*CPU_SPEED)/12))/10  
+ 370   1                 U16 count;
+ 371   1      
+ 372   1                 while(Tms)
+ 373   1      
+ 374   1                 {
+ 375   2      
+ 376   2                           for(count=0; count<CountStick; count++);//total 20 clock for this loop
+ 377   2      
+ 378   2                           Tms--;
+ 379   2      
+ 380   2                 }
+ 381   1      }
+ 382          
+ 383          // ===========================================================================
+ 384          //
+ 385          //
+ 386          //
+ 387          
+ 388          extern  U8 Cam_boot_flag;//ryan@20151201
+ 389          void main(void)
+ 390          {
+ 391   1        U8 Counter=0;
+ 392   1        U16 readtemp=0;
+ 393   1        U8 OsdCount1=200;//Kane @HS 2007 0725 Ver3.4
+ 394   1        U8 OsdCount2=100;//Kane @HS 2007 0725 Ver3.4
+ 395   1        U8 Camera_speed=0;
+ 396   1        // U8 loop=0,lp2=0,lp3=0;  //ryan..
+ 397   1       // U8 x,y,z;
+ 398   1      
+ 399   1        #if 0
+               char busw1[14]={"busw 0 1 A1 11"};  
+               char busw2[14]={"busw 0 1 A2 D7"};  
+               char yvmix[8]={"yvmix 2 "};
+               
+              char mode[7]={"mode 0 "};
+               char test[38]={"hscom 3 3 ch0:12 ch1:12 ch2:12 ch3:03 "};
+              
+               #endif
+ 408   1      
+ 409   1      InitialMPU(); 
+ 410   1       PWM_init(); 
+ 411   1      
+ 412   1      //ADC_FPBS();
+ 413   1      #if 0
+              
+                while(0)
+              {
+              //P0=0x00;
+              //printf(">");//ryan..
+              //HCSB1=0; HCSB0=0;
+              //P3_1=0;
+              I2C_SDA=1;
+              USERTMVAL1=2;
+              while(USERTMVAL1>=2);
+              I2C_SDA=0;
+              USERTMVAL1=2;
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 8   
+
+              while(USERTMVAL1>=2);
+              
+              #if 0
+              MDATA=0x00; 
+              HSPB  = 0;
+              HWRB  = 0;
+              HRDB  = 0;
+              HALE  = 0;
+              HCSB0 = 0;
+              HCSB1 = 0;
+              
+              
+              //  MCTRL=1;
+              Wait_ms(1);
+              //P3_1=1;
+              
+              MDATA=0xff; 
+              HSPB  = 1;
+              HWRB  = 1;
+              HRDB  = 1;
+              HALE  = 1;
+              HCSB0 = 1;
+              HCSB1 = 1;
+              //  MCTRL=0;
+              Wait_ms(1);
+              #endif
+              //P0=0xff;
+              //HCSB1=1; HCSB0=1;
+              //Wait_ms(20);
+              //ping(DVR_address);
+              //ping(RF_ID_address);
+              //ping(Camera_address);
+              
+              }
+              
+              #endif
+ 462   1      
+ 463   1        InitialCommShell();
+ 464   1        ResetCommSell();
+ 465   1      
+ 466   1      #if 1
+ 467   1      /*
+ 468   1      Set_PWM_Output(0,0);
+ 469   1      Set_PWM_Output(1,0);
+ 470   1      Set_PWM_Output(2,0);
+ 471   1      Set_PWM_Output(3,0);
+ 472   1      Set_PWM_Output(4,0);
+ 473   1      Set_PWM_Output(5,0);
+ 474   1      */
+ 475   1      Power_onoff(0);
+ 476   1      SC16_init();
+ 477   1      
+ 478   1      
+ 479   1      Monitor_set(Monitor_offset+3);
+ 480   1      
+ 481   1      ///TW28_WriteByte(1,0xab,0x0a);//ryan@20150522 color bar
+ 482   1      
+ 483   1      
+ 484   1      #endif
+ 485   1      
+ 486   1      #if 0 
+              TW28_WriteByte(1,0x11,0x00);
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 9   
+
+              TW28_WriteByte(1,0x19,0x00);
+              TW28_WriteByte(1,0x21,0x00);
+              TW28_WriteByte(1,0x29,0x00);
+              #endif
+ 492   1      
+ 493   1      GPIO_check();   //TX有錯誤所以開機只做一次baudrate設定
+ 494   1      
+ 495   1      //TW28_WriteByte(0,0x25,0x80);  //ryan
+ 496   1      EnUserTimer(USERTMID3,40);    
+ 497   1      EnUserTimer(USERTMID4,480);
+ 498   1      timerout1=480;
+ 499   1      //EnUserTimer(USERTMID5,16);//for camera moving//300ms
+ 500   1      EnUserTimer(USERTMID5,4);//for camera moving//300ms
+ 501   1      timerout2=600+600+600;//for camera speed//15s
+ 502   1      //EnUserTimer(USERTMID6,600+600+600);//for camera speed//15s
+ 503   1      Camera_speed=(((DVR_GetIO()&0x3f)&0x10)>>4);
+ 504   1      
+ 505   1        while(1){
+ 506   2            
+ 507   2        CommandShell();
+ 508   2        if(RScommand.commFlage == true) PCT_RunCommShell(RScommand.commBuf); 
+ 509   2        if(RScommand.commFlage == true) ResetCommSell(); 
+ 510   2           
+ 511   2        if(VlossFlag==1)
+ 512   2        {
+ 513   3          if(PCT_CheckSystem())//Kane Modified
+ 514   3            VlossFlag=0;
+ 515   3        }
+ 516   2      
+ 517   2        //<<<<<<<<<<<<<<<<<<<<<<<
+ 518   2          
+ 519   2        if(RS_RxReady()) EnUserTimer(USERTMID1,OsdCount1);//Kane @HS 2007 0725 Ver3.4
+ 520   2      
+ 521   2      
+ 522   2      
+ 523   2        if(USERTMVAL1==1)
+ 524   2        {
+ 525   3        //PCT_AudioActionForHS();
+ 526   3        //PCT_OSDActionForHS();
+ 527   3        //PCT_FlashOSDCtrl(OFF);
+ 528   3        DisUserTimer(USERTMID1);
+ 529   3        EnUserTimer(USERTMID0,OsdCount2);//Kane @HS 2007 0725 Ver3.4  // Reset Scan Time, Delay Check and show
+ 530   3        }
+ 531   2      
+ 532   2                   if((USERTMVAL0==1)&&(Com_start==0)) 
+ 533   2                  {
+ 534   3                   // Temp_check(); 
+ 535   3                      //Press_check(); 
+ 536   3                  PCT_GetVideoSignalStatus(); // Check and Show "VLoss", scan time = 500ms
+ 537   3                  //GPIO_check();   //ryan..
+ 538   3                  #ifndef screen3
+ 539   3                    if(Monitor_state!=Monitor_mode)
+ 540   3                    {
+ 541   4                    Monitor_set(Monitor_mode);
+ 542   4                    }
+ 543   3                  #endif
+ 544   3                  
+ 545   3                  //#if 1///#ifdef  get_data_debug
+ 546   3                    //printf("\r\n RsRxRp=%x",(U16) RsRxRp);  
+ 547   3                    //#endif
+ 548   3                    
+ 549   3                  EnUserTimer(USERTMID0,20);
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 10  
+
+ 550   3                    
+ 551   3                   }
+ 552   2      
+ 553   2        if((USERTMVAL5==1)&&(Camera_flag>=1)&&(Cam_boot_flag==1))//trigger the  up,down,ccw,cw functions
+ 554   2        {
+ 555   3          EnUserTimer(USERTMID5,4);
+ 556   3          Camera_move();
+ 557   3         
+ 558   3        }
+ 559   2      
+ 560   2      
+ 561   2        
+ 562   2      
+ 563   2          #if 0///ryan@20150804
+                   Temp_check(); 
+                    Press_check(); 
+                  #else
+ 567   2      
+ 568   2        
+ 569   2          if((USERTMVAL3==1)&&(Camera_flag==0)&&(Cam_boot_flag==1)) 
+ 570   2          {
+ 571   3            #ifdef  get_data_debug
+                      printf("\r\n SC16_com_state=%x",(U16) SC16_com_state);
+                      #endif  
+ 574   3      
+ 575   3          SC16_data_reset(buff_sel(SC16_com_state));
+ 576   3          SC16_com_state++;
+ 577   3          EnUserTimer(USERTMID3,40);
+ 578   3          if(SC16_com_state>=buff_num) SC16_com_state=0;
+ 579   3          //work_flag=1;
+ 580   3          } 
+ 581   2          else
+ 582   2          SC16_DataCheck();   //check sc16i750 
+ 583   2      
+ 584   2      
+ 585   2          if(timerout1==1)
+ 586   2          {
+ 587   3          SC16_busy_flag=0;
+ 588   3          timerout1=480;
+ 589   3                  #ifdef  get_data_debug
+                        printf("\r\n SC16_busy_flag_clear=%x",(U16) SC16_busy_flag);
+                        #endif  
+ 592   3          }
+ 593   2      #endif
+ 594   2      
+ 595   2      
+ 596   2        //SC16_DataCheck();   //check sc16i750 
+ 597   2      
+ 598   2      //set camera speed
+ 599   2      if((timerout2==1)&&(Cam_boot_flag==1))
+ 600   2      {
+ 601   3      Set_Camera_speed(Camera_speed); 
+ 602   3      timerout2=0;
+ 603   3      }
+ 604   2      
+ 605   2          WDTCR|=0x10;
+ 606   2      
+ 607   2          #if 0//ryan@20151106
+                  while(CB_flag==1)
+                  {
+                    //if((get_data_addr)&&(timerout3>=CB_delay))
+                    if(timerout3>=CB_delay)
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 11  
+
+                    {
+                    Get_Data(get_data_addr, get_data_val);
+                    
+                    CB_flag=0;
+                    timerout4=0;
+                    }
+                    WDTCR|=0x10;          
+                  }
+                  
+                  timerout3=0;
+                  #endif
+ 623   2      
+ 624   2      
+ 625   2      
+ 626   2        }
+ 627   1        OsdCount1=10;//Kane @HS 2007 0725 Ver3.4
+ 628   1        OsdCount2 = 20;//Kane @HS 2007 0725 Ver3.4
+ 629   1      
+ 630   1         
+ 631   1      }
+ 632          
+ 633          //void main_loop(void)
+ 634          //{
+ 635          
+ 636          
+ 637          //}
+ 638          // ===========================================================================
+ 639          //
+ 640          //
+ 641          //
+ 642          void InitialMPU(void){
+ 643   1      
+ 644   1        IP = 0x00;
+ 645   1        IE = 0x00;    
+ 646   1      
+ 647   1      //  PCON = 0x80;  // Set SMOD bit7 in power ctrl reg     //smod=1
+ 648   1                // This bit doubles the baud rate 
+ 649   1        PCON = 0x00;  // Clear SMOD bit7 in power ctrl reg   //smod=0
+ 650   1                // This bit doubles the baud rate 
+ 651   1        //watch dog
+ 652   1         WDTCR=0x27;   //pre-scaling value: 256  //4s will reset
+ 653   1         
+ 654   1        PSW  = 0x00;  // Set Program state Register
+ 655   1        TMOD = 0x22;  // Set Timer MODE Register
+ 656   1      //  TMOD = 0x12;  // Set Timer MODE Register
+ 657   1                // Timer0: MODE=1, 16-BIT Timer
+ 658   1                // Timer1: MODE=2, 8-BIT Auto Reload )
+ 659   1        //  TCON = 0x00;  // Set Timer0/Timer1 Control Register
+ 660   1          TCON = 0x00;  // Set Timer0/Timer1 Control Register
+ 661   1                // Timer0=OFF,Timer1=OFF
+ 662   1      //  SCON = 0x52;  // Setup Serial control Register
+ 663   1      //      SCON = 0x00;
+ 664   1                // Mode 1: Start Bit=1,Stop Bit=1,Data Bit=8 
+ 665   1                // and ready Transmit
+ 666   1                // REN: enable receiver 
+ 667   1        
+ 668   1        InitialUART();
+ 669   1        InitialTimer0();
+ 670   1            InitialTimer2();
+ 671   1          
+ 672   1      
+ 673   1      //XICON=0x00;
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 12  
+
+ 674   1      //AUXIE=0x00; 
+ 675   1      AUXR=0;
+ 676   1      AUXR1=0;
+ 677   1        TI = 1;     //* Set TI to indicate ready to xmit */
+ 678   1        EA=1;
+ 679   1        _nop_();
+ 680   1          
+ 681   1      
+ 682   1      
+ 683   1      #if 0
+              
+              CL=0; //PCA counter..
+              CH=0;
+              CMOD=0x04; // PWM use to  timer-0
+              CCON=0x40;  
+              
+              //CMOD=0x00; // PWM use to  crystal
+              //CL=(65536-High);    //PCA counter..
+              //CH=(65536-High)>>8;
+              //CL=1;    //PCA counter..
+              //CH=128;
+              
+              AUXR2|=0x80;    //Fosc/12 for timer-0
+              //CMOD=0x00;///  /12    ///22.1184MHz
+              //CMOD=0x02;/// /2
+              
+              CCAP0L=0x00;
+              CCAP0H =(256-128);
+              
+              CCAP1L=0x00;
+              CCAP1H =(256-128);
+              
+              CCAP2L=0x00;
+              CCAP2H =(256-128);
+              
+              CCAP3L=0x00;
+              CCAP3H =(256-128);
+              
+              CCAP4L=0x00;
+              CCAP4H =(256-128);
+              
+              CCAP5L=0x00;
+              CCAP5H =(256-128);
+              
+              CCAPM0  = 0x42;
+              CCAPM1  = 0x42;
+              CCAPM2  = 0x42;
+              CCAPM3  = 0x42;
+              CCAPM4  = 0x42;
+              CCAPM5  = 0x42;
+              
+              PCAPWM0 = 0x00;
+              PCAPWM1 = 0x00;
+              PCAPWM2 = 0x00;
+              PCAPWM3 = 0x00;
+              PCAPWM4 = 0x00;
+              PCAPWM5 = 0x00;
+              
+              
+               //-------------------------------
+              #endif
+ 735   1      P0M0=0;
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 13  
+
+ 736   1      P0M1=0;
+ 737   1      
+ 738   1      P1M0|=0x03;   //ADC0 & ADC1
+ 739   1      P1M1&=0xFC;  
+ 740   1       
+ 741   1      P2M0=0;
+ 742   1      P2M1=0;
+ 743   1      
+ 744   1      P3M0=0x00;
+ 745   1      P3M1=0x00;
+ 746   1       
+ 747   1      P4M0=0x00;
+ 748   1      P4M1=0x04;
+ 749   1      P4_1=0;
+ 750   1      
+ 751   1      
+ 752   1      P1_2=0;
+ 753   1      P1_3=0;
+ 754   1      P1_4=0;
+ 755   1      P1_5=0;
+ 756   1      P1_6=0;
+ 757   1      P1_7=0;
+ 758   1      
+ 759   1      //P1_1=1;//ryan@20150908
+ 760   1      
+ 761   1      }
+ 762          //----------------------------------------------------------
+ 763          
+ 764          void Set_PWM_Output (U8 addr, U8 val)
+ 765          {
+ 766   1      
+ 767   1      U8 num[6]={255,200,150,100,50,0};
+ 768   1      
+ 769   1      
+ 770   1      //CL=0; //PCA counter..
+ 771   1      //CH=0;
+ 772   1      //CMOD=0x04; // PWM use to  timer-0
+ 773   1      //CCON=0x40; 
+ 774   1      //AUXR2|=0x80;    //Fosc/12 for timer-0
+ 775   1      
+ 776   1      
+ 777   1      
+ 778   1       switch(addr)
+ 779   1          {
+ 780   2          case 0: 
+ 781   2                  CCAP0L=0x00;  
+ 782   2                    if(val==0)  CCAPM0=0x00;
+ 783   2                else   CCAPM0=0x42;                 
+ 784   2                    
+ 785   2                       CCAP0H =num[val];      
+ 786   2                       PCAPWM0 = 0x00;
+ 787   2                      break;
+ 788   2          case 1: 
+ 789   2                  CCAP1L=0x00;  
+ 790   2                    if(val==0)  CCAPM1=0x00;
+ 791   2                else   CCAPM1=0x42;                 
+ 792   2                
+ 793   2                     CCAP1H =num[val];    
+ 794   2                      PCAPWM1 = 0x00;
+ 795   2                      break;
+ 796   2          case 2:  
+ 797   2                  CCAP2L=0x00;  
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 14  
+
+ 798   2                    if(val==0)  CCAPM2=0x00;
+ 799   2                else   CCAPM2=0x42;
+ 800   2                
+ 801   2                      CCAP2H =num[val];   
+ 802   2                      PCAPWM2 = 0x00;
+ 803   2                      break; 
+ 804   2          case 3:
+ 805   2                  CCAP3L=0x00;  
+ 806   2                    if(val==0)  CCAPM3=0x00;
+ 807   2                else   CCAPM3=0x42; 
+ 808   2                
+ 809   2                      CCAP3H =num[val];   
+ 810   2                      PCAPWM3 = 0x00;
+ 811   2                      break;
+ 812   2          case 4:
+ 813   2                  CCAP4L=0x00;  
+ 814   2                    if(val==0)  CCAPM4=0x00;
+ 815   2                else   CCAPM4=0x42; 
+ 816   2                
+ 817   2                      CCAP4H =num[val];  
+ 818   2                      PCAPWM4 = 0x00;
+ 819   2                      break;
+ 820   2          case 5:
+ 821   2                  CCAP5L=0x00;  
+ 822   2                    if(val==0)  CCAPM5=0x00;
+ 823   2                else   CCAPM5=0x42;
+ 824   2                
+ 825   2                      CCAP5H =num[val];  
+ 826   2                      PCAPWM5 = 0x00;
+ 827   2                      break;
+ 828   2           default: 
+ 829   2            break;
+ 830   2          }
+ 831   1      
+ 832   1      
+ 833   1      }
+ 834          
+ 835          //-----------------------------------------------------------
+ 836          void PWM_init(void)
+ 837          {
+ 838   1      
+ 839   1      CL=0; //PCA counter..
+ 840   1      CH=0;
+ 841   1      CMOD=0x04; // PWM use to  timer-0
+ 842   1      //CMOD=0x00; // PWM use to  timer-0
+ 843   1      
+ 844   1      CCON=0x40;  
+ 845   1      
+ 846   1      //CMOD=0x00; // PWM use to  crystal
+ 847   1      //CL=(65536-High);    //PCA counter..
+ 848   1      //CH=(65536-High)>>8;
+ 849   1      //CL=1;    //PCA counter..
+ 850   1      //CH=128;
+ 851   1      
+ 852   1      AUXR2|=0x80;    //Fosc/12 for timer-0
+ 853   1      //CMOD=0x00;///  /12    ///22.1184MHz
+ 854   1      //CMOD=0x02;/// /2
+ 855   1      
+ 856   1      /*
+ 857   1      CCAP0L=0x00;
+ 858   1      CCAP0H =(256-128);
+ 859   1      
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 15  
+
+ 860   1      CCAP1L=0x00;
+ 861   1      CCAP1H =(256-128);
+ 862   1      
+ 863   1      CCAP2L=0x00;
+ 864   1      CCAP2H =(256-128);
+ 865   1      
+ 866   1      CCAP3L=0x00;
+ 867   1      CCAP3H =(256-128);
+ 868   1      
+ 869   1      CCAP4L=0x00;
+ 870   1      CCAP4H =(256-128);
+ 871   1      
+ 872   1      CCAP5L=0x00;
+ 873   1      CCAP5H =(256-128);
+ 874   1      
+ 875   1      CCAPM0  = 0x42;
+ 876   1      CCAPM1  = 0x42;
+ 877   1      CCAPM2  = 0x42;
+ 878   1      CCAPM3  = 0x42;
+ 879   1      CCAPM4  = 0x42;
+ 880   1      CCAPM5  = 0x42;
+ 881   1      
+ 882   1      PCAPWM0 = 0x00;
+ 883   1      PCAPWM1 = 0x00;
+ 884   1      PCAPWM2 = 0x00;
+ 885   1      PCAPWM3 = 0x00;
+ 886   1      PCAPWM4 = 0x00;
+ 887   1      PCAPWM5 = 0x00;
+ 888   1      */
+ 889   1      }
+ 890          
+ 891          //-----------------------------------------
+ 892          U8 Monitor_set(U8 val)
+ 893          {
+ 894   1      char busw1[14]={"busw 0 1 A1 11"};  
+ 895   1      char busw2[14]={"busw 0 1 A2 D7"};  
+ 896   1      char yvmix[8]={"yvmix 4 "};
+ 897   1      char mode[7]={"mode 0 "};
+ 898   1      
+ 899   1      
+ 900   1      //char conf[38]={"hscom 2 2 ch0:12 ch1:12 ch2:02 ch3:03 "};
+ 901   1      //char conf1[38]={"hscom 1 1 ch0:12 ch1:02 ch2:02 ch3:03 "};
+ 902   1      //ch0 Camera  
+ 903   1      //ch1 DVR       
+ 904   1      //ch2 Rear
+ 905   1      
+ 906   1      
+ 907   1      #ifdef OSD_off
+ 908   1      
+ 909   1      char conf1[38]={"hscom 1 1 ch0:10 ch1:00 ch2:00 ch3:00 "};   // C
+ 910   1      char conf2[38]={"hscom 1 1 ch2:10 ch1:00 ch0:00 ch3:00 "};   // R
+ 911   1      char conf3[38]={"hscom 1 1 ch1:10 ch0:00 ch2:00 ch3:00 "};  // D
+ 912   1      
+ 913   1      char conf4[38]={"hscom 2 2 ch2:10 ch0:10 ch1:00 ch3:00 "};   //CR
+ 914   1      char conf5[38]={"hscom 2 2 ch0:10 ch2:10 ch1:00 ch3:00 "};  //RC
+ 915   1      
+ 916   1      char conf6[38]={"hscom 2 2 ch1:10 ch0:10 ch2:00 ch3:00 "};  // DC
+ 917   1      char conf7[38]={"hscom 2 2 ch0:10 ch1:10 ch2:00 ch3:00 "};  // CD
+ 918   1      
+ 919   1      char conf8[38]={"hscom 2 2 ch1:10 ch2:10 ch0:00 ch3:00 "};  // DR
+ 920   1      char conf9[38]={"hscom 2 2 ch2:10 ch1:10 ch2:00 ch3:00 "};  // RD
+ 921   1      
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 16  
+
+ 922   1      char conf10[38]={"hscom 3 3 ch0:10 ch1:10 ch2:10 ch3:00 "};
+ 923   1      
+ 924   1      
+ 925   1      #else
+              char conf1[38]={"hscom 1 1 ch0:12 ch1:02 ch2:02 ch3:03 "};   // C
+              char conf2[38]={"hscom 1 1 ch2:12 ch1:02 ch0:02 ch3:03 "};   // R
+              char conf3[38]={"hscom 1 1 ch1:12 ch0:02 ch2:02 ch3:03 "};  // D
+              
+              char conf4[38]={"hscom 2 2 ch2:12 ch0:12 ch1:02 ch3:03 "};   //CR
+              char conf5[38]={"hscom 2 2 ch0:12 ch2:12 ch1:02 ch3:03 "};  //RC
+              
+              char conf6[38]={"hscom 2 2 ch1:12 ch0:12 ch2:02 ch3:03 "};  // DC
+              char conf7[38]={"hscom 2 2 ch0:12 ch1:12 ch2:02 ch3:03 "};  // CD
+              
+              char conf8[38]={"hscom 2 2 ch1:12 ch2:12 ch0:02 ch3:03 "};  // DR
+              char conf9[38]={"hscom 2 2 ch2:12 ch1:12 ch2:02 ch3:03 "};  // RD
+              
+              char conf10[38]={"hscom 3 3 ch0:12 ch1:12 ch2:12 ch3:03 "};
+              
+              #endif
+ 942   1      
+ 943   1      char conf11[38]={"hscom 1 1 ch3:00 ch1:00 ch2:00 ch0:00 "};
+ 944   1      
+ 945   1      //PU8  ptr;
+ 946   1      U8 Error=0;
+ 947   1      U8 ch=0;
+ 948   1      
+ 949   1      ch=(val-Monitor_offset);
+ 950   1      
+ 951   1      #ifdef Crop_Shrink_flag//20150413
+ 952   1      if(ch>=10)
+ 953   1        ch=ch-4;
+ 954   1      else
+ 955   1        Crop_f=0;//clear Crop_f   
+ 956   1      
+ 957   1      #endif
+ 958   1      
+ 959   1       Monitor_state=val;  
+ 960   1      
+ 961   1      switch(ch)
+ 962   1      {
+ 963   2      case 0:  PIP_flag=1; break;
+ 964   2      case 1:  PIP_flag=0; break;
+ 965   2      case 2: 
+ 966   2          Back_f=0;     
+ 967   2              Main_f=1;  
+ 968   2            break;    
+ 969   2      case 3:   Back_f=1;  
+ 970   2              Main_f=2;
+ 971   2            break;    
+ 972   2      case 4:   Shrink_f=1;
+ 973   2          Main_f=4; 
+ 974   2          break;    
+ 975   2      case 5:  Shrink_f=0;  
+ 976   2          Main_f=1;
+ 977   2              break;
+ 978   2      #ifdef Crop_Shrink_flag//ryan@20150413
+ 979   2      case 6:       //crop+shrink
+ 980   2        Crop_f=0x14;
+ 981   2            break;
+ 982   2      case 7:    //shrink+crop
+ 983   2        Crop_f=0x41;  
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 17  
+
+ 984   2            break;
+ 985   2      #endif
+ 986   2      default:  Main_f=1; break;
+ 987   2      }
+ 988   1      
+ 989   1      
+ 990   1      if(Crop_f>=1)
+ 991   1      {
+ 992   2      m_current=Crop_f;//ryan@20150413
+ 993   2      }
+ 994   1      else if(PIP_flag==1)
+ 995   1        {
+ 996   2          if(Back_f)
+ 997   2            {
+ 998   3                  if(Shrink_f==1)
+ 999   3                  {
+1000   4                  Main_f=2;
+1001   4                  Small_f=4;
+1002   4                  }
+1003   3                  else
+1004   3                  {
+1005   4                  Main_f=2;
+1006   4                  Small_f=1;            
+1007   4                  }
+1008   3            }
+1009   2          else
+1010   2            {
+1011   3                  if(Shrink_f==1)
+1012   3                  {
+1013   4                  Main_f=4;
+1014   4                  Small_f=2;
+1015   4                  }
+1016   3                  else
+1017   3                  {
+1018   4                  Main_f=1;
+1019   4                  Small_f=2;            
+1020   4                  }
+1021   3      
+1022   3            }
+1023   2      
+1024   2          m_current=(Main_f<<4)|Small_f;
+1025   2            
+1026   2        }
+1027   1      else
+1028   1      {
+1029   2            
+1030   2            if(Back_f)
+1031   2            {
+1032   3                  Main_f=2;
+1033   3            }
+1034   2            else
+1035   2            {
+1036   3                  if(Shrink_f==1)
+1037   3                  {
+1038   4                  Main_f=4;
+1039   4                  Small_f=2;
+1040   4                  }
+1041   3                  else
+1042   3                  {
+1043   4                  Main_f=1;
+1044   4                  Small_f=2;            
+1045   4                  }
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 18  
+
+1046   3      
+1047   3            }
+1048   2              
+1049   2          m_current=Main_f<<4;
+1050   2      
+1051   2      }
+1052   1      
+1053   1      
+1054   1      
+1055   1      
+1056   1      if(boot_flag)
+1057   1      {
+1058   2      
+1059   2        //InitialCommShell();
+1060   2        PCT_InitialTW2835();  // Initial RssetN for TW2835
+1061   2        //ResetCommSell();
+1062   2      
+1063   2      memcpy ((RScommand.commBuf), busw1, sizeof(busw1) );
+1064   2      PCT_RunCommShell(RScommand.commBuf); 
+1065   2      
+1066   2      memcpy ((RScommand.commBuf), busw2, sizeof(busw2) );
+1067   2      PCT_RunCommShell(RScommand.commBuf); 
+1068   2      
+1069   2      //memcpy ((RScommand.commBuf), yvmix, sizeof(yvmix) );
+1070   2      //PCT_RunCommShell(RScommand.commBuf); 
+1071   2      
+1072   2      memcpy ((RScommand.commBuf), mode, sizeof(mode)  );
+1073   2      //printf("RScommand.commBuf=%s\r\n",RScommand.commBuf);  //ryan
+1074   2      PCT_RunCommShell(RScommand.commBuf); 
+1075   2      }
+1076   1      else
+1077   1      {
+1078   2        #ifdef black_change
+                  #if 1 
+                  TW28_WriteByte(1,0x11,0x00);
+                  TW28_WriteByte(1,0x19,0x00);
+                  TW28_WriteByte(1,0x21,0x00);
+                  //TW28_WriteByte(1,0x29,0x00);
+              
+                  TW28_WriteByte(0,0xc3,0xf8);
+                  TW28_WriteByte(0,0xc4,0xff);
+                  TW28_WriteByte(1,0x0f,0x00);/// black boundary color
+                  //TW28_WriteByte(1,0x5f,0x30);
+                  #endif
+                  
+                memcpy ((RScommand.commBuf), conf11, sizeof(conf11) );
+                PCT_RunCommShell(RScommand.commBuf); 
+                Wait_ms(25+100+100);
+                #endif
+1095   2      
+1096   2      
+1097   2        
+1098   2      }
+1099   1      
+1100   1      
+1101   1      #ifdef screen3
+              if(boot_flag==1) m_current=10;
+              #endif
+1104   1      
+1105   1      switch(m_current)
+1106   1      {
+1107   2      #if 1
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 19  
+
+1108   2        #if 1//ryan
+1109   2      case 0x10: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); TW28_WriteByte(1,0x0f,0x03);break;  //C
+1110   2      case 0x20: memcpy ((RScommand.commBuf), conf2, sizeof(conf2) ); TW28_WriteByte(1,0x0f,0x03);break;  //R
+1111   2      case 0x40: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); TW28_WriteByte(1,0x0f,0x03);break;  //D
+1112   2      case 0x12: memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); break;  //CR
+1113   2      case 0x21: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); break;  //RC
+1114   2      case 0x14: memcpy ((RScommand.commBuf), conf6, sizeof(conf6) ); break;  //DC
+1115   2      case 0x41: memcpy ((RScommand.commBuf), conf7, sizeof(conf7) ); break;  //CD
+1116   2      case 0x24: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); break;  //DR
+1117   2      case 0x42: memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); break;  //RD
+1118   2      
+1119   2        #else
+              case 0x10: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); TW28_WriteByte(1,0x0f,0x03);break;  //C
+              case 0x20: memcpy ((RScommand.commBuf), conf2, sizeof(conf2) ); TW28_WriteByte(1,0x0f,0x03);break;  //R
+              case 0x40: memcpy ((RScommand.commBuf), conf3, sizeof(conf3) ); TW28_WriteByte(1,0x0f,0x03);break;  //D
+              case 0x12: memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); break;  //CR
+              case 0x21: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); break;  //RC
+              case 0x14: memcpy ((RScommand.commBuf), conf6, sizeof(conf6) ); break;  //DC
+              case 0x41: memcpy ((RScommand.commBuf), conf7, sizeof(conf7) ); break;  //CD
+              case 0x24: memcpy ((RScommand.commBuf), conf8, sizeof(conf8) ); break;  //DR
+              case 0x42: memcpy ((RScommand.commBuf), conf9, sizeof(conf9) ); break;  //RD
+                #endif
+1130   2      #ifdef screen3
+              case 10:      memcpy ((RScommand.commBuf), conf10, sizeof(conf10) ); break;
+              #endif
+1133   2      
+1134   2      default:
+1135   2          memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); break;
+1136   2      #else
+              case 0x00: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); break;
+              case 0x01: memcpy ((RScommand.commBuf), conf2, sizeof(conf2) ); break;
+              case 0x10: memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); break;
+              case 0x11: memcpy ((RScommand.commBuf), conf3, sizeof(conf3) ); break;
+              #ifdef screen3
+              case 4:       memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); break;
+              #endif
+              
+              default:
+                  memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); break;
+              #endif  
+1148   2      }
+1149   1      
+1150   1      #ifdef screen3
+              if(boot_flag) 
+              {
+                 m_current=0;      
+              }
+              #endif
+1156   1      
+1157   1      boot_flag=0;
+1158   1      //printf("RScommand.commBuf=%s\r\n",RScommand.commBuf);  //ryan
+1159   1      PCT_RunCommShell(RScommand.commBuf); 
+1160   1      
+1161   1      
+1162   1      switch(m_current)
+1163   1      {
+1164   2      //#if 1
+1165   2      case 0x10: Bound_Set(0x00); break;  //C
+1166   2      case 0x20: Bound_Set(0x00); break;  //R
+1167   2      case 0x40: Bound_Set(0x00);Error=1; break;  //D
+1168   2      case 0x12: Bound_Set(0x01); break;  //CR
+1169   2      case 0x21: Bound_Set(0x01); break;  //RC
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 20  
+
+1170   2      case 0x14: Bound_Set(0x01); break;  //DC
+1171   2      case 0x41: Bound_Set(0x01); break;  //CD
+1172   2      case 0x24: Bound_Set(0x01); Error=1;break;  //DR
+1173   2      case 0x42: Bound_Set(0x01);Error=1; break;  //RD
+1174   2      
+1175   2      default:
+1176   2           break;
+1177   2      }
+1178   1      
+1179   1      #ifdef  black_change
+              TW28_WriteByte(0,0xc3,0x01);
+              TW28_WriteByte(0,0xc4,0x00);
+              #endif
+1183   1      
+1184   1          #ifdef  Monitor_debug
+                printf("\r\nMonitor mode=%x, m_current=%x ",(U16)ch, (U16)m_current); 
+                  //printf(" ,return=%x", (U16)Error);
+                
+                   
+              
+                  if(Error==1)
+                  {
+                    //SC16_Com
+                      //RS_tx(STX);
+                      // RS_tx(SC16_Com[1]);
+                      // RS_tx(SC16_Com[2]);                 
+                      // RS_tx(ETX);
+                      // RS_tx(SC16_Com[4]);
+                       RS_tx(0x35);
+                     RS_tx(0x35);
+                      RS_tx(0x35);
+                        printf(" Error=1");
+                  } 
+                  #endif  
+1204   1      
+1205   1      return Error;
+1206   1      
+1207   1      }
+1208          
+1209          //-----------------------------------------
+1210          
+1211          U8 PWM_set(U8 val)
+1212          {
+1213   1      
+1214   1      U8 Error=0,ch=0,set_val=0;
+1215   1      
+1216   1      if(val>=PWM1_offset&&val<=(PWM6_offset+6))
+1217   1      {
+1218   2      ch=((val-PWM1_offset)/6);
+1219   2        set_val=(val-PWM1_offset)%6;
+1220   2      
+1221   2        
+1222   2          Set_PWM_Output(ch,set_val);
+1223   2      
+1224   2          #ifdef  SC16IS750_DEBUG_PRINT 
+                  printf("\r\nPWM_set ch=%x , val=%x",(U16)ch,(U16)set_val);
+                    #endif   
+1227   2          
+1228   2            Error=1;
+1229   2      }
+1230   1      
+1231   1      return Error;
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 21  
+
+1232   1      }
+1233          
+1234          //-----------------------------------------
+1235          
+1236          void Temp_check(void)
+1237          {
+1238   1      U16 val=0;
+1239   1      //U8 loop=0;
+1240   1      
+1241   1      //val=(ADT75_GetTemp()>>4)/16;
+1242   1      val=(ADT75_GetTemp()>>4)/16;
+1243   1      if((P1_1==0))
+1244   1        val=99;
+1245   1      //else if(val&0x0800==1)
+1246   1        //val=0;
+1247   1      #if 1
+1248   1      
+1249   1        //val&=99;//ryan@20150909
+1250   1      
+1251   1      if((val%10)>9);
+1252   1      else
+1253   1      Camera_temp0=(U8)(val%10)+0x30;
+1254   1      
+1255   1      Camera_temp1=(U8)(val/10)+0x30;
+1256   1          
+1257   1          //if(Temp_timeout==1)
+1258   1          //  {
+1259   1          //printf("\r\nTemp_check=%x",val);
+1260   1          //Temp_timeout= 120;
+1261   1          //  }
+1262   1      #else
+              SC16_Com[0]=STX;
+              SC16_Com[1]=0x32;
+              SC16_Com[2]=0x31;
+              SC16_Com[3]=(U8)(val/10)+0x30;
+              SC16_Com[4]=(U8)(val%10)+0x30;
+              SC16_Com[5]=0x20;
+              SC16_Com[6]=0x20;
+              SC16_Com[7]=ETX;
+              SC16_Com[8]=0;
+              
+              #ifdef BCC_noSTXEXT          ////XOR 1-6
+              for(loop=1;loop<=6;loop++)
+              SC16_Com[8]^=SC16_Com[loop];
+              #else                                 //XOR 0-7
+              for(loop=0;loop<=7;loop++)
+              SC16_Com[8]^=SC16_Com[loop];
+              #endif
+              
+              
+              
+                for(loop=0;loop<=8;loop++)
+                {
+                RS_tx(SC16_Com[loop]);
+                //DELAY_FOR(200);
+                }
+              #endif
+1289   1      
+1290   1      }
+1291          
+1292          //---------------------------------------------------
+1293          
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 22  
+
+1294          
+1295          void Press_check(void)
+1296          {
+1297   1      
+1298   1      //#define _2V  101300  ///2.0V
+1299   1      //#define _3V  199400  ////3.0V
+1300   1      //#define _1V_step   311
+1301   1      //#define press_offset   0
+1302   1      //#define ap_offset 60-8
+1303   1      
+1304   1      
+1305   1      U16 val=0;
+1306   1      U8 loop=0;
+1307   1      #if 1
+1308   1      
+1309   1      
+1310   1      #define _2V  101300  ///2.0V
+1311   1      #define _3V  199400  ////3.0V
+1312   1      #define _1V_step   311
+1313   1      #define press_offset   0
+1314   1      #define ap_offset 60-8
+1315   1      
+1316   1      U32 temp_val=0;
+1317   1      val=ADC_FPBS();
+1318   1      
+1319   1      val=val-press_offset;
+1320   1      temp_val=val;
+1321   1      
+1322   1      if(temp_val>=(_1V_step*2))   ///>2.0  
+1323   1      {
+1324   2          if(temp_val<=(_1V_step*3))   ///<3V
+1325   2            {
+1326   3              //temp_val=(val-_1V_step)*487;
+1327   3              temp_val=((_1V_step*3)-temp_val)*(316+ap_offset);
+1328   3            }
+1329   2          else
+1330   2            {
+1331   3             temp_val=199400;
+1332   3            }
+1333   2      }
+1334   1      else                ///2.0V to 1.6V
+1335   1      {
+1336   2        //if(temp_val>=328)   ///>1.6 V
+1337   2        if(temp_val>=499)   ///>1.6 V
+1338   2            {
+1339   3              //temp_val=((_1V_step*2)-val)*478;
+1340   3              temp_val=((_1V_step*2)-val)*210;
+1341   3            }
+1342   2          else
+1343   2            {
+1344   3            temp_val=62100;
+1345   3            }
+1346   2      }
+1347   1      
+1348   1      
+1349   1      val=(temp_val/100);
+1350   1      
+1351   1      
+1352   1      temp_val=val;
+1353   1      
+1354   1      
+1355   1      
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 23  
+
+1356   1      if(val>9999)  val=9999;
+1357   1      
+1358   1      //val=1994;
+1359   1      
+1360   1      Camera_press3=(val/1000)+0x30;  val=(val%1000);
+1361   1      Camera_press2=(val/100)+0x30;  val=(val%100);
+1362   1      Camera_press1=(val/10)+0x30;  val=(val%10);
+1363   1      Camera_press0=val+0x30;
+1364   1      
+1365   1          #ifdef  press_debug 
+                  printf("\r\nGet_press=%x ",(U16)temp_val);
+                    #endif  
+1368   1      
+1369   1      
+1370   1      
+1371   1      
+1372   1      #else
+              Camera_press1=(U8)(val/10)+0x30;
+              Camera_press0=(U8)(val%10)+0x30;
+              
+              
+              /*
+              SC16_Com[0]=STX;
+              SC16_Com[1]=0x32;
+              SC16_Com[2]=0x31;
+              SC16_Com[3]=(U8)(val/10)+0x30;
+              SC16_Com[4]=(U8)(val%10)+0x30;
+              SC16_Com[5]=0x20;
+              SC16_Com[6]=0x20;
+              SC16_Com[7]=ETX;
+              SC16_Com[8]=0;
+              
+              #ifdef BCC_noSTXEXT          ////XOR 1-6
+              for(loop=1;loop<=6;loop++)
+              SC16_Com[8]^=SC16_Com[loop];
+              #else                                 //XOR 0-7
+              for(loop=0;loop<=7;loop++)
+              SC16_Com[8]^=SC16_Com[loop];
+              #endif
+              
+              
+              
+                for(loop=0;loop<=8;loop++)
+                {
+                RS_tx(SC16_Com[loop]);
+                //DELAY_FOR(200);
+                }
+              
+              
+                  #ifdef  SC16IS750_DEBUG_PRINT 
+                  printf("\r\nGet_press=%x ",(U16)val);
+                    #endif  
+              
+                  */
+              
+              #endif
+1412   1      }
+1413          
+1414          //---------------------------------------------------
+1415          void Version_check(void)
+1416          {
+1417   1      
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 24  
+
+1418   1      //U16 val=0;
+1419   1      U8 loop;
+1420   1      
+1421   1      SC16_Com[0]=STX;
+1422   1      SC16_Com[1]=0x32;
+1423   1      SC16_Com[2]=0x50;
+1424   1      SC16_Com[3]=Ver0+0x30;
+1425   1      SC16_Com[4]=Ver1+0x30;
+1426   1      //SC16_Com[5]=Ver2+0x30;
+1427   1      SC16_Com[5]=Ver2;
+1428   1      SC16_Com[6]=0x20;
+1429   1      SC16_Com[7]=ETX;
+1430   1      SC16_Com[8]=0;
+1431   1      
+1432   1      #ifdef BCC_noSTXEXT          ////XOR 1-6
+              for(loop=1;loop<=6;loop++)
+              SC16_Com[8]^=SC16_Com[loop];
+              #else                                 //XOR 0-7
+1436   1      for(loop=0;loop<=7;loop++)
+1437   1      SC16_Com[8]^=SC16_Com[loop];
+1438   1      #endif
+1439   1      
+1440   1      
+1441   1      
+1442   1        for(loop=0;loop<=8;loop++)
+1443   1        {
+1444   2        RS_tx(SC16_Com[loop]);
+1445   2        //DELAY_FOR(200);
+1446   2        }
+1447   1      
+1448   1      }
+1449          
+1450          void Camera_Version_check(void)
+1451          {
+1452   1      //U16 val=0;
+1453   1      U8 loop;
+1454   1      
+1455   1      SC16_Com[0]=STX;
+1456   1      SC16_Com[1]=0x32;
+1457   1      SC16_Com[2]=0x4f;
+1458   1      SC16_Com[3]=Camera_ver0;
+1459   1      SC16_Com[4]=Camera_ver1;
+1460   1      //SC16_Com[5]=Ver2+0x30;
+1461   1      SC16_Com[5]=Camera_ver2;
+1462   1      SC16_Com[6]=0x20;
+1463   1      SC16_Com[7]=ETX;
+1464   1      SC16_Com[8]=0;
+1465   1      
+1466   1      #ifdef BCC_noSTXEXT          ////XOR 1-6
+              for(loop=1;loop<=6;loop++)
+              SC16_Com[8]^=SC16_Com[loop];
+              #else                                 //XOR 0-7
+1470   1      for(loop=0;loop<=7;loop++)
+1471   1      SC16_Com[8]^=SC16_Com[loop];
+1472   1      #endif
+1473   1      
+1474   1      
+1475   1      
+1476   1        for(loop=0;loop<=8;loop++)
+1477   1        {
+1478   2        RS_tx(SC16_Com[loop]);
+1479   2        //DELAY_FOR(200);
+C51 COMPILER V9.50a   MAIN                                                                 03/03/2016 17:29:31 PAGE 25  
+
+1480   2        }
+1481   1      
+1482   1      }
+1483          //---------------------------------------------------
+1484          
+1485          // ===========================================================================
+1486          // END of File 
+1487          // ===========================================================================
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   2743    ----
+   CONSTANT SIZE    =    474    ----
+   XDATA SIZE       =     69     496
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

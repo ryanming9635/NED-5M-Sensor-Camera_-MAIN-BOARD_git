@@ -1,0 +1,317 @@
+C51 COMPILER V9.50a   PRINTF                                                               01/14/2015 13:33:03 PAGE 1   
+
+
+C51 COMPILER V9.50a, COMPILATION OF MODULE PRINTF
+OBJECT MODULE PLACED IN .\OBJ\Printf.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Printf.c LARGE OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\OBJ\Prin
+                    -tf.lst) TABS(2) OBJECT(.\OBJ\Printf.obj)
+
+line level    source
+
+   1          //#include "Config.h"
+   2          
+   3          //#ifdef SERIAL
+   4          
+   5          //#include "reg.h"
+   6          //#include "Typedefs.h"
+   7          //#include "debug.h"
+   8          #include "main.h"
+*** ERROR C141 IN LINE 53 OF main.h: syntax error near 'BYTE'
+*** ERROR C129 IN LINE 53 OF main.h: missing ';' before 'commBuf'
+   9          #include "printf.h"
+  10          //#include <stdarg.h>
+  11          #include "types.h"
+  12          
+  13          #define DWORD U16
+  14          
+  15          //CODE BYTE Hex[] = "0123456789ABCDEF";
+  16          //extern  bit       RS_Xbusy;     // bit RS_Xbusy=0;
+  17          //extern  BYTE  DebugLevel;
+  18          
+  19          
+  20          void DoPrint( const char CODE_P *fmt, va_list ap )
+  21          {
+  22            char  ch;
+  23            char  i;
+  24            long  value;
+  25            bit   fl_zero;
+  26            bit   fl_num;
+  27            BYTE  fl_len;
+  28            BYTE  cnt;
+  29            DWORD mask=1;
+  30          
+  31            #ifdef KEILC
+  32            char *ptr;
+  33            #endif
+  34          
+  35            while(1) {
+  36              
+  37              //----- Find Formatter % -----
+  38          
+  39              switch( ch = *fmt++ ) {
+  40                case 0:   return;
+  41                case '%': if( *fmt != '%' ) break;
+  42                      fmt++;
+  43                default:  _outchar( ch );
+  44                      continue;
+  45              }
+  46          
+  47              //----- Get Count -------------
+  48              
+  49              fl_zero = 0;
+  50              fl_num = 0;
+  51              cnt = 0;
+  52          
+C51 COMPILER V9.50a   PRINTF                                                               01/14/2015 13:33:03 PAGE 2   
+
+  53              ch = *fmt++;
+  54          
+  55              if( ch=='0' ) {
+  56                fl_zero = 1;
+  57                ch = *fmt++;
+  58                cnt = ch - '0';
+  59                ch = *fmt++;
+  60              }
+  61              else if( ch>='0' && ch<='9' ) {
+  62                cnt = ch - '0';
+  63                ch = *fmt++;
+  64              }
+  65          
+  66              //----- Get char(B) / int / long(L) ----------------
+  67          
+  68              fl_len = 2;
+  69          
+  70              switch(ch) {
+  71              case 'l':
+  72              case 'L': ch = *fmt++;  fl_len = 4;   break;
+  73              case 'b':
+  74              case 'B': ch = *fmt++;  fl_len = 1;   break;
+  75              }   
+  76          
+  77              //----- Get Type Discriptor -----
+  78              
+  79              switch( ch ) {
+  80          
+  81                case 'd':
+  82                case 'u':
+  83          
+  84                  switch (fl_len) {
+  85                  case 1:
+  86                    if( ch=='d' ) value = (char)va_arg( ap, char );
+  87                    else          value = (BYTE)va_arg( ap, BYTE );
+  88                    break;
+  89          
+  90                  case 2:
+  91                    if( ch=='d' ) value = (int)va_arg( ap,  int );
+  92                    else          value = (WORD)va_arg( ap, WORD );
+  93                    break;
+  94          
+  95                  case 4:
+  96                    if( ch=='d' ) value = (long)va_arg( ap, long );
+  97                    else          value = (DWORD)va_arg( ap, DWORD );
+  98                    break;
+  99                  }
+ 100          
+ 101                  if( value<0 ) {
+ 102                    _outchar('-');
+ 103                    value = value*(-1);
+ 104                  }
+ 105          
+ 106                  if(cnt==0) {
+ 107                    if( value==0 ) { _outchar('0'); continue; }
+ 108          
+ 109                    for(cnt=0, mask=1; cnt<10; cnt++) {
+ 110                      if( (value/mask)==0 ) break;
+ 111                      mask = mask*10;
+ 112                    }
+ 113                  }
+ 114          
+C51 COMPILER V9.50a   PRINTF                                                               01/14/2015 13:33:03 PAGE 3   
+
+ 115                  for(i=0, mask=1; i<cnt-1; i++) mask = mask*10;
+ 116          
+ 117                  while(1) {
+ 118                    ch = (value / mask) + '0';
+ 119                    if( ch=='0' && fl_zero==0 && mask!=1 ) ch=' ';
+ 120                    else fl_zero = 1;
+ 121                    _outchar(ch);
+ 122          
+ 123                    value = value % (mask);
+ 124                    mask = mask / 10;
+ 125                    
+ 126                    if( mask==0 )
+ 127                      break;
+ 128                  }
+ 129                  continue;
+ 130          
+ 131                case 'x':
+ 132                case 'X':
+ 133          
+ 134                  switch (fl_len) {
+ 135                  case 1: value = (BYTE)va_arg( ap, BYTE );   break;
+ 136                  case 2: value = (WORD)va_arg( ap, WORD );   break;
+ 137                  case 4: value = (DWORD)va_arg( ap, DWORD );   break;
+ 138                  }
+ 139          
+ 140                  if(cnt==0) cnt = fl_len*2;
+ 141          
+ 142                  for(i=0; i<cnt; i++) {
+ 143                    _outchar( Hex[(value >> (cnt-i-1)*4) & 0x000f] );
+ 144                  }
+ 145                  continue;
+ 146          
+ 147                case 's':
+ 148          
+ 149                  #ifdef TASKINGC
+                      
+                      value = (WORD)va_arg( ap, WORD );
+                      while(*(char CODE_P *)value!='\0')
+                        _outchar(*(char CODE_P *)value++);
+                      continue;
+              
+                      #elif defined KEILC
+ 157                  
+ 158                  ptr = (char *)va_arg( ap, char* );
+ 159                  while(*ptr!='\0')
+ 160                    _outchar(*ptr++);
+ 161                  continue;
+ 162          
+ 163                  #endif
+ 164          
+ 165          
+ 166                case 'c':
+ 167                  value = va_arg( ap, int );
+ 168                    _outchar((BYTE)value);
+ 169                  continue;
+ 170          
+ 171                default:
+ 172                  value = (WORD)va_arg( ap, int );
+ 173                  continue;
+ 174              }
+ 175            }
+ 176          }
+C51 COMPILER V9.50a   PRINTF                                                               01/14/2015 13:33:03 PAGE 4   
+
+ 177          
+ 178          //===========================================================================//
+ 179          //                                                                           //
+ 180          //===========================================================================//
+ 181          //va_list ap;
+ 182          
+ 183          void Printf( const char CODE_P *fmt, ... )
+ 184          {
+ 185            va_list ap;
+ 186          
+ 187            va_start(ap, fmt);
+ 188            DoPrint( fmt, ap );
+ 189            va_end( ap );
+ 190          }
+ 191          
+ 192          void Puts( CODE_P char *ptr )
+ 193          {
+ 194            while(*ptr!='\0')
+ 195              RS_tx(*ptr++);
+ 196          }
+ 197          
+ 198          //===========================================================================//
+ 199          //                                                                           //
+ 200          //===========================================================================//
+ 201          #ifdef DEBUG
+              
+              void dPrintf( const char CODE_P *fmt, ... )
+              {
+                va_list ap;
+              
+                if( DebugLevel >= DEBUG_INFO ) {
+                  va_start(ap, fmt);
+                  DoPrint( fmt, ap );
+                  va_end( ap );
+                }
+              }
+              /*
+              void wPrintf( const char CODE_P *fmt, ... )
+              {
+                va_list ap;
+              
+                if( DebugLevel >= DEBUG_WARN ) {
+                  va_start(ap, fmt);
+                  DoPrint( fmt, ap );
+                  va_end( ap );
+                }
+              }
+              */
+              
+              /*
+              
+              void ePrintf( const char CODE_P *fmt, ... )
+              {
+                va_list ap;
+              
+                if( DebugLevel >= DEBUG_ERR ) {
+                  va_start(ap, fmt);
+                  DoPrint( fmt, ap );
+                  va_end( ap );
+                }
+              }
+              */
+C51 COMPILER V9.50a   PRINTF                                                               01/14/2015 13:33:03 PAGE 5   
+
+              //===========================================================================//
+              //                                                                           //
+              //===========================================================================//
+              void dPuts( CODE_P char *ptr )
+              {
+                if( DebugLevel >= DEBUG_INFO ) {
+                  while(*ptr!='\0')
+                    RS_tx(*ptr++);
+                }
+              }
+              
+              #if defined( SUPPORT_PC ) || defined( SUPPORT_DTV ) || defined( DEBUG_SETPANEL)
+              void wPuts( CODE_P char *ptr )
+              {
+                if( DebugLevel >= DEBUG_WARN ) {
+                  while(*ptr!='\0')
+                    RS_tx(*ptr++);
+                }
+              }
+              
+              void ePuts( CODE_P char *ptr )
+              {
+                if( DebugLevel >= DEBUG_ERR ) {
+                  while(*ptr!='\0')
+                    RS_tx(*ptr++);
+                }
+              }
+              #endif
+              
+              #endif // DEBUG
+ 269          
+ 270          //===========================================================================//
+ 271          //                                                                           //
+ 272          //===========================================================================//
+ 273          /*
+ 274          #ifdef DEBUG
+ 275          BYTE Getch(void)
+ 276          {
+ 277            while(!RS_ready());
+ 278            return RS_rx();
+ 279          }
+ 280          #endif
+ 281          */
+ 282          #if 0
+              BYTE Getche(void)
+              {
+                BYTE ch;
+              
+                while(!RS_ready());
+                ch = RS_rx();
+                RS_tx(ch);
+              
+                return ch;
+              }
+              #endif
+ 294          #endif  // SERIAL
+*** WARNING C312 IN LINE 294 OF Printf.c: misplaced endif control
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  2 ERROR(S)

@@ -1,0 +1,37 @@
+*******************************************************************
+NED 5M Sensor Camera Firmware History and Release Notice
+
+2016/02/18      				by Ryan Chen
+*******************************************************************
+//=============================================
+V0.a.4 
+1)修正開機初始值VIN0/VIN1/VIN2 TW2835的Contrast和Brightness數值。
+○Back-cam. Contrast (31, 5B): 0x87
+
+○Back-cam. Brightness (31, 5C): 0x70
+
+○TW2871-video Contrast (31, 57): 0x90
+
+○TW2871-video Brightness (31, 58): 0x80
+
+○REC.-video Contrast (31, 59): 0x97
+
+○REC.-video Brightness (31, 5A): 0x67
+
+
+
+//=============================================
+V0.a.3 
+1)增加命令VIN0/VIN1/VIN2 TW2835的BRT和CONT數值。
+
+
+//=============================================
+
+V0.a.2 
+1)修正Camera傳送0x15錯誤問題。
+2)移除LED PWM 設定repeat給Camera的程序。
+3)修正baudrate開機後只可以設定一次。
+
+//=============================================
+
+ 

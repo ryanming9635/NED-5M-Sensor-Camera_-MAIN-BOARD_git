@@ -1,0 +1,16 @@
+".\OBJ\STARTUP.obj",
+".\OBJ\UART.obj",
+".\OBJ\BusCtrl.obj",
+".\OBJ\CommandShell.obj",
+".\OBJ\Main.obj",
+".\OBJ\OSD_Graph.obj",
+".\OBJ\OSDAction .obj",
+".\OBJ\OSDCtrl.obj",
+".\OBJ\Timer.obj",
+".\OBJ\TW28xx_Audio.obj",
+".\OBJ\TW28xx_Video.obj",
+".\OBJ\TW2835_Init.obj",
+".\OBJ\NED.obj" 
+TO ".\OBJ\NED_5MCMOS_v0_a_1_XXXX_20151210" 
+PRINT(".\OBJ\NED_5MCMOS_v0_a_1_XXXX_20151210.m51") RAMSIZE(256) 
+CODE( 0X0000-0XFFFF )
