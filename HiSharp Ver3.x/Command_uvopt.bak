@@ -524,10 +524,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>30</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1347</TopLine>
-      <CurrentLine>1364</CurrentLine>
+      <TopLine>1368</TopLine>
+      <CurrentLine>1366</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\NED.c</PathWithFileName>
       <FilenameWithoutPath>NED.c</FilenameWithoutPath>

@@ -64,10 +64,10 @@
 //#define Ver2   (0x30)//20151019   V0.9.a
 //#define Ver2   (0x32)//20151019   V0.a.3//ryan@20151210
 //#define Ver2   (0x33)//20151019   V0.a.3//ryan@20160226
-#define Ver2   (0x34)//20151019   V0.a.4//ryan@20160303
+//#define Ver2   (0x34)//20151019   V0.a.4//ryan@20160303
+#define Ver2   (0x35)//20180710   V0.a.5//ryan@20180710
 
-
-#warning "NED-5M-Sensor-Camera V0.a.4"
+#warning "NED-5M-Sensor-Camera V0.a.5"
 
 //#define buff_num      13///ryan@20151029		#define buff_num      12
 #define buff_num      6///ryan@20151029		#define buff_num      12

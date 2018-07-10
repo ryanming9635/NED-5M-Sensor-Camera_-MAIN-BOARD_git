@@ -1,10 +1,10 @@
-C51 COMPILER V9.50a   TW28XX_VIDEO                                                         03/03/2016 17:29:32 PAGE 1   
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          07/10/2018 10:15:59 PAGE 1   
 
 
-C51 COMPILER V9.50a, COMPILATION OF MODULE TW28XX_VIDEO
+C51 COMPILER V9.01, COMPILATION OF MODULE TW28XX_VIDEO
 OBJECT MODULE PLACED IN .\OBJ\TW28xx_Video.obj
 COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE TW28xx_Video.c LARGE OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\OB
-                    -J\TW28xx_Video.lst) TABS(2) OBJECT(.\OBJ\TW28xx_Video.obj)
+                    -J\TW28xx_Video.lst) OBJECT(.\OBJ\TW28xx_Video.obj)
 
 line level    source
 
@@ -31,53 +31,53 @@ line level    source
   21          //  --------------------------------------------------------------------------
   22          //  Modification:
   23          //
-  24          //  R0.01 2006/12/11 08:22¤U¤È Phoenix Chuang
-  25          //  Reason:
-  26          //    1. Original.
-  27          //  Solution:
-  28          //  
+  24          //      R0.01 2006/12/11 08:22¤U¤È Phoenix Chuang
+  25          //      Reason:
+  26          //              1. Original.
+  27          //      Solution:
+  28          //      
   29          //  **************************************************************************
-  30          //  -----------------------------------
-  31          //      Header Files
-  32          //  ----------------------------------- 
+  30          //      -----------------------------------
+  31          //                      Header Files
+  32          //      ----------------------------------- 
   33          #include "types.h"
   34          #include "TW28xx_Video.h"
   35          #include "BusCtrl.h"
   36          #include "CommandShell.h"
   37          #include "Win_Table.h"
-*** WARNING C320 IN LINE 70 OF NED.h: "NED-5M-Sensor-Camera V0.a.4"
+*** WARNING C320 IN LINE 70 OF NED.h: "NED-5M-Sensor-Camera V0.a.5"
   38          #include "Timer.h"//andy 20100209 add
   39          #include "TW2835_Init.h"
   40          #include "Main.h"
   41          
-  42          //  ------------------------------------
-  43          //      Macro Definitions
-  44          //  ------------------------------------ 
-  45          #define H_FILTER  0x0000
+  42          //      ------------------------------------
+  43          //                      Macro Definitions
+  44          //      ------------------------------------ 
+  45          #define H_FILTER        0x0000
   46          
-  47          //  ------------------------------------
-  48          //      Type Definitions
-  49          //  ------------------------------------
+  47          //      ------------------------------------
+  48          //                      Type Definitions
+  49          //      ------------------------------------
   50          
   51          
-  52          //  ------------------------------------
-  53          //      Variables Definitions
-C51 COMPILER V9.50a   TW28XX_VIDEO                                                         03/03/2016 17:29:32 PAGE 2   
+  52          //      ------------------------------------
+  53          //                      Variables Definitions
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          07/10/2018 10:15:59 PAGE 2   
 
-  54          //  ------------------------------------
-  55          code U16 XWinAttr_RegAddr[] = {0x0111, 0x0119, 0x0121, 0x0129, 
-  56                           0x0114, 0x011C, 0x0124, 0x012C };
+  54          //      ------------------------------------
+  55          code U16 XWinAttr_RegAddr[]     = {0x0111, 0x0119, 0x0121, 0x0129, 
+  56                                                                     0x0114, 0x011C, 0x0124, 0x012C };
   57          
-  58          code U16 XWinPOP_RegAddr[]  = {0x0110, 0x0118, 0x0120, 0x0128, 
-  59                           0x0113, 0x011B, 0x0123, 0x012B };
+  58          code U16 XWinPOP_RegAddr[]      = {0x0110, 0x0118, 0x0120, 0x0128, 
+  59                                                                     0x0113, 0x011B, 0x0123, 0x012B };
   60          
-  61          code U16 YWinAttr_RegAddr[] = {0x0161, 0x0164, 0x0167, 0x016A};
+  61          code U16 YWinAttr_RegAddr[]     = {0x0161, 0x0164, 0x0167, 0x016A};
   62          
   63          
   64          extern BYTE xdata Original_selwintype;//Kane @HS 2007 0724 Ver3.4
-  65          //  ------------------------------------
-  66          //      Function Prototypes
-  67          //  ------------------------------------
+  65          //      ------------------------------------
+  66          //                      Function Prototypes
+  67          //      ------------------------------------
   68          
   69          
   70          
@@ -89,32 +89,32 @@ line level    source
   76          //
   77          U8 PCT_DetectVideoFormat(U8 _ch)
   78          {
-  79   1        register U8 tmpSta;
-  80   1      //  int _delay;
-  81   1        // Waitting Color Lock
-  82   1        //Kane Modified>>>>
-  83   1        #if 1
-  84   1        tmpSta = 0; 
-  85   1        
-  86   1        if( (TW28_ReadByte(0, SENSORCHANNEL<<4)&0x0F) == 0x0F) 
-  87   1          tmpSta = TW28_ReadByte(0, _ch << 4);
-  88   1        
-  89   1          
-  90   1        if(tmpSta == 0)
-  91   1          return NONE_SYSTEM;
-  92   1        tmpSta &= 0xE0;
-  93   1        tmpSta >>= 5;
-  94   1        return (tmpSta>3)  ? NTSC: PAL; 
-  95   1        #else
-              //  DELAY_FOR(150);
-                tmpSta = TW28_ReadByte(0, _ch << 4);
-                if( 0x0F != (tmpSta & 0x0F))
-                  return DEF_SYSTEM;
-                tmpSta &= 0xE0;
-                tmpSta >>= 5;
-                return (tmpSta>3)  ? NTSC: PAL; 
-                #endif//if 0
- 104   1        //Kane Modified<<<<
+  79   1              register U8 tmpSta;
+  80   1      //      int _delay;
+  81   1              // Waitting Color Lock
+  82   1              //Kane Modified>>>>
+  83   1              #if 1
+  84   1              tmpSta = 0; 
+  85   1              
+  86   1              if( (TW28_ReadByte(0, SENSORCHANNEL<<4)&0x0F) == 0x0F) 
+  87   1                      tmpSta = TW28_ReadByte(0, _ch << 4);
+  88   1              
+  89   1                      
+  90   1              if(tmpSta == 0)
+  91   1                      return NONE_SYSTEM;
+  92   1              tmpSta &= 0xE0;
+  93   1              tmpSta >>= 5;
+  94   1              return (tmpSta>3)  ? NTSC: PAL; 
+  95   1              #else
+              //      DELAY_FOR(150);
+                      tmpSta = TW28_ReadByte(0, _ch << 4);
+                      if( 0x0F != (tmpSta & 0x0F))
+                              return DEF_SYSTEM;
+                      tmpSta &= 0xE0;
+                      tmpSta >>= 5;
+                      return (tmpSta>3)  ? NTSC: PAL; 
+                      #endif//if 0
+ 104   1              //Kane Modified<<<<
  105   1      }
  106          
  107          // ===========================================================================
@@ -123,19 +123,19 @@ line level    source
  110          //
  111          void PCT_SetVideoFormat(U8 _dvc, U8 _ch, U8 _fmat)
  112          {
- 113   1        register U8 tmpSta, addr;
- 114   1        
- 115   1        _dvc = 0;
-C51 COMPILER V9.50a   TW28XX_VIDEO                                                         03/03/2016 17:29:32 PAGE 3   
+ 113   1              register U8 tmpSta, addr;
+ 114   1              
+ 115   1              _dvc = 0;
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          07/10/2018 10:15:59 PAGE 3   
 
- 116   1        addr = _ch << 4 | 0x01;
- 117   1        tmpSta = TW28_ReadByte(0, addr);
- 118   1        //Kane modified>>>>
- 119   1        //tmpSta &= ~VIDEO_ADDR;
- 120   1        tmpSta &= 0x8F;
- 121   1        // Kane modified<<<<
- 122   1        tmpSta |= _fmat;
- 123   1        TW28_WriteByte(0, addr, tmpSta);
+ 116   1              addr = _ch << 4 | 0x01;
+ 117   1              tmpSta = TW28_ReadByte(0, addr);
+ 118   1              //Kane modified>>>>
+ 119   1              //tmpSta &= ~VIDEO_ADDR;
+ 120   1              tmpSta &= 0x8F;
+ 121   1              // Kane modified<<<<
+ 122   1              tmpSta |= _fmat;
+ 123   1              TW28_WriteByte(0, addr, tmpSta);
  124   1      }
  125          
  126          // ===========================================================================
@@ -146,282 +146,282 @@ line level    source
  131          // Video Scale Setting
  132          void PCT_SetChanelScale(U8 _ch, WRITE_REG_DATA *datptr)
  133          {
- 134   1        code U8 ScaleRgeAddr[]={0x83,0x84,0x81,0x82,
- 135   1                    0x93,0x94,0x91,0x92,
- 136   1                    0xA3,0xA4,0xA1,0xA2,
- 137   1                    0xB3,0xB4,0xB1,0xB2,
- 138   1        };
- 139   1        U8  *addrptr;
- 140   1        register U16 value;
+ 134   1              code U8 ScaleRgeAddr[]={0x83,0x84,0x81,0x82,
+ 135   1                                                              0x93,0x94,0x91,0x92,
+ 136   1                                                              0xA3,0xA4,0xA1,0xA2,
+ 137   1                                                              0xB3,0xB4,0xB1,0xB2,
+ 138   1              };
+ 139   1              U8      *addrptr;
+ 140   1              register U16 value;
  141   1      
- 142   1        #define HB GETHBYTE(value)
- 143   1        #define LB GETLBYTE(value)
- 144   1        
- 145   1        addrptr = ScaleRgeAddr+_ch*4;
- 146   1        value = datptr->addr;
- 147   1        if(value != 0xFFFF) value += H_FILTER;
- 148   1        TW28_WriteByte(0, *addrptr++, HB);
- 149   1        TW28_WriteByte(0, *addrptr++, LB);
- 150   1        datptr++;
- 151   1        value = datptr->addr;
- 152   1        TW28_WriteByte(0, *addrptr++, HB);
- 153   1        TW28_WriteByte(0, *addrptr++, LB);
+ 142   1              #define HB GETHBYTE(value)
+ 143   1              #define LB GETLBYTE(value)
+ 144   1              
+ 145   1              addrptr = ScaleRgeAddr+_ch*4;
+ 146   1              value = datptr->addr;
+ 147   1              if(value != 0xFFFF) value += H_FILTER;
+ 148   1              TW28_WriteByte(0, *addrptr++, HB);
+ 149   1              TW28_WriteByte(0, *addrptr++, LB);
+ 150   1              datptr++;
+ 151   1              value = datptr->addr;
+ 152   1              TW28_WriteByte(0, *addrptr++, HB);
+ 153   1              TW28_WriteByte(0, *addrptr++, LB);
  154   1      }
  155          
  156          // Video scale Check 
  157          void PCT_SetVideoHDelay(U8 _typ, PU8 _winch, PU8 _cattr)
  158          {
- 159   1        register U8 hdelay;
+ 159   1              register U8 hdelay;
  160   1      //Kane @HS 2007 0806 Ver3.4>>>>
- 161   1      //  if(Original_selwintype == _typ )//Kane @HS 2007 0724 Ver3.4
- 162   1      //    return;
+ 161   1      //      if(Original_selwintype == _typ )//Kane @HS 2007 0724 Ver3.4
+ 162   1      //              return;
  163   1      ////Kane @HS 2007 0806 Ver3.4<<<<
  164   1      
  165   1      
- 166   1        switch(_typ){
- 167   2          case VMIX_TYPE_N11:
- 168   2          case VMIX_TYPE_P11:
- 169   2          //Kane @HS 2007 0806 Ver3.4>>>> 
- 170   2            //if(Original_selwintype == _typ)//Kane @HS 2007 0724 Ver3.4
- 171   2            //break;
- 172   2          //Kane @HS 2007 0806 Ver3.4<<<<
- 173   2          
- 174   2            hdelay = 0x08|SYSTYPE;
- 175   2            hdelay |= (_cattr[0]&0x01)<<1;
- 176   2            if(_winch[0]&0x01)
- 177   2              hdelay |= WIN_RIGHT;  // Signal Channel 1,3
-C51 COMPILER V9.50a   TW28XX_VIDEO                                                         03/03/2016 17:29:32 PAGE 4   
+ 166   1              switch(_typ){
+ 167   2                      case VMIX_TYPE_N11:
+ 168   2                      case VMIX_TYPE_P11:
+ 169   2                      //Kane @HS 2007 0806 Ver3.4>>>> 
+ 170   2                              //if(Original_selwintype == _typ)//Kane @HS 2007 0724 Ver3.4
+ 171   2                              //break;
+ 172   2                      //Kane @HS 2007 0806 Ver3.4<<<<
+ 173   2                      
+ 174   2                              hdelay = 0x08|SYSTYPE;
+ 175   2                              hdelay |= (_cattr[0]&0x01)<<1;
+ 176   2                              if(_winch[0]&0x01)
+ 177   2                                      hdelay |= WIN_RIGHT;    // Signal Channel 1,3
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          07/10/2018 10:15:59 PAGE 4   
 
- 178   2            else
- 179   2              hdelay |= WIN_LEFT;   // Signal Channel 0,2
+ 178   2                              else
+ 179   2                                      hdelay |= WIN_LEFT;             // Signal Channel 0,2
  180   2      
- 181   2            #if 1
- 182   2        //    if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 183   2              TW28_WriteByte(0, (_winch[0]<<4)|0x02,25);
+ 181   2                              #if 1
+ 182   2              //              if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 183   2                                      TW28_WriteByte(0, (_winch[0]<<4)|0x02,25);
  184   2      
- 185   2            #else
-                    if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
-                      TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
+ 185   2                              #else
+                                      if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+                                              TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
               
-                    #endif
+                                      #endif
  190   2      
- 191   2            break;
+ 191   2                              break;
  192   2      
- 193   2          case VMIX_TYPE_N21://andy
- 194   2          case VMIX_TYPE_P21:
- 195   2            #if 0
-                    // Type N,L,R
-                    hdelay = 0x08|WIN_RIGHT|SYSTYPE;  // WIN_RIGHT for Y Channel LEFT
-                    hdelay |= (_cattr[0]&0x01)<<1;
-                    if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
-                      TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
-                    // LEFT 
-                    hdelay = 0x08|WIN_LEFT|SYSTYPE; // WIN_RIGHT for Y Channel LEFT
-                    hdelay |= (_cattr[1]&0x01)<<1;
-                    if(TW28_ReadByte(0, (_winch[1]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
-                      TW28_WriteByte(0, (_winch[1]<<4)|0x02,Video_HDelay[hdelay]);
+ 193   2                      case VMIX_TYPE_N21://andy
+ 194   2                      case VMIX_TYPE_P21:
+ 195   2                              #if 0
+                                      // Type N,L,R
+                                      hdelay = 0x08|WIN_RIGHT|SYSTYPE;        // WIN_RIGHT for Y Channel LEFT
+                                      hdelay |= (_cattr[0]&0x01)<<1;
+                                      if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+                                              TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
+                                      // LEFT 
+                                      hdelay = 0x08|WIN_LEFT|SYSTYPE; // WIN_RIGHT for Y Channel LEFT
+                                      hdelay |= (_cattr[1]&0x01)<<1;
+                                      if(TW28_ReadByte(0, (_winch[1]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+                                              TW28_WriteByte(0, (_winch[1]<<4)|0x02,Video_HDelay[hdelay]);
               
-                    #endif
- 208   2            break;
+                                      #endif
+ 208   2                              break;
  209   2      
- 210   2          case VMIX_TYPE_N22:
- 211   2          case VMIX_TYPE_P22:
- 212   2            // LEFT 
- 213   2            hdelay = WIN_LEFT|SYSTYPE;
- 214   2            hdelay |= (_cattr[0]&0x01)<<1;
- 215   2            //if(TW28_ReadByte(0,( _winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 216   2              //TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
- 217   2                            //TW28_WriteByte(0, (_winch[0]<<4)|0x02,10+30);
- 218   2                                    #ifdef black_boundary
-                                            //TW28_WriteByte(0, (_winch[0]<<4)|0x02,10+15+1+1+2+3+5);  ///slaver screen
-                                            TW28_WriteByte(0, (_winch[0]<<4)|0x02,10+15+1+1);  ///slaver screen
-                              #else
- 222   2                                    TW28_WriteByte(0, (_winch[0]<<4)|0x02,25+2);  ///slaver screen
- 223   2                      #endif  
- 224   2            
- 225   2            // RIGHT
- 226   2            hdelay = WIN_RIGHT|SYSTYPE;
- 227   2            hdelay |= (_cattr[1]&0x01)<<1;
- 228   2            //if(TW28_ReadByte(0, (_winch[1]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 229   2              //TW28_WriteByte(0, (_winch[1]<<4)|0x02,Video_HDelay[hdelay]);
- 230   2              //TW28_WriteByte(0, (_winch[1]<<4)|0x02,20);
- 231   2        //      TW28_WriteByte(0, (_winch[1]<<4)|0x02,25);       //main screen
- 232   2              TW28_WriteByte(0, (_winch[1]<<4)|0x02,25);       //main screen
+ 210   2                      case VMIX_TYPE_N22:
+ 211   2                      case VMIX_TYPE_P22:
+ 212   2                              // LEFT 
+ 213   2                              hdelay = WIN_LEFT|SYSTYPE;
+ 214   2                              hdelay |= (_cattr[0]&0x01)<<1;
+ 215   2                              //if(TW28_ReadByte(0,( _winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 216   2                                      //TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
+ 217   2                              //TW28_WriteByte(0, (_winch[0]<<4)|0x02,10+30);
+ 218   2                                                              #ifdef black_boundary
+                                                                      //TW28_WriteByte(0, (_winch[0]<<4)|0x02,10+15+1+1+2+3+5);  ///slaver screen
+                                                                      TW28_WriteByte(0, (_winch[0]<<4)|0x02,10+15+1+1);  ///slaver screen
+                                                                              #else
+ 222   2                                                              TW28_WriteByte(0, (_winch[0]<<4)|0x02,25+2);  ///slaver screen
+ 223   2                                                                      #endif  
+ 224   2                              
+ 225   2                              // RIGHT
+ 226   2                              hdelay = WIN_RIGHT|SYSTYPE;
+ 227   2                              hdelay |= (_cattr[1]&0x01)<<1;
+ 228   2                              //if(TW28_ReadByte(0, (_winch[1]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 229   2                                      //TW28_WriteByte(0, (_winch[1]<<4)|0x02,Video_HDelay[hdelay]);
+ 230   2                                      //TW28_WriteByte(0, (_winch[1]<<4)|0x02,20);
+ 231   2              //                      TW28_WriteByte(0, (_winch[1]<<4)|0x02,25);       //main screen
+ 232   2                                      TW28_WriteByte(0, (_winch[1]<<4)|0x02,25);       //main screen
  233   2      
- 234   2            break;
- 235   2            
- 236   2          case VMIX_TYPE_N31:
- 237   2          case VMIX_TYPE_P31:
- 238   2            // Type N,L,R
- 239   2            hdelay = 0x08|WIN_RIGHT|SYSTYPE;  // WIN_RIGHT for Y Channel LEFT
-C51 COMPILER V9.50a   TW28XX_VIDEO                                                         03/03/2016 17:29:32 PAGE 5   
+ 234   2                              break;
+ 235   2                              
+ 236   2                      case VMIX_TYPE_N31:
+ 237   2                      case VMIX_TYPE_P31:
+ 238   2                              // Type N,L,R
+ 239   2                              hdelay = 0x08|WIN_RIGHT|SYSTYPE;        // WIN_RIGHT for Y Channel LEFT
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          07/10/2018 10:15:59 PAGE 5   
 
- 240   2            hdelay |= (_cattr[0]&0x01)<<1;
- 241   2            if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 242   2              TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
- 243   2            // LEFT 
- 244   2            hdelay = WIN_LEFT|SYSTYPE;
- 245   2            hdelay |= (_cattr[1]&0x01)<<1;
- 246   2            if(TW28_ReadByte(0, (_winch[1]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 247   2              TW28_WriteByte(0, (_winch[1]<<4)|0x02,Video_HDelay[hdelay]);
- 248   2            // RIGHT
- 249   2            hdelay = WIN_RIGHT|SYSTYPE;
- 250   2            hdelay |= (_cattr[2]&0x01)<<1;
- 251   2            if(TW28_ReadByte(0, (_winch[2]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 252   2              TW28_WriteByte(0, (_winch[2]<<4)|0x02,Video_HDelay[hdelay]);
- 253   2            break;
+ 240   2                              hdelay |= (_cattr[0]&0x01)<<1;
+ 241   2                              if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 242   2                                      TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
+ 243   2                              // LEFT 
+ 244   2                              hdelay = WIN_LEFT|SYSTYPE;
+ 245   2                              hdelay |= (_cattr[1]&0x01)<<1;
+ 246   2                              if(TW28_ReadByte(0, (_winch[1]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 247   2                                      TW28_WriteByte(0, (_winch[1]<<4)|0x02,Video_HDelay[hdelay]);
+ 248   2                              // RIGHT
+ 249   2                              hdelay = WIN_RIGHT|SYSTYPE;
+ 250   2                              hdelay |= (_cattr[2]&0x01)<<1;
+ 251   2                              if(TW28_ReadByte(0, (_winch[2]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 252   2                                      TW28_WriteByte(0, (_winch[2]<<4)|0x02,Video_HDelay[hdelay]);
+ 253   2                              break;
  254   2      
- 255   2          case VMIX_TYPE_N32:
- 256   2          case VMIX_TYPE_P32:
- 257   2            break;
+ 255   2                      case VMIX_TYPE_N32:
+ 256   2                      case VMIX_TYPE_P32:
+ 257   2                              break;
  258   2      
- 259   2          case VMIX_TYPE_N33:
- 260   2          case VMIX_TYPE_P33:
- 261   2            // Type L,R,R
- 262   2            // LEFT 
- 263   2            hdelay = WIN_LEFT|SYSTYPE;
- 264   2            hdelay |= (_cattr[0]&0x01)<<1;
- 265   2            if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 266   2              TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
- 267   2            // RIGHT
- 268   2            hdelay = WIN_RIGHT|SYSTYPE;
- 269   2            hdelay |= (_cattr[1]&0x01)<<1;
- 270   2            if(TW28_ReadByte(0, (_winch[1]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 271   2              TW28_WriteByte(0, (_winch[1]<<4)|0x02,Video_HDelay[hdelay]);
- 272   2            // RIGHT
- 273   2            hdelay = WIN_RIGHT|SYSTYPE;
- 274   2            hdelay |= (_cattr[2]&0x01)<<1;
- 275   2            if(TW28_ReadByte(0,( _winch[2]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 276   2            TW28_WriteByte(0, (_winch[2]<<4)|0x02,Video_HDelay[hdelay]);
- 277   2            break;
+ 259   2                      case VMIX_TYPE_N33:
+ 260   2                      case VMIX_TYPE_P33:
+ 261   2                              // Type L,R,R
+ 262   2                              // LEFT 
+ 263   2                              hdelay = WIN_LEFT|SYSTYPE;
+ 264   2                              hdelay |= (_cattr[0]&0x01)<<1;
+ 265   2                              if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 266   2                                      TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
+ 267   2                              // RIGHT
+ 268   2                              hdelay = WIN_RIGHT|SYSTYPE;
+ 269   2                              hdelay |= (_cattr[1]&0x01)<<1;
+ 270   2                              if(TW28_ReadByte(0, (_winch[1]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 271   2                                      TW28_WriteByte(0, (_winch[1]<<4)|0x02,Video_HDelay[hdelay]);
+ 272   2                              // RIGHT
+ 273   2                              hdelay = WIN_RIGHT|SYSTYPE;
+ 274   2                              hdelay |= (_cattr[2]&0x01)<<1;
+ 275   2                              if(TW28_ReadByte(0,( _winch[2]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 276   2                              TW28_WriteByte(0, (_winch[2]<<4)|0x02,Video_HDelay[hdelay]);
+ 277   2                              break;
  278   2      
- 279   2          case VMIX_TYPE_N34:
- 280   2          case VMIX_TYPE_P34:
- 281   2            // Type L,R,L
- 282   2            // LEFT 
- 283   2            hdelay = WIN_LEFT|SYSTYPE;
- 284   2            hdelay |= (_cattr[0]&0x01)<<1;
- 285   2            if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 286   2              TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
- 287   2            // RIGHT
- 288   2            hdelay = WIN_RIGHT|SYSTYPE;
- 289   2            hdelay |= (_cattr[1]&0x01)<<1;
- 290   2            if(TW28_ReadByte(0, (_winch[1]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 291   2              TW28_WriteByte(0, (_winch[1]<<4)|0x02,Video_HDelay[hdelay]);
- 292   2            //Left
- 293   2            hdelay = WIN_LEFT|SYSTYPE;
- 294   2            hdelay |= (_cattr[2]&0x01)<<1;
- 295   2            if(TW28_ReadByte(0, (_winch[2]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 296   2              TW28_WriteByte(0, (_winch[2]<<4)|0x02,Video_HDelay[hdelay]);
- 297   2            break;
- 298   2            
- 299   2          case VMIX_TYPE_N41:
- 300   2          case VMIX_TYPE_P41:
- 301   2            // Type L,R,L,R
-C51 COMPILER V9.50a   TW28XX_VIDEO                                                         03/03/2016 17:29:32 PAGE 6   
+ 279   2                      case VMIX_TYPE_N34:
+ 280   2                      case VMIX_TYPE_P34:
+ 281   2                              // Type L,R,L
+ 282   2                              // LEFT 
+ 283   2                              hdelay = WIN_LEFT|SYSTYPE;
+ 284   2                              hdelay |= (_cattr[0]&0x01)<<1;
+ 285   2                              if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 286   2                                      TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
+ 287   2                              // RIGHT
+ 288   2                              hdelay = WIN_RIGHT|SYSTYPE;
+ 289   2                              hdelay |= (_cattr[1]&0x01)<<1;
+ 290   2                              if(TW28_ReadByte(0, (_winch[1]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 291   2                                      TW28_WriteByte(0, (_winch[1]<<4)|0x02,Video_HDelay[hdelay]);
+ 292   2                              //Left
+ 293   2                              hdelay = WIN_LEFT|SYSTYPE;
+ 294   2                              hdelay |= (_cattr[2]&0x01)<<1;
+ 295   2                              if(TW28_ReadByte(0, (_winch[2]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 296   2                                      TW28_WriteByte(0, (_winch[2]<<4)|0x02,Video_HDelay[hdelay]);
+ 297   2                              break;
+ 298   2                              
+ 299   2                      case VMIX_TYPE_N41:
+ 300   2                      case VMIX_TYPE_P41:
+ 301   2                              // Type L,R,L,R
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          07/10/2018 10:15:59 PAGE 6   
 
- 302   2            // LEFT 
- 303   2            hdelay = WIN_LEFT|SYSTYPE;
- 304   2            hdelay |= (_cattr[0]&0x01)<<1;
- 305   2            if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 306   2              TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
- 307   2            // RIGHT
- 308   2            hdelay = WIN_RIGHT|SYSTYPE;
- 309   2            hdelay |= (_cattr[1]&0x01)<<1;
- 310   2            if(TW28_ReadByte(0,( _winch[1]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 311   2              TW28_WriteByte(0, (_winch[1]<<4)|0x02,Video_HDelay[hdelay]);
- 312   2            // Left
- 313   2            hdelay = WIN_LEFT|SYSTYPE;
- 314   2            hdelay |= (_cattr[2]&0x01)<<1;
- 315   2            if(TW28_ReadByte(0, (_winch[2]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 316   2              TW28_WriteByte(0, (_winch[2]<<4)|0x02,Video_HDelay[hdelay]);
- 317   2            // RIGHT
- 318   2            hdelay = WIN_RIGHT|SYSTYPE;
- 319   2            hdelay |= (_cattr[3]&0x01)<<1;
- 320   2            if(TW28_ReadByte(0, (_winch[3]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
- 321   2              TW28_WriteByte(0, (_winch[3]<<4)|0x02,Video_HDelay[hdelay]);
- 322   2            break;
+ 302   2                              // LEFT 
+ 303   2                              hdelay = WIN_LEFT|SYSTYPE;
+ 304   2                              hdelay |= (_cattr[0]&0x01)<<1;
+ 305   2                              if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 306   2                                      TW28_WriteByte(0, (_winch[0]<<4)|0x02,Video_HDelay[hdelay]);
+ 307   2                              // RIGHT
+ 308   2                              hdelay = WIN_RIGHT|SYSTYPE;
+ 309   2                              hdelay |= (_cattr[1]&0x01)<<1;
+ 310   2                              if(TW28_ReadByte(0,( _winch[1]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 311   2                                      TW28_WriteByte(0, (_winch[1]<<4)|0x02,Video_HDelay[hdelay]);
+ 312   2                              // Left
+ 313   2                              hdelay = WIN_LEFT|SYSTYPE;
+ 314   2                              hdelay |= (_cattr[2]&0x01)<<1;
+ 315   2                              if(TW28_ReadByte(0, (_winch[2]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 316   2                                      TW28_WriteByte(0, (_winch[2]<<4)|0x02,Video_HDelay[hdelay]);
+ 317   2                              // RIGHT
+ 318   2                              hdelay = WIN_RIGHT|SYSTYPE;
+ 319   2                              hdelay |= (_cattr[3]&0x01)<<1;
+ 320   2                              if(TW28_ReadByte(0, (_winch[3]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
+ 321   2                                      TW28_WriteByte(0, (_winch[3]<<4)|0x02,Video_HDelay[hdelay]);
+ 322   2                              break;
  323   2      
- 324   2          default :
- 325   2            break;
- 326   2        }
+ 324   2                      default :
+ 325   2                              break;
+ 326   2              }
  327   1      }
  328          
  329          // X Channel Video Mixing Control
  330          void PCT_SetXVideoMixing(U8 _typ, PU8 _winch)
  331          {
- 332   1        WRITE_REG_DATA *wregptr;
+ 332   1              WRITE_REG_DATA *wregptr;
  333   1      
  334   1      #if 1  //ryan@20150302
- 335   1        TW28_WriteByte(1, 0x10, (_winch[0]&0x03)|0x80);
- 336   1        TW28_WriteByte(1, 0x18, (_winch[1]&0x03)|0x80);
- 337   1        TW28_WriteByte(1, 0x20, (_winch[2]&0x03)|0x80);
- 338   1        TW28_WriteByte(1, 0x28, (_winch[3]&0x03)|0x80);
+ 335   1              TW28_WriteByte(1, 0x10, (_winch[0]&0x03)|0x80);
+ 336   1              TW28_WriteByte(1, 0x18, (_winch[1]&0x03)|0x80);
+ 337   1              TW28_WriteByte(1, 0x20, (_winch[2]&0x03)|0x80);
+ 338   1              TW28_WriteByte(1, 0x28, (_winch[3]&0x03)|0x80);
  339   1      #else
-                TW28_WriteByte(1, 0x10, (_winch[0]&0x03)|0x80);
-                TW28_WriteByte(1, 0x18, (_winch[1]&0x03)|0x80);
-                TW28_WriteByte(1, 0x20, (_winch[2]&0x03)|0x80);
-                TW28_WriteByte(1, 0x28, (_winch[3]&0x03)|0x80);
+                      TW28_WriteByte(1, 0x10, (_winch[0]&0x03)|0x80);
+                      TW28_WriteByte(1, 0x18, (_winch[1]&0x03)|0x80);
+                      TW28_WriteByte(1, 0x20, (_winch[2]&0x03)|0x80);
+                      TW28_WriteByte(1, 0x28, (_winch[3]&0x03)|0x80);
               #endif
  345   1      
  346   1      
- 347   1        switch(_typ){
- 348   2          case VMIX_TYPE_N11:
- 349   2          case VMIX_TYPE_P11:
- 350   2            //if(Original_selwintype == _typ)//Kane @HS 2007 0724 Ver3.4
- 351   2            //break;
- 352   2            
- 353   2            wregptr = Init_Vido_W1+SYSTYPE*19;
- 354   2            PCT_SetChanelScale(_winch[0], wregptr);
- 355   2            TW28_WriteSTable(0, wregptr+2);
- 356   2            break;
- 357   2            
- 358   2          case VMIX_TYPE_N21:
- 359   2          case VMIX_TYPE_N22:
- 360   2          case VMIX_TYPE_P21:
- 361   2          case VMIX_TYPE_P22:
- 362   2            wregptr = Init_Vido_W2+SYSTYPE*TYPE2_OFSET*2;
- 363   2            wregptr += ((_typ&0x0F)-1)*TYPE2_OFSET;
-C51 COMPILER V9.50a   TW28XX_VIDEO                                                         03/03/2016 17:29:32 PAGE 7   
+ 347   1              switch(_typ){
+ 348   2                      case VMIX_TYPE_N11:
+ 349   2                      case VMIX_TYPE_P11:
+ 350   2                              //if(Original_selwintype == _typ)//Kane @HS 2007 0724 Ver3.4
+ 351   2                              //break;
+ 352   2                              
+ 353   2                              wregptr = Init_Vido_W1+SYSTYPE*19;
+ 354   2                              PCT_SetChanelScale(_winch[0], wregptr);
+ 355   2                              TW28_WriteSTable(0, wregptr+2);
+ 356   2                              break;
+ 357   2                              
+ 358   2                      case VMIX_TYPE_N21:
+ 359   2                      case VMIX_TYPE_N22:
+ 360   2                      case VMIX_TYPE_P21:
+ 361   2                      case VMIX_TYPE_P22:
+ 362   2                              wregptr = Init_Vido_W2+SYSTYPE*TYPE2_OFSET*2;
+ 363   2                              wregptr += ((_typ&0x0F)-1)*TYPE2_OFSET;
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          07/10/2018 10:15:59 PAGE 7   
 
- 364   2                          
- 365   2        PCT_SetChanelScale(_winch[0], wregptr);
+ 364   2                                              
+ 365   2              PCT_SetChanelScale(_winch[0], wregptr);
  366   2      //PCT_SetChanelScale(_winch[1], wregptr);           
- 367   2        PCT_SetChanelScale(_winch[1], wregptr+2);  //ryan
- 368   2            //TW28_WriteSTable(0, wregptr+2);
- 369   2            TW28_WriteSTable(0, wregptr+2+2); //ryan  
- 370   2            break;
- 371   2            
- 372   2          case VMIX_TYPE_N31:
- 373   2          case VMIX_TYPE_N32:
- 374   2          case VMIX_TYPE_N33:
- 375   2          case VMIX_TYPE_N34:
- 376   2          case VMIX_TYPE_P31:
- 377   2          case VMIX_TYPE_P32:
- 378   2          case VMIX_TYPE_P33:
- 379   2          case VMIX_TYPE_P34:
- 380   2            wregptr = Init_Vido_W3+SYSTYPE*TYPE3_OFSET*4;
- 381   2            wregptr += ((_typ&0x0F)-1)*TYPE3_OFSET;
- 382   2            
- 383   2            PCT_SetChanelScale(_winch[0], wregptr+0);
- 384   2            PCT_SetChanelScale(_winch[1], wregptr+2);
- 385   2            PCT_SetChanelScale(_winch[2], wregptr+4);
- 386   2            TW28_WriteSTable(0, wregptr+6);
- 387   2            break;
- 388   2            
- 389   2          case VMIX_TYPE_N41:
- 390   2          case VMIX_TYPE_P41:
- 391   2            wregptr = Init_Vido_W4+SYSTYPE*19;
- 392   2            PCT_SetChanelScale(_winch[0], wregptr);
- 393   2            PCT_SetChanelScale(_winch[1], wregptr);
- 394   2            PCT_SetChanelScale(_winch[2], wregptr);
- 395   2            PCT_SetChanelScale(_winch[3], wregptr);
- 396   2            TW28_WriteSTable(0, wregptr+2);
- 397   2            break;
+ 367   2              PCT_SetChanelScale(_winch[1], wregptr+2);  //ryan
+ 368   2                              //TW28_WriteSTable(0, wregptr+2);
+ 369   2                              TW28_WriteSTable(0, wregptr+2+2); //ryan        
+ 370   2                              break;
+ 371   2                              
+ 372   2                      case VMIX_TYPE_N31:
+ 373   2                      case VMIX_TYPE_N32:
+ 374   2                      case VMIX_TYPE_N33:
+ 375   2                      case VMIX_TYPE_N34:
+ 376   2                      case VMIX_TYPE_P31:
+ 377   2                      case VMIX_TYPE_P32:
+ 378   2                      case VMIX_TYPE_P33:
+ 379   2                      case VMIX_TYPE_P34:
+ 380   2                              wregptr = Init_Vido_W3+SYSTYPE*TYPE3_OFSET*4;
+ 381   2                              wregptr += ((_typ&0x0F)-1)*TYPE3_OFSET;
+ 382   2                              
+ 383   2                              PCT_SetChanelScale(_winch[0], wregptr+0);
+ 384   2                              PCT_SetChanelScale(_winch[1], wregptr+2);
+ 385   2                              PCT_SetChanelScale(_winch[2], wregptr+4);
+ 386   2                              TW28_WriteSTable(0, wregptr+6);
+ 387   2                              break;
+ 388   2                              
+ 389   2                      case VMIX_TYPE_N41:
+ 390   2                      case VMIX_TYPE_P41:
+ 391   2                              wregptr = Init_Vido_W4+SYSTYPE*19;
+ 392   2                              PCT_SetChanelScale(_winch[0], wregptr);
+ 393   2                              PCT_SetChanelScale(_winch[1], wregptr);
+ 394   2                              PCT_SetChanelScale(_winch[2], wregptr);
+ 395   2                              PCT_SetChanelScale(_winch[3], wregptr);
+ 396   2                              TW28_WriteSTable(0, wregptr+2);
+ 397   2                              break;
  398   2      
- 399   2          default :
- 400   2            break;
- 401   2        }
+ 399   2                      default :
+ 400   2                              break;
+ 401   2              }
  402   1      }
  403          
  404          // ===========================================================================
@@ -430,158 +430,158 @@ line level    source
  407          //
  408          void PCT_SetYVideoMixing(U8 _typ)
  409          {
- 410   1        TW28_WriteSTable(0, Init_Vido_Y + _typ * YTYPE_OFSET);
+ 410   1              TW28_WriteSTable(0, Init_Vido_Y + _typ * YTYPE_OFSET);
  411   1      }
  412          
  413          // About Y channel Video Hdelay 
  414          void PCT_RecompenseYHdelay (PU8 _chmiro)
  415          {
- 416   1        switch(TW28_ReadByte(0x01, 0x6C)){
- 417   2        case 0x00:
- 418   2          
- 419   2          if(TW28_ReadByte(0, 0x02) != Video_HDelay[WIN_LEFT+((_chmiro[0]&BIT0)<<1)+SYSTYPE])//Kane @HS 2007 0808 
+ 416   1              switch(TW28_ReadByte(0x01, 0x6C)){
+ 417   2              case 0x00:
+ 418   2                      
+ 419   2                      if(TW28_ReadByte(0, 0x02) != Video_HDelay[WIN_LEFT+((_chmiro[0]&BIT0)<<1)+SYSTYPE])//Kane @HS 2007 0808 
              -Ver3.4
- 420   2            TW28_WriteByte(0x00, 0x02, Video_HDelay[WIN_LEFT+((_chmiro[0]&BIT0)<<1)+SYSTYPE]);
- 421   2          if(TW28_ReadByte(0, 0x12) != Video_HDelay[WIN_RIGHT+((_chmiro[1]&BIT0)<<1)+SYSTYPE])//Kane @HS 2007 0808
+ 420   2                              TW28_WriteByte(0x00, 0x02, Video_HDelay[WIN_LEFT+((_chmiro[0]&BIT0)<<1)+SYSTYPE]);
+ 421   2                      if(TW28_ReadByte(0, 0x12) != Video_HDelay[WIN_RIGHT+((_chmiro[1]&BIT0)<<1)+SYSTYPE])//Kane @HS 2007 0808
              - Ver3.4
- 422   2            TW28_WriteByte(0x00, 0x12, Video_HDelay[WIN_RIGHT+((_chmiro[1]&BIT0)<<1)+SYSTYPE]);
- 423   2          if(TW28_ReadByte(0, 0x22) != Video_HDelay[WIN_LEFT+((_chmiro[2]&BIT0)<<1)+SYSTYPE])//Kane @HS 2007 0808 
-C51 COMPILER V9.50a   TW28XX_VIDEO                                                         03/03/2016 17:29:32 PAGE 8   
+ 422   2                              TW28_WriteByte(0x00, 0x12, Video_HDelay[WIN_RIGHT+((_chmiro[1]&BIT0)<<1)+SYSTYPE]);
+ 423   2                      if(TW28_ReadByte(0, 0x22) != Video_HDelay[WIN_LEFT+((_chmiro[2]&BIT0)<<1)+SYSTYPE])//Kane @HS 2007 0808 
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          07/10/2018 10:15:59 PAGE 8   
 
              -Ver3.4
- 424   2            TW28_WriteByte(0x00, 0x22, Video_HDelay[WIN_LEFT+((_chmiro[2]&BIT0)<<1)+SYSTYPE]);
- 425   2          if(TW28_ReadByte(0, 0x32) != Video_HDelay[WIN_RIGHT+((_chmiro[3]&BIT0)<<1)+SYSTYPE])//Kane @HS 2007 0808
+ 424   2                              TW28_WriteByte(0x00, 0x22, Video_HDelay[WIN_LEFT+((_chmiro[2]&BIT0)<<1)+SYSTYPE]);
+ 425   2                      if(TW28_ReadByte(0, 0x32) != Video_HDelay[WIN_RIGHT+((_chmiro[3]&BIT0)<<1)+SYSTYPE])//Kane @HS 2007 0808
              - Ver3.4
- 426   2            TW28_WriteByte(0x00, 0x32, Video_HDelay[WIN_RIGHT+((_chmiro[3]&BIT0)<<1)+SYSTYPE]);
- 427   2          break;
+ 426   2                              TW28_WriteByte(0x00, 0x32, Video_HDelay[WIN_RIGHT+((_chmiro[3]&BIT0)<<1)+SYSTYPE]);
+ 427   2                      break;
  428   2      
- 429   2        case 0x03:
- 430   2          if(TW28_ReadByte(0, 0x02) != Video_HDelay[0x08+((_chmiro[0]&BIT0)<<1)+SYSTYPE])//William @HS 2007 0829 V
+ 429   2              case 0x03:
+ 430   2                      if(TW28_ReadByte(0, 0x02) != Video_HDelay[0x08+((_chmiro[0]&BIT0)<<1)+SYSTYPE])//William @HS 2007 0829 V
              -er3.4
- 431   2            TW28_WriteByte(0x00, 0x02, Video_HDelay[0x08+((_chmiro[0]&BIT0)<<1)+SYSTYPE]);
- 432   2          break;
- 433   2          
- 434   2        case 0x0C:
- 435   2          if(TW28_ReadByte(0, 0x12) != Video_HDelay[0x08+((_chmiro[1]&BIT0)<<1)+SYSTYPE])//William @HS 2007 0829 V
+ 431   2                              TW28_WriteByte(0x00, 0x02, Video_HDelay[0x08+((_chmiro[0]&BIT0)<<1)+SYSTYPE]);
+ 432   2                      break;
+ 433   2                      
+ 434   2              case 0x0C:
+ 435   2                      if(TW28_ReadByte(0, 0x12) != Video_HDelay[0x08+((_chmiro[1]&BIT0)<<1)+SYSTYPE])//William @HS 2007 0829 V
              -er3.4
- 436   2            TW28_WriteByte(0x00, 0x12, Video_HDelay[0x08+((_chmiro[1]&BIT0)<<1)+SYSTYPE]);
- 437   2          break;
- 438   2          
- 439   2        case 0x30:
- 440   2          if(TW28_ReadByte(0, 0x22) != Video_HDelay[0x08+((_chmiro[2]&BIT0)<<1)+SYSTYPE])//William @HS 2007 0829 V
+ 436   2                              TW28_WriteByte(0x00, 0x12, Video_HDelay[0x08+((_chmiro[1]&BIT0)<<1)+SYSTYPE]);
+ 437   2                      break;
+ 438   2                      
+ 439   2              case 0x30:
+ 440   2                      if(TW28_ReadByte(0, 0x22) != Video_HDelay[0x08+((_chmiro[2]&BIT0)<<1)+SYSTYPE])//William @HS 2007 0829 V
              -er3.4
- 441   2          TW28_WriteByte(0x00, 0x22, Video_HDelay[0x08+((_chmiro[2]&BIT0)<<1)+SYSTYPE]);
- 442   2          break;
- 443   2          
- 444   2        case 0xC0:
- 445   2          if(TW28_ReadByte(0, 0x32) !=Video_HDelay[0x08+((_chmiro[3]&BIT0)<<1)+SYSTYPE])//William @HS 2007 0829 Ve
+ 441   2                      TW28_WriteByte(0x00, 0x22, Video_HDelay[0x08+((_chmiro[2]&BIT0)<<1)+SYSTYPE]);
+ 442   2                      break;
+ 443   2                      
+ 444   2              case 0xC0:
+ 445   2                      if(TW28_ReadByte(0, 0x32) !=Video_HDelay[0x08+((_chmiro[3]&BIT0)<<1)+SYSTYPE])//William @HS 2007 0829 Ve
              -r3.4
- 446   2          TW28_WriteByte(0x00, 0x32, Video_HDelay[0x08+((_chmiro[3]&BIT0)<<1)+SYSTYPE]);
- 447   2          break;
- 448   2        }
+ 446   2                      TW28_WriteByte(0x00, 0x32, Video_HDelay[0x08+((_chmiro[3]&BIT0)<<1)+SYSTYPE]);
+ 447   2                      break;
+ 448   2              }
  449   1      }
  450          
  451          // ===========================================================================
  452          //
- 453          //  TW2835 Video Mixing last Modify for AC & RB
+ 453          //      TW2835 Video Mixing last Modify for AC & RB
  454          //
  455          //Kane @HS 2007 0808 Ver3.4>>>>
  456          #if 1
  457          void PCT_VideoLastModify(void)
  458          {
- 459   1        register data U8 state=0;
- 460   1        
- 461   1        state += (SYSWINLK[0]&0x03);
- 462   1        state += (SYSWINLK[1]&0x03)<<4;
- 463   1        state += (SYSWINATTR[0]&BIT0)<<2;
- 464   1        state += (SYSWINATTR[1]&BIT0)<<6;
+ 459   1              register data U8 state=0;
+ 460   1              
+ 461   1              state += (SYSWINLK[0]&0x03);
+ 462   1              state += (SYSWINLK[1]&0x03)<<4;
+ 463   1              state += (SYSWINATTR[0]&BIT0)<<2;
+ 464   1              state += (SYSWINATTR[1]&BIT0)<<6;
  465   1      
- 466   1        switch(state) {
- 467   2          case 0x20:
- 468   2          case 0x24:
- 469   2            TW28_WriteSTable(0, VidoW2_ModifyACNM);
- 470   2            break;
+ 466   1              switch(state) {
+ 467   2                      case 0x20:
+ 468   2                      case 0x24:
+ 469   2                              TW28_WriteSTable(0, VidoW2_ModifyACNM);
+ 470   2                              break;
  471   2      
- 472   2          case 0x60:
- 473   2          case 0x64:
- 474   2            //PCT_CheckSystem();      
- 475   2            if((SYSTYPE&BIT0) ==NTSC)//Kane @HS 2007 0813 Cer3.4
- 476   2              TW28_WriteSTable(0, VidoW2_ModifyACHM);
- 477   2            else
- 478   2              TW28_WriteSTable(0, VidoW2_ModifyACHM_PAL);
- 479   2            break;
-C51 COMPILER V9.50a   TW28XX_VIDEO                                                         03/03/2016 17:29:32 PAGE 9   
+ 472   2                      case 0x60:
+ 473   2                      case 0x64:
+ 474   2                              //PCT_CheckSystem();                    
+ 475   2                              if((SYSTYPE&BIT0) ==NTSC)//Kane @HS 2007 0813 Cer3.4
+ 476   2                                      TW28_WriteSTable(0, VidoW2_ModifyACHM);
+ 477   2                              else
+ 478   2                                      TW28_WriteSTable(0, VidoW2_ModifyACHM_PAL);
+ 479   2                              break;
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          07/10/2018 10:15:59 PAGE 9   
 
  480   2      
- 481   2          case 0x13:
- 482   2          case 0x53:
- 483   2            PCT_WinPOPupCtrl(1);
- 484   2            TW28_WriteSTable(0, VidoW2_ModifyRBNM);
- 485   2            break;
- 486   2          case 0x17:
- 487   2          case 0x57:
- 488   2            PCT_WinPOPupCtrl(1);
- 489   2            TW28_WriteSTable(0, VidoW2_ModifyRBHM);
- 490   2            break;
- 491   2        }
+ 481   2                      case 0x13:
+ 482   2                      case 0x53:
+ 483   2                              PCT_WinPOPupCtrl(1);
+ 484   2                              TW28_WriteSTable(0, VidoW2_ModifyRBNM);
+ 485   2                              break;
+ 486   2                      case 0x17:
+ 487   2                      case 0x57:
+ 488   2                              PCT_WinPOPupCtrl(1);
+ 489   2                              TW28_WriteSTable(0, VidoW2_ModifyRBHM);
+ 490   2                              break;
+ 491   2              }
  492   1      }
  493          
  494          #endif
  495          //Kane @HS 2007 0808 Ver3.4<<<<
  496          // ===========================================================================
  497          //
- 498          //  TW2835 Attribute Set about Freeze for X Channel                              
+ 498          //      TW2835 Attribute Set about Freeze for X Channel                                                                                                            
  499          //
  500          void PCT_WinAttrCtrl(U8 _wid, U8 _attrsel, U8 _setval)
  501          {
- 502   1        #define PAGE GETHBYTE(XWinAttr_RegAddr[_wid])
- 503   1        #define ADDR GETLBYTE(XWinAttr_RegAddr[_wid])
+ 502   1              #define PAGE GETHBYTE(XWinAttr_RegAddr[_wid])
+ 503   1              #define ADDR GETLBYTE(XWinAttr_RegAddr[_wid])
  504   1      
- 505   1        register U8 dat;
+ 505   1              register U8 dat;
  506   1      
- 507   1        dat = TW28_ReadByte(PAGE, ADDR);
- 508   1        _setval ? dat |= _attrsel : (dat &= ~_attrsel);
- 509   1        TW28_WriteByte(PAGE, ADDR, dat);
+ 507   1              dat = TW28_ReadByte(PAGE, ADDR);
+ 508   1              _setval ? dat |= _attrsel : (dat &= ~_attrsel);
+ 509   1              TW28_WriteByte(PAGE, ADDR, dat);
  510   1      }
  511          
  512          // ===========================================================================
  513          //
- 514          //  TW2835 Attribute Set about Freeze for X Channel                              
+ 514          //      TW2835 Attribute Set about Freeze for X Channel                                                                                                            
  515          //
  516          //extern void PutsP(BYTE * ptr);
  517          //extern void RS_tx(BYTE tx_buf);
  518          void PCT_WinAttrCtrlY(U8 _wid, U8 _attrsel, U8 _setval)
  519          {
- 520   1        #define YPAGE GETHBYTE(YWinAttr_RegAddr[_wid])
- 521   1        #define YADDR GETLBYTE(YWinAttr_RegAddr[_wid])
- 522   1        register U8 dat;
- 523   1        
- 524   1        dat = TW28_ReadByte(YPAGE, YADDR);
- 525   1        _setval ? dat |= _attrsel : (dat &= ~_attrsel);
- 526   1        TW28_WriteByte(YPAGE, YADDR, dat);
+ 520   1              #define YPAGE GETHBYTE(YWinAttr_RegAddr[_wid])
+ 521   1              #define YADDR GETLBYTE(YWinAttr_RegAddr[_wid])
+ 522   1              register U8 dat;
+ 523   1              
+ 524   1              dat = TW28_ReadByte(YPAGE, YADDR);
+ 525   1              _setval ? dat |= _attrsel : (dat &= ~_attrsel);
+ 526   1              TW28_WriteByte(YPAGE, YADDR, dat);
  527   1      
  528   1      
  529   1      }
  530          
  531          // ===========================================================================
  532          //
- 533          //  TW2835 Attribute Set about Freeze                              
+ 533          //      TW2835 Attribute Set about Freeze                                                                                                                  
  534          //
  535          void PCT_WinAttrClear(U8 _attrsel)
  536          {
- 537   1        #define PAGE GETHBYTE(XWinAttr_RegAddr[_wid])
- 538   1        #define ADDR GETLBYTE(XWinAttr_RegAddr[_wid])
+ 537   1              #define PAGE GETHBYTE(XWinAttr_RegAddr[_wid])
+ 538   1              #define ADDR GETLBYTE(XWinAttr_RegAddr[_wid])
  539   1      
- 540   1        register  U8 _wid;
- 541   1        register  U8 dat;
-C51 COMPILER V9.50a   TW28XX_VIDEO                                                         03/03/2016 17:29:32 PAGE 10  
+ 540   1              register  U8 _wid;
+ 541   1              register  U8 dat;
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          07/10/2018 10:15:59 PAGE 10  
 
  542   1      
- 543   1        for(_wid=0; _wid<8; _wid++) {
- 544   2          dat = TW28_ReadByte(PAGE, ADDR);
- 545   2          dat &= ~_attrsel;
- 546   2          TW28_WriteByte(PAGE, ADDR, dat);
- 547   2        }
+ 543   1              for(_wid=0; _wid<8; _wid++) {
+ 544   2                      dat = TW28_ReadByte(PAGE, ADDR);
+ 545   2                      dat &= ~_attrsel;
+ 546   2                      TW28_WriteByte(PAGE, ADDR, dat);
+ 547   2              }
  548   1      }
  549          
  550          
@@ -591,14 +591,14 @@ line level    source
  554          //
  555          void PCT_WinPOPupCtrl(U8 _wid)
  556          {
- 557   1        #define POPPAGE GETHBYTE(XWinPOP_RegAddr[_wid])
- 558   1        #define POPADDR GETLBYTE(XWinPOP_RegAddr[_wid])
+ 557   1              #define POPPAGE GETHBYTE(XWinPOP_RegAddr[_wid])
+ 558   1              #define POPADDR GETLBYTE(XWinPOP_RegAddr[_wid])
  559   1      
- 560   1        register  U8 dat;
+ 560   1              register  U8 dat;
  561   1      
- 562   1        dat = TW28_ReadByte(POPPAGE, POPADDR);
- 563   1        dat |= BIT6;
- 564   1        TW28_WriteByte(POPPAGE, POPADDR, dat);
+ 562   1              dat = TW28_ReadByte(POPPAGE, POPADDR);
+ 563   1              dat |= BIT6;
+ 564   1              TW28_WriteByte(POPPAGE, POPADDR, dat);
  565   1      }
  566          
  567          // ===========================================================================

@@ -2009,7 +2009,7 @@ addr++;
 								break;
  	}
 	
-
+return 0;
 	
 	//if(SC16_ComAddr>=(num-1))
 	//{		

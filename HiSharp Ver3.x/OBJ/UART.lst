@@ -1,10 +1,10 @@
-C51 COMPILER V9.50a   UART                                                                 03/03/2016 17:29:31 PAGE 1   
+C51 COMPILER V9.01   UART                                                                  07/10/2018 10:15:58 PAGE 1   
 
 
-C51 COMPILER V9.50a, COMPILATION OF MODULE UART
+C51 COMPILER V9.01, COMPILATION OF MODULE UART
 OBJECT MODULE PLACED IN .\OBJ\UART.obj
 COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE UART.c LARGE OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\OBJ\UART.l
-                    -st) TABS(2) OBJECT(.\OBJ\UART.obj)
+                    -st) OBJECT(.\OBJ\UART.obj)
 
 line level    source
 
@@ -31,38 +31,38 @@ line level    source
   21          //  --------------------------------------------------------------------------
   22          //  Modification:
   23          //
-  24          //  R0.01 2006/10/22 10:39¤U¤È Phoenix Chuang
-  25          //  Reason:
-  26          //    1. Original.
-  27          //  Solution:
-  28          //  
+  24          //      R0.01 2006/10/22 10:39¤U¤È Phoenix Chuang
+  25          //      Reason:
+  26          //              1. Original.
+  27          //      Solution:
+  28          //      
   29          //  **************************************************************************
-  30          //  -----------------------------------
-  31          //      Header Files
-  32          //  ----------------------------------- 
+  30          //      -----------------------------------
+  31          //                      Header Files
+  32          //      ----------------------------------- 
   33          #include "types.h"
   34          #include "UART.h"
   35          #include "Main.h"
   36          #include "NED.h"
-*** WARNING C320 IN LINE 70 OF NED.h: "NED-5M-Sensor-Camera V0.a.4"
+*** WARNING C320 IN LINE 70 OF NED.h: "NED-5M-Sensor-Camera V0.a.5"
   37          
-  38          //  ------------------------------------
-  39          //      Macro Definitions
-  40          //  ------------------------------------ 
+  38          //      ------------------------------------
+  39          //                      Macro Definitions
+  40          //      ------------------------------------ 
   41          
   42          
-  43          //  ------------------------------------
-  44          //      Type Definitions
-  45          //  ------------------------------------
+  43          //      ------------------------------------
+  44          //                      Type Definitions
+  45          //      ------------------------------------
   46          
   47          
-  48          //  ------------------------------------
-  49          //      Variables Definitions
-  50          //  ------------------------------------
+  48          //      ------------------------------------
+  49          //                      Variables Definitions
+  50          //      ------------------------------------
   51          
   52          //#define RS_RECV_MAX_BUFF (80)
   53          #define RS_RECV_MAX_BUFF (100)
-C51 COMPILER V9.50a   UART                                                                 03/03/2016 17:29:31 PAGE 2   
+C51 COMPILER V9.01   UART                                                                  07/10/2018 10:15:58 PAGE 2   
 
   54          
   55          //#define RS_RECV_MAX_BUFF (37) 
@@ -73,9 +73,9 @@ line level    source
   60          BYTE RsRxRp,RsRxWp;
   61          
   62          
-  63          //  ------------------------------------
-  64          //      Function Prototypes
-  65          //  ------------------------------------
+  63          //      ------------------------------------
+  64          //                      Function Prototypes
+  65          //      ------------------------------------
   66          
   67          
   68          
@@ -83,159 +83,159 @@ line level    source
   70          //                      Parallel function description
   71          // ===========================================================================
   72          //
-  73          //    Initial UART                             
+  73          //              Initial UART                                                                                               
   74          //
   75          void InitialUART (void)
   76          {
-  77   1        // Useing Interrupt RS
-  78   1        #if 1
-  79   1        PS=0;
-  80   1        ES=1;
+  77   1              // Useing Interrupt RS
+  78   1              #if 1
+  79   1              PS=0;
+  80   1              ES=1;
   81   1              #endif
   82   1      
   83   1      #ifdef no_parity        
-  84   1            SCON = 0x52;  // Setup Serial control Register
+  84   1              SCON = 0x52;    // Setup Serial control Register
   85   1      #else
                  SCON = 0xD0;//parity bit 
               #endif
   88   1         
-  89   1      //  // Useing Interrupt Timer1
-  90   1      //  PT1=1;
-  91   1      //  ET1=1;
+  89   1      //      // Useing Interrupt Timer1
+  90   1      //      PT1=1;
+  91   1      //      ET1=1;
   92   1      
-  93   1      //  TH1 = B9600;        // 40M HZ   //modify by ryan.
-  94   1      //  TH1 = SET_BAUDRATE(115200); // 22.118M HZ   //remask by ryan.
-  95   1      //  TH1 = SET_BAUDRATE(76800);  // 22.118M HZ   //remask by ryan.
+  93   1      //      TH1 = B9600;                            // 40M HZ               //modify by ryan.
+  94   1      //      TH1 = SET_BAUDRATE(115200);     // 22.118M HZ     //remask by ryan.
+  95   1      //      TH1 = SET_BAUDRATE(76800);      // 22.118M HZ     //remask by ryan.
   96   1      //   TH1=254;
-  97   1      //  TH1 = SET_BAUDRATE(38400);  // 22.118M HZ   //remask by ryan.
-  98   1      //  TH1 = SET_BAUDRATE(19200);  // 22.118M HZ   //remask by ryan.
-  99   1        TH1 = SET_BAUDRATE(9600,0); // 22.118M HZ   //remask by ryan.
+  97   1      //      TH1 = SET_BAUDRATE(38400);      // 22.118M HZ     //remask by ryan.
+  98   1      //      TH1 = SET_BAUDRATE(19200);      // 22.118M HZ     //remask by ryan.
+  99   1              TH1 = SET_BAUDRATE(9600,0);     // 22.118M HZ     //remask by ryan.
  100   1      //       TL1=255;
  101   1      
  102   1             //TH1=0;
  103   1             TL1=0;
- 104   1        TR1 = 1;          // Start timer 1
+ 104   1              TR1 = 1;                                        // Start timer 1
  105   1      
- 106   1        RsRxRp = 0;
- 107   1        RsRxWp = 0;
+ 106   1              RsRxRp = 0;
+ 107   1              RsRxWp = 0;
  108   1      }
  109          
  110          // ===========================================================================
  111          //
- 112          //    Serial RX Check                            
+ 112          //              Serial RX Check                                                                                                    
  113          //
  114          BYTE RS_RxReady (void)
  115          {
-C51 COMPILER V9.50a   UART                                                                 03/03/2016 17:29:31 PAGE 3   
+C51 COMPILER V9.01   UART                                                                  07/10/2018 10:15:58 PAGE 3   
 
- 116   1        if( RsRxWp == RsRxRp ) return false;
- 117   1        else return true;
+ 116   1              if( RsRxWp == RsRxRp ) return false;
+ 117   1              else return true;
  118   1      }
  119          
  120          //=============================================================================
  121          //
- 122          //    Serial RX                              
+ 122          //              Serial RX                                                                                                                  
  123          //
  124          BYTE RS_rx (void)
  125          {
- 126   1        register BYTE ret;  
- 127   1        //ES = 0;  //ryan..
- 128   1        //Kane @HS 2007 0809 Ver3.5
- 129   1        //if(RS_RECVBUF[RsRxRp+3]=='T' && RS_RECVBUF[RsRxRp+2]=='W' && RS_RECVBUF[RsRxRp+1]=='3'  && RS_RECVBUF[R
+ 126   1              register BYTE   ret;    
+ 127   1              //ES = 0;  //ryan..
+ 128   1              //Kane @HS 2007 0809 Ver3.5
+ 129   1              //if(RS_RECVBUF[RsRxRp+3]=='T' && RS_RECVBUF[RsRxRp+2]=='W' && RS_RECVBUF[RsRxRp+1]=='3'  && RS_RECVBUF[R
              -sRxRp]=='T' )
- 130   1        //  return TWCMD;
- 131   1        ret = RS_RECVBUF[RsRxRp];
- 132   1        RsRxRp++;
- 133   1        if(RsRxRp >= RS_RECV_MAX_BUFF) 
- 134   1          RsRxRp = 0;
+ 130   1              //      return TWCMD;
+ 131   1              ret = RS_RECVBUF[RsRxRp];
+ 132   1              RsRxRp++;
+ 133   1              if(RsRxRp >= RS_RECV_MAX_BUFF) 
+ 134   1                      RsRxRp = 0;
  135   1      
- 136   1          
- 137   1        
- 138   1        ES = 1;
+ 136   1                      
+ 137   1              
+ 138   1              ES = 1;
  139   1      
- 140   1        return ret;
+ 140   1              return ret;
  141   1      }
  142          
  143          //=============================================================================
  144          //
- 145          //    Serial TX                              
+ 145          //              Serial TX                                                                                                                  
  146          //
  147          void RS_tx (BYTE tx_buf)
  148          {
- 149   1        //TI=1;
- 150   1          
+ 149   1              //TI=1;
+ 150   1                      
  151   1      #if 0
               
               
-                  while(TI==0); 
+                              while(TI==0); 
               
-                  
-                  #ifdef no_parity
-                      //#eldef UART_debug
-                        #else
-                          TB8=parity(tx_buf);
-                            #endif
-                    SBUF = tx_buf;
+                              
+                              #ifdef no_parity
+                                              //#eldef UART_debug
+                                                      #else
+                                                              TB8=parity(tx_buf);
+                                                                      #endif
+                                      SBUF = tx_buf;
               
               
               #else
- 166   1        while(1)
- 167   1        {
- 168   2        
+ 166   1              while(1)
+ 167   1              {
+ 168   2              
  169   2                 if(TI) {
- 170   3                #ifdef no_parity
- 171   3                #else
-                        TB8=parity(tx_buf);
-                        #endif
+ 170   3                                              #ifdef no_parity
+ 171   3                                              #else
+                                                      TB8=parity(tx_buf);
+                                                      #endif
  174   3      
  175   3      
- 176   3            //TB8=parity(tx_buf);
-C51 COMPILER V9.50a   UART                                                                 03/03/2016 17:29:31 PAGE 4   
+ 176   3                              //TB8=parity(tx_buf);
+C51 COMPILER V9.01   UART                                                                  07/10/2018 10:15:58 PAGE 4   
 
  177   3      
- 178   3            SBUF=tx_buf;
- 179   3            TI=0;
- 180   3            break;
- 181   3            }
- 182   2        }
+ 178   3                              SBUF=tx_buf;
+ 179   3                              TI=0;
+ 180   3                              break;
+ 181   3                              }
+ 182   2              }
  183   1      
- 184   1        #endif
+ 184   1              #endif
  185   1      }
  186          
  187          
  188          
  189          // ===========================================================================
  190          //
- 191          //    Serial Interrupt
+ 191          //              Serial Interrupt
  192          //
  193          void RS_interrupt(void) interrupt 4 using 1
  194          {
  195   1      
- 196   1        if( RI ) {          //--- Receive interrupt ----
- 197   2          RI = 0;
- 198   2          //WDTCR|=0x10;
- 199   2        /*
- 200   2          if(RsRxWp+1==RsRxRp) RsRxRp++;
- 201   2          if(RsRxWp==RS_RECV_MAX_BUFF-1 && RsRxRp==0) RsRxRp++;
- 202   2          
- 203   2          if( RsRxRp >= RS_RECV_MAX_BUFF ) RsRxRp = 0;
+ 196   1              if( RI ) {                                      //--- Receive interrupt ----
+ 197   2                      RI = 0;
+ 198   2                      //WDTCR|=0x10;
+ 199   2              /*
+ 200   2                      if(RsRxWp+1==RsRxRp) RsRxRp++;
+ 201   2                      if(RsRxWp==RS_RECV_MAX_BUFF-1 && RsRxRp==0) RsRxRp++;
+ 202   2                      
+ 203   2                      if( RsRxRp >= RS_RECV_MAX_BUFF ) RsRxRp = 0;
  204   2      */
  205   2      
- 206   2          RS_RECVBUF[RsRxWp] = SBUF;
- 207   2          
- 208   2              //RS_tx(RS_RECVBUF[RsRxWp] );//ryan..
- 209   2          //printf(">");
- 210   2          RsRxWp++;
- 211   2          if( RsRxWp >= RS_RECV_MAX_BUFF ) RsRxWp = 0;
- 212   2          
- 213   2                  //#ifdef  UART_debug
- 214   2                  //printf("%x",(U16)RS_RECVBUF[RsRxWp]);
- 215   2                  //#endif
- 216   2            
+ 206   2                      RS_RECVBUF[RsRxWp] = SBUF;
+ 207   2                      
+ 208   2                                      //RS_tx(RS_RECVBUF[RsRxWp] );//ryan..
+ 209   2                      //printf(">");
+ 210   2                      RsRxWp++;
+ 211   2                      if( RsRxWp >= RS_RECV_MAX_BUFF ) RsRxWp = 0;
+ 212   2                      
+ 213   2                                                      //#ifdef  UART_debug
+ 214   2                                                      //printf("%x",(U16)RS_RECVBUF[RsRxWp]);
+ 215   2                                                      //#endif
+ 216   2                              
  217   2      
- 218   2        }
- 219   1        
- 220   1                  
+ 218   2              }
+ 219   1              
+ 220   1                                                      
  221   1      }
  222          
  223          // ===========================================================================
