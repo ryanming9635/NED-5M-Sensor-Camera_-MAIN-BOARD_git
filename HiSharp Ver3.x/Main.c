@@ -1309,16 +1309,40 @@ U8 loop=0;
 
 #define _2V  101300  ///2.0V
 #define _3V  199400  ////3.0V
-#define _1V_step   311
-#define press_offset   0
+#define _1V_step   310//0//311///one step=0.0031V refernec voltage=3.3V
+#define press_offset   (50+30-1) ///1.850V offset to 2.0V ryan@20180727
 #define ap_offset 60-8
 
 U32 temp_val=0;
 val=ADC_FPBS();
 
-val=val-press_offset;
+val=val+press_offset;
 temp_val=val;
 
+#if 1//ryan@20180727
+if(temp_val>=(645+1))   ///>2.0  645*0.0031=2.0V
+{
+		if(temp_val<=967)   ///<3V  967*0.0031=3.0V
+			{
+ 		  temp_val=(((((temp_val*_1V_step)/100)-2000)*98)+101300);
+			}
+		else
+			{
+			 temp_val=199400;
+			}
+}
+else         			  ///2.0V to 1.6V
+{
+	if(temp_val>=(516+1))   ///>1.6 V   516*0.0031=1.6V
+			{
+			  temp_val=(((((temp_val*_1V_step)/100)-1600)*98)+62100);
+			}
+		else
+			{
+			temp_val=62100;
+			}
+}
+#else
 if(temp_val>=(_1V_step*2))   ///>2.0  
 {
 		if(temp_val<=(_1V_step*3))   ///<3V
@@ -1344,7 +1368,7 @@ else         			  ///2.0V to 1.6V
 			temp_val=62100;
 			}
 }
-
+#endif
 
 val=(temp_val/100);
 
@@ -1361,6 +1385,7 @@ Camera_press3=(val/1000)+0x30;  val=(val%1000);
 Camera_press2=(val/100)+0x30;  val=(val%100);
 Camera_press1=(val/10)+0x30;  val=(val%10);
 Camera_press0=val+0x30;
+
 
 		#ifdef  press_debug 
 		printf("\r\nGet_press=%x ",(U16)temp_val);

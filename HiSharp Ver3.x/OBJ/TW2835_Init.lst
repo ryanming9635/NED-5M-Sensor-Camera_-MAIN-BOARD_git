@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   TW2835_INIT                                                           07/10/2018 10:15:59 PAGE 1   
+C51 COMPILER V9.01   TW2835_INIT                                                           07/27/2018 15:46:01 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE TW2835_INIT
@@ -62,7 +62,7 @@ line level    source
   52          //      ------------------------------------
   53           #define NED
   54          
-C51 COMPILER V9.01   TW2835_INIT                                                           07/10/2018 10:15:59 PAGE 2   
+C51 COMPILER V9.01   TW2835_INIT                                                           07/27/2018 15:46:01 PAGE 2   
 
   55          #ifdef NED
   56          sbit RSTn = P4 ^ 0;
@@ -126,7 +126,7 @@ line level    source
  114          {
  115   1              register U16 _delay; 
  116   1      //Kane @HS 2007 0723 Ver3.4>>>>
-C51 COMPILER V9.01   TW2835_INIT                                                           07/10/2018 10:15:59 PAGE 3   
+C51 COMPILER V9.01   TW2835_INIT                                                           07/27/2018 15:46:01 PAGE 3   
 
  117   1      #if 0
                       // Initial RssetN for TW2835
@@ -190,7 +190,7 @@ line level    source
  176          //
  177          //
  178          
-C51 COMPILER V9.01   TW2835_INIT                                                           07/10/2018 10:15:59 PAGE 4   
+C51 COMPILER V9.01   TW2835_INIT                                                           07/27/2018 15:46:01 PAGE 4   
 
  179          
  180          // ===========================================================================

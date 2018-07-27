@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   UART                                                                  07/10/2018 10:15:58 PAGE 1   
+C51 COMPILER V9.01   UART                                                                  07/27/2018 15:46:00 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE UART
@@ -44,7 +44,7 @@ line level    source
   34          #include "UART.h"
   35          #include "Main.h"
   36          #include "NED.h"
-*** WARNING C320 IN LINE 70 OF NED.h: "NED-5M-Sensor-Camera V0.a.5"
+*** WARNING C320 IN LINE 71 OF NED.h: "NED-5M-Sensor-Camera V0.a.6"
   37          
   38          //      ------------------------------------
   39          //                      Macro Definitions
@@ -62,7 +62,7 @@ line level    source
   51          
   52          //#define RS_RECV_MAX_BUFF (80)
   53          #define RS_RECV_MAX_BUFF (100)
-C51 COMPILER V9.01   UART                                                                  07/10/2018 10:15:58 PAGE 2   
+C51 COMPILER V9.01   UART                                                                  07/27/2018 15:46:00 PAGE 2   
 
   54          
   55          //#define RS_RECV_MAX_BUFF (37) 
@@ -126,7 +126,7 @@ line level    source
  113          //
  114          BYTE RS_RxReady (void)
  115          {
-C51 COMPILER V9.01   UART                                                                  07/10/2018 10:15:58 PAGE 3   
+C51 COMPILER V9.01   UART                                                                  07/27/2018 15:46:00 PAGE 3   
 
  116   1              if( RsRxWp == RsRxRp ) return false;
  117   1              else return true;
@@ -190,7 +190,7 @@ line level    source
  174   3      
  175   3      
  176   3                              //TB8=parity(tx_buf);
-C51 COMPILER V9.01   UART                                                                  07/10/2018 10:15:58 PAGE 4   
+C51 COMPILER V9.01   UART                                                                  07/27/2018 15:46:00 PAGE 4   
 
  177   3      
  178   3                              SBUF=tx_buf;

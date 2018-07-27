@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 1   
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE COMMANDSHELL
@@ -53,7 +53,7 @@ line level    source
   43          #include "Main.h"
   44          
   45          #include "NED.h"
-*** WARNING C320 IN LINE 70 OF NED.h: "NED-5M-Sensor-Camera V0.a.5"
+*** WARNING C320 IN LINE 71 OF NED.h: "NED-5M-Sensor-Camera V0.a.6"
   46          
   47          // Table define on code
   48          
@@ -62,7 +62,7 @@ line level    source
   51          //                      Macro Definitions
   52          //      ------------------------------------ 
   53          #define WINCH           sysdat.channel_link
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 2   
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 2   
 
   54          #define RECWINTYPE      sysdat.video_mix_type
   55          #define RECLKTP         sysdat.link_type
@@ -126,7 +126,7 @@ line level    source
  113          {
  114   1              data U16 ret=0;
  115   1              
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 3   
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 3   
 
  116   1              while(*Str != '\0' ) ret+=*Str++;
  117   1              return ret;
@@ -190,7 +190,7 @@ line level    source
  175   1      
  176   1              do {
  177   2                      printf("\n<R>%02bx[%02bx]=%02bx", page, start, TW28_ReadByte(page, start) );
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 4   
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 4   
 
  178   2                      start++;
  179   2              }while(start != end);
@@ -254,7 +254,7 @@ line level    source
  237          
  238          // ***************************************************************************
  239          //
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 5   
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 5   
 
  240          // Monitor Audio Mixing 
  241          // Format : amix N ch0:val ch1:val ch2:val ch3:val ch4:val 
@@ -318,7 +318,7 @@ line level    source
  299   2                      sscanf(szParam,"ch%bd:%bd ch%bd:%bd ch%bd:%bd ch%bd:%bd ch%bd:%bd ", \
  300   2                              &selch0, &valch0, &selch1, &valch1, &selch2, &valch2, &selch3, &valch3,  &selch4, &valch4 );
  301   2                      PCT_AudioMixCtrl(0, selch0, valch0);
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 6   
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 6   
 
  302   2                      PCT_AudioMixCtrl(0, selch1, valch1);
  303   2                      PCT_AudioMixCtrl(0, selch2, valch2);
@@ -382,7 +382,7 @@ line level    source
  361   2                      PCT_AudioGainCtrl(0, selch2, ch2val);
  362   2                      break;
  363   2              
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 7   
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 7   
 
  364   2              case 4:
  365   2                      sscanf(szParam,"ch%bd:%bd ch%bd:%bd ch%bd:%bd ch%bd:%bd ", \
@@ -446,7 +446,7 @@ line level    source
  423          //
  424          // video signal mixing to windows
  425          //
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 8   
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 8   
 
  426          void MoniVideoMixWin(PCHAR szParam)
  427          {
@@ -510,7 +510,7 @@ line level    source
  485   2                      attrsel = WIN_FREEZE;
  486   2                      setval  = OFF;
  487   2              } else if ( chose==PCT_StrToCommCode("dishmirror") ) {
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 9   
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 9   
 
  488   2                      attrsel = WIN_HMIRROR;
  489   2                      setval  = OFF;
@@ -574,7 +574,7 @@ line level    source
  547   1              );
  548   1      }
  549          
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 10  
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 10  
 
  550          // ***************************************************************************
  551          //
@@ -638,7 +638,7 @@ line level    source
  609   1              addry=atoi(getStr);
  610   1      
  611   1              PCT_PreSetForegroundColor(OSD_COL_100WHT);
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 11  
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 11  
 
  612   1              PCT_PreSetBackgroundColor(OSD_COL_BLU);
  613   1              PCT_SetOSDDrawPage(WRPHX_PAGE5);
@@ -702,7 +702,7 @@ line level    source
  670   1              PCT_WinAttrCtrlY(2, WIN_HMIRROR, SYSCHATTR[2]&BIT0);    
  671   1              PCT_WinAttrCtrlY(3, WIN_HMIRROR, SYSCHATTR[3]&BIT0);    
  672   1              // -----------------------------------------------------------------
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 12  
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 12  
 
  673   1      
  674   1              // ------------- Control Video ------------
@@ -766,7 +766,7 @@ line level    source
  732   1                      return FALSE;
  733   1              if(TempSystem == SYSTYPE)
  734   1                      return TRUE;
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 13  
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 13  
 
  735   1              SYSTYPE = TempSystem;
  736   1              //Kane Add<<<<
@@ -830,7 +830,7 @@ line level    source
  794          
  795          U8 PCT_RunCommShell(char *strptr)
  796          {
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 14  
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 14  
 
  797   1              U16 commcode;
  798   1              char *getStr;  
@@ -894,7 +894,7 @@ line level    source
                               PCT_AudioRegList();
                       } else if (commcode == PCT_StrToCommCode("again")) {
                               // ===== Audio Gain Control =======
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 15  
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 15  
 
                               //printf("Audio Gain Control");
                               MoniAudioGain(strptr);
@@ -958,7 +958,7 @@ line level    source
  918   2                      PCT_SendACK();
  919   2                      //printf("Command Shell for HiSharp");
  920   2                      MoniHSComm(strptr);
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 16  
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 16  
 
  921   2      
  922   2      #if 1
@@ -1022,7 +1022,7 @@ line level    source
                                               {
                                               Temp_check();
                                               #ifdef  SC16IS750_DEBUG_PRINT 
-C51 COMPILER V9.01   COMMANDSHELL                                                          07/10/2018 10:15:58 PAGE 17  
+C51 COMPILER V9.01   COMMANDSHELL                                                          07/27/2018 15:46:00 PAGE 17  
 
                                               printf("\r\nget temp=%x",(U16)ADT75_GetTemp());
                                               #endif

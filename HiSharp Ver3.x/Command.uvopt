@@ -525,8 +525,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1368</TopLine>
-      <CurrentLine>1366</CurrentLine>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\NED.c</PathWithFileName>
       <FilenameWithoutPath>NED.c</FilenameWithoutPath>
@@ -534,9 +534,9 @@
   </Group>
 
   <AlienFiles>
-    <PathWithFilename>D:\ryan_work\NED資料\NED-5M-Sensor-Camera_0303\HiSharp Ver3.x\NED.h</PathWithFilename>
-    <TopLine>50</TopLine>
-    <CurrentLine>66</CurrentLine>
+    <PathWithFilename>D:\ryan_work\NED資料\NED-5M-Sensor-Camera_0303\HiSharp Ver3.x\NED.H</PathWithFilename>
+    <TopLine>62</TopLine>
+    <CurrentLine>73</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -560,9 +560,9 @@
   </AlienFiles>
 
   <WinLayout>
-    <sActiveDebugView></sActiveDebugView>
-    <iActiveDebugViewLocation>0</iActiveDebugViewLocation>
-    <sActiveBuildView></sActiveBuildView>
+    <sActiveDebugView>Default</sActiveDebugView>
+    <iActiveDebugViewLocation>1</iActiveDebugViewLocation>
+    <sActiveBuildView>Build</sActiveBuildView>
     <iActiveBuildViewLocation>0</iActiveBuildViewLocation>
     <View>
       <ViewName>Default</ViewName>
@@ -1903,10 +1903,10 @@
       <ActiveTab>0</ActiveTab>
       <Documents>
         <Doc>
-          <Name>NED.h</Name>
-          <ColumnNumber>41</ColumnNumber>
-          <TopLine>50</TopLine>
-          <CurrentLine>66</CurrentLine>
+          <Name>NED.H</Name>
+          <ColumnNumber>43</ColumnNumber>
+          <TopLine>62</TopLine>
+          <CurrentLine>73</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>
