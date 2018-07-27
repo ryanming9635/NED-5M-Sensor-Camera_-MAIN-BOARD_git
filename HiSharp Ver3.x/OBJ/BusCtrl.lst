@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   BUSCTRL                                                               07/27/2018 15:46:00 PAGE 1   
+C51 COMPILER V9.01   BUSCTRL                                                               07/27/2018 16:10:39 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE BUSCTRL
@@ -62,7 +62,7 @@ line level    source
   51          
   52          //      ------------------------------------
   53          //                      Function Prototypes
-C51 COMPILER V9.01   BUSCTRL                                                               07/27/2018 15:46:00 PAGE 2   
+C51 COMPILER V9.01   BUSCTRL                                                               07/27/2018 16:10:39 PAGE 2   
 
   54          //      ------------------------------------
   55          
@@ -126,7 +126,7 @@ line level    source
  113   1              _dvc = 0;                       //... temporal
  114   1      
  115   1              EA = OFF;               // Disable All Interrupt
-C51 COMPILER V9.01   BUSCTRL                                                               07/27/2018 15:46:00 PAGE 3   
+C51 COMPILER V9.01   BUSCTRL                                                               07/27/2018 16:10:39 PAGE 3   
 
  116   1              //... P[7:4]:INT[5:2], P1_3:HALE, P1_2:HRDB, P1_1:HWRB, P1_0:HSPB
  117   1              //MCTRL_set();///MCTRL = 0xf6;          //... initial state
@@ -190,7 +190,7 @@ line level    source
                   MCTRL = 0xf6;               //... initial state
               #endif
  177   1      
-C51 COMPILER V9.01   BUSCTRL                                                               07/27/2018 15:46:00 PAGE 4   
+C51 COMPILER V9.01   BUSCTRL                                                               07/27/2018 16:10:39 PAGE 4   
 
  178   1              _dvc = 0;                       //... temporal
  179   1              if(_pg == DVC_PG0){ HCSB1=0; HCSB0=0;}
@@ -254,7 +254,7 @@ line level    source
  237   1      }
  238          
  239          //==================================================================================
-C51 COMPILER V9.01   BUSCTRL                                                               07/27/2018 15:46:00 PAGE 5   
+C51 COMPILER V9.01   BUSCTRL                                                               07/27/2018 16:10:39 PAGE 5   
 
  240          //      
  241          // Change to I2C Control Mode

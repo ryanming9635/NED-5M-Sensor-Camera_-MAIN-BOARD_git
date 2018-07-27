@@ -1310,7 +1310,7 @@ U8 loop=0;
 #define _2V  101300  ///2.0V
 #define _3V  199400  ////3.0V
 #define _1V_step   310//0//311///one step=0.0031V refernec voltage=3.3V
-#define press_offset   (50+30-1) ///1.850V offset to 2.0V ryan@20180727
+#define press_offset  0//// (50+30-1) ///1.850V offset to 2.0V ryan@20180727
 #define ap_offset 60-8
 
 U32 temp_val=0;

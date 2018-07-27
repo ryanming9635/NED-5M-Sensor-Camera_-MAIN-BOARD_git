@@ -536,7 +536,7 @@
   <AlienFiles>
     <PathWithFilename>D:\ryan_work\NED資料\NED-5M-Sensor-Camera_0303\HiSharp Ver3.x\NED.H</PathWithFilename>
     <TopLine>62</TopLine>
-    <CurrentLine>73</CurrentLine>
+    <CurrentLine>69</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -1904,9 +1904,9 @@
       <Documents>
         <Doc>
           <Name>NED.H</Name>
-          <ColumnNumber>43</ColumnNumber>
+          <ColumnNumber>0</ColumnNumber>
           <TopLine>62</TopLine>
-          <CurrentLine>73</CurrentLine>
+          <CurrentLine>69</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>

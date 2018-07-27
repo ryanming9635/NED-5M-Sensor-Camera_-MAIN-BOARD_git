@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 1   
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE OSDACTION_
@@ -62,7 +62,7 @@ line level    source
   52          
   53          #define LOCATE_XM0      20
   54          #define LOCATE_XM1      41
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 2   
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 2   
 
   55          #define LOCATE_XM2      62
   56          
@@ -126,7 +126,7 @@ line level    source
  114   1              PCT_EnShowOSDPage(WRPHX_PAGE1);
  115   1              PCT_PreSetBackgroundColor(OSD_COL_CLR);
  116   1              PCT_SetOSDDrawPage(WRPHY_PAGE0);
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 3   
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 3   
 
  117   1              PCT_FullColorOnOSD(0,0,90,38);                          // ??
  118   1      
@@ -190,7 +190,7 @@ line level    source
  173   2                              ifBitSet(_attr[3],OSDBIT) DrawString(LOCATE_XM2, LOCATE_YT1, camstr[SYSWINLK[3]]);
  174   2                              break;
  175   2              
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 4   
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 4   
 
  176   2                      // ------------------------------------ PAL ----------------------------------------
  177   2                      case VMIX_TYPE_P11:     
@@ -254,7 +254,7 @@ line level    source
  233          // ===========================================================================
  234          //
  235          // Get Video Signal Status
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 5   
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 5   
 
  236          //
  237          void PCT_GetVideoSignalStatus(void)
@@ -318,7 +318,7 @@ line level    source
  295   2      
  296   2                      case VMIX_TYPE_N21:     
  297   2                      case VMIX_TYPE_P21:     ////////////////////////////andy-980604
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 6   
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 6   
 
  298   2                              // ---------- LEFT Windows ----------
  299   2                              iconid = (_attr[0]&ICONBIT) >> ICONSFT;
@@ -382,7 +382,7 @@ line level    source
  357   2                              iconid = (_attr[0]&ICONBIT) >> ICONSFT;
  358   2                              if(iconid) {
  359   3                                      PCT_ClearWordsPathX(0, LOCATE_YT0, 2);
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 7   
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 7   
 
  360   3                                      DrawString(ILCT_X0, LOCATE_YT0, &indicate_icon[iconid<<1]);
  361   3                              } else {
@@ -446,7 +446,7 @@ line level    source
  419   3                                      DrawString(MLCT_X1, LOCATE_YT1, MIRROR);
  420   3                              } else {
  421   3                                      PCT_ClearWordsPathX(MLCT_X1, LOCATE_YT1, 1);
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 8   
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 8   
 
  422   3                              }       
  423   2                              break;
@@ -510,7 +510,7 @@ line level    source
  481   3                              }
  482   2      
  483   2                              // ---------- RIGHT_DOWN Window Show "M" ----------
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 9   
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 9   
 
  484   2                              ifBitSet(_attr[2],BIT0) {
  485   3                                      DrawString(MLCT_X2, LOCATE_YT1, MIRROR);
@@ -574,7 +574,7 @@ line level    source
  543   2      
  544   2                      // ------------------------------------ PAL ----------------------------------------
  545   2                      case VMIX_TYPE_P11:     
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 10  
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 10  
 
  546   2                              // ---------- Window Show "M" ----------
  547   2                              ifBitSet(_attr[0],BIT0) {
@@ -638,7 +638,7 @@ line level    source
  605   3                                      PCT_ClearWordsPathX(MLCT_X2, LOCATE_YT2, 1);
  606   3                              }
  607   2                              break;
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 11  
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 11  
 
  608   2      
  609   2                      case VMIX_TYPE_P32:     
@@ -702,7 +702,7 @@ line level    source
  667   2                              ifBitSet(_attr[1],BIT0) {
  668   3                                      DrawString(MLCT_X2, LOCATE_YT0, MIRROR);
  669   3                              } else {
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 12  
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 12  
 
  670   3                                      PCT_ClearWordsPathX(MLCT_X2, LOCATE_YT0, 1);
  671   3                              }
@@ -766,7 +766,7 @@ line level    source
  729   2                              ifBitSet(_attr[0],BIT4) {
  730   3                                      DrawString(SLCT_X0, LOCATE_YT0, SPEAKICON);
  731   3                              } else {
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 13  
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 13  
 
  732   3                                      PCT_ClearWordsPathX(SLCT_X0, LOCATE_YT0, 1);
  733   3                              }
@@ -830,7 +830,7 @@ line level    source
  791   2                              ifBitSet(_attr[2],BIT4) {
  792   3                                      DrawString(SLCT_X0, LOCATE_YT1, SPEAKICON);
  793   3                              } else {
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 14  
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 14  
 
  794   3                                      PCT_ClearWordsPathX(SLCT_X0, LOCATE_YT1, 1);
  795   3                              }
@@ -894,7 +894,7 @@ line level    source
  853   3                                      DrawString(SLCT_X0, LOCATE_YT2, SPEAKICON);
  854   3                              } else {
  855   3                                      PCT_ClearWordsPathX(SLCT_X0, LOCATE_YT2, 1);
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 15  
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 15  
 
  856   3                              }
  857   2                              ifBitSet(_attr[2],BIT4) {
@@ -958,7 +958,7 @@ line level    source
  915   3                                      DrawString(SLCT_X0, LOCATE_YT2, SPEAKICON);
  916   3                              } else {
  917   3                                      PCT_ClearWordsPathX(SLCT_X0, LOCATE_YT2, 1);
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 16  
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 16  
 
  918   3                              }
  919   2                              ifBitSet(_attr[3],BIT4) {
@@ -1022,7 +1022,7 @@ line level    source
  977   2      
  978   2                      case VMIX_TYPE_N31:     // Trun Back
  979   2                              if(MSGVDOSGL&(0x01<<SYSWINLK[0]))
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 17  
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 17  
 
  980   2                                      DrawString(VLS_LCT_XM1, LOCATE_YM0, msgVLOSS);
  981   2                              else
@@ -1086,7 +1086,7 @@ line level    source
 1039   2                              if(MSGVDOSGL&(0x01<<SYSWINLK[3]))
 1040   2                                      DrawString(VLS_LCT_XM2, LOCATE_YM2, msgVLOSS);
 1041   2                              else
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 18  
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 18  
 
 1042   2                                      PCT_ClearWordsPathX(VLS_LCT_XM2, LOCATE_YM2, msgCLEAR_W);
 1043   2                              break;
@@ -1150,7 +1150,7 @@ line level    source
 1101   2                              if(MSGVDOSGL&(0x01<<SYSWINLK[0]))
 1102   2                                      DrawString(VLS_LCT_XM0, LOCATE_PYM0, msgVLOSS);
 1103   2                              else
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 19  
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 19  
 
 1104   2                                      PCT_ClearWordsPathX(VLS_LCT_XM0, LOCATE_PYM0, msgCLEAR_W);
 1105   2                              if(MSGVDOSGL&(0x01<<SYSWINLK[1]))
@@ -1214,7 +1214,7 @@ line level    source
 1163   2              case SMODE:
 1164   2                      break;
 1165   2                      }
-C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 15:46:00 PAGE 20  
+C51 COMPILER V9.01   OSDACTION_                                                            07/27/2018 16:10:39 PAGE 20  
 
 1166   1      }
 1167          

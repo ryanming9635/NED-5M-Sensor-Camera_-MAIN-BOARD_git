@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 1   
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   51          //                      Type Definitions
   52          //      ------------------------------------
   53          
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 2   
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 2   
 
   54          
   55          //      ------------------------------------
@@ -126,7 +126,7 @@ line level    source
  113          //extern U16 USERTMVAL6;
  114          //-------------------------------
  115          
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 3   
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 3   
 
  116          //data U8 *mode="mode 0\r\n";
  117          // char *test="hscom 1 1 ch0:1%1bx ch1:0%1bx ch2:0%1bx ch3:0%1bx\n\r";
@@ -190,7 +190,7 @@ line level    source
  175   2                                              {
  176   3      
  177   3                                                      SC16_Com[Com_pos]=ch;                                           
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 4   
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 4   
 
  178   3                                                      Com_pos++;
  179   3                                                      Com_end=1;
@@ -254,7 +254,7 @@ line level    source
                                               #ifdef  SC16IS750_DEBUG_PRINT 
                    printf("\r\nget data=%x %x %x %x",(U16)RScommand.commBuf[0],(U16)RScommand.commBuf[1]\
                      ,(U16)RScommand.commBuf[2],(U16)RScommand.commBuf[3]);
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 5   
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 5   
 
                                               
                                               #endif  
@@ -318,7 +318,7 @@ line level    source
  299          
  300          // ===========================================================================
  301          //
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 6   
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 6   
 
  302          //      Restart Command Shell 
  303          //
@@ -382,7 +382,7 @@ line level    source
  361          void Wait_ms(U16 Tms)
  362          
  363          {
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 7   
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 7   
 
  364   1      //      #define CPU_CLK_KHZ             40000
  365   1      #define CPU_CLK_KHZ             22118
@@ -446,7 +446,7 @@ line level    source
               while(USERTMVAL1>=2);
               I2C_SDA=0;
               USERTMVAL1=2;
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 8   
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 8   
 
               while(USERTMVAL1>=2);
               
@@ -510,7 +510,7 @@ line level    source
  485   1      
  486   1      #if 0 
               TW28_WriteByte(1,0x11,0x00);
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 9   
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 9   
 
               TW28_WriteByte(1,0x19,0x00);
               TW28_WriteByte(1,0x21,0x00);
@@ -574,7 +574,7 @@ line level    source
  547   3                                                              //#endif
  548   3                                                              
  549   3                                                      EnUserTimer(USERTMID0,20);
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 10  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 10  
 
  550   3                                                              
  551   3                                                       }
@@ -638,7 +638,7 @@ line level    source
                               {
                                       //if((get_data_addr)&&(timerout3>=CB_delay))
                                       if(timerout3>=CB_delay)
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 11  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 11  
 
                                       {
                                       Get_Data(get_data_addr, get_data_val);
@@ -702,7 +702,7 @@ line level    source
  671   1          
  672   1      
  673   1      //XICON=0x00;
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 12  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 12  
 
  674   1      //AUXIE=0x00; 
  675   1      AUXR=0;
@@ -766,7 +766,7 @@ line level    source
                //-------------------------------
               #endif
  735   1      P0M0=0;
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 13  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 13  
 
  736   1      P0M1=0;
  737   1      
@@ -830,7 +830,7 @@ line level    source
  795   2                      break;
  796   2          case 2:  
  797   2                                                      CCAP2L=0x00;  
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 14  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 14  
 
  798   2                                if(val==0)    CCAPM2=0x00;
  799   2                                              else     CCAPM2=0x42;
@@ -894,7 +894,7 @@ line level    source
  857   1      CCAP0L=0x00;
  858   1      CCAP0H =(256-128);
  859   1      
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 15  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 15  
 
  860   1      CCAP1L=0x00;
  861   1      CCAP1H =(256-128);
@@ -958,7 +958,7 @@ line level    source
  919   1      char conf8[38]={"hscom 2 2 ch1:10 ch2:10 ch0:00 ch3:00 "};  // DR
  920   1      char conf9[38]={"hscom 2 2 ch2:10 ch1:10 ch2:00 ch3:00 "};  // RD
  921   1      
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 16  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 16  
 
  922   1      char conf10[38]={"hscom 3 3 ch0:10 ch1:10 ch2:10 ch3:00 "};
  923   1      
@@ -1022,7 +1022,7 @@ line level    source
  981   2                  break;
  982   2      case 7:          //shrink+crop
  983   2              Crop_f=0x41;    
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 17  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 17  
 
  984   2                  break;
  985   2      #endif
@@ -1086,7 +1086,7 @@ line level    source
 1043   4                                                      Main_f=1;
 1044   4                                                      Small_f=2;                                              
 1045   4                                                      }
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 18  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 18  
 
 1046   3      
 1047   3                              }
@@ -1150,7 +1150,7 @@ line level    source
 1105   1      switch(m_current)
 1106   1      {
 1107   2      #if 1
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 19  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 19  
 
 1108   2              #if 1//ryan
 1109   2      case 0x10: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); TW28_WriteByte(1,0x0f,0x03);break;  //C
@@ -1214,7 +1214,7 @@ line level    source
 1167   2      case 0x40: Bound_Set(0x00);Error=1; break;  //D
 1168   2      case 0x12: Bound_Set(0x01); break;  //CR
 1169   2      case 0x21: Bound_Set(0x01); break;  //RC
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 20  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 20  
 
 1170   2      case 0x14: Bound_Set(0x01); break;  //DC
 1171   2      case 0x41: Bound_Set(0x01); break;  //CD
@@ -1278,7 +1278,7 @@ line level    source
 1229   2      }
 1230   1      
 1231   1      return Error;
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 21  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 21  
 
 1232   1      }
 1233          
@@ -1342,7 +1342,7 @@ line level    source
 1291          
 1292          //---------------------------------------------------
 1293          
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 22  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 22  
 
 1294          
 1295          void Press_check(void)
@@ -1363,7 +1363,7 @@ line level    source
 1310   1      #define _2V  101300  ///2.0V
 1311   1      #define _3V  199400  ////3.0V
 1312   1      #define _1V_step   310//0//311///one step=0.0031V refernec voltage=3.3V
-1313   1      #define press_offset   (50+30-1) ///1.850V offset to 2.0V ryan@20180727
+1313   1      #define press_offset  0//// (50+30-1) ///1.850V offset to 2.0V ryan@20180727
 1314   1      #define ap_offset 60-8
 1315   1      
 1316   1      U32 temp_val=0;
@@ -1406,7 +1406,7 @@ line level    source
                               else
                                       {
                                        temp_val=199400;
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 23  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 23  
 
                                       }
               }
@@ -1470,7 +1470,7 @@ line level    source
               SC16_Com[8]^=SC16_Com[loop];
               #else                                 //XOR 0-7
               for(loop=0;loop<=7;loop++)
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 24  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 24  
 
               SC16_Com[8]^=SC16_Com[loop];
               #endif
@@ -1534,7 +1534,7 @@ line level    source
 1477   1      //U16 val=0;
 1478   1      U8 loop;
 1479   1      
-C51 COMPILER V9.01   MAIN                                                                  07/27/2018 15:46:00 PAGE 25  
+C51 COMPILER V9.01   MAIN                                                                  07/27/2018 16:10:39 PAGE 25  
 
 1480   1      SC16_Com[0]=STX;
 1481   1      SC16_Com[1]=0x32;
@@ -1572,7 +1572,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   2744    ----
+   CODE SIZE        =   2736    ----
    CONSTANT SIZE    =    474    ----
    XDATA SIZE       =     69     496
    PDATA SIZE       =   ----    ----
