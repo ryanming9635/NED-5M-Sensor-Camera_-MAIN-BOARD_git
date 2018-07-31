@@ -763,9 +763,11 @@ P1_7=0;
 
 void Set_PWM_Output (U8 addr, U8 val)
 {
-
+#ifdef _LED_PWM_HALF
+U8 num[6]={255,200+28,150+53,100+79+5,50+103,0+128};
+#else
 U8 num[6]={255,200,150,100,50,0};
-
+#endif
 
 //CL=0; //PCA counter..
 //CH=0;

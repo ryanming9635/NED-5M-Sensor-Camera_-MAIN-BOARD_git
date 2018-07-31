@@ -1,5 +1,11 @@
----- Camera_press3 Matches (4 in 2 files) ----
-Main.c (hisharp ver3.x):extern U8 Camera_press3;
-Main.c (hisharp ver3.x):Camera_press3=(val/1000)+0x30;  val=(val%1000);
-NED.c (hisharp ver3.x):U8 Camera_press3=0x30;
-NED.c (hisharp ver3.x):SC16_Com[3]=Camera_press3;
+---- Set_PWM_Output Matches (10 in 3 files) ----
+Main.c (hisharp ver3.x):Set_PWM_Output(0,0);
+Main.c (hisharp ver3.x):Set_PWM_Output(1,0);
+Main.c (hisharp ver3.x):Set_PWM_Output(2,0);
+Main.c (hisharp ver3.x):Set_PWM_Output(3,0);
+Main.c (hisharp ver3.x):Set_PWM_Output(4,0);
+Main.c (hisharp ver3.x):Set_PWM_Output(5,0);
+Main.c (hisharp ver3.x):void Set_PWM_Output (U8 addr, U8 val)
+Main.c (hisharp ver3.x):		Set_PWM_Output(ch,set_val);
+Main.h (hisharp ver3.x):void Set_PWM_Output (U8 addr,U8 val);
+NED.h (hisharp ver3.x)://void Set_PWM_Output (U8 addr,U8 val);

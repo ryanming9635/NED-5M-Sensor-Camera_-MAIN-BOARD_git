@@ -43,7 +43,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\OBJ\</OutputDirectory>
-          <OutputName>NED_5MCMOS_v0_a_6_XXXX_20180710</OutputName>
+          <OutputName>NED_5MCMOS_v0_a_6_XXXX_20180727</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>

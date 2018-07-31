@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   OSDCTRL                                                               07/27/2018 16:10:40 PAGE 1   
+C51 COMPILER V9.01   OSDCTRL                                                               07/31/2018 13:58:14 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE OSDCTRL
@@ -62,7 +62,7 @@ line level    source
   52          
   53          //      ------------------------------------
   54          //                      Variables Definitions
-C51 COMPILER V9.01   OSDCTRL                                                               07/27/2018 16:10:40 PAGE 2   
+C51 COMPILER V9.01   OSDCTRL                                                               07/31/2018 13:58:14 PAGE 2   
 
   55          //      ------------------------------------
   56                  U8 bdata bitdat;
@@ -126,7 +126,7 @@ line level    source
  114          //
  115          //              
  116          //
-C51 COMPILER V9.01   OSDCTRL                                                               07/27/2018 16:10:40 PAGE 3   
+C51 COMPILER V9.01   OSDCTRL                                                               07/31/2018 13:58:14 PAGE 3   
 
  117          void PCT_InitOSDColor(void)
  118          {
@@ -190,7 +190,7 @@ line level    source
  176   1              dat = (ReadByteOSD(0x0F)&0x0F);
  177   1              WriteByteOSD(0x0F, ClearBit(dat, _bit));
  178   1      }
-C51 COMPILER V9.01   OSDCTRL                                                               07/27/2018 16:10:40 PAGE 4   
+C51 COMPILER V9.01   OSDCTRL                                                               07/31/2018 13:58:14 PAGE 4   
 
  179          
  180          // ===========================================================================
@@ -254,7 +254,7 @@ line level    source
  238   1              WriteByteOSD(0x03, DAT_BIT0 ? (foreColor) : (backColor));               //... 4th pixel
  239   1              WriteByteOSD(0x04, 0x80|_index);                        //... write to buffer
  240   1              _index++;
-C51 COMPILER V9.01   OSDCTRL                                                               07/27/2018 16:10:40 PAGE 5   
+C51 COMPILER V9.01   OSDCTRL                                                               07/31/2018 13:58:14 PAGE 5   
 
  241   1              
  242   1              bitdat = _dat[1];
@@ -318,7 +318,7 @@ line level    source
  299          // Clear 16x16 Dots for word, tatal N words
  300          // _posx  : Start point for Horizontal (unit = 8 Dots)
  301          // _posy  : Start point for Vertical   (unit = 8 Dots)
-C51 COMPILER V9.01   OSDCTRL                                                               07/27/2018 16:10:40 PAGE 6   
+C51 COMPILER V9.01   OSDCTRL                                                               07/31/2018 13:58:14 PAGE 6   
 
  302          // _len   : 1-4: 1-4 words
  303          //
@@ -382,7 +382,7 @@ line level    source
  353          
  354          // ===========================================================================
  355          //
-C51 COMPILER V9.01   OSDCTRL                                                               07/27/2018 16:10:40 PAGE 7   
+C51 COMPILER V9.01   OSDCTRL                                                               07/31/2018 13:58:14 PAGE 7   
 
  356          // Draw 16x16 Dots for word, tatal 8 words is 128 x 16 Dots
  357          // _posx  : Start point for Horizontal (unit = 8 Dots)
@@ -446,7 +446,7 @@ line level    source
  415          //==================================================================================
  416          //
  417          //
-C51 COMPILER V9.01   OSDCTRL                                                               07/27/2018 16:10:40 PAGE 8   
+C51 COMPILER V9.01   OSDCTRL                                                               07/31/2018 13:58:14 PAGE 8   
 
  418          //
  419          

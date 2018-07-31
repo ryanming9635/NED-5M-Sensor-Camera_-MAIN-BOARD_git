@@ -66,9 +66,12 @@
 //#define Ver2   (0x33)//20151019   V0.a.3//ryan@20160226
 //#define Ver2   (0x34)//20151019   V0.a.4//ryan@20160303
 //#define Ver2   (0x35)//20180710   V0.a.5//ryan@20180710
-#define Ver2   (0x36)//20180710   V0.a.6//ryan@20180727
+//#define Ver2   (0x36)//20180710   V0.a.6//ryan@20180727
+#define Ver2   (0x37)//20180731   V0.a.7//ryan@20180731
 
-#warning "NED-5M-Sensor-Camera V0.a.6"
+#warning "NED-5M-Sensor-Camera V0.a.7"
+
+#define _LED_PWM_HALF 1 ////ryan@20180731 奈良要求LED PWM 變成一半
 
 //#define buff_num      13///ryan@20151029		#define buff_num      12
 #define buff_num      6///ryan@20151029		#define buff_num      12

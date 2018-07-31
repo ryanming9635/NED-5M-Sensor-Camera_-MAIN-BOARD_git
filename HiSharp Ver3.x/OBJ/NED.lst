@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 1   
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE NED
@@ -10,7 +10,7 @@ line level    source
 
    1          #include "types.h"
    2          #include "NED.h"                  //add by ryan.
-*** WARNING C320 IN LINE 71 OF NED.h: "NED-5M-Sensor-Camera V0.a.6"
+*** WARNING C320 IN LINE 72 OF NED.h: "NED-5M-Sensor-Camera V0.a.7"
    3          #include "Main.h"
    4          #include "printf.h"
    5          //#include "Timer.h"
@@ -62,7 +62,7 @@ line level    source
   51           U8 SC16_ComAddr=0;
   52           U8 GPIO_current=0;
   53           U8 DVR_startup_flag=0;
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 2   
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 2   
 
   54           U8 Cam_startup_flag=0;
   55           U8 DVR_Com[5]={0x02,0x37,0x32,0x03,0x04};
@@ -126,7 +126,7 @@ line level    source
  113          #endif
  114            
  115           U8 OUTPUT=0;
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 3   
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 3   
 
  116           U8 peek_flag=0,peek_buf=0;
  117          extern data user_timer[TIMER_NUM];
@@ -190,7 +190,7 @@ line level    source
               #endif
  175   1      }
  176          
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 4   
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 4   
 
  177          void I2CStart2(void)
  178          {
@@ -254,7 +254,7 @@ line level    source
  236   1              I2C_SCL = 1;
  237   1                      I2Cdelay();
  238   1              I2C_SCL = 0;
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 5   
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 5   
 
  239   1                    I2Cdelay();
  240   1          #else
@@ -318,7 +318,7 @@ line level    source
  298   1              I2C_SCL = 0;    // HHY 3.00
  299   1              I2C_SCL = 0;    // HHY 3.00
  300   1              I2C_SCL = 0;    //I2Cdelay();
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 6   
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 6   
 
  301   1            I2C_SDA = 1;      //I2Cdelay();
  302   1            
@@ -382,7 +382,7 @@ line level    source
                         //DELAY_FOR(5);/// I2Cdelay();
                           I2C_SCL = 1;
                        DELAY_FOR(I2C_time);///  I2Cdelay();
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 7   
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 7   
 
                       //DELAY_FOR(5);/// I2Cdelay();
                           I2C_SCL = 0;
@@ -446,7 +446,7 @@ line level    source
  421   1              //I2C_SCL = 1;  // HHY 3.00
  422   1              //I2C_SCL = 1;  // HHY 3.00
  423   1              //I2C_SCL = 1; 
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 8   
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 8   
 
  424   1               I2Cdelay2();
  425   1            //  I2C_SCL = 0;
@@ -510,7 +510,7 @@ line level    source
                               //I2CDLY_5uSec(1);
                               ReadValue = (ReadValue<<1)|bitt;
                       }
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 9   
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 9   
 
                   
                       I2C_SDA = 0;    I2Cdelay();             //ack
@@ -574,7 +574,7 @@ line level    source
                       I2CWriteData(addr);
                      I2C_ACK2();
                       I2CWriteData((index<<3));
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 10  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 10  
 
                      I2C_ACK2();
                       I2CWriteData(val);
@@ -638,7 +638,7 @@ line level    source
               }
               Printf("                    <-\r\n",(U16) x,(U16) val2[x]);  //ry               
               #endif
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 11  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 11  
 
               
                       #endif
@@ -702,7 +702,7 @@ line level    source
  669   1       //I2C_SDA = 1;
  670   1         //  DELAY_FOR(10);///     I2Cdelay();
  671   1             
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 12  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 12  
 
  672   1      }
  673          //----------------------------------------
@@ -766,7 +766,7 @@ line level    source
                               break;
               default:
                               
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 13  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 13  
 
                               //TW28_WriteByte(1,0x0f,0x03);
                               TW28_WriteByte(1,0x11,0x00);
@@ -830,7 +830,7 @@ line level    source
  793   2      case 0x40: TW28_WriteByte(1,0x18,0x81); break;  //D
  794   2      case 0x12: Bound_Set(0x01); break;  //CR
  795   2      case 0x21: Bound_Set(0x01); break;  //RC
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 14  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 14  
 
  796   2      case 0x14: Bound_Set(0x01); break;  //DC
  797   2      case 0x41: Bound_Set(0x02); break;  //CD
@@ -894,7 +894,7 @@ line level    source
  855   1      SC16_Com[0]=STX;
  856   1      SC16_Com[1]=0x32;
  857   1      SC16_Com[2]=0x4f;
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 15  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 15  
 
  858   1      SC16_Com[3]=Camera_ver2;
  859   1      SC16_Com[4]=Camera_ver1;
@@ -958,7 +958,7 @@ line level    source
               SC16_Com[6]=0x20;
               #else
  919   1      SC16_Com[3]=Camera_press3;
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 16  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 16  
 
  920   1      SC16_Com[4]=Camera_press2;
  921   1      SC16_Com[5]=Camera_press1;
@@ -1022,7 +1022,7 @@ line level    source
  979          {
  980   1      
  981   1      U8 loop;
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 17  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 17  
 
  982   1      
  983   1      SC16_Com[0]=STX;
@@ -1086,7 +1086,7 @@ line level    source
 1041   1              for(loop=0;loop<=8;loop++)
 1042   1              {
 1043   2              RS_tx(SC16_Com[loop]);
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 18  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 18  
 
 1044   2              }
 1045   1      
@@ -1150,7 +1150,7 @@ line level    source
 1103   1              {
 1104   2              RS_tx(SC16_Com[loop]);
 1105   2              }
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 19  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 19  
 
 1106   1      
 1107   1              }
@@ -1214,7 +1214,7 @@ line level    source
 1165   2      WriteByte(DRP_ID[2], 0x90);
 1166   2      WriteByte(DRP_ID[2], ETX);
 1167   2      WriteByte(DRP_ID[2], 0x6E);
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 20  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 20  
 
 1168   2                      }
 1169   1              else
@@ -1278,7 +1278,7 @@ line level    source
 1227   1                              GPIO_current=GPIO_state;
 1228   1      
 1229   1                              #ifdef  SC16IS750_DEBUG_PRINT 
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 21  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 21  
 
                                       printf("\r\n GPIO=%x",(U16)GPIO_state);
                                       #endif   
@@ -1342,7 +1342,7 @@ line level    source
                       
                       if((Com_flag==camera_com_flag)&&(Cam_startup_flag==1))
                       WriteByte(DRP_ID[2], val);                                      
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 22  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 22  
 
                       
               #else
@@ -1406,7 +1406,7 @@ line level    source
 1351   1              WriteI2C(DRP_ID[addr],FCR,0x03);   //RXFIFO_reset 
 1352   1              DELAY_FOR(50);
 1353   1              WriteI2C(DRP_ID[addr],FCR,0x01);   //RXFIFO_reset 
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 23  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 23  
 
 1354   1              }
 1355   1              else
@@ -1470,7 +1470,7 @@ line level    source
 1412   4                                                              {       
 1413   5                                                              etx_flag=1;
 1414   5                                                              //loop++;
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 24  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 24  
 
 1415   5                                                              //SC16_com_buff[loop]=ReadByte(DRP_ID[addr]);
 1416   5                                                              //error_flag=0;//end loop   //ryan@20150420
@@ -1534,7 +1534,7 @@ line level    source
 1474   4                                                      return 1;//if buff are error...
 1475   4                                                      }
 1476   3                                                      else if((loop_temp<=6)&&(error_flag==0))///ryan@20150602
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 25  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 25  
 
 1477   3                                                              {
 1478   4      
@@ -1598,7 +1598,7 @@ line level    source
 1536   2                                      else
 1537   2                                              {
 1538   3                                      //if data isn't NAK or ACK of value that it should be send 1 byte to devices..
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 26  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 26  
 
 1539   3                                                      #if 0
                                                               RS_tx(data_temp); 
@@ -1662,7 +1662,7 @@ line level    source
               /*
                       if( (ReadI2C(DRP_ID[addr], LSR)&BIT1))
                       {
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 27  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 27  
 
                       WriteI2C(DRP_ID[addr],FCR,0x03);   //RXFIFO_reset 
                       DELAY_FOR(50);
@@ -1726,7 +1726,7 @@ line level    source
                                               {
                                                      Data=ReadByte(DRP_ID[0]);
                                                       SC16_Com[SC16_ComAddr]=Data;
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 28  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 28  
 
                                                       #ifdef  SC16IS750_DEBUG_PRINT 
                                                       printf("\r\nSC16_Com[%x]=%x",(U16)SC16_ComAddr,(U16)Data);
@@ -1790,7 +1790,7 @@ line level    source
 1721   2                                                // printf("\r\nSC16_SendDataSelect(6);");
 1722   2                                              work_flag=0;
 1723   2                                              }
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 29  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 29  
 
 1724   1                                      //else if(work_flag==3)
 1725   1                                      //      {
@@ -1854,7 +1854,7 @@ line level    source
 1783          {
 1784   1      //static U8 work_flag;
 1785   1      U8 mask[4]={0x01,0x02,0x10,0x20};
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 30  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 30  
 
 1786   1      U8 cam[4]={0x31,0x34,0x41,0x42};
 1787   1      U8 BCC[4]={0x07,0x02,0x77,0x74};
@@ -1918,7 +1918,7 @@ line level    source
                                               WriteByte(DRP_ID[2],cam[loop]); 
                                               WriteByte(DRP_ID[2],0x03); 
                                               WriteByte(DRP_ID[2],BCC[loop]); 
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 31  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 31  
 
                                               }       
                               }
@@ -1982,7 +1982,7 @@ line level    source
 1906          //reset sc16 data
 1907          //-----------------------------------------
 1908          U8 SC16_ComCheck(U8 *addr)
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 32  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 32  
 
 1909          {
 1910   1      
@@ -2046,7 +2046,7 @@ line level    source
 1968   3                                                      addr++;                                                                                         
 1969   3                                                      Camera_ver2=*addr;
 1970   3                                                      SC16_busy_flag&=~(camera_version);
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 33  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 33  
 
 1971   3                                                        return 1;
 1972   3                                                      }       
@@ -2110,7 +2110,7 @@ line level    source
 2030   1              //      }       
 2031   1            //}
 2032   1      
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 34  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 34  
 
 2033   1                                              //#ifdef get_data_buff 
 2034   1                                              //printf("\r\n Got data from the sc16");                                        
@@ -2174,7 +2174,7 @@ line level    source
 2092          {
 2093   1      
 2094   1      switch(addr)
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 35  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 35  
 
 2095   1      {
 2096   2      case 1: Send_Camera_Temp();  get_data_addr=0;break; ///1
@@ -2238,7 +2238,7 @@ line level    source
 2153   2       addr++;    ///5
 2154   2         f_val^=*addr;
 2155   2       addr++;    ///6
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 36  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 36  
 
 2156   2         f_val^=*addr;
 2157   2       addr++;    ///7
@@ -2302,7 +2302,7 @@ line level    source
 2215   3                                                              }
 2216   2                                              else if(com[0]==0x31&&(com[1]==0x35))
 2217   2                                                              {
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 37  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 37  
 
 2218   3                                                              Sent_Camera_RAng();
 2219   3                                                              //timerout3+=timerout4;
@@ -2366,7 +2366,7 @@ line level    source
 2277   4                                                                              SC16_SendData(SC16_Com[loop]); 
 2278   4      
 2279   4                                                                              user_timer[5]=4;//ryan@20151130
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 38  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 38  
 
 2280   4                                                                              user_timer[3]=(20);//reset polling time..
 2281   4                                                                              
@@ -2430,7 +2430,7 @@ line level    source
 2338   2                      if(SC16_Com[2]==0x31) //ryan@20150416
 2339   2                              {
 2340   3                              Camera_flag=((Camera_flag&0x30)|0x01);//set/clear  up move
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 39  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 39  
 
 2341   3                              RS_tx(ACK);
 2342   3                              }
@@ -2494,7 +2494,7 @@ line level    source
 2400   1      if((SC16_Com[1]==0x31)&&(SC16_Com[2]>=0x41)&&(SC16_Com[2]<=0x47))  {
 2401   2              Com_flag=camera_com_flag;       
 2402   2              return TRUE;
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 40  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 40  
 
 2403   2      }
 2404   1      if((SC16_Com[1]==0x31)&&(SC16_Com[2]>=0x4f)&&(SC16_Com[2]<=0x53)) {
@@ -2558,7 +2558,7 @@ line level    source
 2462          {
 2463   1              U8 noofones = 0;
 2464   1      //      unsigned long mask = 0x00000001ul; /* start at first bit */
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 41  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 41  
 
 2465   1      
 2466   1              U8 mask = 0x01; /* start at first bit */
@@ -2622,7 +2622,7 @@ line level    source
 2524   1          temp |= 0x08;
 2525   1           WriteI2C(addr, IOContro, temp);
 2526   1            
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 42  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 42  
 
 2527   1      //    WriteRegister(SC16IS750_REG_IOCONTROL, temp_iocontrol);   
 2528   1      //    temp_iocontrol = ReadRegister(SC16IS750_REG_IOCONTROL);
@@ -2686,7 +2686,7 @@ line level    source
               Printf("SetBaudrate_DLH=%x\r\n",(U16) ReadI2C(addr,DLH));
               #endif 
 2588   1      
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 43  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 43  
 
 2589   1          temp_lcr &= 0x7F;
 2590   1         WriteI2C(addr, LCR, temp_lcr); ///WriteRegister(SC16IS750_REG_LCR,temp_lcr); 
@@ -2750,7 +2750,7 @@ line level    source
 2648   2                  temp_lcr |= 0x18;
 2649   2                  break;
 2650   2              case 3:                         //force '1' parity
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 44  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 44  
 
 2651   2                  temp_lcr |= 0x03;
 2652   2                  break;
@@ -2814,7 +2814,7 @@ line level    source
 2710   1       WriteI2C(addr, IODir, port_io); ///WriteRegister(SC16IS750_REG_IODIR, port_io);
 2711   1        //  return;
 2712   1      
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 45  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 45  
 
 2713   1      }
 2714          //-----------------------------------------
@@ -2878,7 +2878,7 @@ line level    source
                           //Serial.println(ReadRegister(SC16IS750_REG_RXLVL), DEC);
                           #endif
 2774   2                      tmp_lsr = ReadI2C(addr,LSR);///ReadRegister(SC16IS750_REG_LSR);
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 46  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 46  
 
 2775   2                      
 2776   2              } while ((tmp_lsr&0x20) ==0);
@@ -2942,7 +2942,7 @@ line level    source
 2834   1      //      } while ((tmp_lsr&0x20) ==0);
 2835   1      
 2836   1              
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 47  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 47  
 
 2837   1              WriteI2C(addr, THR, val);///WriteRegister(SC16IS750_REG_THR,val);
 2838   1              
@@ -3006,7 +3006,7 @@ line level    source
 2896   1      step=0;
 2897   1      val=0;
 2898   1      for(x=0;x<=2;x++)
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 48  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 48  
 
 2899   1      {
 2900   1      val=(TW28_ReadByte(page,0x02+step)+(((TW28_ReadByte(page,0x06+step)&BIT0&BIT1)<<8)));
@@ -3070,7 +3070,7 @@ line level    source
 2956   1              } 
 2957   1              */
 2958   1              return 1 ;//peek_buf;
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 49  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 49  
 
 2959   1                      
 2960   1      }
@@ -3134,7 +3134,7 @@ line level    source
 3016          
 3017          void Int2_interrupt(void) interrupt 6 using 1
 3018          {
-C51 COMPILER V9.01   NED                                                                   07/27/2018 16:10:40 PAGE 50  
+C51 COMPILER V9.01   NED                                                                   07/31/2018 13:58:15 PAGE 50  
 
 3019          
 3020          IE2=0;
