@@ -1,11 +1,3 @@
----- Set_PWM_Output Matches (10 in 3 files) ----
-Main.c (hisharp ver3.x):Set_PWM_Output(0,0);
-Main.c (hisharp ver3.x):Set_PWM_Output(1,0);
-Main.c (hisharp ver3.x):Set_PWM_Output(2,0);
-Main.c (hisharp ver3.x):Set_PWM_Output(3,0);
-Main.c (hisharp ver3.x):Set_PWM_Output(4,0);
-Main.c (hisharp ver3.x):Set_PWM_Output(5,0);
-Main.c (hisharp ver3.x):void Set_PWM_Output (U8 addr, U8 val)
-Main.c (hisharp ver3.x):		Set_PWM_Output(ch,set_val);
-Main.h (hisharp ver3.x):void Set_PWM_Output (U8 addr,U8 val);
-NED.h (hisharp ver3.x)://void Set_PWM_Output (U8 addr,U8 val);
+---- _LED_PWM_HALF Matches (2 in 2 files) ----
+Main.c (hisharp ver3.x):766:#ifdef _LED_PWM_HALF
+NED.h (hisharp ver3.x):75:#define _LED_PWM_HALF 1 ////ryan@20180731 ©`®}≠n®DLED PWM ≈‹¶®§@•b°
