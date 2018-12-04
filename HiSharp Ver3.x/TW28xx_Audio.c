@@ -57,6 +57,7 @@
 
 // ===========================================================================
 //                      Parallel function description
+#if 0
 void PCT_AudioRegList(void)
 {	
 	printf("***** %bx == %bx *****\n",0x4c, TW28_ReadByte(0, 0x4c) );
@@ -85,11 +86,12 @@ void PCT_AudioRegList(void)
 	printf("***** %bx == %bx *****\n",0x73, TW28_ReadByte(0, 0x73) );
 	printf("***** %bx == %bx *****\n",0x74, TW28_ReadByte(0, 0x74) );
 }
-
+#endif
 // ===========================================================================
 //
 //		Audio Inputer & Output Gain Control
 //
+#if 0
 BYTE PCT_AudioGainCtrl(U8 _dvc, U8 _channel, U8 _gain)
 {
 	register U8	dat;
@@ -117,12 +119,13 @@ BYTE PCT_AudioGainCtrl(U8 _dvc, U8 _channel, U8 _gain)
 	result = TW28_ReadByte(AGAIN_PAGE, AGAIN_ADDR );
 	return true;
 }
-
+#endif
 
 // ===========================================================================
 //
 //	Audio Miaxing Ratio Control
 //
+#if 0
 BYTE PCT_AudioMixCtrl(U8 _dvc, U8 _channel, U8 _gain)
 {
 	register U8	dat;
@@ -152,11 +155,12 @@ BYTE PCT_AudioMixCtrl(U8 _dvc, U8 _channel, U8 _gain)
 	PCT_AudioSelLive(_dvc, 0xFF);
 	return true;
 }
-
+#endif
 // ===========================================================================
 //
 //	Audio Mixing Mute Control
 //
+#if 0
 BYTE PCT_AudioMixMute(U8 _dvc, U8 _ch, U8 _ctrl)
 {
 	data U8 dat;
@@ -195,7 +199,7 @@ BYTE PCT_AudioSelLive(U8 _dvc, U8 _chan)
 	TW28_WriteByte(SEL_LMMOD_PAGE, SEL_LMMOD_ADDR, _chan);
 	return 0;
 }
-
+#endif
 
 // ===========================================================================
 //

@@ -77,9 +77,13 @@
 	extern void PCT_PreDrawOSD(void);
 	extern void PCT_EnfalshVLoss(void);
 	extern void PCT_GetVideoSignalStatus(void);
+	#if 0
 	extern void PCT_ShowVLoss(void);
+	#endif
 	extern void PCT_ShowIndicateIcon(PU8 _attr);
+	#if 0
 	extern void PCT_ShowSpeakIcon(PU8 _attr);
+	#endif
 	extern void PCT_ShowMirrorIcon(PU8 _attr);
 	extern void PCT_ShowModeIcon(void);
 	extern void PCT_OSDActionForHS(void);

@@ -169,7 +169,7 @@ void RS_tx (BYTE tx_buf)
            if(TI) {
 					#ifdef no_parity
 					#else
-					TB8=parity(tx_buf);
+					//TB8=parity(tx_buf);
 					#endif
 
 

@@ -1,4 +1,4 @@
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 1   
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 1   
 
 
 C51 COMPILER V9.50a, COMPILATION OF MODULE MAIN
@@ -49,7 +49,6 @@ line level    source
   39          #include "CommandShell.h"
   40          #include "OSDAction.h"
   41          #include "NED.h"    //add by ryan.
-*** WARNING C320 IN LINE 73 OF NED.h: "NED-5M-Sensor-Camera V0.a.8"
   42          #include "Printf.h"
   43          //#include "SST89x5xxRD2.H"
   44          
@@ -62,9 +61,9 @@ line level    source
   51          //      Type Definitions
   52          //  ------------------------------------
   53          
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 2   
-
   54          
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 2   
+
   55          //  ------------------------------------
   56          //      Variables Definitions
   57          //  ------------------------------------
@@ -126,9 +125,9 @@ line level    source
  113          //extern U16 USERTMVAL6;
  114          //-------------------------------
  115          
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 3   
-
  116          //data U8 *mode="mode 0\r\n";
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 3   
+
  117          // char *test="hscom 1 1 ch0:1%1bx ch1:0%1bx ch2:0%1bx ch3:0%1bx\n\r";
  118          
  119          //code U8 *test="hscom 1 1 ch1:12 ch0:02 ch2:02 ch3:03\r\n";  //camA
@@ -190,9 +189,9 @@ line level    source
  175   2                {
  176   3      
  177   3                  SC16_Com[Com_pos]=ch;           
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 4   
-
  178   3                  Com_pos++;
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 4   
+
  179   3                  Com_end=1;
  180   3                  etx_flag=0;///end of loop
  181   3                  #ifdef  SC16IS750_DEBUG_PRINT 
@@ -213,7 +212,7 @@ line level    source
                           printf("*");
                           #endif
  198   3                    
- 199   3                  if(SC16_BCC_Check(&SC16_Com[0],4))
+ 199   3                  if(SC16_BCC_Check(&SC16_Com[0]))
  200   3                  {
  201   4                  RScommand.commFlage = true;
  202   4      
@@ -254,9 +253,9 @@ line level    source
                       #ifdef  SC16IS750_DEBUG_PRINT 
                    printf("\r\nget data=%x %x %x %x",(U16)RScommand.commBuf[0],(U16)RScommand.commBuf[1]\
                      ,(U16)RScommand.commBuf[2],(U16)RScommand.commBuf[3]);
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 5   
-
                       
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 5   
+
                         #endif  
                       
                       break;
@@ -297,129 +296,132 @@ line level    source
  278          //
  279          //
  280          //
- 281          void NewLine(void)
- 282          {
- 283   1        puts("\r\n");                   
- 284   1      }
- 285          
- 286          // ===========================================================================
- 287          //
+ 281          #if 0
+              void NewLine(void)
+              {
+                puts("\r\n");                   
+              }
+              #endif
+ 287          // ===========================================================================
  288          //
  289          //
- 290          void PutsP(BYTE *ptr)
- 291          {
- 292   1        data BYTE ch;
- 293   1        
- 294   1        while(*ptr!='\0') {
- 295   2          ch = *ptr++;
- 296   2          RS_tx(ch);
- 297   2        }
- 298   1      }
- 299          
- 300          // ===========================================================================
- 301          //
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 6   
+ 290          //
+ 291          #if 0
+              void PutsP(BYTE *ptr)
+              {
+                data BYTE ch;
+                
+                while(*ptr!='\0') {
+                  ch = *ptr++;
+                  RS_tx(ch);
+                }
+              }
+              #endif
+ 302          // ===========================================================================
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 6   
 
- 302          //  Restart Command Shell 
  303          //
- 304          void ResetCommSell(void)
- 305          {
- 306   1        //if( comm_chk_flag ) PutsP("Debug Program >");
- 307   1        
- 308   1        Com_start=0;  //ryan..
- 309   1        Com_end=0;
- 310   1        Com_pos=0;
- 311   1        SC16_Com[0]=0;
- 312   1        SC16_Com[1]=0;
- 313   1        SC16_Com[2]=0;
- 314   1        SC16_Com[3]=0;
- 315   1        SC16_Com[4]=0;
- 316   1        SC16_Com[5]=0;
- 317   1        SC16_Com[6]=0;
- 318   1        SC16_Com[7]=0;
- 319   1        SC16_Com[8]=0;
- 320   1        
- 321   1        RScommand.WritePtr = 0;
- 322   1        RScommand.commFlage = false;
- 323   1        RScommand.commBuf[0] = '\0';
- 324   1      }
- 325          
- 326          // ===========================================================================
- 327          //
- 328          //  Falsh OSD Contril
+ 304          //  Restart Command Shell 
+ 305          //
+ 306          void ResetCommSell(void)
+ 307          {
+ 308   1        //if( comm_chk_flag ) PutsP("Debug Program >");
+ 309   1        
+ 310   1        Com_start=0;  //ryan..
+ 311   1        Com_end=0;
+ 312   1        Com_pos=0;
+ 313   1        SC16_Com[0]=0;
+ 314   1        SC16_Com[1]=0;
+ 315   1        SC16_Com[2]=0;
+ 316   1        SC16_Com[3]=0;
+ 317   1        SC16_Com[4]=0;
+ 318   1        SC16_Com[5]=0;
+ 319   1        SC16_Com[6]=0;
+ 320   1        SC16_Com[7]=0;
+ 321   1        SC16_Com[8]=0;
+ 322   1        
+ 323   1        RScommand.WritePtr = 0;
+ 324   1        RScommand.commFlage = false;
+ 325   1        RScommand.commBuf[0] = '\0';
+ 326   1      }
+ 327          
+ 328          // ===========================================================================
  329          //
- 330          void PCT_FlashOSDCtrl(U8 _on)
- 331          {
- 332   1        if(_on) osd_chk_flag=false;
- 333   1        else osd_chk_flag=true;
- 334   1      }
- 335          
- 336          
- 337          // ===========================================================================
- 338          //
- 339          //  Initial Command Shell 
+ 330          //  Falsh OSD Contril
+ 331          //
+ 332          void PCT_FlashOSDCtrl(U8 _on)
+ 333          {
+ 334   1        if(_on) osd_chk_flag=false;
+ 335   1        else osd_chk_flag=true;
+ 336   1      }
+ 337          
+ 338          
+ 339          // ===========================================================================
  340          //
- 341          void InitialCommShell(void)
- 342          {
- 343   1        comm_chk_flag=false;
- 344   1        osd_chk_flag=false;
- 345   1      
- 346   1        //VlossState=0;
- 347   1        VlossFlag=0;
- 348   1        VlossCount=0;
- 349   1      }
- 350          
- 351          // ===========================================================================
- 352          //
- 353          //  Start Command Shell 
+ 341          //  Initial Command Shell 
+ 342          //
+ 343          void InitialCommShell(void)
+ 344          {
+ 345   1        comm_chk_flag=false;
+ 346   1        osd_chk_flag=false;
+ 347   1      
+ 348   1        //VlossState=0;
+ 349   1        VlossFlag=0;
+ 350   1        VlossCount=0;
+ 351   1      }
+ 352          
+ 353          // ===========================================================================
  354          //
- 355          void chkStartCommShell(char *ptr)
- 356          {
- 357   1        if( comm_chk_flag ) return;
- 358   1        if( strcmp(ptr,"PCT")==0 ) comm_chk_flag=true;
- 359   1      }
- 360          
- 361          void Wait_ms(U16 Tms)
- 362          
- 363          {
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 7   
+ 355          //  Start Command Shell 
+ 356          //
+ 357          #if 0
+              void chkStartCommShell(char *ptr)
+              {
+                if( comm_chk_flag ) return;
+                if( strcmp(ptr,"PCT")==0 ) comm_chk_flag=true;
+              }
+              #endif
+ 364          void Wait_ms(U16 Tms)
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 7   
 
- 364   1      //  #define CPU_CLK_KHZ   40000
- 365   1      #define CPU_CLK_KHZ   22118
- 366   1      #define CPU_SPEED 1
- 367   1      #define CountStick      (1000000U/((CPU_CLK_KHZ*CPU_SPEED)/12))/20    
- 368   1      
- 369   1      //#define CountStick      (1000000U/((CPU_CLK_KHZ*CPU_SPEED)/12))/10  
- 370   1                 U16 count;
+ 365          
+ 366          {
+ 367   1      //  #define CPU_CLK_KHZ   40000
+ 368   1      #define CPU_CLK_KHZ   22118
+ 369   1      #define CPU_SPEED 1
+ 370   1      #define CountStick      (1000000U/((CPU_CLK_KHZ*CPU_SPEED)/12))/20    
  371   1      
- 372   1                 while(Tms)
- 373   1      
- 374   1                 {
- 375   2      
- 376   2                           for(count=0; count<CountStick; count++);//total 20 clock for this loop
- 377   2      
- 378   2                           Tms--;
- 379   2      
- 380   2                 }
- 381   1      }
- 382          
- 383          // ===========================================================================
- 384          //
- 385          //
- 386          //
- 387          
- 388          extern  U8 Cam_boot_flag;//ryan@20151201
- 389          void main(void)
- 390          {
- 391   1        U8 Counter=0;
- 392   1        U16 readtemp=0;
- 393   1        U8 OsdCount1=200;//Kane @HS 2007 0725 Ver3.4
- 394   1        U8 OsdCount2=100;//Kane @HS 2007 0725 Ver3.4
- 395   1        U8 Camera_speed=0;
- 396   1        // U8 loop=0,lp2=0,lp3=0;  //ryan..
- 397   1       // U8 x,y,z;
- 398   1      
- 399   1        #if 0
+ 372   1      //#define CountStick      (1000000U/((CPU_CLK_KHZ*CPU_SPEED)/12))/10  
+ 373   1                 U16 count;
+ 374   1      
+ 375   1                 while(Tms)
+ 376   1      
+ 377   1                 {
+ 378   2      
+ 379   2                           for(count=0; count<CountStick; count++);//total 20 clock for this loop
+ 380   2      
+ 381   2                           Tms--;
+ 382   2      
+ 383   2                 }
+ 384   1      }
+ 385          
+ 386          // ===========================================================================
+ 387          //
+ 388          //
+ 389          //
+ 390          
+ 391          extern  U8 Cam_boot_flag;//ryan@20151201
+ 392          void main(void)
+ 393          {
+ 394   1        U8 Counter=0;
+ 395   1        U16 readtemp=0;
+ 396   1        U8 OsdCount1=200;//Kane @HS 2007 0725 Ver3.4
+ 397   1        U8 OsdCount2=100;//Kane @HS 2007 0725 Ver3.4
+ 398   1        U8 Camera_speed=0;
+ 399   1        // U8 loop=0,lp2=0,lp3=0;  //ryan..
+ 400   1       // U8 x,y,z;
+ 401   1      
+ 402   1        #if 0
                char busw1[14]={"busw 0 1 A1 11"};  
                char busw2[14]={"busw 0 1 A2 D7"};  
                char yvmix[8]={"yvmix 2 "};
@@ -428,12 +430,12 @@ line level    source
                char test[38]={"hscom 3 3 ch0:12 ch1:12 ch2:12 ch3:03 "};
               
                #endif
- 408   1      
- 409   1      InitialMPU(); 
- 410   1       PWM_init(); 
  411   1      
- 412   1      //ADC_FPBS();
- 413   1      #if 0
+ 412   1      InitialMPU(); 
+ 413   1       PWM_init(); 
+ 414   1      
+ 415   1      //ADC_FPBS();
+ 416   1      #if 0
               
                 while(0)
               {
@@ -444,10 +446,10 @@ line level    source
               I2C_SDA=1;
               USERTMVAL1=2;
               while(USERTMVAL1>=2);
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 8   
+
               I2C_SDA=0;
               USERTMVAL1=2;
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 8   
-
               while(USERTMVAL1>=2);
               
               #if 0
@@ -484,162 +486,166 @@ line level    source
               }
               
               #endif
- 462   1      
- 463   1        InitialCommShell();
- 464   1        ResetCommSell();
  465   1      
- 466   1      #if 1
- 467   1      /*
- 468   1      Set_PWM_Output(0,0);
- 469   1      Set_PWM_Output(1,0);
- 470   1      Set_PWM_Output(2,0);
- 471   1      Set_PWM_Output(3,0);
- 472   1      Set_PWM_Output(4,0);
- 473   1      Set_PWM_Output(5,0);
- 474   1      */
- 475   1      Power_onoff(0);
- 476   1      SC16_init();
- 477   1      
- 478   1      
- 479   1      Monitor_set(Monitor_offset+3);
- 480   1      
- 481   1      ///TW28_WriteByte(1,0xab,0x0a);//ryan@20150522 color bar
- 482   1      
- 483   1      
- 484   1      #endif
- 485   1      
- 486   1      #if 0 
-              TW28_WriteByte(1,0x11,0x00);
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 9   
+ 466   1        InitialCommShell();
+ 467   1        ResetCommSell();
+ 468   1      
+ 469   1      #if 1
+ 470   1      /*
+ 471   1      Set_PWM_Output(0,0);
+ 472   1      Set_PWM_Output(1,0);
+ 473   1      Set_PWM_Output(2,0);
+ 474   1      Set_PWM_Output(3,0);
+ 475   1      Set_PWM_Output(4,0);
+ 476   1      Set_PWM_Output(5,0);
+ 477   1      */
+ 478   1        
+ 479   1      Power_onoff(0);
+ 480   1      SC16_init();
+ 481   1      
+ 482   1      Monitor_set(Monitor_offset+3);
+ 483   1      #if 1
+ 484   1      boot_flag=2;//ryan@20181130.
+ 485   1      Monitor_set(Monitor_offset+3);//ryan@20181130.
+ 486   1      boot_flag=0;//ryan@20181130.
+ 487   1       #endif
+ 488   1      ///TW28_WriteByte(1,0xab,0x0a);//ryan@20150522 color bar
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 9   
 
+ 489   1      
+ 490   1      
+ 491   1      #endif
+ 492   1      
+ 493   1      #if 0 
+              TW28_WriteByte(1,0x11,0x00);
               TW28_WriteByte(1,0x19,0x00);
               TW28_WriteByte(1,0x21,0x00);
               TW28_WriteByte(1,0x29,0x00);
               #endif
- 492   1      
- 493   1      GPIO_check();   //TX有錯誤所以開機只做一次baudrate設定
- 494   1      
- 495   1      //TW28_WriteByte(0,0x25,0x80);  //ryan
- 496   1      EnUserTimer(USERTMID3,40);    
- 497   1      EnUserTimer(USERTMID4,480);
- 498   1      timerout1=480;
- 499   1      //EnUserTimer(USERTMID5,16);//for camera moving//300ms
- 500   1      EnUserTimer(USERTMID5,4);//for camera moving//300ms
- 501   1      timerout2=600+600+600;//for camera speed//15s
- 502   1      //EnUserTimer(USERTMID6,600+600+600);//for camera speed//15s
- 503   1      Camera_speed=(((DVR_GetIO()&0x3f)&0x10)>>4);
- 504   1      
- 505   1        while(1){
- 506   2            
- 507   2        CommandShell();
- 508   2        if(RScommand.commFlage == true) PCT_RunCommShell(RScommand.commBuf); 
- 509   2        if(RScommand.commFlage == true) ResetCommSell(); 
- 510   2           
- 511   2        if(VlossFlag==1)
- 512   2        {
- 513   3          if(PCT_CheckSystem())//Kane Modified
- 514   3            VlossFlag=0;
- 515   3        }
- 516   2      
- 517   2        //<<<<<<<<<<<<<<<<<<<<<<<
- 518   2          
- 519   2        if(RS_RxReady()) EnUserTimer(USERTMID1,OsdCount1);//Kane @HS 2007 0725 Ver3.4
- 520   2      
- 521   2      
- 522   2      
- 523   2        if(USERTMVAL1==1)
- 524   2        {
- 525   3        //PCT_AudioActionForHS();
- 526   3        //PCT_OSDActionForHS();
- 527   3        //PCT_FlashOSDCtrl(OFF);
- 528   3        DisUserTimer(USERTMID1);
- 529   3        EnUserTimer(USERTMID0,OsdCount2);//Kane @HS 2007 0725 Ver3.4  // Reset Scan Time, Delay Check and show
- 530   3        }
- 531   2      
- 532   2                   if((USERTMVAL0==1)&&(Com_start==0)) 
- 533   2                  {
- 534   3                   // Temp_check(); 
- 535   3                      //Press_check(); 
- 536   3                  PCT_GetVideoSignalStatus(); // Check and Show "VLoss", scan time = 500ms
- 537   3                  //GPIO_check();   //ryan..
- 538   3                  #ifndef screen3
- 539   3                    if(Monitor_state!=Monitor_mode)
- 540   3                    {
- 541   4                    Monitor_set(Monitor_mode);
- 542   4                    }
- 543   3                  #endif
- 544   3                  
- 545   3                  //#if 1///#ifdef  get_data_debug
- 546   3                    //printf("\r\n RsRxRp=%x",(U16) RsRxRp);  
- 547   3                    //#endif
- 548   3                    
- 549   3                  EnUserTimer(USERTMID0,20);
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 10  
+ 499   1      
+ 500   1      GPIO_check();   //TX有錯誤所以開機只做一次baudrate設定
+ 501   1      
+ 502   1      //TW28_WriteByte(0,0x25,0x80);  //ryan
+ 503   1      EnUserTimer(USERTMID3,40);    
+ 504   1      EnUserTimer(USERTMID4,480);
+ 505   1      timerout1=480;
+ 506   1      //EnUserTimer(USERTMID5,16);//for camera moving//300ms
+ 507   1      EnUserTimer(USERTMID5,4);//for camera moving//300ms
+ 508   1      timerout2=600+600+600;//for camera speed//15s
+ 509   1      //EnUserTimer(USERTMID6,600+600+600);//for camera speed//15s
+ 510   1      Camera_speed=(((DVR_GetIO()&0x3f)&0x10)>>4);
+ 511   1      
+ 512   1        while(1){
+ 513   2            
+ 514   2        CommandShell();
+ 515   2        if(RScommand.commFlage == true) PCT_RunCommShell(RScommand.commBuf); 
+ 516   2        if(RScommand.commFlage == true) ResetCommSell(); 
+ 517   2           
+ 518   2        if(VlossFlag==1)
+ 519   2        {
+ 520   3          if(PCT_CheckSystem())//Kane Modified
+ 521   3            VlossFlag=0;
+ 522   3        }
+ 523   2      
+ 524   2        //<<<<<<<<<<<<<<<<<<<<<<<
+ 525   2          
+ 526   2        if(RS_RxReady()) EnUserTimer(USERTMID1,OsdCount1);//Kane @HS 2007 0725 Ver3.4
+ 527   2      
+ 528   2      
+ 529   2      
+ 530   2        if(USERTMVAL1==1)
+ 531   2        {
+ 532   3        //PCT_AudioActionForHS();
+ 533   3        //PCT_OSDActionForHS();
+ 534   3        //PCT_FlashOSDCtrl(OFF);
+ 535   3        DisUserTimer(USERTMID1);
+ 536   3        EnUserTimer(USERTMID0,OsdCount2);//Kane @HS 2007 0725 Ver3.4  // Reset Scan Time, Delay Check and show
+ 537   3        }
+ 538   2      
+ 539   2                   if((USERTMVAL0==1)&&(Com_start==0)) 
+ 540   2                  {
+ 541   3                   // Temp_check(); 
+ 542   3                      //Press_check(); 
+ 543   3                  PCT_GetVideoSignalStatus(); // Check and Show "VLoss", scan time = 500ms
+ 544   3                  //GPIO_check();   //ryan..
+ 545   3                  #ifndef screen3
+ 546   3                    if(Monitor_state!=Monitor_mode)
+ 547   3                    {
+ 548   4                    Monitor_set(Monitor_mode);
+ 549   4                    }
+ 550   3                  #endif
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 10  
 
- 550   3                    
- 551   3                   }
- 552   2      
- 553   2        if((USERTMVAL5==1)&&(Camera_flag>=1)&&(Cam_boot_flag==1))//trigger the  up,down,ccw,cw functions
- 554   2        {
- 555   3          EnUserTimer(USERTMID5,4);
- 556   3          Camera_move();
- 557   3         
- 558   3        }
+ 551   3                  
+ 552   3                  //#if 1///#ifdef  get_data_debug
+ 553   3                    //printf("\r\n RsRxRp=%x",(U16) RsRxRp);  
+ 554   3                    //#endif
+ 555   3                    
+ 556   3                  EnUserTimer(USERTMID0,20);
+ 557   3                    
+ 558   3                   }
  559   2      
- 560   2      
- 561   2        
- 562   2      
- 563   2          #if 0///ryan@20150804
+ 560   2        if((USERTMVAL5==1)&&(Camera_flag>=1)&&(Cam_boot_flag==1))//trigger the  up,down,ccw,cw functions
+ 561   2        {
+ 562   3          EnUserTimer(USERTMID5,4);
+ 563   3          Camera_move();
+ 564   3         
+ 565   3        }
+ 566   2      
+ 567   2      
+ 568   2        
+ 569   2      
+ 570   2          #if 0///ryan@20150804
                    Temp_check(); 
                     Press_check(); 
                   #else
- 567   2      
- 568   2        
- 569   2          if((USERTMVAL3==1)&&(Camera_flag==0)&&(Cam_boot_flag==1)) 
- 570   2          {
- 571   3            #ifdef  get_data_debug
+ 574   2      
+ 575   2        
+ 576   2          if((USERTMVAL3==1)&&(Camera_flag==0)&&(Cam_boot_flag==1)) 
+ 577   2          {
+ 578   3            #ifdef  get_data_debug
                       printf("\r\n SC16_com_state=%x",(U16) SC16_com_state);
                       #endif  
- 574   3      
- 575   3          SC16_data_reset(buff_sel(SC16_com_state));
- 576   3          SC16_com_state++;
- 577   3          EnUserTimer(USERTMID3,40);
- 578   3          if(SC16_com_state>=buff_num) SC16_com_state=0;
- 579   3          //work_flag=1;
- 580   3          } 
- 581   2          else
- 582   2          SC16_DataCheck();   //check sc16i750 
- 583   2      
- 584   2      
- 585   2          if(timerout1==1)
- 586   2          {
- 587   3          SC16_busy_flag=0;
- 588   3          timerout1=480;
- 589   3                  #ifdef  get_data_debug
+ 581   3      
+ 582   3          SC16_data_reset(buff_sel(SC16_com_state));
+ 583   3          SC16_com_state++;
+ 584   3          EnUserTimer(USERTMID3,40);
+ 585   3          if(SC16_com_state>=buff_num) SC16_com_state=0;
+ 586   3          //work_flag=1;
+ 587   3          } 
+ 588   2          else
+ 589   2          SC16_DataCheck();   //check sc16i750 
+ 590   2      
+ 591   2      
+ 592   2          if(timerout1==1)
+ 593   2          {
+ 594   3          SC16_busy_flag=0;
+ 595   3          timerout1=480;
+ 596   3                  #ifdef  get_data_debug
                         printf("\r\n SC16_busy_flag_clear=%x",(U16) SC16_busy_flag);
                         #endif  
- 592   3          }
- 593   2      #endif
- 594   2      
- 595   2      
- 596   2        //SC16_DataCheck();   //check sc16i750 
- 597   2      
- 598   2      //set camera speed
- 599   2      if((timerout2==1)&&(Cam_boot_flag==1))
- 600   2      {
- 601   3      Set_Camera_speed(Camera_speed); 
- 602   3      timerout2=0;
- 603   3      }
+ 599   3          }
+ 600   2      #endif
+ 601   2      
+ 602   2      
+ 603   2        //SC16_DataCheck();   //check sc16i750 
  604   2      
- 605   2          WDTCR|=0x10;
- 606   2      
- 607   2          #if 0//ryan@20151106
+ 605   2      //set camera speed
+ 606   2      if((timerout2==1)&&(Cam_boot_flag==1))
+ 607   2      {
+ 608   3      Set_Camera_speed(Camera_speed); 
+ 609   3      timerout2=0;
+ 610   3      }
+ 611   2      
+ 612   2          WDTCR|=0x10;
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 11  
+
+ 613   2      
+ 614   2          #if 0//ryan@20151106
                   while(CB_flag==1)
                   {
                     //if((get_data_addr)&&(timerout3>=CB_delay))
                     if(timerout3>=CB_delay)
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 11  
-
                     {
                     Get_Data(get_data_addr, get_data_val);
                     
@@ -651,69 +657,69 @@ line level    source
                   
                   timerout3=0;
                   #endif
- 623   2      
- 624   2      
- 625   2      
- 626   2        }
- 627   1        OsdCount1=10;//Kane @HS 2007 0725 Ver3.4
- 628   1        OsdCount2 = 20;//Kane @HS 2007 0725 Ver3.4
- 629   1      
- 630   1         
- 631   1      }
- 632          
- 633          //void main_loop(void)
- 634          //{
- 635          
- 636          
- 637          //}
- 638          // ===========================================================================
- 639          //
- 640          //
- 641          //
- 642          void InitialMPU(void){
- 643   1      
- 644   1        IP = 0x00;
- 645   1        IE = 0x00;    
- 646   1      
- 647   1      //  PCON = 0x80;  // Set SMOD bit7 in power ctrl reg     //smod=1
- 648   1                // This bit doubles the baud rate 
- 649   1        PCON = 0x00;  // Clear SMOD bit7 in power ctrl reg   //smod=0
- 650   1                // This bit doubles the baud rate 
- 651   1        //watch dog
- 652   1         WDTCR=0x27;   //pre-scaling value: 256  //4s will reset
- 653   1         
- 654   1        PSW  = 0x00;  // Set Program state Register
- 655   1        TMOD = 0x22;  // Set Timer MODE Register
- 656   1      //  TMOD = 0x12;  // Set Timer MODE Register
- 657   1                // Timer0: MODE=1, 16-BIT Timer
- 658   1                // Timer1: MODE=2, 8-BIT Auto Reload )
- 659   1        //  TCON = 0x00;  // Set Timer0/Timer1 Control Register
- 660   1          TCON = 0x00;  // Set Timer0/Timer1 Control Register
- 661   1                // Timer0=OFF,Timer1=OFF
- 662   1      //  SCON = 0x52;  // Setup Serial control Register
- 663   1      //      SCON = 0x00;
- 664   1                // Mode 1: Start Bit=1,Stop Bit=1,Data Bit=8 
- 665   1                // and ready Transmit
- 666   1                // REN: enable receiver 
- 667   1        
- 668   1        InitialUART();
- 669   1        InitialTimer0();
- 670   1            InitialTimer2();
- 671   1          
- 672   1      
- 673   1      //XICON=0x00;
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 12  
+ 630   2      
+ 631   2      
+ 632   2      
+ 633   2        }
+ 634   1        OsdCount1=10;//Kane @HS 2007 0725 Ver3.4
+ 635   1        OsdCount2 = 20;//Kane @HS 2007 0725 Ver3.4
+ 636   1      
+ 637   1         
+ 638   1      }
+ 639          
+ 640          //void main_loop(void)
+ 641          //{
+ 642          
+ 643          
+ 644          //}
+ 645          // ===========================================================================
+ 646          //
+ 647          //
+ 648          //
+ 649          void InitialMPU(void){
+ 650   1      
+ 651   1        IP = 0x00;
+ 652   1        IE = 0x00;    
+ 653   1      
+ 654   1      //  PCON = 0x80;  // Set SMOD bit7 in power ctrl reg     //smod=1
+ 655   1                // This bit doubles the baud rate 
+ 656   1        PCON = 0x00;  // Clear SMOD bit7 in power ctrl reg   //smod=0
+ 657   1                // This bit doubles the baud rate 
+ 658   1        //watch dog
+ 659   1         WDTCR=0x27;   //pre-scaling value: 256  //4s will reset
+ 660   1         
+ 661   1        PSW  = 0x00;  // Set Program state Register
+ 662   1        TMOD = 0x22;  // Set Timer MODE Register
+ 663   1      //  TMOD = 0x12;  // Set Timer MODE Register
+ 664   1                // Timer0: MODE=1, 16-BIT Timer
+ 665   1                // Timer1: MODE=2, 8-BIT Auto Reload )
+ 666   1        //  TCON = 0x00;  // Set Timer0/Timer1 Control Register
+ 667   1          TCON = 0x00;  // Set Timer0/Timer1 Control Register
+ 668   1                // Timer0=OFF,Timer1=OFF
+ 669   1      //  SCON = 0x52;  // Setup Serial control Register
+ 670   1      //      SCON = 0x00;
+ 671   1                // Mode 1: Start Bit=1,Stop Bit=1,Data Bit=8 
+ 672   1                // and ready Transmit
+ 673   1                // REN: enable receiver 
+ 674   1        
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 12  
 
- 674   1      //AUXIE=0x00; 
- 675   1      AUXR=0;
- 676   1      AUXR1=0;
- 677   1        TI = 1;     //* Set TI to indicate ready to xmit */
- 678   1        EA=1;
- 679   1        _nop_();
- 680   1          
- 681   1      
- 682   1      
- 683   1      #if 0
+ 675   1        InitialUART();
+ 676   1        InitialTimer0();
+ 677   1            InitialTimer2();
+ 678   1          
+ 679   1      
+ 680   1      //XICON=0x00;
+ 681   1      //AUXIE=0x00; 
+ 682   1      AUXR=0;
+ 683   1      AUXR1=0;
+ 684   1        TI = 1;     //* Set TI to indicate ready to xmit */
+ 685   1        EA=1;
+ 686   1        _nop_();
+ 687   1          
+ 688   1      
+ 689   1      
+ 690   1      #if 0
               
               CL=0; //PCA counter..
               CH=0;
@@ -760,216 +766,216 @@ line level    source
               PCAPWM2 = 0x00;
               PCAPWM3 = 0x00;
               PCAPWM4 = 0x00;
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 13  
+
               PCAPWM5 = 0x00;
               
               
                //-------------------------------
               #endif
- 735   1      P0M0=0;
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 13  
-
- 736   1      P0M1=0;
- 737   1      
- 738   1      P1M0|=0x03;   //ADC0 & ADC1
- 739   1      P1M1&=0xFC;  
- 740   1       
- 741   1      P2M0=0;
- 742   1      P2M1=0;
- 743   1      
- 744   1      P3M0=0x00;
- 745   1      P3M1=0x00;
- 746   1       
- 747   1      P4M0=0x00;
- 748   1      P4M1=0x04;
- 749   1      P4_1=0;
+ 742   1      P0M0=0;
+ 743   1      P0M1=0;
+ 744   1      
+ 745   1      P1M0|=0x03;   //ADC0 & ADC1
+ 746   1      P1M1&=0xFC;  
+ 747   1       
+ 748   1      P2M0=0;
+ 749   1      P2M1=0;
  750   1      
- 751   1      
- 752   1      P1_2=0;
- 753   1      P1_3=0;
- 754   1      P1_4=0;
- 755   1      P1_5=0;
- 756   1      P1_6=0;
- 757   1      P1_7=0;
+ 751   1      P3M0=0x00;
+ 752   1      P3M1=0x00;
+ 753   1       
+ 754   1      P4M0=0x00;
+ 755   1      P4M1=0x04;
+ 756   1      P4_1=0;
+ 757   1      
  758   1      
- 759   1      //P1_1=1;//ryan@20150908
- 760   1      
- 761   1      }
- 762          //----------------------------------------------------------
- 763          
- 764          void Set_PWM_Output (U8 addr, U8 val)
- 765          {
- 766   1      #ifdef _LED_PWM_HALF
- 767   1        #ifdef _LED_PWM_DECREASE
- 768   1        U8 num[6]={255,243,237,232,226,222};//0%,5%,7%,9%,11%,13%
- 769   1        #else 
+ 759   1      P1_2=0;
+ 760   1      P1_3=0;
+ 761   1      P1_4=0;
+ 762   1      P1_5=0;
+ 763   1      P1_6=0;
+ 764   1      P1_7=0;
+ 765   1      
+ 766   1      //P1_1=1;//ryan@20150908
+ 767   1      
+ 768   1      }
+ 769          //----------------------------------------------------------
+ 770          
+ 771          void Set_PWM_Output (U8 addr, U8 val)
+ 772          {
+ 773   1      #ifdef _LED_PWM_HALF
+ 774   1        #ifdef _LED_PWM_DECREASE
+ 775   1        U8 num[6]={255,243,237,232,226,222};//0%,5%,7%,9%,11%,13%
+ 776   1        #else 
                 U8 num[6]={255,200+28,150+53,100+79+5,50+103,0+128};//0%,10%,20%,30%,40%,50%
                 #endif
- 772   1      #else
+ 779   1      #else
               U8 num[6]={255,200,150,100,50,0};//0%,20%,40%,60%,80%,100%
               #endif
- 775   1      
- 776   1      //CL=0; //PCA counter..
- 777   1      //CH=0;
- 778   1      //CMOD=0x04; // PWM use to  timer-0
- 779   1      //CCON=0x40; 
- 780   1      //AUXR2|=0x80;    //Fosc/12 for timer-0
- 781   1      
  782   1      
- 783   1      
- 784   1       switch(addr)
- 785   1          {
- 786   2          case 0: 
- 787   2                  CCAP0L=0x00;  
- 788   2                    if(val==0)  CCAPM0=0x00;
- 789   2                else   CCAPM0=0x42;                 
- 790   2                    
- 791   2                       CCAP0H =num[val];      
- 792   2                       PCAPWM0 = 0x00;
- 793   2                      break;
- 794   2          case 1: 
- 795   2                  CCAP1L=0x00;  
- 796   2                    if(val==0)  CCAPM1=0x00;
- 797   2                else   CCAPM1=0x42;                 
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 14  
+ 783   1      //CL=0; //PCA counter..
+ 784   1      //CH=0;
+ 785   1      //CMOD=0x04; // PWM use to  timer-0
+ 786   1      //CCON=0x40; 
+ 787   1      //AUXR2|=0x80;    //Fosc/12 for timer-0
+ 788   1      
+ 789   1      
+ 790   1      
+ 791   1       switch(addr)
+ 792   1          {
+ 793   2          case 0: 
+ 794   2                  CCAP0L=0x00;  
+ 795   2                    if(val==0)  CCAPM0=0x00;
+ 796   2                else   CCAPM0=0x42;                 
+ 797   2                    
+ 798   2                       CCAP0H =num[val];      
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 14  
 
- 798   2                
- 799   2                     CCAP1H =num[val];    
- 800   2                      PCAPWM1 = 0x00;
- 801   2                      break;
- 802   2          case 2:  
- 803   2                  CCAP2L=0x00;  
- 804   2                    if(val==0)  CCAPM2=0x00;
- 805   2                else   CCAPM2=0x42;
- 806   2                
- 807   2                      CCAP2H =num[val];   
- 808   2                      PCAPWM2 = 0x00;
- 809   2                      break; 
- 810   2          case 3:
- 811   2                  CCAP3L=0x00;  
- 812   2                    if(val==0)  CCAPM3=0x00;
- 813   2                else   CCAPM3=0x42; 
- 814   2                
- 815   2                      CCAP3H =num[val];   
- 816   2                      PCAPWM3 = 0x00;
- 817   2                      break;
- 818   2          case 4:
- 819   2                  CCAP4L=0x00;  
- 820   2                    if(val==0)  CCAPM4=0x00;
- 821   2                else   CCAPM4=0x42; 
- 822   2                
- 823   2                      CCAP4H =num[val];  
- 824   2                      PCAPWM4 = 0x00;
- 825   2                      break;
- 826   2          case 5:
- 827   2                  CCAP5L=0x00;  
- 828   2                    if(val==0)  CCAPM5=0x00;
- 829   2                else   CCAPM5=0x42;
- 830   2                
- 831   2                      CCAP5H =num[val];  
- 832   2                      PCAPWM5 = 0x00;
- 833   2                      break;
- 834   2           default: 
- 835   2            break;
- 836   2          }
- 837   1      
- 838   1      
- 839   1      }
- 840          
- 841          //-----------------------------------------------------------
- 842          void PWM_init(void)
- 843          {
+ 799   2                       PCAPWM0 = 0x00;
+ 800   2                      break;
+ 801   2          case 1: 
+ 802   2                  CCAP1L=0x00;  
+ 803   2                    if(val==0)  CCAPM1=0x00;
+ 804   2                else   CCAPM1=0x42;                 
+ 805   2                
+ 806   2                     CCAP1H =num[val];    
+ 807   2                      PCAPWM1 = 0x00;
+ 808   2                      break;
+ 809   2          case 2:  
+ 810   2                  CCAP2L=0x00;  
+ 811   2                    if(val==0)  CCAPM2=0x00;
+ 812   2                else   CCAPM2=0x42;
+ 813   2                
+ 814   2                      CCAP2H =num[val];   
+ 815   2                      PCAPWM2 = 0x00;
+ 816   2                      break; 
+ 817   2          case 3:
+ 818   2                  CCAP3L=0x00;  
+ 819   2                    if(val==0)  CCAPM3=0x00;
+ 820   2                else   CCAPM3=0x42; 
+ 821   2                
+ 822   2                      CCAP3H =num[val];   
+ 823   2                      PCAPWM3 = 0x00;
+ 824   2                      break;
+ 825   2          case 4:
+ 826   2                  CCAP4L=0x00;  
+ 827   2                    if(val==0)  CCAPM4=0x00;
+ 828   2                else   CCAPM4=0x42; 
+ 829   2                
+ 830   2                      CCAP4H =num[val];  
+ 831   2                      PCAPWM4 = 0x00;
+ 832   2                      break;
+ 833   2          case 5:
+ 834   2                  CCAP5L=0x00;  
+ 835   2                    if(val==0)  CCAPM5=0x00;
+ 836   2                else   CCAPM5=0x42;
+ 837   2                
+ 838   2                      CCAP5H =num[val];  
+ 839   2                      PCAPWM5 = 0x00;
+ 840   2                      break;
+ 841   2           default: 
+ 842   2            break;
+ 843   2          }
  844   1      
- 845   1      CL=0; //PCA counter..
- 846   1      CH=0;
- 847   1      CMOD=0x04; // PWM use to  timer-0
- 848   1      //CMOD=0x00; // PWM use to  timer-0
- 849   1      
- 850   1      CCON=0x40;  
+ 845   1      
+ 846   1      }
+ 847          
+ 848          //-----------------------------------------------------------
+ 849          void PWM_init(void)
+ 850          {
  851   1      
- 852   1      //CMOD=0x00; // PWM use to  crystal
- 853   1      //CL=(65536-High);    //PCA counter..
- 854   1      //CH=(65536-High)>>8;
- 855   1      //CL=1;    //PCA counter..
- 856   1      //CH=128;
- 857   1      
- 858   1      AUXR2|=0x80;    //Fosc/12 for timer-0
- 859   1      //CMOD=0x00;///  /12    ///22.1184MHz
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 15  
+ 852   1      CL=0; //PCA counter..
+ 853   1      CH=0;
+ 854   1      CMOD=0x04; // PWM use to  timer-0
+ 855   1      //CMOD=0x00; // PWM use to  timer-0
+ 856   1      
+ 857   1      CCON=0x40;  
+ 858   1      
+ 859   1      //CMOD=0x00; // PWM use to  crystal
+ 860   1      //CL=(65536-High);    //PCA counter..
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 15  
 
- 860   1      //CMOD=0x02;/// /2
- 861   1      
- 862   1      /*
- 863   1      CCAP0L=0x00;
- 864   1      CCAP0H =(256-128);
- 865   1      
- 866   1      CCAP1L=0x00;
- 867   1      CCAP1H =(256-128);
+ 861   1      //CH=(65536-High)>>8;
+ 862   1      //CL=1;    //PCA counter..
+ 863   1      //CH=128;
+ 864   1      
+ 865   1      AUXR2|=0x80;    //Fosc/12 for timer-0
+ 866   1      //CMOD=0x00;///  /12    ///22.1184MHz
+ 867   1      //CMOD=0x02;/// /2
  868   1      
- 869   1      CCAP2L=0x00;
- 870   1      CCAP2H =(256-128);
- 871   1      
- 872   1      CCAP3L=0x00;
- 873   1      CCAP3H =(256-128);
- 874   1      
- 875   1      CCAP4L=0x00;
- 876   1      CCAP4H =(256-128);
- 877   1      
- 878   1      CCAP5L=0x00;
- 879   1      CCAP5H =(256-128);
- 880   1      
- 881   1      CCAPM0  = 0x42;
- 882   1      CCAPM1  = 0x42;
- 883   1      CCAPM2  = 0x42;
- 884   1      CCAPM3  = 0x42;
- 885   1      CCAPM4  = 0x42;
- 886   1      CCAPM5  = 0x42;
+ 869   1      /*
+ 870   1      CCAP0L=0x00;
+ 871   1      CCAP0H =(256-128);
+ 872   1      
+ 873   1      CCAP1L=0x00;
+ 874   1      CCAP1H =(256-128);
+ 875   1      
+ 876   1      CCAP2L=0x00;
+ 877   1      CCAP2H =(256-128);
+ 878   1      
+ 879   1      CCAP3L=0x00;
+ 880   1      CCAP3H =(256-128);
+ 881   1      
+ 882   1      CCAP4L=0x00;
+ 883   1      CCAP4H =(256-128);
+ 884   1      
+ 885   1      CCAP5L=0x00;
+ 886   1      CCAP5H =(256-128);
  887   1      
- 888   1      PCAPWM0 = 0x00;
- 889   1      PCAPWM1 = 0x00;
- 890   1      PCAPWM2 = 0x00;
- 891   1      PCAPWM3 = 0x00;
- 892   1      PCAPWM4 = 0x00;
- 893   1      PCAPWM5 = 0x00;
- 894   1      */
- 895   1      }
- 896          
- 897          //-----------------------------------------
- 898          U8 Monitor_set(U8 val)
- 899          {
- 900   1      char busw1[14]={"busw 0 1 A1 11"};  
- 901   1      char busw2[14]={"busw 0 1 A2 D7"};  
- 902   1      char yvmix[8]={"yvmix 4 "};
- 903   1      char mode[7]={"mode 0 "};
- 904   1      
- 905   1      
- 906   1      //char conf[38]={"hscom 2 2 ch0:12 ch1:12 ch2:02 ch3:03 "};
- 907   1      //char conf1[38]={"hscom 1 1 ch0:12 ch1:02 ch2:02 ch3:03 "};
- 908   1      //ch0 Camera  
- 909   1      //ch1 DVR       
- 910   1      //ch2 Rear
+ 888   1      CCAPM0  = 0x42;
+ 889   1      CCAPM1  = 0x42;
+ 890   1      CCAPM2  = 0x42;
+ 891   1      CCAPM3  = 0x42;
+ 892   1      CCAPM4  = 0x42;
+ 893   1      CCAPM5  = 0x42;
+ 894   1      
+ 895   1      PCAPWM0 = 0x00;
+ 896   1      PCAPWM1 = 0x00;
+ 897   1      PCAPWM2 = 0x00;
+ 898   1      PCAPWM3 = 0x00;
+ 899   1      PCAPWM4 = 0x00;
+ 900   1      PCAPWM5 = 0x00;
+ 901   1      */
+ 902   1      }
+ 903          
+ 904          //-----------------------------------------
+ 905          U8 Monitor_set(U8 val)
+ 906          {
+ 907   1      char busw1[14]={"busw 0 1 A1 11"};  
+ 908   1      char busw2[14]={"busw 0 1 A2 D7"};  
+ 909   1      char yvmix[8]={"yvmix 4 "};
+ 910   1      char mode[7]={"mode 0 "};
  911   1      
  912   1      
- 913   1      #ifdef OSD_off
- 914   1      
- 915   1      char conf1[38]={"hscom 1 1 ch0:10 ch1:00 ch2:00 ch3:00 "};   // C
- 916   1      char conf2[38]={"hscom 1 1 ch2:10 ch1:00 ch0:00 ch3:00 "};   // R
- 917   1      char conf3[38]={"hscom 1 1 ch1:10 ch0:00 ch2:00 ch3:00 "};  // D
+ 913   1      //char conf[38]={"hscom 2 2 ch0:12 ch1:12 ch2:02 ch3:03 "};
+ 914   1      //char conf1[38]={"hscom 1 1 ch0:12 ch1:02 ch2:02 ch3:03 "};
+ 915   1      //ch0 Camera  
+ 916   1      //ch1 DVR       
+ 917   1      //ch2 Rear
  918   1      
- 919   1      char conf4[38]={"hscom 2 2 ch2:10 ch0:10 ch1:00 ch3:00 "};   //CR
- 920   1      char conf5[38]={"hscom 2 2 ch0:10 ch2:10 ch1:00 ch3:00 "};  //RC
+ 919   1      
+ 920   1      #ifdef OSD_off
  921   1      
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 16  
+ 922   1      char conf1[38]={"hscom 1 1 ch0:10 ch1:00 ch2:00 ch3:00 "};   // C
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 16  
 
- 922   1      char conf6[38]={"hscom 2 2 ch1:10 ch0:10 ch2:00 ch3:00 "};  // DC
- 923   1      char conf7[38]={"hscom 2 2 ch0:10 ch1:10 ch2:00 ch3:00 "};  // CD
- 924   1      
- 925   1      char conf8[38]={"hscom 2 2 ch1:10 ch2:10 ch0:00 ch3:00 "};  // DR
- 926   1      char conf9[38]={"hscom 2 2 ch2:10 ch1:10 ch2:00 ch3:00 "};  // RD
- 927   1      
- 928   1      char conf10[38]={"hscom 3 3 ch0:10 ch1:10 ch2:10 ch3:00 "};
- 929   1      
- 930   1      
- 931   1      #else
+ 923   1      char conf2[38]={"hscom 1 1 ch2:10 ch1:00 ch0:00 ch3:00 "};   // R
+ 924   1      char conf3[38]={"hscom 1 1 ch1:10 ch0:00 ch2:00 ch3:00 "};  // D
+ 925   1      
+ 926   1      char conf4[38]={"hscom 2 2 ch2:10 ch0:10 ch1:00 ch3:00 "};   //CR
+ 927   1      char conf5[38]={"hscom 2 2 ch0:10 ch2:10 ch1:00 ch3:00 "};  //RC
+ 928   1      
+ 929   1      char conf6[38]={"hscom 2 2 ch1:10 ch0:10 ch2:00 ch3:00 "};  // DC
+ 930   1      char conf7[38]={"hscom 2 2 ch0:10 ch1:10 ch2:00 ch3:00 "};  // CD
+ 931   1      
+ 932   1      char conf8[38]={"hscom 2 2 ch1:10 ch2:10 ch0:00 ch3:00 "};  // DR
+ 933   1      char conf9[38]={"hscom 2 2 ch2:10 ch1:10 ch2:00 ch3:00 "};  // RD
+ 934   1      
+ 935   1      char conf10[38]={"hscom 3 3 ch0:10 ch1:10 ch2:10 ch3:00 "};
+ 936   1      
+ 937   1      
+ 938   1      #else
               char conf1[38]={"hscom 1 1 ch0:12 ch1:02 ch2:02 ch3:03 "};   // C
               char conf2[38]={"hscom 1 1 ch2:12 ch1:02 ch0:02 ch3:03 "};   // R
               char conf3[38]={"hscom 1 1 ch1:12 ch0:02 ch2:02 ch3:03 "};  // D
@@ -986,150 +992,166 @@ line level    source
               char conf10[38]={"hscom 3 3 ch0:12 ch1:12 ch2:12 ch3:03 "};
               
               #endif
- 948   1      
- 949   1      char conf11[38]={"hscom 1 1 ch3:00 ch1:00 ch2:00 ch0:00 "};
- 950   1      
- 951   1      //PU8  ptr;
- 952   1      U8 Error=0;
- 953   1      U8 ch=0;
- 954   1      
- 955   1      ch=(val-Monitor_offset);
- 956   1      
- 957   1      #ifdef Crop_Shrink_flag//20150413
- 958   1      if(ch>=10)
- 959   1        ch=ch-4;
- 960   1      else
- 961   1        Crop_f=0;//clear Crop_f   
- 962   1      
- 963   1      #endif
- 964   1      
- 965   1       Monitor_state=val;  
- 966   1      
- 967   1      switch(ch)
- 968   1      {
- 969   2      case 0:  PIP_flag=1; break;
- 970   2      case 1:  PIP_flag=0; break;
- 971   2      case 2: 
- 972   2          Back_f=0;     
- 973   2              Main_f=1;  
- 974   2            break;    
- 975   2      case 3:   Back_f=1;  
- 976   2              Main_f=2;
- 977   2            break;    
- 978   2      case 4:   Shrink_f=1;
- 979   2          Main_f=4; 
- 980   2          break;    
- 981   2      case 5:  Shrink_f=0;  
- 982   2          Main_f=1;
- 983   2              break;
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 17  
+ 955   1      
+ 956   1      char conf11[38]={"hscom 1 1 ch3:00 ch1:00 ch2:00 ch0:00 "};
+ 957   1      
+ 958   1      //PU8  ptr;
+ 959   1      U8 Error=0;
+ 960   1      U8 ch=0;
+ 961   1      
+ 962   1      ch=(val-Monitor_offset);
+ 963   1      
+ 964   1      #ifdef Crop_Shrink_flag//20150413
+ 965   1      if(ch>=10)
+ 966   1        ch=ch-4;
+ 967   1      else
+ 968   1        Crop_f=0;//clear Crop_f   
+ 969   1      
+ 970   1      #endif
+ 971   1      
+ 972   1       Monitor_state=val;  
+ 973   1      
+ 974   1      switch(ch)
+ 975   1      {
+ 976   2      case 0:  PIP_flag=1; break;
+ 977   2      case 1:  PIP_flag=0; break;
+ 978   2      case 2: 
+ 979   2          Back_f=0;     
+ 980   2              Main_f=1;  
+ 981   2            break;    
+ 982   2      case 3:   Back_f=1;  
+ 983   2              Main_f=2;
+ 984   2            break;    
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 17  
 
- 984   2      #ifdef Crop_Shrink_flag//ryan@20150413
- 985   2      case 6:       //crop+shrink
- 986   2        Crop_f=0x14;
- 987   2            break;
- 988   2      case 7:    //shrink+crop
- 989   2        Crop_f=0x41;  
- 990   2            break;
- 991   2      #endif
- 992   2      default:  Main_f=1; break;
- 993   2      }
- 994   1      
- 995   1      
- 996   1      if(Crop_f>=1)
- 997   1      {
- 998   2      m_current=Crop_f;//ryan@20150413
- 999   2      }
-1000   1      else if(PIP_flag==1)
-1001   1        {
-1002   2          if(Back_f)
-1003   2            {
-1004   3                  if(Shrink_f==1)
-1005   3                  {
-1006   4                  Main_f=2;
-1007   4                  Small_f=4;
-1008   4                  }
-1009   3                  else
-1010   3                  {
-1011   4                  Main_f=2;
-1012   4                  Small_f=1;            
-1013   4                  }
-1014   3            }
-1015   2          else
-1016   2            {
-1017   3                  if(Shrink_f==1)
-1018   3                  {
-1019   4                  Main_f=4;
-1020   4                  Small_f=2;
-1021   4                  }
-1022   3                  else
-1023   3                  {
-1024   4                  Main_f=1;
-1025   4                  Small_f=2;            
-1026   4                  }
-1027   3      
-1028   3            }
-1029   2      
-1030   2          m_current=(Main_f<<4)|Small_f;
-1031   2            
-1032   2        }
-1033   1      else
-1034   1      {
-1035   2            
-1036   2            if(Back_f)
-1037   2            {
-1038   3                  Main_f=2;
-1039   3            }
-1040   2            else
-1041   2            {
-1042   3                  if(Shrink_f==1)
-1043   3                  {
-1044   4                  Main_f=4;
-1045   4                  Small_f=2;
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 18  
+ 985   2      case 4:   Shrink_f=1;
+ 986   2          Main_f=4; 
+ 987   2          break;    
+ 988   2      case 5:  Shrink_f=0;  
+ 989   2          Main_f=1;
+ 990   2              break;
+ 991   2      #ifdef Crop_Shrink_flag//ryan@20150413
+ 992   2      case 6:       //crop+shrink
+ 993   2        Crop_f=0x14;
+ 994   2            break;
+ 995   2      case 7:    //shrink+crop
+ 996   2        Crop_f=0x41;  
+ 997   2            break;
+ 998   2      #endif
+ 999   2      default:  Main_f=1; break;
+1000   2      }
+1001   1      
+1002   1      
+1003   1      if(Crop_f>=1)
+1004   1      {
+1005   2      m_current=Crop_f;//ryan@20150413
+1006   2      }
+1007   1      else if(PIP_flag==1)
+1008   1        {
+1009   2          if(Back_f)
+1010   2            {
+1011   3                  if(Shrink_f==1)
+1012   3                  {
+1013   4                  Main_f=2;
+1014   4                  Small_f=4;
+1015   4                  }
+1016   3                  else
+1017   3                  {
+1018   4                  Main_f=2;
+1019   4                  Small_f=1;            
+1020   4                  }
+1021   3            }
+1022   2          else
+1023   2            {
+1024   3                  if(Shrink_f==1)
+1025   3                  {
+1026   4                  Main_f=4;
+1027   4                  Small_f=2;
+1028   4                  }
+1029   3                  else
+1030   3                  {
+1031   4                  Main_f=1;
+1032   4                  Small_f=2;            
+1033   4                  }
+1034   3      
+1035   3            }
+1036   2      
+1037   2          m_current=(Main_f<<4)|Small_f;
+1038   2            
+1039   2        }
+1040   1      else
+1041   1      {
+1042   2            
+1043   2            if(Back_f)
+1044   2            {
+1045   3                  Main_f=2;
+1046   3            }
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 18  
 
-1046   4                  }
-1047   3                  else
-1048   3                  {
-1049   4                  Main_f=1;
-1050   4                  Small_f=2;            
-1051   4                  }
-1052   3      
-1053   3            }
-1054   2              
-1055   2          m_current=Main_f<<4;
-1056   2      
-1057   2      }
-1058   1      
-1059   1      
-1060   1      
-1061   1      
-1062   1      if(boot_flag)
-1063   1      {
-1064   2      
-1065   2        //InitialCommShell();
-1066   2        PCT_InitialTW2835();  // Initial RssetN for TW2835
-1067   2        //ResetCommSell();
-1068   2      
-1069   2      memcpy ((RScommand.commBuf), busw1, sizeof(busw1) );
-1070   2      PCT_RunCommShell(RScommand.commBuf); 
-1071   2      
-1072   2      memcpy ((RScommand.commBuf), busw2, sizeof(busw2) );
-1073   2      PCT_RunCommShell(RScommand.commBuf); 
-1074   2      
-1075   2      //memcpy ((RScommand.commBuf), yvmix, sizeof(yvmix) );
-1076   2      //PCT_RunCommShell(RScommand.commBuf); 
-1077   2      
-1078   2      memcpy ((RScommand.commBuf), mode, sizeof(mode)  );
-1079   2      //printf("RScommand.commBuf=%s\r\n",RScommand.commBuf);  //ryan
-1080   2      PCT_RunCommShell(RScommand.commBuf); 
-1081   2      }
-1082   1      else
-1083   1      {
-1084   2        #ifdef black_change
+1047   2            else
+1048   2            {
+1049   3                  if(Shrink_f==1)
+1050   3                  {
+1051   4                  Main_f=4;
+1052   4                  Small_f=2;
+1053   4                  }
+1054   3                  else
+1055   3                  {
+1056   4                  Main_f=1;
+1057   4                  Small_f=2;            
+1058   4                  }
+1059   3      
+1060   3            }
+1061   2              
+1062   2          m_current=Main_f<<4;
+1063   2      
+1064   2      }
+1065   1      
+1066   1      if(boot_flag==2)
+1067   1      {
+1068   2      ///read 0xA1
+1069   2      //memcpy ((RScommand.commBuf), busr1, sizeof(busr1) );
+1070   2      //PCT_RunCommShell(RScommand.commBuf);
+1071   2      //printf("%x",(U16)(ch));
+1072   2      //printf("\r\nReadAsicByte == %x", (U16)TW28_ReadByte(1, 0xA1));
+1073   2      
+1074   2      memcpy ((RScommand.commBuf), busw1, sizeof(busw1) );
+1075   2      PCT_RunCommShell(RScommand.commBuf); 
+1076   2      
+1077   2      //memcpy ((RScommand.commBuf), busw2, sizeof(busw2) );
+1078   2      //PCT_RunCommShell(RScommand.commBuf); 
+1079   2      
+1080   2      //memcpy ((RScommand.commBuf), mode, sizeof(mode)  );
+1081   2      //PCT_RunCommShell(RScommand.commBuf); 
+1082   2      return 0;
+1083   2      }
+1084   1      else if(boot_flag)
+1085   1      {  
+1086   2        //InitialCommShell();
+1087   2        PCT_InitialTW2835();  // Initial RssetN for TW2835
+1088   2        //ResetCommSell();
+1089   2      memcpy ((RScommand.commBuf), busw1, sizeof(busw1) );
+1090   2      PCT_RunCommShell(RScommand.commBuf); 
+1091   2      
+1092   2      memcpy ((RScommand.commBuf), busw2, sizeof(busw2) );
+1093   2      PCT_RunCommShell(RScommand.commBuf); 
+1094   2      
+1095   2      //memcpy ((RScommand.commBuf), yvmix, sizeof(yvmix) );
+1096   2      //PCT_RunCommShell(RScommand.commBuf); 
+1097   2      
+1098   2      memcpy ((RScommand.commBuf), mode, sizeof(mode)  );
+1099   2      //printf("RScommand.commBuf=%s\r\n",RScommand.commBuf);  //ryan
+1100   2      PCT_RunCommShell(RScommand.commBuf); 
+1101   2      
+1102   2      }
+1103   1      else
+1104   1      {
+1105   2        #ifdef black_change
                   #if 1 
                   TW28_WriteByte(1,0x11,0x00);
                   TW28_WriteByte(1,0x19,0x00);
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 19  
+
                   TW28_WriteByte(1,0x21,0x00);
                   //TW28_WriteByte(1,0x29,0x00);
               
@@ -1143,33 +1165,28 @@ line level    source
                 PCT_RunCommShell(RScommand.commBuf); 
                 Wait_ms(25+100+100);
                 #endif
-1101   2      
-1102   2      
-1103   2        
-1104   2      }
-1105   1      
-1106   1      
-1107   1      #ifdef screen3
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 19  
-
+1122   2      }
+1123   1      
+1124   1      
+1125   1      #ifdef screen3
               if(boot_flag==1) m_current=10;
               #endif
-1110   1      
-1111   1      switch(m_current)
-1112   1      {
-1113   2      #if 1
-1114   2        #if 1//ryan
-1115   2      case 0x10: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); TW28_WriteByte(1,0x0f,0x03);break;  //C
-1116   2      case 0x20: memcpy ((RScommand.commBuf), conf2, sizeof(conf2) ); TW28_WriteByte(1,0x0f,0x03);break;  //R
-1117   2      case 0x40: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); TW28_WriteByte(1,0x0f,0x03);break;  //D
-1118   2      case 0x12: memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); break;  //CR
-1119   2      case 0x21: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); break;  //RC
-1120   2      case 0x14: memcpy ((RScommand.commBuf), conf6, sizeof(conf6) ); break;  //DC
-1121   2      case 0x41: memcpy ((RScommand.commBuf), conf7, sizeof(conf7) ); break;  //CD
-1122   2      case 0x24: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); break;  //DR
-1123   2      case 0x42: memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); break;  //RD
-1124   2      
-1125   2        #else
+1128   1      
+1129   1      switch(m_current)
+1130   1      {
+1131   2      #if 1
+1132   2        #if 1//ryan
+1133   2      case 0x10: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); TW28_WriteByte(1,0x0f,0x03);break;  //C
+1134   2      case 0x20: memcpy ((RScommand.commBuf), conf2, sizeof(conf2) ); TW28_WriteByte(1,0x0f,0x03);break;  //R
+1135   2      case 0x40: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); TW28_WriteByte(1,0x0f,0x03);break;  //D
+1136   2      case 0x12: memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); break;  //CR
+1137   2      case 0x21: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); break;  //RC
+1138   2      case 0x14: memcpy ((RScommand.commBuf), conf6, sizeof(conf6) ); break;  //DC
+1139   2      case 0x41: memcpy ((RScommand.commBuf), conf7, sizeof(conf7) ); break;  //CD
+1140   2      case 0x24: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); break;  //DR
+1141   2      case 0x42: memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); break;  //RD
+1142   2      
+1143   2        #else
               case 0x10: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); TW28_WriteByte(1,0x0f,0x03);break;  //C
               case 0x20: memcpy ((RScommand.commBuf), conf2, sizeof(conf2) ); TW28_WriteByte(1,0x0f,0x03);break;  //R
               case 0x40: memcpy ((RScommand.commBuf), conf3, sizeof(conf3) ); TW28_WriteByte(1,0x0f,0x03);break;  //D
@@ -1180,13 +1197,13 @@ line level    source
               case 0x24: memcpy ((RScommand.commBuf), conf8, sizeof(conf8) ); break;  //DR
               case 0x42: memcpy ((RScommand.commBuf), conf9, sizeof(conf9) ); break;  //RD
                 #endif
-1136   2      #ifdef screen3
+1154   2      #ifdef screen3
               case 10:      memcpy ((RScommand.commBuf), conf10, sizeof(conf10) ); break;
               #endif
-1139   2      
-1140   2      default:
-1141   2          memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); break;
-1142   2      #else
+1157   2      
+1158   2      default:
+1159   2          memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); break;
+1160   2      #else
               case 0x00: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); break;
               case 0x01: memcpy ((RScommand.commBuf), conf2, sizeof(conf2) ); break;
               case 0x10: memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); break;
@@ -1197,46 +1214,46 @@ line level    source
               
               default:
                   memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); break;
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 20  
+
               #endif  
-1154   2      }
-1155   1      
-1156   1      #ifdef screen3
+1172   2      }
+1173   1      
+1174   1      #ifdef screen3
               if(boot_flag) 
               {
                  m_current=0;      
               }
               #endif
-1162   1      
-1163   1      boot_flag=0;
-1164   1      //printf("RScommand.commBuf=%s\r\n",RScommand.commBuf);  //ryan
-1165   1      PCT_RunCommShell(RScommand.commBuf); 
-1166   1      
-1167   1      
-1168   1      switch(m_current)
-1169   1      {
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 20  
-
-1170   2      //#if 1
-1171   2      case 0x10: Bound_Set(0x00); break;  //C
-1172   2      case 0x20: Bound_Set(0x00); break;  //R
-1173   2      case 0x40: Bound_Set(0x00);Error=1; break;  //D
-1174   2      case 0x12: Bound_Set(0x01); break;  //CR
-1175   2      case 0x21: Bound_Set(0x01); break;  //RC
-1176   2      case 0x14: Bound_Set(0x01); break;  //DC
-1177   2      case 0x41: Bound_Set(0x01); break;  //CD
-1178   2      case 0x24: Bound_Set(0x01); Error=1;break;  //DR
-1179   2      case 0x42: Bound_Set(0x01);Error=1; break;  //RD
-1180   2      
-1181   2      default:
-1182   2           break;
-1183   2      }
+1180   1      
+1181   1      boot_flag=0;
+1182   1      //printf("RScommand.commBuf=%s\r\n",RScommand.commBuf);  //ryan
+1183   1      PCT_RunCommShell(RScommand.commBuf); 
 1184   1      
-1185   1      #ifdef  black_change
+1185   1      
+1186   1      switch(m_current)
+1187   1      {
+1188   2      //#if 1
+1189   2      case 0x10: Bound_Set(0x00); break;  //C
+1190   2      case 0x20: Bound_Set(0x00); break;  //R
+1191   2      case 0x40: Bound_Set(0x00);Error=1; break;  //D
+1192   2      case 0x12: Bound_Set(0x01); break;  //CR
+1193   2      case 0x21: Bound_Set(0x01); break;  //RC
+1194   2      case 0x14: Bound_Set(0x01); break;  //DC
+1195   2      case 0x41: Bound_Set(0x01); break;  //CD
+1196   2      case 0x24: Bound_Set(0x01); Error=1;break;  //DR
+1197   2      case 0x42: Bound_Set(0x01);Error=1; break;  //RD
+1198   2      
+1199   2      default:
+1200   2           break;
+1201   2      }
+1202   1      
+1203   1      #ifdef  black_change
               TW28_WriteByte(0,0xc3,0x01);
               TW28_WriteByte(0,0xc4,0x00);
               #endif
-1189   1      
-1190   1          #ifdef  Monitor_debug
+1207   1      
+1208   1          #ifdef  Monitor_debug
                 printf("\r\nMonitor mode=%x, m_current=%x ",(U16)ch, (U16)m_current); 
                   //printf(" ,return=%x", (U16)Error);
                 
@@ -1256,67 +1273,67 @@ line level    source
                         printf(" Error=1");
                   } 
                   #endif  
-1210   1      
-1211   1      return Error;
-1212   1      
-1213   1      }
-1214          
-1215          //-----------------------------------------
-1216          
-1217          U8 PWM_set(U8 val)
-1218          {
-1219   1      
-1220   1      U8 Error=0,ch=0,set_val=0;
-1221   1      
-1222   1      if(val>=PWM1_offset&&val<=(PWM6_offset+6))
-1223   1      {
-1224   2      ch=((val-PWM1_offset)/6);
-1225   2        set_val=(val-PWM1_offset)%6;
-1226   2      
-1227   2        
-1228   2          Set_PWM_Output(ch,set_val);
-1229   2      
-1230   2          #ifdef  SC16IS750_DEBUG_PRINT 
-                  printf("\r\nPWM_set ch=%x , val=%x",(U16)ch,(U16)set_val);
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 21  
+1228   1      
+1229   1      return Error;
+1230   1      
+1231   1      }
+1232          
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 21  
 
+1233          //-----------------------------------------
+1234          
+1235          U8 PWM_set(U8 val)
+1236          {
+1237   1      
+1238   1      U8 Error=0,ch=0,set_val=0;
+1239   1      
+1240   1      if(val>=PWM1_offset&&val<=(PWM6_offset+6))
+1241   1      {
+1242   2      ch=((val-PWM1_offset)/6);
+1243   2        set_val=(val-PWM1_offset)%6;
+1244   2      
+1245   2        
+1246   2          Set_PWM_Output(ch,set_val);
+1247   2      
+1248   2          #ifdef  SC16IS750_DEBUG_PRINT 
+                  printf("\r\nPWM_set ch=%x , val=%x",(U16)ch,(U16)set_val);
                     #endif   
-1233   2          
-1234   2            Error=1;
-1235   2      }
-1236   1      
-1237   1      return Error;
-1238   1      }
-1239          
-1240          //-----------------------------------------
-1241          
-1242          void Temp_check(void)
-1243          {
-1244   1      U16 val=0;
-1245   1      //U8 loop=0;
-1246   1      
-1247   1      //val=(ADT75_GetTemp()>>4)/16;
-1248   1      val=(ADT75_GetTemp()>>4)/16;
-1249   1      if((P1_1==0))
-1250   1        val=99;
-1251   1      //else if(val&0x0800==1)
-1252   1        //val=0;
-1253   1      #if 1
+1251   2          
+1252   2            Error=1;
+1253   2      }
 1254   1      
-1255   1        //val&=99;//ryan@20150909
-1256   1      
-1257   1      if((val%10)>9);
-1258   1      else
-1259   1      Camera_temp0=(U8)(val%10)+0x30;
-1260   1      
-1261   1      Camera_temp1=(U8)(val/10)+0x30;
-1262   1          
-1263   1          //if(Temp_timeout==1)
-1264   1          //  {
-1265   1          //printf("\r\nTemp_check=%x",val);
-1266   1          //Temp_timeout= 120;
-1267   1          //  }
-1268   1      #else
+1255   1      return Error;
+1256   1      }
+1257          
+1258          //-----------------------------------------
+1259          
+1260          void Temp_check(void)
+1261          {
+1262   1      U16 val=0;
+1263   1      //U8 loop=0;
+1264   1      
+1265   1      //val=(ADT75_GetTemp()>>4)/16;
+1266   1      val=(ADT75_GetTemp()>>4)/16;
+1267   1      if((P1_1==0))
+1268   1        val=99;
+1269   1      //else if(val&0x0800==1)
+1270   1        //val=0;
+1271   1      #if 1
+1272   1      
+1273   1        //val&=99;//ryan@20150909
+1274   1      
+1275   1      if((val%10)>9);
+1276   1      else
+1277   1      Camera_temp0=(U8)(val%10)+0x30;
+1278   1      
+1279   1      Camera_temp1=(U8)(val/10)+0x30;
+1280   1          
+1281   1          //if(Temp_timeout==1)
+1282   1          //  {
+1283   1          //printf("\r\nTemp_check=%x",val);
+1284   1          //Temp_timeout= 120;
+1285   1          //  }
+1286   1      #else
               SC16_Com[0]=STX;
               SC16_Com[1]=0x32;
               SC16_Com[2]=0x31;
@@ -1325,6 +1342,8 @@ line level    source
               SC16_Com[5]=0x20;
               SC16_Com[6]=0x20;
               SC16_Com[7]=ETX;
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 22  
+
               SC16_Com[8]=0;
               
               #ifdef BCC_noSTXEXT          ////XOR 1-6
@@ -1342,72 +1361,84 @@ line level    source
                 RS_tx(SC16_Com[loop]);
                 //DELAY_FOR(200);
                 }
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 22  
-
               #endif
-1295   1      
-1296   1      }
-1297          
-1298          //---------------------------------------------------
-1299          
-1300          
-1301          void Press_check(void)
-1302          {
-1303   1      
-1304   1      //#define _2V  101300  ///2.0V
-1305   1      //#define _3V  199400  ////3.0V
-1306   1      //#define _1V_step   311
-1307   1      //#define press_offset   0
-1308   1      //#define ap_offset 60-8
-1309   1      
-1310   1      
-1311   1      U16 val=0;
-1312   1      U8 loop=0;
-1313   1      #if 1
-1314   1      
-1315   1      
-1316   1      #define _2V  101300  ///2.0V
-1317   1      #define _3V  199400  ////3.0V
-1318   1      #define _1V_step   310//0//311///one step=0.0031V refernec voltage=3.3V
-1319   1      #define press_offset  0//// (50+30-1) ///1.850V offset to 2.0V ryan@20180727
-1320   1      #define ap_offset 60-8
+1313   1      
+1314   1      }
+1315          
+1316          //---------------------------------------------------
+1317          
+1318          
+1319          void Press_check(void)
+1320          {
 1321   1      
-1322   1      U32 temp_val=0;
-1323   1      val=ADC_FPBS();
-1324   1      
-1325   1      val=val+press_offset;
-1326   1      temp_val=val;
+1322   1      //#define _2V  101300  ///2.0V
+1323   1      //#define _3V  199400  ////3.0V
+1324   1      //#define _1V_step   311
+1325   1      //#define press_offset   0
+1326   1      //#define ap_offset 60-8
 1327   1      
-1328   1      #if 1//ryan@20180727
-1329   1      if(temp_val>=(645+1))   ///>2.0  645*0.0031=2.0V
-1330   1      {
-1331   2          if(temp_val<=967)   ///<3V  967*0.0031=3.0V
-1332   2            {
-1333   3            temp_val=(((((temp_val*_1V_step)/100)-2000)*98)+101300);
-1334   3            }
-1335   2          else
-1336   2            {
-1337   3             temp_val=199400;
-1338   3            }
-1339   2      }
-1340   1      else                ///2.0V to 1.6V
-1341   1      {
-1342   2        if(temp_val>=(516+1))   ///>1.6 V   516*0.0031=1.6V
-1343   2            {
-1344   3              temp_val=(((((temp_val*_1V_step)/100)-1600)*98)+62100);
-1345   3            }
-1346   2          else
-1347   2            {
-1348   3            temp_val=62100;
-1349   3            }
-1350   2      }
-1351   1      #else
+1328   1      
+1329   1      U16 val=0;
+1330   1      U8 loop=0;
+1331   1      #if 1
+1332   1      
+1333   1      
+1334   1      #define _2V  101300  ///2.0V
+1335   1      #define _3V  199400  ////3.0V
+1336   1      #define _1V_step   310//0//311///one step=0.0031V refernec voltage=3.3V
+1337   1      #define press_offset  (-31)//// (50+30-1) ///1.850V offset to 2.0V ryan@20180727
+1338   1      #define ap_offset 60-8
+1339   1      
+1340   1      //U32 temp_val=0;
+1341   1      float temp_val=0;
+1342   1      val=ADC_FPBS();
+1343   1      
+1344   1      val=val+press_offset;
+1345   1      temp_val=val;
+1346   1      
+1347   1      #ifdef  press_debug 
+              printf("\r\nADC_FPBS()=%x ",(U16)val);
+              #endif  
+1350   1          
+1351   1      #if 1//ryan@20180727
+1352   1      #if 1//ryan@20181203
+1353   1        //壓力P=101.3*((ADC-281)/281)=大氣壓力[KPa]
+1354   1        //ADC=562 壓力P=101.3*((562-281)/281)=101.3[KPa]//標準
+1355   1        //ADC=500 壓力P=101.3*((500-281)/281)=78.9[KPa]
+1356   1        //ADC=844 壓力P=101.3*((844-281)/281)=200.4[KPa]
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 23  
+
+1357   1        temp_val=(101.3)*((temp_val-281)/281);
+1358   1        
+1359   1      #else//>2.0  645*0.0031=2.0V
+              {
+                  if(temp_val<=967)   ///<3V  967*0.0031=3.0V
+                    {
+                    temp_val=(((((temp_val*_1V_step)/100)-2000)*98)+101300);
+                    }
+                  else
+                    {
+                     temp_val=199400;
+                    }
+              }
+              else                ///2.0V to 1.6V
+              {
+                if(temp_val>=(516+1))   ///>1.6 V   516*0.0031=1.6V
+                    {
+                      temp_val=(((((temp_val*_1V_step)/100)-1600)*98)+62100);
+                    }
+                  else
+                    {
+                    temp_val=62100;
+                    }
+                  
+              }
+                #endif
+1383   1      #else
               if(temp_val>=(_1V_step*2))   ///>2.0  
               {
                   if(temp_val<=(_1V_step*3))   ///<3V
                     {
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 23  
-
                       //temp_val=(val-_1V_step)*487;
                       temp_val=((_1V_step*3)-temp_val)*(316+ap_offset);
                     }
@@ -1430,32 +1461,39 @@ line level    source
                     }
               }
               #endif
-1378   1      
-1379   1      val=(temp_val/100);
-1380   1      
-1381   1      
-1382   1      temp_val=val;
-1383   1      
-1384   1      
-1385   1      
-1386   1      if(val>9999)  val=9999;
-1387   1      
-1388   1      //val=1994;
-1389   1      
-1390   1      Camera_press3=(val/1000)+0x30;  val=(val%1000);
-1391   1      Camera_press2=(val/100)+0x30;  val=(val%100);
-1392   1      Camera_press1=(val/10)+0x30;  val=(val%10);
-1393   1      Camera_press0=val+0x30;
-1394   1      
-1395   1      
-1396   1          #ifdef  press_debug 
+1410   1      
+1411   1      #if 1//ryan@20181203
+1412   1      val=(U16)(temp_val*10);
+1413   1      temp_val=(U16)(temp_val*10);
+1414   1      #else
+              val=(temp_val/100);
+              temp_val=val;
+              #endif
+1418   1      
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 24  
+
+1419   1      if((val>=1003)&&(val<=1023))
+1420   1      {
+1421   2      val=1013;
+1422   2      }
+1423   1      else if(val>9999)  val=9999;
+1424   1      
+1425   1      //val=1994;
+1426   1      
+1427   1      Camera_press3=(val/1000)+0x30;  val=(val%1000);
+1428   1      Camera_press2=(val/100)+0x30;  val=(val%100);
+1429   1      Camera_press1=(val/10)+0x30;  val=(val%10);
+1430   1      Camera_press0=val+0x30;
+1431   1      
+1432   1      
+1433   1          #ifdef  press_debug 
                   printf("\r\nGet_press=%x ",(U16)temp_val);
                     #endif  
-1399   1      
-1400   1      
-1401   1      
-1402   1      
-1403   1      #else
+1436   1      
+1437   1      
+1438   1      
+1439   1      
+1440   1      #else
               Camera_press1=(U8)(val/10)+0x30;
               Camera_press0=(U8)(val%10)+0x30;
               
@@ -1470,8 +1508,6 @@ line level    source
               SC16_Com[6]=0x20;
               SC16_Com[7]=ETX;
               SC16_Com[8]=0;
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 24  
-
               
               #ifdef BCC_noSTXEXT          ////XOR 1-6
               for(loop=1;loop<=6;loop++)
@@ -1497,95 +1533,97 @@ line level    source
                   */
               
               #endif
-1443   1      }
-1444          
-1445          //---------------------------------------------------
-1446          void Version_check(void)
-1447          {
-1448   1      
-1449   1      //U16 val=0;
-1450   1      U8 loop;
-1451   1      
-1452   1      SC16_Com[0]=STX;
-1453   1      SC16_Com[1]=0x32;
-1454   1      SC16_Com[2]=0x50;
-1455   1      SC16_Com[3]=Ver0+0x30;
-1456   1      SC16_Com[4]=Ver1+0x30;
-1457   1      //SC16_Com[5]=Ver2+0x30;
-1458   1      SC16_Com[5]=Ver2;
-1459   1      SC16_Com[6]=0x20;
-1460   1      SC16_Com[7]=ETX;
-1461   1      SC16_Com[8]=0;
-1462   1      
-1463   1      #ifdef BCC_noSTXEXT          ////XOR 1-6
-              for(loop=1;loop<=6;loop++)
-              SC16_Com[8]^=SC16_Com[loop];
-              #else                                 //XOR 0-7
-1467   1      for(loop=0;loop<=7;loop++)
-1468   1      SC16_Com[8]^=SC16_Com[loop];
-1469   1      #endif
-1470   1      
-1471   1      
-1472   1      
-1473   1        for(loop=0;loop<=8;loop++)
-1474   1        {
-1475   2        RS_tx(SC16_Com[loop]);
-1476   2        //DELAY_FOR(200);
-1477   2        }
-1478   1      
-1479   1      }
-C51 COMPILER V9.50a   MAIN                                                                 09/21/2018 12:00:21 PAGE 25  
+1480   1      }
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 25  
 
-1480          
-1481          void Camera_Version_check(void)
-1482          {
-1483   1      //U16 val=0;
-1484   1      U8 loop;
+1481          
+1482          //---------------------------------------------------
+1483          void Version_check(void)
+1484          {
 1485   1      
-1486   1      SC16_Com[0]=STX;
-1487   1      SC16_Com[1]=0x32;
-1488   1      SC16_Com[2]=0x4f;
-1489   1      SC16_Com[3]=Camera_ver0;
-1490   1      SC16_Com[4]=Camera_ver1;
-1491   1      //SC16_Com[5]=Ver2+0x30;
-1492   1      SC16_Com[5]=Camera_ver2;
-1493   1      SC16_Com[6]=0x20;
-1494   1      SC16_Com[7]=ETX;
-1495   1      SC16_Com[8]=0;
-1496   1      
-1497   1      #ifdef BCC_noSTXEXT          ////XOR 1-6
+1486   1      //U16 val=0;
+1487   1      U8 loop;
+1488   1      
+1489   1      SC16_Com[0]=STX;
+1490   1      SC16_Com[1]=0x32;
+1491   1      SC16_Com[2]=0x50;
+1492   1      SC16_Com[3]=Ver0+0x30;
+1493   1      SC16_Com[4]=Ver1+0x30;
+1494   1      //SC16_Com[5]=Ver2+0x30;
+1495   1      SC16_Com[5]=Ver2;
+1496   1      SC16_Com[6]=0x20;
+1497   1      SC16_Com[7]=ETX;
+1498   1      SC16_Com[8]=0;
+1499   1      
+1500   1      #ifdef BCC_noSTXEXT          ////XOR 1-6
               for(loop=1;loop<=6;loop++)
               SC16_Com[8]^=SC16_Com[loop];
               #else                                 //XOR 0-7
-1501   1      for(loop=0;loop<=7;loop++)
-1502   1      SC16_Com[8]^=SC16_Com[loop];
-1503   1      #endif
-1504   1      
-1505   1      
-1506   1      
-1507   1        for(loop=0;loop<=8;loop++)
-1508   1        {
-1509   2        RS_tx(SC16_Com[loop]);
-1510   2        //DELAY_FOR(200);
-1511   2        }
-1512   1      
-1513   1      }
-1514          //---------------------------------------------------
-1515          
-1516          // ===========================================================================
-1517          // END of File 
-1518          // ===========================================================================
+1504   1      for(loop=0;loop<=7;loop++)
+1505   1      SC16_Com[8]^=SC16_Com[loop];
+1506   1      #endif
+1507   1      
+1508   1      
+1509   1      
+1510   1        for(loop=0;loop<=8;loop++)
+1511   1        {
+1512   2        RS_tx(SC16_Com[loop]);
+1513   2        //DELAY_FOR(200);
+1514   2        }
+1515   1      
+1516   1      }
+1517          
+1518          void Camera_Version_check(void)
+1519          {
+1520   1      //U16 val=0;
+1521   1      U8 loop;
+1522   1      
+1523   1      SC16_Com[0]=STX;
+1524   1      SC16_Com[1]=0x32;
+1525   1      SC16_Com[2]=0x4f;
+1526   1      SC16_Com[3]=Camera_ver0;
+1527   1      SC16_Com[4]=Camera_ver1;
+1528   1      //SC16_Com[5]=Ver2+0x30;
+1529   1      SC16_Com[5]=Camera_ver2;
+1530   1      SC16_Com[6]=0x20;
+1531   1      SC16_Com[7]=ETX;
+1532   1      SC16_Com[8]=0;
+1533   1      
+1534   1      #ifdef BCC_noSTXEXT          ////XOR 1-6
+              for(loop=1;loop<=6;loop++)
+              SC16_Com[8]^=SC16_Com[loop];
+              #else                                 //XOR 0-7
+1538   1      for(loop=0;loop<=7;loop++)
+1539   1      SC16_Com[8]^=SC16_Com[loop];
+1540   1      #endif
+1541   1      
+1542   1      
+C51 COMPILER V9.50a   MAIN                                                                 12/04/2018 12:27:03 PAGE 26  
+
+1543   1      
+1544   1        for(loop=0;loop<=8;loop++)
+1545   1        {
+1546   2        RS_tx(SC16_Com[loop]);
+1547   2        //DELAY_FOR(200);
+1548   2        }
+1549   1      
+1550   1      }
+1551          //---------------------------------------------------
+1552          
+1553          // ===========================================================================
+1554          // END of File 
+1555          // ===========================================================================
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   2736    ----
-   CONSTANT SIZE    =    474    ----
-   XDATA SIZE       =     69     496
+   CODE SIZE        =   2621    ----
+   CONSTANT SIZE    =    467    ----
+   XDATA SIZE       =     69     490
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      1       2
+   DATA SIZE        =      1       1
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      2    ----
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

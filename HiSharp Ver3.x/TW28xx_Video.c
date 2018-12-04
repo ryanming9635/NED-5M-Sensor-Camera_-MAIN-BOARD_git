@@ -108,6 +108,7 @@ U8 PCT_DetectVideoFormat(U8 _ch)
 //
 // Setting Video Format 
 //
+#if 0
 void PCT_SetVideoFormat(U8 _dvc, U8 _ch, U8 _fmat)
 {
 	register U8 tmpSta, addr;
@@ -122,7 +123,7 @@ void PCT_SetVideoFormat(U8 _dvc, U8 _ch, U8 _fmat)
 	tmpSta |= _fmat;
 	TW28_WriteByte(0, addr, tmpSta);
 }
-
+#endif
 // ===========================================================================
 //
 // About X channel Video Mixing Control 
@@ -453,7 +454,7 @@ void PCT_RecompenseYHdelay (PU8 _chmiro)
 //	TW2835 Video Mixing last Modify for AC & RB
 //
 //Kane @HS 2007 0808 Ver3.4>>>>
-#if 1
+#if 0
 void PCT_VideoLastModify(void)
 {
 	register data U8 state=0;
@@ -532,6 +533,7 @@ void PCT_WinAttrCtrlY(U8 _wid, U8 _attrsel, U8 _setval)
 //
 //	TW2835 Attribute Set about Freeze		 												   
 //
+#if 0
 void PCT_WinAttrClear(U8 _attrsel)
 {
 	#define PAGE GETHBYTE(XWinAttr_RegAddr[_wid])
@@ -546,12 +548,13 @@ void PCT_WinAttrClear(U8 _attrsel)
 		TW28_WriteByte(PAGE, ADDR, dat);
 	}
 }
-
+#endif
 
 // ===========================================================================
 //
 // TW2835 Window POP UP 
 //
+#if 0
 void PCT_WinPOPupCtrl(U8 _wid)
 {
 	#define POPPAGE GETHBYTE(XWinPOP_RegAddr[_wid])
@@ -563,7 +566,7 @@ void PCT_WinPOPupCtrl(U8 _wid)
 	dat |= BIT6;
 	TW28_WriteByte(POPPAGE, POPADDR, dat);
 }
-
+#endif
 // ===========================================================================
 //
 // 

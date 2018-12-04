@@ -55,6 +55,7 @@
 //	------------------------------------
 //			Type Definitions
 //	------------------------------------
+
 	enum ColorIndex{
 		OSD_COL_BLK=0,	
 		OSD_COL_RED,			
@@ -88,7 +89,7 @@
 		WRPHX_PAGE5=0x05,
 		WRPHY_PAGE0=0x08
 	};		
-		
+
 
 #define DISOSD_PHX	BIT3	
 #define DISOSD_PHY	BIT1
@@ -124,7 +125,6 @@
 	extern void PCT_ClearOSDPageX(U8 _page);
 	extern void PCT_WriteOSDFntY(U8 _posx, U16 _posy, U8 _len, PU8 _indx);
 	extern void PCT_ShowOSDString(U8 _path, U8 _addrx, U8 _addry, PCHAR _strptr);
-	
 // ===========================================================================
 //			Hardware-independent ( Logical) primitives
 // ===========================================================================

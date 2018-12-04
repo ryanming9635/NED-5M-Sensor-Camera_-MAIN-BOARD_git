@@ -76,11 +76,16 @@
 // ===========================================================================
 	extern void ResetCommSell (void);
 	extern void InitialCommShell (void);
+	#if 0
 	extern void chkStartCommShell (char *ptr);
+	#endif
 	extern void CommandShell (void);
+	#if 0
 	extern void NewLine (void);
+	#endif
+	#if 0
 	extern void PutsP (BYTE *);
-
+#endif
 	extern void InitialMPU (void);
 	extern void PCT_SetChanelScale (U8 _ch, WRITE_REG_DATA *datptr);
 	extern void PCT_FlashOSDCtrl(U8 _on);
@@ -94,7 +99,7 @@ U8 PWM_set(U8 val);
 void Temp_check(void);
 void Version_check(void);
 void Press_check(void);
-
+void Camera_Version_check(void);
 
 extern U8 ping(U8 addr);
 extern  U8 SC16_Com[9];   

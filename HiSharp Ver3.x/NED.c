@@ -121,7 +121,6 @@ extern data user_timer[TIMER_NUM];
 //-------------I2C 
  void I2Cdelay(void)
  {
-	 U16 i;
 	 #if 1//ryan@20151106
 
 
@@ -130,11 +129,13 @@ extern data user_timer[TIMER_NUM];
 	// 	}
 	 
 	 #else
+		 U16 i; 
 	 for(i=0; i<(20-12); i++){
 //          for(i=0; i<(20+120); i++){  //ryan..
 	 }
 	 #endif
  }
+#if 0
  void I2Cdelay2(void)
  {
 	 U16 i;
@@ -149,7 +150,7 @@ void I2C_100Khz(void)
 while(USERTMVAL1>=2);
 USERTMVAL1=2;
 }
-
+#endif
 void I2CStart(void)
 {
 #if 1
@@ -173,7 +174,7 @@ I2C_SCL = 0;
 
 #endif
 }
-
+#if 0
 void I2CStart2(void)
 {
 
@@ -182,6 +183,7 @@ void I2CStart2(void)
 	I2C_SDA = 0;	I2Cdelay2();
 	I2C_SCL = 0;
 }
+#endif
 void I2CStop(void)
 {
    #if 1
@@ -203,7 +205,7 @@ void I2CStop(void)
 
     #endif
 }
-
+#if 0
 void I2CStop2(void)
 {
    
@@ -211,7 +213,7 @@ void I2CStop2(void)
 	I2C_SCL = 1;	I2Cdelay2();
 	I2C_SDA = 1;
 }
-
+#endif
 void I2CWriteData(BYTE value)
 {
    #if 1
@@ -280,7 +282,7 @@ void I2CWriteData(BYTE value)
      #endif
 }
 
-
+#if 0
 void I2CWriteData2(BYTE value)
 {
   
@@ -307,7 +309,7 @@ void I2CWriteData2(BYTE value)
 	I2C_SCL = 0;
 	      I2Cdelay2();
 }
-
+#endif
 
 
 U8 I2CReadData(void)
@@ -397,7 +399,7 @@ U8 I2CReadData(void)
 	return ReadValue;
 #endif
 }
-
+#if 0
 U8 I2CReadData2(void)
 {
 
@@ -426,7 +428,7 @@ U8 I2CReadData2(void)
         I2Cdelay2();
 	return value;
 }
-
+#endif
 U8 I2CReadDataWithACK(void)
 {
   #if 1
@@ -495,10 +497,10 @@ U8 I2CReadDataWithACK(void)
     
     #endif
 }
-
+#if 0
 U8 I2CReadDataWithACK2(void)
 {
-  #if 1
+//#if 1
 	U16 i;
 	U8 value=0;
 
@@ -529,7 +531,7 @@ U8 I2CReadDataWithACK2(void)
 
 	return value;
 }
-
+#endif
 void WriteI2C(U8 addr, U8 index, U8 val)
 {
 
@@ -613,6 +615,7 @@ Printf("                    <-\r\n",(U16) x,(U16) val2[x]);  //ry
 	return val;
 }
 //---------------------------------------
+#if 0
 void WriteI2C2(U8 addr, U8 index, U8 val)
 {
 	I2CStart();
@@ -670,6 +673,7 @@ return 1;
    //  DELAY_FOR(10);///     I2Cdelay();
        
 }
+ #endif
 //----------------------------------------
 
 U16 ReadI2CWORD(BYTE addr, BYTE index)
@@ -693,7 +697,7 @@ U16 ReadI2CWORD(BYTE addr, BYTE index)
 	return val;
 }
 //---------------------------------------
-
+#if 0
 void WriteI2CWORD(U8 addr, U8 index, U16 Data)
 {
       U8 tempL,tempH;
@@ -707,7 +711,7 @@ void WriteI2CWORD(U8 addr, U8 index, U16 Data)
 	I2CWriteData(tempL);
 	I2CStop();
 }
-
+#endif
 //----------------------------------------
 
 void Bound_Set(U8 val)
@@ -778,7 +782,7 @@ for(loop=0;loop<=2;loop++)
 }
 
 //---------------------------------------
-
+#if 0
 void Set_channel(U8 addr)
 {
 TW28_WriteByte(1,0x10,0x00); //C
@@ -803,7 +807,7 @@ default:
 	}
  
 }
-
+#endif
 
 
 //----------------------------------------
@@ -847,7 +851,7 @@ default:
 
 
 //-----------------------------------------
-
+#if 0
 void Send_Camera_Ver(void)
 {
 U8 loop;
@@ -867,7 +871,7 @@ SC16_Com[8]=BCC_Cal(SC16_Com, 8);
 	RS_tx(SC16_Com[loop]);
 	}
 }
-
+#endif
 void Get_Camera_Ver(void)
 {
 WriteByte(DRP_ID[2], 0x02);
@@ -997,7 +1001,7 @@ SC16_Com[8]=BCC_Cal(SC16_Com, 8);
 
 }
 //----------------------------------------
-
+#if 0
 void Get_Camera_IRD(U8 sel)
 {
 //U8 bcc[4]={0x02,0x31,0,0x03},bcc_val;
@@ -1017,6 +1021,7 @@ WriteByte(DRP_ID[2], ETX);
 WriteByte(DRP_ID[2], bcc_val );
 
 }
+#endif
 void Sent_Camera_IRD(U8 sel)
 {
 	
@@ -1044,6 +1049,7 @@ SC16_Com[8]=BCC_Cal(SC16_Com, 8);
 	}
 
 }
+
 //----------------------------------------
 
 void Get_DVR_temp(void)
@@ -1077,6 +1083,8 @@ SC16_Com[8]=BCC_Cal(SC16_Com, 8);
 
 
 }
+
+#if 0
 void Get_DVR_ver(void)
 {
 WriteByte(DRP_ID[0], STX);
@@ -1105,6 +1113,7 @@ SC16_Com[8]=BCC_Cal(SC16_Com, 8);
 	}
 
 	}
+
 void Get_DVR_Year(void)
 {
 WriteByte(DRP_ID[0], STX);
@@ -1135,6 +1144,7 @@ SC16_Com[8]=BCC_Cal(SC16_Com, 8);
 
 
 }
+
 void Get_DVR_MD(void)
 	{
 WriteByte(DRP_ID[0], STX);
@@ -1154,6 +1164,7 @@ WriteByte(DRP_ID[0], ETX);
 WriteByte(DRP_ID[0], 0x05);
 }
 void Sent_DVR_HS(void){}
+#endif
 //-----------------------------------------
 
 void Set_Camera_speed(U8 val)
@@ -1303,7 +1314,7 @@ WriteByte(DRP_ID[2], val);
 //if(Com_flag==camera_com_flag) user_timer[3]=(40+40);//reset polling timer..
 
 
-//#endif
+#endif
 
 //ryan@20150814			WriteByte(DRP_ID[1], val);
 
@@ -1316,7 +1327,7 @@ return 1;
 U8 SC16_SendDataSelect(U8 addr)
 {
 
-U8 loop=0,Error=FALSE,count=0,data_temp=0;
+U8 loop=0,Error=0,count=0,data_temp=0;
 //U8 count2=0,start=0,end=0,loop_flag;
 U8 buff_flag=1,loop_temp=0;
 U8 error_flag=1;
@@ -1343,8 +1354,9 @@ WDTCR|=0x10;
 //if( (ReadI2C(DRP_ID[addr], LSR)&BIT1))
 
 //}
+#endif
 
-#elif 1
+#if 1
 /*
 	if( (ReadI2C(DRP_ID[addr], LSR)&BIT1))
 	{
@@ -1360,7 +1372,7 @@ WDTCR|=0x10;
 				count=ReadI2C(DRP_ID[addr], RXLVL);
 				//data_flag=count;
 				
-					 if(count==0) return;
+					 if(count==0) return 0;
 
 					#ifdef  SC16IS750_DEBUG_PRINT 
 					printf("\r\n SC16_ID=%x Data=",(U16) DRP_ID[addr]);
@@ -1492,7 +1504,7 @@ WDTCR|=0x10;
 							}
 						
 					//else if((SC16_ComCheck(&SC16_com_buff[0])==1)&&(loop>=8)&&(error_flag==0))
-					#if 1//ryan@20150602
+						#if 1//ryan@20150602
 						else if((SC16_ComCheck(&SC16_com_buff[0])==1)&&(error_flag==0))
 						{
 						return 1;
@@ -1620,21 +1632,18 @@ for(loop=0;loop<=(count-1);loop++) WriteByte(DRP_ID[addr+1],SC16_Com[loop]);
 for(loop=0;loop<=(count-1);loop++) WriteByte(DRP_ID[addr+2],SC16_Com[loop]); 
 #endif
 
-					//#ifdef  SC16IS750_DEBUG_PRINT 
-					//printf("\r\n SC16_ID=%x Data=",(U16) DRP_ID[addr]);
-					//for(loop=0;loop<=(count-1);loop++) 					
-					//printf("%x ",(U16)SC16_Com[loop]);
-					//#endif  
 
-return Error;
+return 0;
 
 }
 //----------------------------------------
+/*
 void Command_Check(U8 val)//ryan@20150417
 {
 
 
 }
+*/
 //----------------------------------------
 void Repeat_PWM_Com(void)
 {
@@ -1666,7 +1675,7 @@ U8 Dev_ID=0,Error=FALSE,count=0;
 					SC16_ComAddr++;	
 					Error=TRUE;
 			    	}
-		#elif 0
+		//#elif 0
 			for(Dev_ID=0;Dev_ID<=8;Dev_ID+=3)
 			{
 			    if( (ReadI2C(DRP_ID[Dev_ID], LSR)&BIT0))
@@ -1687,6 +1696,7 @@ U8 Dev_ID=0,Error=FALSE,count=0;
 				
 				//Dev_ID+=2;
    			}
+			
 		   #else
 
    			  // if( ReadI2C(DRP_ID[0], LSR)&BIT0)  SC16_SendDataSelect(0);
@@ -1705,7 +1715,7 @@ U8 Dev_ID=0,Error=FALSE,count=0;
 					    else
 					    check_startup(6);		
 					
-			          #else			
+			        //  #else			
    				  
 				    #endif	
 
@@ -1785,7 +1795,7 @@ void Camera_move(void)
 U8 mask[4]={0x01,0x02,0x10,0x20};
 U8 cam[4]={0x31,0x34,0x41,0x42};
 U8 BCC[4]={0x07,0x02,0x77,0x74};
-U8 loop;
+//U8 loop;
 #if 1//ryan@20151130
 
 			if(Camera_move_loop==1)
@@ -1852,6 +1862,7 @@ U8 loop;
 }
 
 //----------------------------------------
+#if 0
 void check_startup(U8 addr)
 {
 
@@ -1901,7 +1912,7 @@ U8 loop=0,Error=FALSE,count=0,data_temp=0;
 
 
 }
-
+#endif
 //-----------------------------------------
 //reset sc16 data
 //-----------------------------------------
@@ -2087,7 +2098,7 @@ if(count==8)
 */
 }
 //----------------------------------------
-
+#if 0
 void Get_Data(U8 addr,U8 val)
 {
 
@@ -2105,13 +2116,14 @@ case 8: Camera_Version_check();  get_data_addr=0;break;		///megawin cpu version 
 get_data_addr=0;
 get_data_val=0;
 }
+#endif
 //----------------------------------------
 extern U16 timerout4;
 extern U16 timerout3;
 extern U8  CB_flag;
 //#define get_delay 15-10
 #define get_delay 50
-U8 SC16_BCC_Check(U8 *addr, U8 sum )
+U8 SC16_BCC_Check(U8 *addr )
 {
 	U8 loop;
 	U8 f_val=0;
@@ -2458,6 +2470,7 @@ return FALSE;
 }
 
 //----------------------------------------
+#if 0
 U8 parity(U8 ino)
 {
 	U8 noofones = 0;
@@ -2479,7 +2492,7 @@ U8 parity(U8 ino)
 
 
 }
-
+#endif
 //-----------------------------------------
 //U8 Com_check(U8 com,U8 start, U8 count)
 //{
@@ -2488,7 +2501,7 @@ U8 parity(U8 ino)
 //}
 
 //-----------------------------------------
-
+#if 0
 U8 ADT75_init(void)
 {
 
@@ -2515,6 +2528,7 @@ Printf(" GetCon=%X  ",(U16)ADT75_GetCon());
 return 1;
 
 }
+#endif
 //-----------------------------------------
 
 void ResetDevice(U8 addr)
@@ -2727,6 +2741,7 @@ U8 GPIOGetPortState(U8 addr)
 
 }
 //-----------------------------------------
+#if 0
 U8 FIFOAvailableData(U8 addr)
 {
 #ifdef  SC16IS750_DEBUG_PRINT 
@@ -2746,7 +2761,9 @@ U8 FIFOAvailableSpace(U8 addr)
    return ReadI2C(addr,TXLVL);///ReadRegister(SC16IS750_REG_TXLVL);
 
 }
+
 //-----------------------------------------
+
 void EnableTransmit(U8 addr,U8 OnOff)
 {
     U8 temp_efcr;
@@ -2760,8 +2777,9 @@ void EnableTransmit(U8 addr,U8 OnOff)
     
     //return;
 }
-
+#endif
 //-----------------------------------------
+#if 0
 void flush(U8 addr)  //Transmit Holding Register Empty indicator.
 {
 	U8 tmp_lsr;
@@ -2777,8 +2795,9 @@ void flush(U8 addr)  //Transmit Holding Register Empty indicator.
 
 
 }
-
+#endif
 //---------------------------------------------------------
+#if 0
 U8 ping(U8 addr)
 {
 
@@ -2807,6 +2826,7 @@ if (ReadI2C(addr,SPR) !=0x55) {
 	return 1;
 
 }
+#endif
 //-----------------------------------------
 
 //-----------------------------------------
@@ -2842,7 +2862,8 @@ void WriteByte(U8 addr, U8 val)
 
 U8 ReadByte(U8 addr)
 {
-	volatile U8 val;
+//	volatile U8 val;
+	U8 val;
 	#if 1
 	val = ReadI2C(addr,RHR);///ReadRegister(SC16IS750_REG_RHR);    
 	  return val;
@@ -2872,8 +2893,8 @@ printf("\r\n**No data available");
 	
 
 }
-
-void TW2835_get(U8 page,U8 start, U8 count)
+#if 0
+void TW2835_get(U8 page)
 {
 U8 x,loop=0,step=0;
 U16 val=0;
@@ -2942,10 +2963,11 @@ val=0;
 */
 
 }
-
+#endif
 
 //-----------------------------------------
-U16 peek(U8 addr)
+#if 0
+U16 peek(void)
 {
 	/*
 	if ( peek_flag == 0 ) {	
@@ -2958,9 +2980,10 @@ U16 peek(U8 addr)
 	return 1 ;//peek_buf;
 		
 }
+#endif
 //-----------------------------------------
-
-void Set_INT(U8 addr)
+#if 0
+void Set_INT(void)
 {
 //INT_flag=0;
 
@@ -2976,6 +2999,7 @@ EX2=1;
 IT2=1;    //'1' falling edge trigger/ '0' low level trigger
 IE2=0;    //flag
 }
+#endif
 //----------------------------------------
 
 void MCTRL_set(void)

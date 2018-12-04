@@ -699,6 +699,7 @@ code unsigned char SPEAKICON[] = {0x0E,'\0'};
 //
 // Show Speak Icon on OSD 
 //
+#if 0
 void PCT_ShowSpeakIcon(PU8 _attr)
 {
 	PCT_PreSetForegroundColor(OSD_COL_GRN);
@@ -927,7 +928,7 @@ void PCT_ShowSpeakIcon(PU8 _attr)
 			break;
 	}
 }
-
+#endif
 #define VLS_LCT_XM0	LOCATE_XM0-4
 #define VLS_LCT_XM1	LOCATE_XM1-4
 #define VLS_LCT_XM2	LOCATE_XM2-4
@@ -948,6 +949,7 @@ code unsigned char msgVLOSS[]= {'\0'};	// VLoss define for HiSharp		//william-v3
 //
 // Show VLoss on OSD when Video Signal Loss
 //
+#if 0
 void PCT_ShowVLoss(void)
 {
 	data U8 tmpsta;
@@ -1135,7 +1137,7 @@ void PCT_ShowVLoss(void)
 			break;
 	}
 }
-
+#endif
 // ===========================================================================
 //
 // Show Control Mode OSD 

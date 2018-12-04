@@ -196,7 +196,7 @@ void CommandShell(void)
 						printf("*");
 						#endif
 							
-						if(SC16_BCC_Check(&SC16_Com[0],4))
+						if(SC16_BCC_Check(&SC16_Com[0]))
 						{
 						RScommand.commFlage = true;
 
@@ -278,15 +278,17 @@ timerout4=0;
 //
 //
 //
+#if 0
 void NewLine(void)
 {
 	puts("\r\n");								    
 }
-
+#endif
 // ===========================================================================
 //
 //
 //
+#if 0
 void PutsP(BYTE *ptr)
 {
 	data BYTE ch;
@@ -296,7 +298,7 @@ void PutsP(BYTE *ptr)
 		RS_tx(ch);
 	}
 }
-
+#endif
 // ===========================================================================
 //
 //	Restart Command Shell 
@@ -352,12 +354,13 @@ void InitialCommShell(void)
 //
 //	Start Command Shell 
 //
+#if 0
 void chkStartCommShell(char *ptr)
 {
 	if( comm_chk_flag ) return;
 	if( strcmp(ptr,"PCT")==0 ) comm_chk_flag=true;
 }
-
+#endif
 void Wait_ms(U16 Tms)
 
 {
@@ -472,12 +475,16 @@ Set_PWM_Output(3,0);
 Set_PWM_Output(4,0);
 Set_PWM_Output(5,0);
 */
+	
 Power_onoff(0);
 SC16_init();
 
-
 Monitor_set(Monitor_offset+3);
-
+#if 1
+boot_flag=2;//ryan@20181130.
+Monitor_set(Monitor_offset+3);//ryan@20181130.
+boot_flag=0;//ryan@20181130.
+ #endif
 ///TW28_WriteByte(1,0xab,0x0a);//ryan@20150522 color bar
 
 
@@ -1056,16 +1063,29 @@ else
 
 }
 
-
-
-
-if(boot_flag)
+if(boot_flag==2)
 {
+///read 0xA1
+//memcpy ((RScommand.commBuf), busr1, sizeof(busr1) );
+//PCT_RunCommShell(RScommand.commBuf);
+//printf("%x",(U16)(ch));
+//printf("\r\nReadAsicByte == %x", (U16)TW28_ReadByte(1, 0xA1));
 
+memcpy ((RScommand.commBuf), busw1, sizeof(busw1) );
+PCT_RunCommShell(RScommand.commBuf); 
+
+//memcpy ((RScommand.commBuf), busw2, sizeof(busw2) );
+//PCT_RunCommShell(RScommand.commBuf); 
+
+//memcpy ((RScommand.commBuf), mode, sizeof(mode)  );
+//PCT_RunCommShell(RScommand.commBuf); 
+return 0;
+}
+else if(boot_flag)
+{  
 	//InitialCommShell();
 	PCT_InitialTW2835();	// Initial RssetN for TW2835
 	//ResetCommSell();
-
 memcpy ((RScommand.commBuf), busw1, sizeof(busw1) );
 PCT_RunCommShell(RScommand.commBuf); 
 
@@ -1078,6 +1098,7 @@ PCT_RunCommShell(RScommand.commBuf);
 memcpy ((RScommand.commBuf), mode, sizeof(mode)  );
 //printf("RScommand.commBuf=%s\r\n",RScommand.commBuf);  //ryan
 PCT_RunCommShell(RScommand.commBuf); 
+
 }
 else
 {
@@ -1098,9 +1119,6 @@ else
 	PCT_RunCommShell(RScommand.commBuf); 
 	Wait_ms(25+100+100);
 	#endif
-
-
-	
 }
 
 
@@ -1316,17 +1334,29 @@ U8 loop=0;
 #define _2V  101300  ///2.0V
 #define _3V  199400  ////3.0V
 #define _1V_step   310//0//311///one step=0.0031V refernec voltage=3.3V
-#define press_offset  0//// (50+30-1) ///1.850V offset to 2.0V ryan@20180727
+#define press_offset  (-31)//// (50+30-1) ///1.850V offset to 2.0V ryan@20180727
 #define ap_offset 60-8
 
-U32 temp_val=0;
+//U32 temp_val=0;
+float temp_val=0;
 val=ADC_FPBS();
 
 val=val+press_offset;
 temp_val=val;
 
+#ifdef  press_debug 
+printf("\r\nADC_FPBS()=%x ",(U16)val);
+#endif  
+		
 #if 1//ryan@20180727
-if(temp_val>=(645+1))   ///>2.0  645*0.0031=2.0V
+#if 1//ryan@20181203
+	//壓力P=101.3*((ADC-281)/281)=大氣壓力[KPa]
+	//ADC=562 壓力P=101.3*((562-281)/281)=101.3[KPa]//標準
+	//ADC=500 壓力P=101.3*((500-281)/281)=78.9[KPa]
+	//ADC=844 壓力P=101.3*((844-281)/281)=200.4[KPa]
+	temp_val=(101.3)*((temp_val-281)/281);
+	
+#else//>2.0  645*0.0031=2.0V
 {
 		if(temp_val<=967)   ///<3V  967*0.0031=3.0V
 			{
@@ -1347,7 +1377,9 @@ else         			  ///2.0V to 1.6V
 			{
 			temp_val=62100;
 			}
+		
 }
+	#endif
 #else
 if(temp_val>=(_1V_step*2))   ///>2.0  
 {
@@ -1376,14 +1408,19 @@ else         			  ///2.0V to 1.6V
 }
 #endif
 
+#if 1//ryan@20181203
+val=(U16)(temp_val*10);
+temp_val=(U16)(temp_val*10);
+#else
 val=(temp_val/100);
-
-
 temp_val=val;
+#endif
 
-
-
-if(val>9999)  val=9999;
+if((val>=1003)&&(val<=1023))
+{
+val=1013;
+}
+else if(val>9999)  val=9999;
 
 //val=1994;
 

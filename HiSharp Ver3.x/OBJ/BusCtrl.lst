@@ -1,4 +1,4 @@
-C51 COMPILER V9.50a   BUSCTRL                                                              09/21/2018 12:00:20 PAGE 1   
+C51 COMPILER V9.50a   BUSCTRL                                                              12/04/2018 12:27:03 PAGE 1   
 
 
 C51 COMPILER V9.50a, COMPILATION OF MODULE BUSCTRL
@@ -44,7 +44,6 @@ line level    source
   34          #include "BusCtrl.h"
   35          
   36          #include "NED.h"
-*** WARNING C320 IN LINE 73 OF NED.h: "NED-5M-Sensor-Camera V0.a.8"
   37          //  ------------------------------------
   38          //      Macro Definitions
   39          //  ------------------------------------ 
@@ -62,9 +61,9 @@ line level    source
   51          
   52          //  ------------------------------------
   53          //      Function Prototypes
-C51 COMPILER V9.50a   BUSCTRL                                                              09/21/2018 12:00:20 PAGE 2   
-
   54          //  ------------------------------------
+C51 COMPILER V9.50a   BUSCTRL                                                              12/04/2018 12:27:03 PAGE 2   
+
   55          
   56          
   57          // ===========================================================================
@@ -126,9 +125,9 @@ line level    source
  113   1        _dvc = 0;     //... temporal
  114   1      
  115   1        EA = OFF;   // Disable All Interrupt
-C51 COMPILER V9.50a   BUSCTRL                                                              09/21/2018 12:00:20 PAGE 3   
-
  116   1        //... P[7:4]:INT[5:2], P1_3:HALE, P1_2:HRDB, P1_1:HWRB, P1_0:HSPB
+C51 COMPILER V9.50a   BUSCTRL                                                              12/04/2018 12:27:03 PAGE 3   
+
  117   1        //MCTRL_set();///MCTRL = 0xf6;    //... initial state
  118   1      #ifdef NED
  119   1          MCTRL_set();
@@ -190,9 +189,9 @@ line level    source
                   MCTRL = 0xf6;   //... initial state
               #endif
  177   1      
-C51 COMPILER V9.50a   BUSCTRL                                                              09/21/2018 12:00:20 PAGE 4   
-
  178   1        _dvc = 0;     //... temporal
+C51 COMPILER V9.50a   BUSCTRL                                                              12/04/2018 12:27:03 PAGE 4   
+
  179   1        if(_pg == DVC_PG0){ HCSB1=0; HCSB0=0;}
  180   1        else if(_pg == DVC_PG1){ HCSB1=0; HCSB0=1;}
  181   1        else if(_pg == DVC_PG2){ HCSB1=1; HCSB0=0;}
@@ -254,9 +253,9 @@ line level    source
  237   1      }
  238          
  239          //==================================================================================
-C51 COMPILER V9.50a   BUSCTRL                                                              09/21/2018 12:00:20 PAGE 5   
-
  240          //  
+C51 COMPILER V9.50a   BUSCTRL                                                              12/04/2018 12:27:03 PAGE 5   
+
  241          // Change to I2C Control Mode
  242          //  
  243          void PTC_SwitchToI2CMode(void)
@@ -300,4 +299,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

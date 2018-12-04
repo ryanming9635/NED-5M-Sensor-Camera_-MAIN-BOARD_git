@@ -1,4 +1,4 @@
-C51 COMPILER V9.50a   UART                                                                 09/21/2018 12:00:20 PAGE 1   
+C51 COMPILER V9.50a   UART                                                                 12/04/2018 12:27:03 PAGE 1   
 
 
 C51 COMPILER V9.50a, COMPILATION OF MODULE UART
@@ -44,7 +44,6 @@ line level    source
   34          #include "UART.h"
   35          #include "Main.h"
   36          #include "NED.h"
-*** WARNING C320 IN LINE 73 OF NED.h: "NED-5M-Sensor-Camera V0.a.8"
   37          
   38          //  ------------------------------------
   39          //      Macro Definitions
@@ -62,9 +61,9 @@ line level    source
   51          
   52          //#define RS_RECV_MAX_BUFF (80)
   53          #define RS_RECV_MAX_BUFF (100)
-C51 COMPILER V9.50a   UART                                                                 09/21/2018 12:00:20 PAGE 2   
-
   54          
+C51 COMPILER V9.50a   UART                                                                 12/04/2018 12:27:03 PAGE 2   
+
   55          //#define RS_RECV_MAX_BUFF (37) 
   56          #ifdef SC16IS750_DEBUG_PRINT
               #endif
@@ -126,9 +125,9 @@ line level    source
  113          //
  114          BYTE RS_RxReady (void)
  115          {
-C51 COMPILER V9.50a   UART                                                                 09/21/2018 12:00:20 PAGE 3   
-
  116   1        if( RsRxWp == RsRxRp ) return false;
+C51 COMPILER V9.50a   UART                                                                 12/04/2018 12:27:03 PAGE 3   
+
  117   1        else return true;
  118   1      }
  119          
@@ -185,14 +184,14 @@ line level    source
  169   2                 if(TI) {
  170   3                #ifdef no_parity
  171   3                #else
-                        TB8=parity(tx_buf);
+                        //TB8=parity(tx_buf);
                         #endif
  174   3      
  175   3      
  176   3            //TB8=parity(tx_buf);
-C51 COMPILER V9.50a   UART                                                                 09/21/2018 12:00:20 PAGE 4   
-
  177   3      
+C51 COMPILER V9.50a   UART                                                                 12/04/2018 12:27:03 PAGE 4   
+
  178   3            SBUF=tx_buf;
  179   3            TI=0;
  180   3            break;
@@ -255,4 +254,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

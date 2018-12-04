@@ -68,11 +68,11 @@
 //#define Ver2   (0x35)//20180710   V0.a.5//ryan@20180710
 //#define Ver2   (0x36)//20180710   V0.a.6//ryan@20180727
 //#define Ver2   (0x37)//20180731   V0.a.7//ryan@20180731
-#define Ver2   (0x38)//20180731   V0.a.8//ryan@20180921
+//#define Ver2   (0x38)//20180731   V0.a.8//ryan@20180921
+#define Ver2   (0x39)//20180731   V0.a.9//ryan@20181204
+//#warning "NED-5M-Sensor-Camera V0.a.9"
 
-#warning "NED-5M-Sensor-Camera V0.a.8"
-
-#define _LED_PWM_HALF 1 ////ryan@20180731 ©`®}≠n®DLED PWM ≈‹¶®§@•b°
+#define _LED_PWM_HALF 1 ////ryan@20180731 ©`®}≠n®DLED PWM ≈‹¶®§@•b?
 #define _LED_PWM_DECREASE   1 ////ryan@20180921 ©`®}≠n®DLED PWM ¶b¥Ó§÷°C
 
 //#define buff_num      13///ryan@20151029		#define buff_num      12
@@ -178,7 +178,7 @@ U8 ReadI2C(U8 addr, U8 index);
 void WriteI2C2(U8 addr, U8 index, U8 val);
 U8 ReadI2C2(U8 addr, U8 index);
 extern void Power_onoff(U8 val);
-U8 ADT75_init(void);
+//U8 ADT75_init(void);
 U8 Check_other_Com(void);
 void check_startup(U8 addr);
 void Set_channel(U8 addr);
@@ -194,7 +194,7 @@ U8 SC16_SendData(U8 val);
 U8 SC16_SendDataSelect(U8 addr);
 
 U8 SC16_ComCheck(U8 *addr);
-U8 SC16_BCC_Check(U8 *, U8 num);
+U8 SC16_BCC_Check(U8 *addr);
 U8 BCC_Cal(U8 *addr,U8 count);
 
 void SC16_data_reset(U16 sel);
@@ -221,14 +221,14 @@ void flush(U8 addr) ;
 U8 ping(U8 addr);  
 void WriteByte(U8 addr, U8 val);
 U8 ReadByte(U8 addr);
-void Set_INT(U8 addr);
+//void Set_INT(void);
 void MCTRL_set(void);
 U8 parity(U8 ino);
 
-void TW2835_get(U8 page,U8 start, U8 count);
+//void TW2835_get(U8 page);
 void Bound_Set(U8 val);
 void Camera_move(void);
-void Command_Check(U8 val);
+//void Command_Check(U8 val);
 void Repeat_PWM_Com(void);
 void Set_Video(U8 addr, U8 val);
 
@@ -237,8 +237,8 @@ extern void RS_tx(U8);
 //ADT75-------------------------------------
 
 #define ADT75_SetCon(a)          	WriteI2C2(Temp_address,0x01,a)	
-#define ADT75_SetThyst(a)        	WriteI2CWORD(Temp_address,0x02,a)        
-#define ADT75_SetTOs(a)          	WriteI2CWORD(Temp_address,0x03,a)      
+//#define ADT75_SetThyst(a)        	WriteI2CWORD(Temp_address,0x02,a)        
+//#define ADT75_SetTOs(a)          	WriteI2CWORD(Temp_address,0x03,a)      
 #define ADT75_SetOneShot(a)    	WriteI2C2(Temp_address,0x04,a)
 
 //#define ADT75_GetCon()   	 		ReadI2C2(Temp_address,0x01)	

@@ -167,6 +167,7 @@ void PCT_CheckVMixType(U8 _typ)
 //
 // This is to communicate with PC AP 
 //
+#if 0
 void MoniReadPageBuffer(PCHAR szParam)
 {
 	data U8 page, start, end;
@@ -203,7 +204,7 @@ void MoniWriteOneBuffer(PCHAR szParam)
 	sscanf(szParam, "%bx %bx %bx", &page, &addr, &dat); 
 	TW28_WriteByte(page, addr, dat);
 }
-
+#endif
 // ***************************************************************************
 //
 // Monitor ASCIBUS Write Byte
@@ -223,6 +224,7 @@ void MoniWriteAsicByte(PCHAR szParam)
 //
 // Monitor ASCIBUS Write Byte
 //
+#if 0
 void MoniReadAsicByte(PCHAR szParam)
 {
 	data U8 _dev=0;
@@ -234,12 +236,13 @@ void MoniReadAsicByte(PCHAR szParam)
 	_rdat = TW28_ReadByte(_pg, _addr);
 	printf("ReadAsicByte == %bx \n", _rdat);
 }
-
+#endif
 // ***************************************************************************
 //
 // Monitor Audio Mixing 
 // Format : amix N ch0:val ch1:val ch2:val ch3:val ch4:val 
 //
+#if 0
 void MoniAudioMixing(PCHAR szParam)
 {
 	data U8 selch0,selch1,selch2,selch3,selch4;	
@@ -519,7 +522,7 @@ void MoniVideoMixAttr(PCHAR szParam)
 		}
 	}
 }
-
+#endif
 // ***************************************************************************
 //
 // Monitor Video Y Channel Select Live or Mixing Mode 
@@ -537,6 +540,7 @@ void MoniYVideoMix(PCHAR szParam)
 //
 // Monitor Video Auto Detect Format 
 //
+#if 0
 void MoniVideoAutoDetect(void)
 {
 	printf("===== Format : ch0=[%bx] ch1=[%bx] ch2=[%bx] ch3=[%bx] =====\n",	\ 
@@ -598,6 +602,7 @@ void MoniSetVideoFormat(PCHAR szParam)
 //
 // Monitor Setting Video Format 
 //
+#endif
 void MoniShowSODStr(PCHAR szParam)
 {
 	data U8 addrx,addry;
@@ -619,6 +624,7 @@ void MoniShowSODStr(PCHAR szParam)
 //
 // Audio Control for HiSarp
 //
+#if 0
 void PCT_AudioActionForHS(void)
 {
 	data U8 winid;
@@ -643,7 +649,7 @@ void PCT_AudioActionForHS(void)
 	}
 	// ----------------------------------------
 }
-
+#endif
 // ***************************************************************************
 //
 // Command Shell for HiSarp
@@ -772,11 +778,11 @@ void MoniHSCommSJmode(PCHAR szParam)
 //
 // Command Shell for HiSarp Setting S or J Mode
 //
+#if 0
 void MoniHSCommDisScroll(void)
 {
 	PCT_EnShowOSDPage(WRPHX_PAGE1);
 }
-
 // ***************************************************************************
 //
 // Command Shell for HiSarp Setting S or J Mode
@@ -786,6 +792,7 @@ void MoniHSCommVersion(void)
 	RS_tx(VERSION[0]);
 	RS_tx(VERSION[1]);
 }
+#endif
 
 // ***************************************************************************
 //
@@ -929,7 +936,7 @@ U8 PCT_RunCommShell(char *strptr)
 #endif
 
 		#ifdef TW2835_degug
-		TW2835_get(0, 0, 0x36);
+		TW2835_get(0);
 		#endif		
 
 
@@ -969,10 +976,13 @@ U8 PCT_RunCommShell(char *strptr)
 				
 				#ifdef  SC16IS750_DEBUG_PRINT 
 				printf("\r\nget PWM=%x",(U16)Com_run);
-				#endif
-
+				#endif		
 				
 		   	}
+		      else if(commcode == PCT_StrToCommCode("0123456789ABCDEF"))
+		      	{
+			MoniShowSODStr(strptr);///re-build warning issue add by ryan@20181204
+		      	}
 		   #if 0//ryan@20150818
 		   	else if (commcode == PCT_StrToCommCode("1"))
 		   	{	   	

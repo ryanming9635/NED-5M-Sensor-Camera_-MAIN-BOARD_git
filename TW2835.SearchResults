@@ -1,3 +1,3 @@
----- _LED_PWM_HALF Matches (2 in 2 files) ----
-Main.c (hisharp ver3.x):766:#ifdef _LED_PWM_HALF
-NED.h (hisharp ver3.x):75:#define _LED_PWM_HALF 1 ////ryan@20180731 ©`®}≠n®DLED PWM ≈‹¶®§@•b°
+---- monishowsodstr Matches (2 in 1 files) ----
+CommandShell.c (hisharp ver3.x):606:void MoniShowSODStr(PCHAR szParam)
+CommandShell.c (hisharp ver3.x):919:		MoniShowSODStr(strptr);

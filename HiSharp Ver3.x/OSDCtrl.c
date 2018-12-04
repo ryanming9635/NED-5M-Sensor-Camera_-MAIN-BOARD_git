@@ -53,7 +53,9 @@
 //	------------------------------------
 //			Variables Definitions
 //	------------------------------------
+#if 1
 	U8 bdata bitdat;
+
 	sbit DAT_BIT0 = bitdat^0;
 	sbit DAT_BIT1 = bitdat^1;
 	sbit DAT_BIT2 = bitdat^2;
@@ -62,7 +64,7 @@
 	sbit DAT_BIT5 = bitdat^5;
 	sbit DAT_BIT6 = bitdat^6;
 	sbit DAT_BIT7 = bitdat^7;
-
+#endif
 	data U8 foreColor;
 	data U8 backColor;
 
@@ -222,6 +224,7 @@ void PCT_ClearOSDPageX(U8 _page)
 //
 // Draw 16 Dots to OSD Dtat Buuffer 0-15
 //
+#if 1
 void PCT_WriteOSDDataBufferX(U8 _index, PU8 _dat)
 {
 	bitdat = _dat[0];
@@ -253,7 +256,7 @@ void PCT_WriteOSDDataBufferX(U8 _index, PU8 _dat)
 	WriteByteOSD(0x03, DAT_BIT0 ? (foreColor) : (backColor));		//... 4th pixel
 	WriteByteOSD(0x04, 0x80|_index);			//... write to buffer
 }
-
+#endif
 // ===========================================================================
 //
 // Draw 16x16 Dots for word, tatal 4 words is 64 x 16 Dots
@@ -262,6 +265,7 @@ void PCT_WriteOSDDataBufferX(U8 _index, PU8 _dat)
 // _len   : 1-4: 1-4 words
 // _index : Ascii code for string
 //
+#if 1
 void PCT_WriteOSDFntX(U8 _posx, U16 _posy, U8 _len, PU8 _indx)	//... only one _pth at once
 {
 	data U8	i,j,posx;
@@ -293,7 +297,7 @@ void PCT_WriteOSDFntX(U8 _posx, U16 _posy, U8 _len, PU8 _indx)	//... only one _p
 		_posy++;
 	}
 }
-
+#endif
 // ===========================================================================
 //
 // Clear 16x16 Dots for word, tatal N words
@@ -333,6 +337,7 @@ void PCT_ClearWordsPathX(U8 _posx, U16 _posy, U8 _len)
 //
 // Draw 16 Dots to OSD Dtat Buuffer 0-15
 //
+#if 1
 void PCT_WriteOSDDataBufferY(U8 _index, PU8 _dat)
 {
 	bitdat = _dat[0];
@@ -350,7 +355,7 @@ void PCT_WriteOSDDataBufferY(U8 _index, PU8 _dat)
 	WriteByteOSD(0x04, 0x80|_index++);			//... write to buffer
 	
 }
-
+#endif
 // ===========================================================================
 //
 // Draw 16x16 Dots for word, tatal 8 words is 128 x 16 Dots
@@ -359,6 +364,7 @@ void PCT_WriteOSDDataBufferY(U8 _index, PU8 _dat)
 // _len   : 1-4: 1-8 words
 // _index : Ascii code for string
 //
+#if 1
 void PCT_WriteOSDFntY(U8 _posx, U16 _posy, U8 _len, PU8 _indx)	//... only one _pth at once
 {
 	data U8	i,j;
@@ -383,11 +389,12 @@ void PCT_WriteOSDFntY(U8 _posx, U16 _posy, U8 _len, PU8 _indx)	//... only one _p
 		_posy++;
 	}
 }
-
+#endif
 //==================================================================================
 //
 // Show String on OSD
 //
+#if 1
 void PCT_ShowOSDString(U8 _path, U8 _addrx, U8 _addry, PCHAR _strptr)
 {
 	register signed char slen;
@@ -411,7 +418,7 @@ void PCT_ShowOSDString(U8 _path, U8 _addrx, U8 _addry, PCHAR _strptr)
 	}
 	PTC_SwitchToI2CMode();
 }
-
+#endif
 //==================================================================================
 //
 //
