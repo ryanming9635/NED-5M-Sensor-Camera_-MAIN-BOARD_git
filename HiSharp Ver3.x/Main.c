@@ -480,10 +480,12 @@ Power_onoff(0);
 SC16_init();
 
 Monitor_set(Monitor_offset+3);
-#if 1
+#if 0
 boot_flag=2;//ryan@20181130.
 Monitor_set(Monitor_offset+3);//ryan@20181130.
 boot_flag=0;//ryan@20181130.
+#else
+
  #endif
 ///TW28_WriteByte(1,0xab,0x0a);//ryan@20150522 color bar
 
@@ -1062,7 +1064,7 @@ else
 		m_current=Main_f<<4;
 
 }
-
+/*
 if(boot_flag==2)
 {
 ///read 0xA1
@@ -1081,11 +1083,15 @@ PCT_RunCommShell(RScommand.commBuf);
 //PCT_RunCommShell(RScommand.commBuf); 
 return 0;
 }
-else if(boot_flag)
+else
+	*/
+	
+if(boot_flag)
 {  
 	//InitialCommShell();
 	PCT_InitialTW2835();	// Initial RssetN for TW2835
 	//ResetCommSell();
+#if 0///ryan@20181217
 memcpy ((RScommand.commBuf), busw1, sizeof(busw1) );
 PCT_RunCommShell(RScommand.commBuf); 
 
@@ -1098,7 +1104,7 @@ PCT_RunCommShell(RScommand.commBuf);
 memcpy ((RScommand.commBuf), mode, sizeof(mode)  );
 //printf("RScommand.commBuf=%s\r\n",RScommand.commBuf);  //ryan
 PCT_RunCommShell(RScommand.commBuf); 
-
+#endif
 }
 else
 {

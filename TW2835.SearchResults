@@ -1,3 +1,36 @@
----- monishowsodstr Matches (2 in 1 files) ----
-CommandShell.c (hisharp ver3.x):606:void MoniShowSODStr(PCHAR szParam)
-CommandShell.c (hisharp ver3.x):919:		MoniShowSODStr(strptr);
+---- Ver2 Matches (35 in 4 files) ----
+CommandShell.c (hisharp ver3.x):					printf("\r\nget Version=%x%x%x",(U16)Ver0,(U16)Ver1,(U16)Ver2);
+Main.c (hisharp ver3.x):extern U8 Camera_ver2;
+Main.c (hisharp ver3.x)://SC16_Com[5]=Ver2+0x30;
+Main.c (hisharp ver3.x):SC16_Com[5]=Ver2;
+Main.c (hisharp ver3.x)://SC16_Com[5]=Ver2+0x30;
+Main.c (hisharp ver3.x):SC16_Com[5]=Camera_ver2;
+NED.c (hisharp ver3.x):U8 Camera_ver2=0x30;
+NED.c (hisharp ver3.x):SC16_Com[3]=Camera_ver2;
+NED.c (hisharp ver3.x):					 	Camera_ver2=*addr;
+NED.c (hisharp ver3.x):					 	Camera_ver2=*addr;
+Ned.h (hisharp ver3.x)://#define Ver2   (2) //20150302
+Ned.h (hisharp ver3.x)://efine Ver2   (3) //20150306
+Ned.h (hisharp ver3.x)://#define Ver2   (4)//20150331
+Ned.h (hisharp ver3.x)://#define Ver2   (5)//20150416
+Ned.h (hisharp ver3.x)://#define Ver2   (6)//20150417
+Ned.h (hisharp ver3.x)://#define Ver2   (3)//20150420
+Ned.h (hisharp ver3.x):///#define Ver2   (4)//20150522
+Ned.h (hisharp ver3.x)://#define Ver2   (5)//20150602
+Ned.h (hisharp ver3.x)://#define Ver2   (6)//20150605
+Ned.h (hisharp ver3.x)://#define Ver2   (7)//20150706
+Ned.h (hisharp ver3.x)://#define Ver2   (8)//20150706
+Ned.h (hisharp ver3.x)://#define Ver2   (0x61)//20150706   V0.9.a
+Ned.h (hisharp ver3.x)://#define Ver2   (0x63)//20150706   V0.9.c
+Ned.h (hisharp ver3.x)://#define Ver2   (0x64)//20151019   V0.9.d
+Ned.h (hisharp ver3.x)://#define Ver2   (0x65)//20151019   V0.9.e
+Ned.h (hisharp ver3.x)://#define Ver2   (0x66)//20151019   V0.9.f
+Ned.h (hisharp ver3.x)://#define Ver2   (0x30)//20151019   V0.9.a
+Ned.h (hisharp ver3.x)://#define Ver2   (0x32)//20151019   V0.a.3//ryan@20151210
+Ned.h (hisharp ver3.x)://#define Ver2   (0x33)//20151019   V0.a.3//ryan@20160226
+Ned.h (hisharp ver3.x)://#define Ver2   (0x34)//20151019   V0.a.4//ryan@20160303
+Ned.h (hisharp ver3.x)://#define Ver2   (0x35)//20180710   V0.a.5//ryan@20180710
+Ned.h (hisharp ver3.x)://#define Ver2   (0x36)//20180710   V0.a.6//ryan@20180727
+Ned.h (hisharp ver3.x)://#define Ver2   (0x37)//20180731   V0.a.7//ryan@20180731
+Ned.h (hisharp ver3.x)://#define Ver2   (0x38)//20180731   V0.a.8//ryan@20180921
+Ned.h (hisharp ver3.x):#define Ver2   (0x39)//20180731   V0.a.9//ryan@20181204

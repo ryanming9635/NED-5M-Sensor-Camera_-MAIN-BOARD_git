@@ -69,7 +69,8 @@
 //#define Ver2   (0x36)//20180710   V0.a.6//ryan@20180727
 //#define Ver2   (0x37)//20180731   V0.a.7//ryan@20180731
 //#define Ver2   (0x38)//20180731   V0.a.8//ryan@20180921
-#define Ver2   (0x39)//20180731   V0.a.9//ryan@20181204
+//#define Ver2   (0x39)//20180731   V0.a.9//ryan@20181204
+#define Ver2   (0x61)//V0.a.a//ryan@20181217
 //#warning "NED-5M-Sensor-Camera V0.a.9"
 
 #define _LED_PWM_HALF 1 ////ryan@20180731 奈良要求LED PWM 變成一半?
