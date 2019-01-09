@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 1   
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE NED
@@ -62,7 +62,7 @@ line level    source
   52           U8 GPIO_current=0;
   53           U8 DVR_startup_flag=0;
   54           U8 Cam_startup_flag=0;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 2   
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 2   
 
   55           U8 DVR_Com[5]={0x02,0x37,0x32,0x03,0x04};
   56           U8 DVR_Com_p=0;
@@ -126,7 +126,7 @@ line level    source
  114            
  115           U8 OUTPUT=0;
  116           U8 peek_flag=0,peek_buf=0;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 3   
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 3   
 
  117          extern data user_timer[TIMER_NUM];
  118          
@@ -190,7 +190,7 @@ line level    source
  176   1      }
  177          #if 0
               void I2CStart2(void)
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 4   
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 4   
 
               {
               
@@ -254,7 +254,7 @@ line level    source
  238   1              I2C_SCL = 1;
  239   1                      I2Cdelay();
  240   1              I2C_SCL = 0;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 5   
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 5   
 
  241   1                    I2Cdelay();
  242   1          #else
@@ -318,7 +318,7 @@ line level    source
                       I2C_SCL = 0;    // HHY 3.00
                       I2C_SCL = 0;    // HHY 3.00
                       I2C_SCL = 0;    //I2Cdelay();
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 6   
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 6   
 
                     I2C_SDA = 1;      //I2Cdelay();
                     
@@ -382,7 +382,7 @@ line level    source
                         //DELAY_FOR(5);/// I2Cdelay();
                           I2C_SCL = 1;
                        DELAY_FOR(I2C_time);///  I2Cdelay();
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 7   
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 7   
 
                       //DELAY_FOR(5);/// I2Cdelay();
                           I2C_SCL = 0;
@@ -446,7 +446,7 @@ line level    source
                       //I2C_SCL = 1;  // HHY 3.00
                       //I2C_SCL = 1;  // HHY 3.00
                       //I2C_SCL = 1; 
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 8   
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 8   
 
                        I2Cdelay2();
                     //  I2C_SCL = 0;
@@ -510,7 +510,7 @@ line level    source
                               //I2CDLY_5uSec(1);
                               ReadValue = (ReadValue<<1)|bitt;
                       }
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 9   
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 9   
 
                   
                       I2C_SDA = 0;    I2Cdelay();             //ack
@@ -574,7 +574,7 @@ line level    source
                       I2CWriteData(addr);
                      I2C_ACK2();
                       I2CWriteData((index<<3));
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 10  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 10  
 
                      I2C_ACK2();
                       I2CWriteData(val);
@@ -638,7 +638,7 @@ line level    source
               }
               Printf("                    <-\r\n",(U16) x,(U16) val2[x]);  //ry               
               #endif
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 11  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 11  
 
               
                       #endif
@@ -702,7 +702,7 @@ line level    source
               // DELAY_FOR(5);///    I2Cdelay();
                //I2C_SDA = 1;
                  //  DELAY_FOR(10);///     I2Cdelay();
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 12  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 12  
 
                      
               }
@@ -766,7 +766,7 @@ line level    source
               case 4: TW28_WriteByte(1,0x21,0x02);
                               TW28_WriteByte(1,0x0f,0x00);
                               break;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 13  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 13  
 
               default:
                               
@@ -830,7 +830,7 @@ line level    source
               case 0x10: TW28_WriteByte(1,0x10,0x80); break;  //C
               case 0x20: TW28_WriteByte(1,0x20,0x82); break;  //R
               case 0x40: TW28_WriteByte(1,0x18,0x81); break;  //D
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 14  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 14  
 
               case 0x12: Bound_Set(0x01); break;  //CR
               case 0x21: Bound_Set(0x01); break;  //RC
@@ -894,7 +894,7 @@ line level    source
               U8 loop;
               
               SC16_Com[0]=STX;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 15  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 15  
 
               SC16_Com[1]=0x32;
               SC16_Com[2]=0x4f;
@@ -958,7 +958,7 @@ line level    source
               SC16_Com[4]=Camera_press0;
               SC16_Com[5]=0x20;
               SC16_Com[6]=0x20;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 16  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 16  
 
               #else
  923   1      SC16_Com[3]=Camera_press3;
@@ -1022,7 +1022,7 @@ line level    source
  981          
  982          void Sent_Camera_RAng(void)
  983          {
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 17  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 17  
 
  984   1      
  985   1      U8 loop;
@@ -1086,7 +1086,7 @@ line level    source
 1043   1      SC16_Com[7]=ETX;
 1044   1      SC16_Com[8]=BCC_Cal(SC16_Com, 8);
 1045   1      
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 18  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 18  
 
 1046   1              for(loop=0;loop<=8;loop++)
 1047   1              {
@@ -1150,7 +1150,7 @@ line level    source
               SC16_Com[5]=DVR_ver[0];
               SC16_Com[6]=0x20;
               SC16_Com[7]=ETX;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 19  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 19  
 
               SC16_Com[8]=BCC_Cal(SC16_Com, 8);
               
@@ -1214,7 +1214,7 @@ line level    source
               #endif
 1168          //-----------------------------------------
 1169          
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 20  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 20  
 
 1170          void Set_Camera_speed(U8 val)
 1171          {
@@ -1278,7 +1278,7 @@ line level    source
 1229   2                                      PCON =PCON| 0x80;                               //smod=1
 1230   2                                      TH1 = SET_BAUDRATE(76800,1);    // 22.118M HZ     //remask by ryan.
 1231   2                                      break;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 21  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 21  
 
 1232   2                      default:  PCON = PCON&0x7f;                             //  smod=0
 1233   2                                      TH1 = SET_BAUDRATE(9600,0);     // 22.118M HZ     //remask by ryan.
@@ -1302,51 +1302,52 @@ line level    source
 1251   1      Power_EN2=sel;
 1252   1      Power_EN3=sel;
 1253   1       Wait_ms(100);
-1254   1      //P2_4=1;
-1255   1      //P2_7=1;
-1256   1      //printf("power on");
-1257   1      }
-1258          //-----------------------------------------
-1259          
-1260          U8 SC16_init(void)
-1261          {
-1262   1      
-1263   1      U8 Dev_ID;
-1264   1      
-1265   1          SC16_RST=0;
-1266   1              Wait_ms(20);
-1267   1                  SC16_RST=1;
-1268   1                      Wait_ms(20);
-1269   1      
-1270   1        #if 1
-1271   1          for(Dev_ID=0;Dev_ID<=2;Dev_ID++)
-1272   1          {            
-1273   2               ResetDevice(DRP_ID[Dev_ID]);
-1274   2                SetBaudrate(DRP_ID[Dev_ID],BaudRate_sel);
-1275   2              SetLine(DRP_ID[Dev_ID],8,0,1);
-1276   2              WriteI2C(DRP_ID[Dev_ID],FCR , 0x01);   //FIFO mode
-1277   2          }
-1278   1      #endif
-1279   1      
-1280   1      #ifdef dvr_parity
+1254   1      
+1255   1      //P2_4=1;
+1256   1      //P2_7=1;
+1257   1      //printf("power on");
+1258   1      }
+1259          //-----------------------------------------
+1260          
+1261          U8 SC16_init(void)
+1262          {
+1263   1      
+1264   1      U8 Dev_ID;
+1265   1      
+1266   1          SC16_RST=0;
+1267   1              Wait_ms(20);
+1268   1                  SC16_RST=1;
+1269   1                      Wait_ms(20);
+1270   1      
+1271   1        #if 1
+1272   1          for(Dev_ID=0;Dev_ID<=2;Dev_ID++)
+1273   1          {            
+1274   2               ResetDevice(DRP_ID[Dev_ID]);
+1275   2                SetBaudrate(DRP_ID[Dev_ID],BaudRate_sel);
+1276   2              SetLine(DRP_ID[Dev_ID],8,0,1);
+1277   2              WriteI2C(DRP_ID[Dev_ID],FCR , 0x01);   //FIFO mode
+1278   2          }
+1279   1      #endif
+1280   1      
+1281   1      #ifdef dvr_parity
                 SetLine(DVR_address,8,2,1);  //DVR parity even
               #endif
-1283   1      
-1284   1              GPIOSetPortMode(DRP_ID[0],0);
-1285   1              GPIOSetPortState(DRP_ID[0],0xff)        ;
-1286   1      return 1;
-1287   1      }
-1288          //-----------------------------------------
-1289          extern data user_timer[TIMER_NUM];//ryan@20151216
-1290          
-1291          U8 SC16_SendData(U8 val)
-1292          {
-1293   1      U8 error=0;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 22  
+1284   1      
+1285   1              GPIOSetPortMode(DRP_ID[0],0);
+1286   1              GPIOSetPortState(DRP_ID[0],0xff)        ;
+1287   1      return 1;
+1288   1      }
+1289          //-----------------------------------------
+1290          extern data user_timer[TIMER_NUM];//ryan@20151216
+1291          
+1292          U8 SC16_SendData(U8 val)
+1293          {
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 22  
 
-1294   1      //U8 Dev_ID=0,Data,Error=FALSE;
-1295   1      
-1296   1      #ifdef power_startup_check
+1294   1      U8 error=0;
+1295   1      //U8 Dev_ID=0,Data,Error=FALSE;
+1296   1      
+1297   1      #ifdef power_startup_check
               
                       if((Com_flag==dvr_com_flag)&&(DVR_startup_flag==1))
                       WriteByte(DRP_ID[0], val);      
@@ -1355,40 +1356,40 @@ line level    source
                       WriteByte(DRP_ID[2], val);                                      
                       
               #else
-1305   1      
-1306   1      WriteByte(DRP_ID[0], val);
-1307   1      
-1308   1      //if((SC16_Com[1]==0x37)&&((SC16_Com[2]==0x31)|| (SC16_Com[2]==0x34)||(SC16_Com[2]==0x53)||
-1309   1      //      (SC16_Com[2]==0x41)||(SC16_Com[2]==0x42)));
-1310   1      //else
-1311   1      WriteByte(DRP_ID[2], val);
-1312   1      
-1313   1      //#if 1//ryan@20151216
-1314   1      //if(Com_flag==camera_com_flag) user_timer[3]=(40+40);//reset polling timer..
-1315   1      
+1306   1      
+1307   1      WriteByte(DRP_ID[0], val);
+1308   1      
+1309   1      //if((SC16_Com[1]==0x37)&&((SC16_Com[2]==0x31)|| (SC16_Com[2]==0x34)||(SC16_Com[2]==0x53)||
+1310   1      //      (SC16_Com[2]==0x41)||(SC16_Com[2]==0x42)));
+1311   1      //else
+1312   1      WriteByte(DRP_ID[2], val);
+1313   1      
+1314   1      //#if 1//ryan@20151216
+1315   1      //if(Com_flag==camera_com_flag) user_timer[3]=(40+40);//reset polling timer..
 1316   1      
-1317   1      #endif
-1318   1      
-1319   1      //ryan@20150814                 WriteByte(DRP_ID[1], val);
-1320   1      
-1321   1      //WDTCR|=0x10;
-1322   1      return 1;
-1323   1      
-1324   1      }
-1325          //-----------------------------------------
-1326          
-1327          U8 SC16_SendDataSelect(U8 addr)
-1328          {
-1329   1      
-1330   1      U8 loop=0,Error=0,count=0,data_temp=0;
-1331   1      //U8 count2=0,start=0,end=0,loop_flag;
-1332   1      U8 buff_flag=1,loop_temp=0;
-1333   1      U8 error_flag=1;
-1334   1      U8 etx_flag=0;///camera 
-1335   1      //data_flag=0;
-1336   1      
-1337   1      //WDTCR|=0x10;
-1338   1      #if 0
+1317   1      
+1318   1      #endif
+1319   1      
+1320   1      //ryan@20150814                 WriteByte(DRP_ID[1], val);
+1321   1      
+1322   1      //WDTCR|=0x10;
+1323   1      return 1;
+1324   1      
+1325   1      }
+1326          //-----------------------------------------
+1327          
+1328          U8 SC16_SendDataSelect(U8 addr)
+1329          {
+1330   1      
+1331   1      U8 loop=0,Error=0,count=0,data_temp=0;
+1332   1      //U8 count2=0,start=0,end=0,loop_flag;
+1333   1      U8 buff_flag=1,loop_temp=0;
+1334   1      U8 error_flag=1;
+1335   1      U8 etx_flag=0;///camera 
+1336   1      //data_flag=0;
+1337   1      
+1338   1      //WDTCR|=0x10;
+1339   1      #if 0
               
               while( (ReadI2C(DRP_ID[addr], LSR)&BIT0))
               {
@@ -1405,94 +1406,94 @@ line level    source
               
               
               //if( (ReadI2C(DRP_ID[addr], LSR)&BIT1))
-              
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 23  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 23  
 
+              
               //}
               #endif
-1358   1      
-1359   1      #if 1
-1360   1      /*
-1361   1              if( (ReadI2C(DRP_ID[addr], LSR)&BIT1))
-1362   1              {
-1363   1              WriteI2C(DRP_ID[addr],FCR,0x03);   //RXFIFO_reset 
-1364   1              DELAY_FOR(50);
-1365   1              WriteI2C(DRP_ID[addr],FCR,0x01);   //RXFIFO_reset 
-1366   1              }
-1367   1              else
-1368   1                      {
-1369   1                      */
-1370   1                              if( ReadI2C(DRP_ID[addr], LSR)&BIT0)
-1371   1                              {   
-1372   2                                      count=ReadI2C(DRP_ID[addr], RXLVL);
-1373   2                                      //data_flag=count;
-1374   2                                      
-1375   2                                               if(count==0) return 0;
-1376   2      
-1377   2                                              #ifdef  SC16IS750_DEBUG_PRINT 
+1359   1      
+1360   1      #if 1
+1361   1      /*
+1362   1              if( (ReadI2C(DRP_ID[addr], LSR)&BIT1))
+1363   1              {
+1364   1              WriteI2C(DRP_ID[addr],FCR,0x03);   //RXFIFO_reset 
+1365   1              DELAY_FOR(50);
+1366   1              WriteI2C(DRP_ID[addr],FCR,0x01);   //RXFIFO_reset 
+1367   1              }
+1368   1              else
+1369   1                      {
+1370   1                      */
+1371   1                              if( ReadI2C(DRP_ID[addr], LSR)&BIT0)
+1372   1                              {   
+1373   2                                      count=ReadI2C(DRP_ID[addr], RXLVL);
+1374   2                                      //data_flag=count;
+1375   2                                      
+1376   2                                               if(count==0) return 0;
+1377   2      
+1378   2                                              #ifdef  SC16IS750_DEBUG_PRINT 
                                                       printf("\r\n SC16_ID=%x Data=",(U16) DRP_ID[addr]);
                                                       #endif  
-1380   2      
-1381   2                                              #ifdef  SC16IS750_DEBUG_PRINT 
+1381   2      
+1382   2                                              #ifdef  SC16IS750_DEBUG_PRINT 
                                                       printf("\r\n count=%x Data=",(U16) count);
                                                       #endif  
-1384   2      
-1385   2                                      #ifdef get_data_buff
-1386   2      
-1387   2                                      data_temp=ReadByte(DRP_ID[addr]);
-1388   2      
-1389   2                                      if((data_temp==NAK)||(data_temp==ACK))
-1390   2                                      {                               
-1391   3                                              if((addr==6)&&(data_temp==NAK));
-1392   3                                              else
-1393   3                                              RS_tx(data_temp); 
-1394   3                                              
-1395   3                                              #if 0//ryan@20151106¦^ÂÐ¤ÓºC®³±¼
+1385   2      
+1386   2                                      #ifdef get_data_buff
+1387   2      
+1388   2                                      data_temp=ReadByte(DRP_ID[addr]);
+1389   2      
+1390   2                                      if((data_temp==NAK)||(data_temp==ACK))
+1391   2                                      {                               
+1392   3                                              if((addr==6)&&(data_temp==NAK));
+1393   3                                              else
+1394   3                                              RS_tx(data_temp); 
+1395   3                                              
+1396   3                                              #if 0//ryan@20151106¦^ÂÐ¤ÓºC®³±¼
                                                       WriteByte(DRP_ID[addr+1],data_temp); 
                                                       WriteByte(DRP_ID[addr+2],data_temp); 
                                                       #endif
-1399   3      
-1400   3                                              //if(data_temp==NAK) 
-1401   3                                                      //printf("(N=%x)",(U16)addr);   
-1402   3                                              
-1403   3                                              #ifdef  SC16IS750_DEBUG_PRINT 
+1400   3      
+1401   3                                              //if(data_temp==NAK) 
+1402   3                                                      //printf("(N=%x)",(U16)addr);   
+1403   3                                              
+1404   3                                              #ifdef  SC16IS750_DEBUG_PRINT 
                                                       printf("sc16_data=%x ",(U16)data_temp);                                 
                                                       #endif                                  
-1406   3                                      }
-1407   2                                      else if(data_temp==CAM_MOV) return 1;//ryan@20150417
-1408   2      //                              else if((data_temp==STX)&&(count>=9))
-1409   2                                      else if((data_temp==STX)&&(count>=5))
-1410   2                                      {
-1411   3      
-1412   3                                      SC16_com_buff[0]=data_temp;
-1413   3      
-1414   3                                              loop=1;
-1415   3                                              while((error_flag==1)&&(loop<=7))
-1416   3                                              {
-1417   4                                                      
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 24  
+1407   3                                      }
+1408   2                                      else if(data_temp==CAM_MOV) return 1;//ryan@20150417
+1409   2      //                              else if((data_temp==STX)&&(count>=9))
+1410   2                                      else if((data_temp==STX)&&(count>=5))
+1411   2                                      {
+1412   3      
+1413   3                                      SC16_com_buff[0]=data_temp;
+1414   3      
+1415   3                                              loop=1;
+1416   3                                              while((error_flag==1)&&(loop<=7))
+1417   3                                              {
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 24  
 
 1418   4                                                      
-1419   4                                              SC16_com_buff[loop]=ReadByte(DRP_ID[addr]);
-1420   4      
+1419   4                                                      
+1420   4                                              SC16_com_buff[loop]=ReadByte(DRP_ID[addr]);
 1421   4      
-1422   4                                                      #if 1///ryan@20150605
-1423   4                                                              if(SC16_com_buff[loop]==ETX&&((SC16_com_buff[1]>=0x52))&&(etx_flag==0)&&(loop<=3)) 
-1424   4                                                              {       
-1425   5                                                              etx_flag=1;
-1426   5                                                              //loop++;
-1427   5                                                              //SC16_com_buff[loop]=ReadByte(DRP_ID[addr]);
-1428   5                                                              //error_flag=0;//end loop   //ryan@20150420
-1429   5                                                              //printf("get first EXT");
-1430   5                                                              }
-1431   4                                                              else if(SC16_com_buff[loop]==ETX)
-1432   4                                                                      {
-1433   5                                                                      loop++;
-1434   5                                                                      SC16_com_buff[loop]=ReadByte(DRP_ID[addr]);
-1435   5                                                                      error_flag=0;///endi loop //ryan@20150420
-1436   5                                                                      //printf("get data");
-1437   5                                                                      }
-1438   4                                                      #else
+1422   4      
+1423   4                                                      #if 1///ryan@20150605
+1424   4                                                              if(SC16_com_buff[loop]==ETX&&((SC16_com_buff[1]>=0x52))&&(etx_flag==0)&&(loop<=3)) 
+1425   4                                                              {       
+1426   5                                                              etx_flag=1;
+1427   5                                                              //loop++;
+1428   5                                                              //SC16_com_buff[loop]=ReadByte(DRP_ID[addr]);
+1429   5                                                              //error_flag=0;//end loop   //ryan@20150420
+1430   5                                                              //printf("get first EXT");
+1431   5                                                              }
+1432   4                                                              else if(SC16_com_buff[loop]==ETX)
+1433   4                                                                      {
+1434   5                                                                      loop++;
+1435   5                                                                      SC16_com_buff[loop]=ReadByte(DRP_ID[addr]);
+1436   5                                                                      error_flag=0;///endi loop //ryan@20150420
+1437   5                                                                      //printf("get data");
+1438   5                                                                      }
+1439   4                                                      #else
                                                               if(SC16_com_buff[loop]==ETX) 
                                                               {       
                                                               loop++;
@@ -1501,115 +1502,115 @@ line level    source
                                                               error_flag=0;//ryan@20150420
                                                               }
                                                               #endif
-1447   4                                                      
-1448   4                                              
-1449   4                                                      
-1450   4                                              loop++;
-1451   4                                      
-1452   4                                              }
-1453   3      
-1454   3                                                      //ryan
-1455   3                                                      if((SC16_com_buff[1]==0xff)&&(SC16_com_buff[2]==0x92))
-1456   3                                                      {
-1457   4                                                      //Cam_boot_count_flag++;                                                
-1458   4                                                      
-1459   4                                                              Cam_boot_flag=1;
-1460   4                                                              //printf("\r\nGot Camera ready");
-1461   4                                              
-1462   4                                                      //WriteByte(DRP_ID[2],0x02); //view com.
-1463   4                                                      //WriteByte(DRP_ID[2],0x37); 
-1464   4                                                      //WriteByte(DRP_ID[2],0x52); 
-1465   4                                                      //WriteByte(DRP_ID[2],0x03); 
-1466   4                                                      //WriteByte(DRP_ID[2],0x64); 
-1467   4                                                      }
-1468   3                                                      
-1469   3                                                      loop_temp=loop-1;
-1470   3      
-1471   3                                                      if((loop_temp<=4)&&(error_flag==0))
-1472   3                                                      {
-1473   4                                                      
-1474   4                                                      //printf("\r\nRecived a command from device1..");
-1475   4                                                              for(loop=0;loop<=4;loop++)
-1476   4                                                              {
-1477   5                                                              //data_temp=ReadByte(DRP_ID[addr]);                     
-1478   5                                                              //SC16_Com[count]=ReadByte(DRP_ID[addr]);
-1479   5                                                              RS_tx(SC16_com_buff[loop]); 
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 25  
+1448   4                                                      
+1449   4                                              
+1450   4                                                      
+1451   4                                              loop++;
+1452   4                                      
+1453   4                                              }
+1454   3      
+1455   3                                                      //ryan
+1456   3                                                      if((SC16_com_buff[1]==0xff)&&(SC16_com_buff[2]==0x92))
+1457   3                                                      {
+1458   4                                                      //Cam_boot_count_flag++;                                                
+1459   4                                                      
+1460   4                                                              Cam_boot_flag=1;
+1461   4                                                              //printf("\r\nGot Camera ready");
+1462   4                                              
+1463   4                                                      //WriteByte(DRP_ID[2],0x02); //view com.
+1464   4                                                      //WriteByte(DRP_ID[2],0x37); 
+1465   4                                                      //WriteByte(DRP_ID[2],0x52); 
+1466   4                                                      //WriteByte(DRP_ID[2],0x03); 
+1467   4                                                      //WriteByte(DRP_ID[2],0x64); 
+1468   4                                                      }
+1469   3                                                      
+1470   3                                                      loop_temp=loop-1;
+1471   3      
+1472   3                                                      if((loop_temp<=4)&&(error_flag==0))
+1473   3                                                      {
+1474   4                                                      
+1475   4                                                      //printf("\r\nRecived a command from device1..");
+1476   4                                                              for(loop=0;loop<=4;loop++)
+1477   4                                                              {
+1478   5                                                              //data_temp=ReadByte(DRP_ID[addr]);                     
+1479   5                                                              //SC16_Com[count]=ReadByte(DRP_ID[addr]);
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 25  
 
-1480   5                                                              #if 0//ryan@20151106¦^ÂÐ¤ÓºC®³±¼
+1480   5                                                              RS_tx(SC16_com_buff[loop]); 
+1481   5                                                              #if 0//ryan@20151106¦^ÂÐ¤ÓºC®³±¼
                                                                       WriteByte(DRP_ID[addr+1],SC16_com_buff[loop]); 
                                                                       WriteByte(DRP_ID[addr+2],SC16_com_buff[loop]);                          
                                                                       #endif
-1484   5                                                              }               
-1485   4                                                                      //}
-1486   4                                                      return 1;//if buff are error...
-1487   4                                                      }
-1488   3                                                      else if((loop_temp<=6)&&(error_flag==0))///ryan@20150602
-1489   3                                                              {
-1490   4      
-1491   4                                                              //printf("\r\nRecived a command from device2..");
-1492   4                                                              
-1493   4                                                              for(loop=0;loop<=6;loop++)
-1494   4                                                              {
-1495   5                                                              //data_temp=ReadByte(DRP_ID[addr]);                     
-1496   5                                                              //SC16_Com[count]=ReadByte(DRP_ID[addr]);
-1497   5                                                              RS_tx(SC16_com_buff[loop]); 
-1498   5                                                              #if 0//ryan@20151106¦^ÂÐ¤ÓºC®³±¼
+1485   5                                                              }               
+1486   4                                                                      //}
+1487   4                                                      return 1;//if buff are error...
+1488   4                                                      }
+1489   3                                                      else if((loop_temp<=6)&&(error_flag==0))///ryan@20150602
+1490   3                                                              {
+1491   4      
+1492   4                                                              //printf("\r\nRecived a command from device2..");
+1493   4                                                              
+1494   4                                                              for(loop=0;loop<=6;loop++)
+1495   4                                                              {
+1496   5                                                              //data_temp=ReadByte(DRP_ID[addr]);                     
+1497   5                                                              //SC16_Com[count]=ReadByte(DRP_ID[addr]);
+1498   5                                                              RS_tx(SC16_com_buff[loop]); 
+1499   5                                                              #if 0//ryan@20151106¦^ÂÐ¤ÓºC®³±¼
                                                                       WriteByte(DRP_ID[addr+1],SC16_com_buff[loop]); 
                                                                       WriteByte(DRP_ID[addr+2],SC16_com_buff[loop]);                          
                                                                       #endif
-1502   5                                                              }       
-1503   4                                                                      return 1;//if buff are error...
-1504   4                                                              }
-1505   3                                                      
-1506   3                                              //else if((SC16_ComCheck(&SC16_com_buff[0])==1)&&(loop>=8)&&(error_flag==0))
-1507   3                                                      #if 1//ryan@20150602
-1508   3                                                      else if((SC16_ComCheck(&SC16_com_buff[0])==1)&&(error_flag==0))
-1509   3                                                      {
-1510   4                                                      return 1;
-1511   4                                                      }
-1512   3                                                      #endif
-1513   3                                                      else if(error_flag==0)
-1514   3                                                      {
-1515   4                                                      //bcc check
-1516   4                                                      buff_flag=SC16_com_buff[0];
-1517   4                                                              
-1518   4                                              for(loop=1;loop<=7;loop++)
-1519   4                                                              buff_flag^=SC16_com_buff[loop];
-1520   4                                              
-1521   4                                                      if(buff_flag==SC16_com_buff[8])
-1522   4                                                      {
-1523   5                                              //      printf("\r\nRecived a command from device3..");
-1524   5                                                      
-1525   5                                                              for(loop=0;loop<=loop_temp;loop++)
-1526   5                                                              {
-1527   6                                                              //data_temp=ReadByte(DRP_ID[addr]);                     
-1528   6                                                              //SC16_Com[count]=ReadByte(DRP_ID[addr]);
-1529   6                                                              RS_tx(SC16_com_buff[loop]); 
-1530   6                                                              #if 0//ryan220151106
+1503   5                                                              }       
+1504   4                                                                      return 1;//if buff are error...
+1505   4                                                              }
+1506   3                                                      
+1507   3                                              //else if((SC16_ComCheck(&SC16_com_buff[0])==1)&&(loop>=8)&&(error_flag==0))
+1508   3                                                      #if 1//ryan@20150602
+1509   3                                                      else if((SC16_ComCheck(&SC16_com_buff[0])==1)&&(error_flag==0))
+1510   3                                                      {
+1511   4                                                      return 1;
+1512   4                                                      }
+1513   3                                                      #endif
+1514   3                                                      else if(error_flag==0)
+1515   3                                                      {
+1516   4                                                      //bcc check
+1517   4                                                      buff_flag=SC16_com_buff[0];
+1518   4                                                              
+1519   4                                              for(loop=1;loop<=7;loop++)
+1520   4                                                              buff_flag^=SC16_com_buff[loop];
+1521   4                                              
+1522   4                                                      if(buff_flag==SC16_com_buff[8])
+1523   4                                                      {
+1524   5                                              //      printf("\r\nRecived a command from device3..");
+1525   5                                                      
+1526   5                                                              for(loop=0;loop<=loop_temp;loop++)
+1527   5                                                              {
+1528   6                                                              //data_temp=ReadByte(DRP_ID[addr]);                     
+1529   6                                                              //SC16_Com[count]=ReadByte(DRP_ID[addr]);
+1530   6                                                              RS_tx(SC16_com_buff[loop]); 
+1531   6                                                              #if 0//ryan220151106
                                                                       WriteByte(DRP_ID[addr+1],SC16_com_buff[loop]); 
                                                                       WriteByte(DRP_ID[addr+2],SC16_com_buff[loop]); 
                                                                       #endif
-1534   6                                                              #ifdef  SC16IS750_DEBUG_PRINT 
+1535   6                                                              #ifdef  SC16IS750_DEBUG_PRINT 
                                                                       printf("%x ",(U16)SC16_com_buff[loop]);                                 
                                                                       #endif          
-1537   6                                                              user_timer[3]=200;
-1538   6                                                              }
-1539   5                                                      }
-1540   4                                                      //else                                          
-1541   4                                                      //printf("ECOM,");
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 26  
+1538   6                                                              user_timer[3]=200;
+1539   6                                                              }
+1540   5                                                      }
+1541   4                                                      //else                                          
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 26  
 
-1542   4                                                      
-1543   4                                                      return 1;
-1544   4                                                      }
-1545   3                                                      else
-1546   3                                                              return 1;
-1547   3                                      }
-1548   2                                      else
-1549   2                                              {
-1550   3                                      //if data isn't NAK or ACK of value that it should be send 1 byte to devices..
-1551   3                                                      #if 0
+1542   4                                                      //printf("ECOM,");
+1543   4                                                      
+1544   4                                                      return 1;
+1545   4                                                      }
+1546   3                                                      else
+1547   3                                                              return 1;
+1548   3                                      }
+1549   2                                      else
+1550   2                                              {
+1551   3                                      //if data isn't NAK or ACK of value that it should be send 1 byte to devices..
+1552   3                                                      #if 0
                                                               RS_tx(data_temp); 
                                                               WriteByte(DRP_ID[addr+1],data_temp); 
                                                               WriteByte(DRP_ID[addr+2],data_temp); 
@@ -1633,10 +1634,10 @@ line level    source
                                                               //printf("\r\n count=%x",(U16) count);
               
                                                               #endif
-1575   3                                              }
-1576   2      
-1577   2                                      
-1578   2                                      #else   
+1576   3                                              }
+1577   2      
+1578   2                                      
+1579   2                                      #else   
                                               //printf("\r\nRecived a command from device4..");
                                               for(loop=0;loop<=(count-1);loop++)
                                               {
@@ -1654,21 +1655,21 @@ line level    source
                                       
                                               }
                                               #endif
-1596   2                                      
-1597   2                              //count++;
-1598   2                              //Error=TRUE;
-1599   2                                                      
-1600   2                              }
-1601   1      
-1602   1              //}
-1603   1      
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 27  
+1597   2                                      
+1598   2                              //count++;
+1599   2                              //Error=TRUE;
+1600   2                                                      
+1601   2                              }
+1602   1      
+1603   1              //}
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 27  
 
-1604   1      //for(loop=0;loop<=(count-1);loop++) RS_tx(SC16_Com[loop]); 
-1605   1      //for(loop=0;loop<=(count-1);loop++) WriteByte(DRP_ID[addr+1],SC16_Com[loop]); 
-1606   1      //for(loop=0;loop<=(count-1);loop++) WriteByte(DRP_ID[addr+2],SC16_Com[loop]); 
-1607   1                                      
-1608   1      #else
+1604   1      
+1605   1      //for(loop=0;loop<=(count-1);loop++) RS_tx(SC16_Com[loop]); 
+1606   1      //for(loop=0;loop<=(count-1);loop++) WriteByte(DRP_ID[addr+1],SC16_Com[loop]); 
+1607   1      //for(loop=0;loop<=(count-1);loop++) WriteByte(DRP_ID[addr+2],SC16_Com[loop]); 
+1608   1                                      
+1609   1      #else
               
               /*
                       if( (ReadI2C(DRP_ID[addr], LSR)&BIT1))
@@ -1694,41 +1695,41 @@ line level    source
               for(loop=0;loop<=(count-1);loop++) WriteByte(DRP_ID[addr+1],SC16_Com[loop]); 
               for(loop=0;loop<=(count-1);loop++) WriteByte(DRP_ID[addr+2],SC16_Com[loop]); 
               #endif
-1634   1      
 1635   1      
-1636   1      return 0;
-1637   1      
-1638   1      }
-1639          //----------------------------------------
-1640          /*
-1641          void Command_Check(U8 val)//ryan@20150417
-1642          {
-1643          
+1636   1      
+1637   1      return 0;
+1638   1      
+1639   1      }
+1640          //----------------------------------------
+1641          /*
+1642          void Command_Check(U8 val)//ryan@20150417
+1643          {
 1644          
-1645          }
-1646          */
-1647          //----------------------------------------
-1648          void Repeat_PWM_Com(void)
-1649          {
-1650   1                                      WriteByte(PIC32_address,SC16_Com[0]); 
-1651   1                                      WriteByte(PIC32_address,SC16_Com[1]); 
-1652   1                                      WriteByte(PIC32_address,SC16_Com[2]); 
-1653   1                                      WriteByte(PIC32_address,SC16_Com[3]); 
-1654   1                                      WriteByte(PIC32_address,SC16_Com[4]); 
-1655   1      
-1656   1                                      //printf("SET_LED");
-1657   1      }
-1658          
+1645          
+1646          }
+1647          */
+1648          //----------------------------------------
+1649          void Repeat_PWM_Com(void)
+1650          {
+1651   1                                      WriteByte(PIC32_address,SC16_Com[0]); 
+1652   1                                      WriteByte(PIC32_address,SC16_Com[1]); 
+1653   1                                      WriteByte(PIC32_address,SC16_Com[2]); 
+1654   1                                      WriteByte(PIC32_address,SC16_Com[3]); 
+1655   1                                      WriteByte(PIC32_address,SC16_Com[4]); 
+1656   1      
+1657   1                                      //printf("SET_LED");
+1658   1      }
 1659          
-1660          //-----------------------------------------
-1661          U8 SC16_DataCheck(void)
-1662          {
-1663   1      
-1664   1      U8 Dev_ID=0,Error=FALSE,count=0;
-1665   1      
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 28  
+1660          
+1661          //-----------------------------------------
+1662          U8 SC16_DataCheck(void)
+1663          {
+1664   1      
+1665   1      U8 Dev_ID=0,Error=FALSE,count=0;
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 28  
 
-1666   1                      #if 0
+1666   1      
+1667   1                      #if 0
                                           if( (ReadI2C(DRP_ID[0], LSR)&BIT0))
                                               {
                                                      Data=ReadByte(DRP_ID[0]);
@@ -1763,12 +1764,12 @@ line level    source
                                       }
                                       
                                  #else
-1701   1      
-1702   1                                // if( ReadI2C(DRP_ID[0], LSR)&BIT0)  SC16_SendDataSelect(0);
-1703   1                                // if( ReadI2C(DRP_ID[3], LSR)&BIT0)  SC16_SendDataSelect(3);
-1704   1                               //  if( ReadI2C(DRP_ID[6], LSR)&BIT0)  SC16_SendDataSelect(6);
-1705   1      
-1706   1                                          #ifdef power_startup_check
+1702   1      
+1703   1                                // if( ReadI2C(DRP_ID[0], LSR)&BIT0)  SC16_SendDataSelect(0);
+1704   1                                // if( ReadI2C(DRP_ID[3], LSR)&BIT0)  SC16_SendDataSelect(3);
+1705   1                               //  if( ReadI2C(DRP_ID[6], LSR)&BIT0)  SC16_SendDataSelect(6);
+1706   1      
+1707   1                                          #ifdef power_startup_check
                                                       
                                                           if(DVR_startup_flag==TRUE)
                                                           SC16_SendDataSelect(0);
@@ -1783,56 +1784,56 @@ line level    source
                                               //  #else                       
                                                 
                                                   #endif      
-1721   1      
-1722   1                                      if(work_flag==0)        
-1723   1                                              {
-1724   2                                                SC16_SendDataSelect(0);
-1725   2                                                 //printf("\r\nSC16_SendDataSelect(0);");
-1726   2                                                 work_flag=1;
-1727   2                                              }
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 29  
+1722   1      
+1723   1                                      if(work_flag==0)        
+1724   1                                              {
+1725   2                                                SC16_SendDataSelect(0);
+1726   2                                                 //printf("\r\nSC16_SendDataSelect(0);");
+1727   2                                                 work_flag=1;
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 29  
 
-1728   1                                      else if(work_flag==1)
-1729   1                                              {
-1730   2                                          SC16_SendDataSelect(6);   
-1731   2                                                // printf("\r\nSC16_SendDataSelect(6);");
-1732   2                                              work_flag=0;
-1733   2                                              }
-1734   1                                      //else if(work_flag==3)
-1735   1                                      //      {
-1736   1                                        // SC16_SendDataSelect(3);
-1737   1                                        // work_flag=0;
-1738   1                                              //}
-1739   1      
-1740   1                              #endif
-1741   1      return Error; 
-1742   1      }
-1743          //----------------------------------------
-1744          
-1745          void SC16_data_reset(U16 sel)
-1746          {
-1747   1      /*
-1748   1      #define camera_press            BIT1
-1749   1      #define _camera_ang             BIT2
-1750   1      #define _camera_rang    BIT3
-1751   1      #define _camera_IRD0            BIT4
-1752   1      #define _camera_IRD1            BIT5
-1753   1      #define _camera_IRD2            BIT6
-1754   1      #define _camera_IRD3            BIT7
-1755   1      #define _camera_IRD4            BIT8
-1756   1      #define _camera_IRD5            BIT9
-1757   1      #define _camera_IRD6            BIT10
-1758   1      #define _dvr_temp                       BIT11
-1759   1      */
-1760   1      if(SC16_busy_flag&sel) return;
-1761   1      
-1762   1              switch(sel)
-1763   1              {
-1764   2                case camera_temp:  Temp_check() ;break;     //0
-1765   2                case camera_press:  Press_check() ;break;     
-1766   2                case _camera_ang:  Get_Camera_Ang();break;
-1767   2                case _camera_rang: Get_Camera_RAng();break;   
-1768   2      #if 0//ryan@20151201
+1728   2                                              }
+1729   1                                      else if(work_flag==1)
+1730   1                                              {
+1731   2                                          SC16_SendDataSelect(6);   
+1732   2                                                // printf("\r\nSC16_SendDataSelect(6);");
+1733   2                                              work_flag=0;
+1734   2                                              }
+1735   1                                      //else if(work_flag==3)
+1736   1                                      //      {
+1737   1                                        // SC16_SendDataSelect(3);
+1738   1                                        // work_flag=0;
+1739   1                                              //}
+1740   1      
+1741   1                              #endif
+1742   1      return Error; 
+1743   1      }
+1744          //----------------------------------------
+1745          
+1746          void SC16_data_reset(U16 sel)
+1747          {
+1748   1      /*
+1749   1      #define camera_press            BIT1
+1750   1      #define _camera_ang             BIT2
+1751   1      #define _camera_rang    BIT3
+1752   1      #define _camera_IRD0            BIT4
+1753   1      #define _camera_IRD1            BIT5
+1754   1      #define _camera_IRD2            BIT6
+1755   1      #define _camera_IRD3            BIT7
+1756   1      #define _camera_IRD4            BIT8
+1757   1      #define _camera_IRD5            BIT9
+1758   1      #define _camera_IRD6            BIT10
+1759   1      #define _dvr_temp                       BIT11
+1760   1      */
+1761   1      if(SC16_busy_flag&sel) return;
+1762   1      
+1763   1              switch(sel)
+1764   1              {
+1765   2                case camera_temp:  Temp_check() ;break;     //0
+1766   2                case camera_press:  Press_check() ;break;     
+1767   2                case _camera_ang:  Get_Camera_Ang();break;
+1768   2                case _camera_rang: Get_Camera_RAng();break;   
+1769   2      #if 0//ryan@20151201
               case _camera_IRD0: break;//Get_Camera_IRD(0x41);break;  
                         case _camera_IRD1: break;//Get_Camera_IRD(0x42);break;        
                         case _camera_IRD2: break;//Get_Camera_IRD(0x43);break;        
@@ -1841,85 +1842,85 @@ line level    source
                         case _camera_IRD5: break;//Get_Camera_IRD(0x46);break;                ///9
                         case _camera_IRD6: break;//Get_Camera_IRD(0x47);break;                //10
               #endif
-1777   2                case _dvr_temp: Get_DVR_temp();break;                         //11
-1778   2              case camera_version: Get_Camera_Ver();break;                            //11    
-1779   2                //case camera_version:    
-1780   2                //if(SC16_busy_flag&sel) return;
-1781   2                //                            SC16_busy_flag|=sel;
-1782   2                //                    Get_Camera_Ver(); break;
-1783   2      
-1784   2              default: break;
-1785   2              }
-1786   1      
-1787   1      //SC16_busy_flag=1;
-1788   1      }
-1789          //---------------------------------------
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 30  
+1778   2                case _dvr_temp: Get_DVR_temp();break;                         //11
+1779   2              case camera_version: Get_Camera_Ver();break;                            //11    
+1780   2                //case camera_version:    
+1781   2                //if(SC16_busy_flag&sel) return;
+1782   2                //                            SC16_busy_flag|=sel;
+1783   2                //                    Get_Camera_Ver(); break;
+1784   2      
+1785   2              default: break;
+1786   2              }
+1787   1      
+1788   1      //SC16_busy_flag=1;
+1789   1      }
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 30  
 
-1790          U8 Camera_move_loop=1;
-1791          extern U8 SC16_com_state;//ryan@20151216
-1792          void Camera_move(void)
-1793          {
-1794   1      //static U8 work_flag;
-1795   1      U8 mask[4]={0x01,0x02,0x10,0x20};
-1796   1      U8 cam[4]={0x31,0x34,0x41,0x42};
-1797   1      U8 BCC[4]={0x07,0x02,0x77,0x74};
-1798   1      //U8 loop;
-1799   1      #if 1//ryan@20151130
-1800   1      
-1801   1                              if(Camera_move_loop==1)
-1802   1                              {
-1803   2                                      if((Camera_flag&0x01)==0x01)
-1804   2                                      {
-1805   3                                      WriteByte(DRP_ID[2],0x02); 
-1806   3                                      WriteByte(DRP_ID[2],0x37); 
-1807   3                                      WriteByte(DRP_ID[2],0x31); 
-1808   3                                      WriteByte(DRP_ID[2],0x03); 
-1809   3                                      WriteByte(DRP_ID[2],0x07); 
-1810   3                                      SC16_com_state=2;//rang. polling first//ryan@20151214
-1811   3                                      }       
-1812   2      
-1813   2                                      if((Camera_flag&0x02)==0x02)
-1814   2                                      {
-1815   3                                      WriteByte(DRP_ID[2],0x02); 
-1816   3                                      WriteByte(DRP_ID[2],0x37); 
-1817   3                                      WriteByte(DRP_ID[2],0x34); 
-1818   3                                      WriteByte(DRP_ID[2],0x03); 
-1819   3                                      WriteByte(DRP_ID[2],0x02); 
-1820   3                                      SC16_com_state=2;//rang. polling first//ryan@20151214
-1821   3                                      }       
-1822   2                                      Camera_move_loop=0;
-1823   2                              }
-1824   1                              else
-1825   1                              {
-1826   2                                      if((Camera_flag&0x10)==0x10)
-1827   2                                      {
-1828   3                                      WriteByte(DRP_ID[2],0x02); 
-1829   3                                      WriteByte(DRP_ID[2],0x37); 
-1830   3                                      WriteByte(DRP_ID[2],0x41); 
-1831   3                                      WriteByte(DRP_ID[2],0x03); 
-1832   3                                      WriteByte(DRP_ID[2],0x77); 
-1833   3                                              SC16_com_state=3;//rang. polling first//ryan@20151214
-1834   3                                      }       
-1835   2      
-1836   2                                      if((Camera_flag&0x20)==0x20)
-1837   2                                      {
-1838   3                                      WriteByte(DRP_ID[2],0x02); 
-1839   3                                      WriteByte(DRP_ID[2],0x37); 
-1840   3                                      WriteByte(DRP_ID[2],0x42); 
-1841   3                                      WriteByte(DRP_ID[2],0x03); 
-1842   3                                      WriteByte(DRP_ID[2],0x74); 
-1843   3                                              SC16_com_state=3;//rang. polling first//ryan@20151214
-1844   3                                      }       
-1845   2      
-1846   2                                      Camera_move_loop=1;
-1847   2                              }
-1848   1      #else
+1790          //---------------------------------------
+1791          U8 Camera_move_loop=1;
+1792          extern U8 SC16_com_state;//ryan@20151216
+1793          void Camera_move(void)
+1794          {
+1795   1      //static U8 work_flag;
+1796   1      U8 mask[4]={0x01,0x02,0x10,0x20};
+1797   1      U8 cam[4]={0x31,0x34,0x41,0x42};
+1798   1      U8 BCC[4]={0x07,0x02,0x77,0x74};
+1799   1      //U8 loop;
+1800   1      #if 1//ryan@20151130
+1801   1      
+1802   1                              if(Camera_move_loop==1)
+1803   1                              {
+1804   2                                      if((Camera_flag&0x01)==0x01)
+1805   2                                      {
+1806   3                                      WriteByte(DRP_ID[2],0x02); 
+1807   3                                      WriteByte(DRP_ID[2],0x37); 
+1808   3                                      WriteByte(DRP_ID[2],0x31); 
+1809   3                                      WriteByte(DRP_ID[2],0x03); 
+1810   3                                      WriteByte(DRP_ID[2],0x07); 
+1811   3                                      SC16_com_state=2;//rang. polling first//ryan@20151214
+1812   3                                      }       
+1813   2      
+1814   2                                      if((Camera_flag&0x02)==0x02)
+1815   2                                      {
+1816   3                                      WriteByte(DRP_ID[2],0x02); 
+1817   3                                      WriteByte(DRP_ID[2],0x37); 
+1818   3                                      WriteByte(DRP_ID[2],0x34); 
+1819   3                                      WriteByte(DRP_ID[2],0x03); 
+1820   3                                      WriteByte(DRP_ID[2],0x02); 
+1821   3                                      SC16_com_state=2;//rang. polling first//ryan@20151214
+1822   3                                      }       
+1823   2                                      Camera_move_loop=0;
+1824   2                              }
+1825   1                              else
+1826   1                              {
+1827   2                                      if((Camera_flag&0x10)==0x10)
+1828   2                                      {
+1829   3                                      WriteByte(DRP_ID[2],0x02); 
+1830   3                                      WriteByte(DRP_ID[2],0x37); 
+1831   3                                      WriteByte(DRP_ID[2],0x41); 
+1832   3                                      WriteByte(DRP_ID[2],0x03); 
+1833   3                                      WriteByte(DRP_ID[2],0x77); 
+1834   3                                              SC16_com_state=3;//rang. polling first//ryan@20151214
+1835   3                                      }       
+1836   2      
+1837   2                                      if((Camera_flag&0x20)==0x20)
+1838   2                                      {
+1839   3                                      WriteByte(DRP_ID[2],0x02); 
+1840   3                                      WriteByte(DRP_ID[2],0x37); 
+1841   3                                      WriteByte(DRP_ID[2],0x42); 
+1842   3                                      WriteByte(DRP_ID[2],0x03); 
+1843   3                                      WriteByte(DRP_ID[2],0x74); 
+1844   3                                              SC16_com_state=3;//rang. polling first//ryan@20151214
+1845   3                                      }       
+1846   2      
+1847   2                                      Camera_move_loop=1;
+1848   2                              }
+1849   1      #else
                               for(loop=0;loop<4;loop++)
                               {
-                                              if((Camera_flag&mask[loop])>=1)
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 31  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 31  
 
+                                              if((Camera_flag&mask[loop])>=1)
                                               {
                                               WriteByte(DRP_ID[2],0x02); 
                                               WriteByte(DRP_ID[2],0x37); 
@@ -1929,11 +1930,11 @@ line level    source
                                               }       
                               }
               #endif
-1861   1                      
-1862   1      }
-1863          
-1864          //----------------------------------------
-1865          #if 0
+1862   1                      
+1863   1      }
+1864          
+1865          //----------------------------------------
+1866          #if 0
               void check_startup(U8 addr)
               {
               
@@ -1981,51 +1982,51 @@ line level    source
                                                               
                                       }
               
-              
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 32  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 32  
 
+              
               }
               #endif
-1916          //-----------------------------------------
-1917          //reset sc16 data
-1918          //-----------------------------------------
-1919          U8 SC16_ComCheck(U8 *addr)
-1920          {
-1921   1      
-1922   1      //if(*addr!=0x02) return 0;
-1923   1      U8 pos=0,temp=0;
-1924   1      addr++;
-1925   1       switch(*addr)
-1926   1              {
-1927   2                      case 0x32: 
-1928   2                              addr++;
-1929   2                              if(*addr==0x34)
-1930   2                              {
-1931   3                              addr++;
-1932   3                              Camera_Ang[3]=*addr;
-1933   3                              addr++;                                         
-1934   3                              Camera_Ang[2]=*addr;
-1935   3                              addr++;                                                                                         
-1936   3                              Camera_Ang[1]=*addr;
-1937   3                              addr++;                                                                                         
-1938   3                              Camera_Ang[0]=*addr;                    
-1939   3                              SC16_busy_flag&=~(_camera_ang);
-1940   3                             return 1;
-1941   3                              }                                       
-1942   2                              else if(*addr==0x35)
-1943   2                                      {
-1944   3                                      addr++;
-1945   3                                      Camera_RAng[3]=*addr;
-1946   3                                      addr++;                                         
-1947   3                                      Camera_RAng[2]=*addr;
-1948   3                                      addr++;                                                                                         
-1949   3                                      Camera_RAng[1]=*addr;
-1950   3                                      addr++;                                                                                         
-1951   3                                      Camera_RAng[0]=*addr;                   
-1952   3                                      SC16_busy_flag&=~(_camera_rang);
-1953   3                                       return 1;
-1954   3                                      }
-1955   2                              #if 0//ryan@20151106
+1917          //-----------------------------------------
+1918          //reset sc16 data
+1919          //-----------------------------------------
+1920          U8 SC16_ComCheck(U8 *addr)
+1921          {
+1922   1      
+1923   1      //if(*addr!=0x02) return 0;
+1924   1      U8 pos=0,temp=0;
+1925   1      addr++;
+1926   1       switch(*addr)
+1927   1              {
+1928   2                      case 0x32: 
+1929   2                              addr++;
+1930   2                              if(*addr==0x34)
+1931   2                              {
+1932   3                              addr++;
+1933   3                              Camera_Ang[3]=*addr;
+1934   3                              addr++;                                         
+1935   3                              Camera_Ang[2]=*addr;
+1936   3                              addr++;                                                                                         
+1937   3                              Camera_Ang[1]=*addr;
+1938   3                              addr++;                                                                                         
+1939   3                              Camera_Ang[0]=*addr;                    
+1940   3                              SC16_busy_flag&=~(_camera_ang);
+1941   3                             return 1;
+1942   3                              }                                       
+1943   2                              else if(*addr==0x35)
+1944   2                                      {
+1945   3                                      addr++;
+1946   3                                      Camera_RAng[3]=*addr;
+1947   3                                      addr++;                                         
+1948   3                                      Camera_RAng[2]=*addr;
+1949   3                                      addr++;                                                                                         
+1950   3                                      Camera_RAng[1]=*addr;
+1951   3                                      addr++;                                                                                         
+1952   3                                      Camera_RAng[0]=*addr;                   
+1953   3                                      SC16_busy_flag&=~(_camera_rang);
+1954   3                                       return 1;
+1955   3                                      }
+1956   2                              #if 0//ryan@20151106
                                       else if((*addr>=0x41)&&(*addr<=0x47))
                                               {
                                               pos=*addr;
@@ -2043,141 +2044,141 @@ line level    source
                                                return 1;
                                               }
                                       #endif
-1973   2                                      else  if(*addr==0x4f)
-1974   2                                                      {
-1975   3                                                      addr++;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 33  
+1974   2                                      else  if(*addr==0x4f)
+1975   2                                                      {
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 33  
 
-1976   3                                                      Camera_ver0=*addr;
-1977   3                                                      addr++;                                         
-1978   3                                                      Camera_ver1=*addr;
-1979   3                                                      addr++;                                                                                         
-1980   3                                                      Camera_ver2=*addr;
-1981   3                                                      SC16_busy_flag&=~(camera_version);
-1982   3                                                        return 1;
-1983   3                                                      }       
-1984   2                                      
-1985   2                              
-1986   2                              break;
-1987   2                      case 0x34: 
-1988   2                                                      addr++;
-1989   2                                                      if(*addr==0x31)
-1990   2                                                      {
-1991   3                                                      addr++;
-1992   3                                                      DVR_temp[1]=*addr;
-1993   3                                                      addr++;                                         
-1994   3                                                      DVR_temp[0]=*addr;
-1995   3                                                      SC16_busy_flag&=~(_dvr_temp);
-1996   3                                                      return 1;
-1997   3                                                      }
-1998   2                                                      break;
-1999   2                      
-2000   2                      //case camera_temp:  Temp_check() ;break;
-2001   2                      //case camera_press:  Press_check() ;break;         
-2002   2                      /*
-2003   2                      case 0x32: 
-2004   2                                                      addr++;
-2005   2                                                      if(*addr==0x4f)
-2006   2                                                      {
-2007   2                                                      addr++;
-2008   2                                                      Camera_ver0=*addr;
-2009   2                                                      addr++;                                         
-2010   2                                                      Camera_ver1=*addr;
-2011   2                                                      addr++;                                                                                         
-2012   2                                                      Camera_ver2=*addr;
-2013   2                                                      SC16_busy_flag&=~(camera_version);
-2014   2                                                        return 1;
-2015   2                                                      }                                                               
-2016   2                                                      break;
-2017   2                                      */
-2018   2                      default:  //printf("\r\n not megawin com");     
-2019   2                                                      return 0;
-2020   2                                                                      break;
-2021   2              }
-2022   1              
-2023   1      return 0;
-2024   1              
-2025   1              //if(SC16_ComAddr>=(num-1))
-2026   1              //{             
-2027   1              //      if((SC16_Com[0]==STX)&&(SC16_BCC_Check(&SC16_Com[0],(num-1))))
-2028   1              //      {
-2029   1              //              switch(SC16_Com[1])
-2030   1              //                      {
-2031   1              //                              case Monitor_Com:
-2032   1              //                                                              Monitor_set(SC16_Com[2]);       
-2033   1              //                                                           break;
-2034   1              //                              case PWM_Com:
-2035   1              //                                                              PWM_set(SC16_Com[2]);
-2036   1              //                                                           break;                                                                              
-2037   1              //                              default:                     break;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 34  
+1976   3                                                      addr++;
+1977   3                                                      Camera_ver0=*addr;
+1978   3                                                      addr++;                                         
+1979   3                                                      Camera_ver1=*addr;
+1980   3                                                      addr++;                                                                                         
+1981   3                                                      Camera_ver2=*addr;
+1982   3                                                      SC16_busy_flag&=~(camera_version);
+1983   3                                                        return 1;
+1984   3                                                      }       
+1985   2                                      
+1986   2                              
+1987   2                              break;
+1988   2                      case 0x34: 
+1989   2                                                      addr++;
+1990   2                                                      if(*addr==0x31)
+1991   2                                                      {
+1992   3                                                      addr++;
+1993   3                                                      DVR_temp[1]=*addr;
+1994   3                                                      addr++;                                         
+1995   3                                                      DVR_temp[0]=*addr;
+1996   3                                                      SC16_busy_flag&=~(_dvr_temp);
+1997   3                                                      return 1;
+1998   3                                                      }
+1999   2                                                      break;
+2000   2                      
+2001   2                      //case camera_temp:  Temp_check() ;break;
+2002   2                      //case camera_press:  Press_check() ;break;         
+2003   2                      /*
+2004   2                      case 0x32: 
+2005   2                                                      addr++;
+2006   2                                                      if(*addr==0x4f)
+2007   2                                                      {
+2008   2                                                      addr++;
+2009   2                                                      Camera_ver0=*addr;
+2010   2                                                      addr++;                                         
+2011   2                                                      Camera_ver1=*addr;
+2012   2                                                      addr++;                                                                                         
+2013   2                                                      Camera_ver2=*addr;
+2014   2                                                      SC16_busy_flag&=~(camera_version);
+2015   2                                                        return 1;
+2016   2                                                      }                                                               
+2017   2                                                      break;
+2018   2                                      */
+2019   2                      default:  //printf("\r\n not megawin com");     
+2020   2                                                      return 0;
+2021   2                                                                      break;
+2022   2              }
+2023   1              
+2024   1      return 0;
+2025   1              
+2026   1              //if(SC16_ComAddr>=(num-1))
+2027   1              //{             
+2028   1              //      if((SC16_Com[0]==STX)&&(SC16_BCC_Check(&SC16_Com[0],(num-1))))
+2029   1              //      {
+2030   1              //              switch(SC16_Com[1])
+2031   1              //                      {
+2032   1              //                              case Monitor_Com:
+2033   1              //                                                              Monitor_set(SC16_Com[2]);       
+2034   1              //                                                           break;
+2035   1              //                              case PWM_Com:
+2036   1              //                                                              PWM_set(SC16_Com[2]);
+2037   1              //                                                           break;                                                                              
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 34  
 
-2038   1              //      
-2039   1              //                      }
-2040   1              //              return TRUE;
-2041   1              //      }       
-2042   1            //}
-2043   1      
-2044   1                                              //#ifdef get_data_buff 
-2045   1                                              //printf("\r\n Got data from the sc16");                                        
-2046   1                                              //#endif 
-2047   1               
-2048   1           
-2049   1      }
-2050          
-2051          //----------------------------------------
-2052          
-2053          U8 BCC_Cal(U8 *addr,U8 count)
-2054          {
-2055   1              U8 f_val=0;
-2056   1              U8 s_val=0;
-2057   1              U8 loop=0;
-2058   1              count--;
-2059   1      
-2060   1      for(loop=0;loop<=count;loop++)
-2061   1      {
-2062   2        // f_val=*addr;  
-2063   2         
-2064   2         f_val^=*addr;  
-2065   2        addr++;    
-2066   2      }
-2067   1      return f_val;
-2068   1      
-2069   1      /*
-2070   1         f_val=*addr;  //XOR 0-3  //0
-2071   1         addr++;            ///1
-2072   1         //com[0]=*addr;   
-2073   1         f_val^=*addr;    
-2074   1         addr++;          ///2
-2075   1         //com[1]=*addr;
-2076   1         f_val^=*addr;    
-2077   1         addr++;    ///3
-2078   1         f_val^=*addr;
-2079   1         //addr++;
-2080   1      
-2081   1      if(count==8)
-2082   1              {
-2083   1       addr++;    ///4
-2084   1         f_val^=*addr;
-2085   1       addr++;    ///5
-2086   1         f_val^=*addr;
-2087   1       addr++;    ///6
-2088   1         f_val^=*addr;
-2089   1       addr++;    ///7
-2090   1         f_val^=*addr;
-2091   1        
-2092   1              }
-2093   1      
-2094   1         addr++;
-2095   1      
-2096   1      //if(f_val==*addr)
-2097   1              return f_val;
-2098   1      */
-2099   1      }
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 35  
+2038   1              //                              default:                     break;
+2039   1              //      
+2040   1              //                      }
+2041   1              //              return TRUE;
+2042   1              //      }       
+2043   1            //}
+2044   1      
+2045   1                                              //#ifdef get_data_buff 
+2046   1                                              //printf("\r\n Got data from the sc16");                                        
+2047   1                                              //#endif 
+2048   1               
+2049   1           
+2050   1      }
+2051          
+2052          //----------------------------------------
+2053          
+2054          U8 BCC_Cal(U8 *addr,U8 count)
+2055          {
+2056   1              U8 f_val=0;
+2057   1              U8 s_val=0;
+2058   1              U8 loop=0;
+2059   1              count--;
+2060   1      
+2061   1      for(loop=0;loop<=count;loop++)
+2062   1      {
+2063   2        // f_val=*addr;  
+2064   2         
+2065   2         f_val^=*addr;  
+2066   2        addr++;    
+2067   2      }
+2068   1      return f_val;
+2069   1      
+2070   1      /*
+2071   1         f_val=*addr;  //XOR 0-3  //0
+2072   1         addr++;            ///1
+2073   1         //com[0]=*addr;   
+2074   1         f_val^=*addr;    
+2075   1         addr++;          ///2
+2076   1         //com[1]=*addr;
+2077   1         f_val^=*addr;    
+2078   1         addr++;    ///3
+2079   1         f_val^=*addr;
+2080   1         //addr++;
+2081   1      
+2082   1      if(count==8)
+2083   1              {
+2084   1       addr++;    ///4
+2085   1         f_val^=*addr;
+2086   1       addr++;    ///5
+2087   1         f_val^=*addr;
+2088   1       addr++;    ///6
+2089   1         f_val^=*addr;
+2090   1       addr++;    ///7
+2091   1         f_val^=*addr;
+2092   1        
+2093   1              }
+2094   1      
+2095   1         addr++;
+2096   1      
+2097   1      //if(f_val==*addr)
+2098   1              return f_val;
+2099   1      */
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 35  
 
-2100          //----------------------------------------
-2101          #if 0
+2100   1      }
+2101          //----------------------------------------
+2102          #if 0
               void Get_Data(U8 addr,U8 val)
               {
               
@@ -2196,20 +2197,20 @@ line level    source
               get_data_val=0;
               }
               #endif
-2120          //----------------------------------------
-2121          extern U16 timerout4;
-2122          extern U16 timerout3;
-2123          extern U8  CB_flag;
-2124          //#define get_delay 15-10
-2125          #define get_delay 50
-2126          U8 SC16_BCC_Check(U8 *addr )
-2127          {
-2128   1              U8 loop;
-2129   1              U8 f_val=0;
-2130   1              U8 s_val=0;
-2131   1         U8  com[3]; 
-2132   1      
-2133   1      #ifdef BCC_noSTXEXT           
+2121          //----------------------------------------
+2122          extern U16 timerout4;
+2123          extern U16 timerout3;
+2124          extern U8  CB_flag;
+2125          //#define get_delay 15-10
+2126          #define get_delay 50
+2127          U8 SC16_BCC_Check(U8 *addr )
+2128          {
+2129   1              U8 loop;
+2130   1              U8 f_val=0;
+2131   1              U8 s_val=0;
+2132   1         U8  com[3]; 
+2133   1      
+2134   1      #ifdef BCC_noSTXEXT           
                  addr++;       //XOR 1-2
                  f_val=*addr;
                  com[0]=*addr;
@@ -2219,134 +2220,134 @@ line level    source
                  addr++;
               
               #else
-2143   1         f_val=*addr;  //XOR 0-3  //0
-2144   1         addr++;            ///1
-2145   1         com[0]=*addr;   
-2146   1         f_val^=*addr;    
-2147   1         addr++;          ///2
-2148   1         com[1]=*addr;
-2149   1         f_val^=*addr;    
-2150   1         addr++;    ///3
-2151   1         com[2]=*addr;  
-2152   1         f_val^=*addr;
-2153   1         //addr++;
-2154   1      
-2155   1      if(Com_pos==6)//ryan@20150602
-2156   1      {
-2157   2       addr++;    ///4
-2158   2         f_val^=*addr;
-2159   2       addr++;    ///5
-2160   2         f_val^=*addr;
-2161   2      }else if(Com_pos==8)
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 36  
+2144   1         f_val=*addr;  //XOR 0-3  //0
+2145   1         addr++;            ///1
+2146   1         com[0]=*addr;   
+2147   1         f_val^=*addr;    
+2148   1         addr++;          ///2
+2149   1         com[1]=*addr;
+2150   1         f_val^=*addr;    
+2151   1         addr++;    ///3
+2152   1         com[2]=*addr;  
+2153   1         f_val^=*addr;
+2154   1         //addr++;
+2155   1      
+2156   1      if(Com_pos==6)//ryan@20150602
+2157   1      {
+2158   2       addr++;    ///4
+2159   2         f_val^=*addr;
+2160   2       addr++;    ///5
+2161   2         f_val^=*addr;
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 36  
 
-2162   1              {
-2163   2       addr++;    ///4
-2164   2         f_val^=*addr;
-2165   2       addr++;    ///5
-2166   2         f_val^=*addr;
-2167   2       addr++;    ///6
-2168   2         f_val^=*addr;
-2169   2       addr++;    ///7
-2170   2         f_val^=*addr;
-2171   2        
-2172   2              }
-2173   1         #endif
-2174   1         addr++;
-2175   1      
-2176   1                      
-2177   1      
-2178   1                                                                              
-2179   1                      if(f_val==*addr)        
-2180   1                      {
-2181   2                               if((com[0]==0x37)&&((com[1]>=0x4a&&com[1]<=0x4f)||(com[1]==0x54)||(com[1]==0x55)))
-2182   2                              {
-2183   3                                       RS_tx(STX);
-2184   3                                       RS_tx(com[0]);
-2185   3                                       RS_tx(com[1]);                                                          
-2186   3                                       RS_tx(ETX);
-2187   3                                       RS_tx(f_val);  
-2188   3      
-2189   3                                      #if 1//ryan@20150706 feeback pip of data to camera
-2190   3                      
-2191   3                                      if(Cam_boot_flag==1)    
-2192   3                                      {
-2193   4                                      WriteByte(PIC32_address,STX); 
-2194   4                                      WriteByte(PIC32_address,com[0]); 
-2195   4                                      WriteByte(PIC32_address,com[1]); 
-2196   4                                      WriteByte(PIC32_address,ETX); 
-2197   4                                      WriteByte(PIC32_address,f_val); 
-2198   4                                      }
-2199   3                                      
-2200   3                                       #endif
-2201   3                              }   
-2202   2                               else if(com[0]==0x38&&com[1]>=0x3d&&com[1]<=0x60)
-2203   2                                      {
-2204   3                                       RS_tx(ACK);
-2205   3                                      }       
-2206   2                               #if 1//ryan@20150814
-2207   2                                              else if((com[0]==0x31)&&(com[1]==0x31)) 
-2208   2                                                      {
-2209   3                                                      Send_Camera_Temp();
-2210   3                                                      //timerout3+=timerout4;
-2211   3                                                      //CB_flag=1;    ///timerout3=get_delay;
-2212   3                                                      //get_data_addr=1;/// Send_Camera_Temp();               ///1    
-2213   3                                                      }
-2214   2                                              else if(com[0]==0x31&&(com[1]==0x33))   
-2215   2                                                              {
-2216   3                                                              Send_Camera_Press();
-2217   3                                                              //timerout3+=timerout4;
-2218   3                                                              //CB_flag=1;//timerout3=get_delay;
-2219   3                                                              //get_data_addr=2; ///Send_Camera_Press();              ///2    
-2220   3                                                      }
-2221   2                                              else if(com[0]==0x31&&(com[1]==0x34))
-2222   2                                                              {
-2223   3                                                              Sent_Camera_Ang();
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 37  
+2162   2      }else if(Com_pos==8)
+2163   1              {
+2164   2       addr++;    ///4
+2165   2         f_val^=*addr;
+2166   2       addr++;    ///5
+2167   2         f_val^=*addr;
+2168   2       addr++;    ///6
+2169   2         f_val^=*addr;
+2170   2       addr++;    ///7
+2171   2         f_val^=*addr;
+2172   2        
+2173   2              }
+2174   1         #endif
+2175   1         addr++;
+2176   1      
+2177   1                      
+2178   1      
+2179   1                                                                              
+2180   1                      if(f_val==*addr)        
+2181   1                      {
+2182   2                               if((com[0]==0x37)&&((com[1]>=0x4a&&com[1]<=0x4f)||(com[1]==0x54)||(com[1]==0x55)))
+2183   2                              {
+2184   3                                       RS_tx(STX);
+2185   3                                       RS_tx(com[0]);
+2186   3                                       RS_tx(com[1]);                                                          
+2187   3                                       RS_tx(ETX);
+2188   3                                       RS_tx(f_val);  
+2189   3      
+2190   3                                      #if 1//ryan@20150706 feeback pip of data to camera
+2191   3                      
+2192   3                                      if(Cam_boot_flag==1)    
+2193   3                                      {
+2194   4                                      WriteByte(PIC32_address,STX); 
+2195   4                                      WriteByte(PIC32_address,com[0]); 
+2196   4                                      WriteByte(PIC32_address,com[1]); 
+2197   4                                      WriteByte(PIC32_address,ETX); 
+2198   4                                      WriteByte(PIC32_address,f_val); 
+2199   4                                      }
+2200   3                                      
+2201   3                                       #endif
+2202   3                              }   
+2203   2                               else if(com[0]==0x38&&com[1]>=0x3d&&com[1]<=0x60)
+2204   2                                      {
+2205   3                                       RS_tx(ACK);
+2206   3                                      }       
+2207   2                               #if 1//ryan@20150814
+2208   2                                              else if((com[0]==0x31)&&(com[1]==0x31)) 
+2209   2                                                      {
+2210   3                                                      Send_Camera_Temp();
+2211   3                                                      //timerout3+=timerout4;
+2212   3                                                      //CB_flag=1;    ///timerout3=get_delay;
+2213   3                                                      //get_data_addr=1;/// Send_Camera_Temp();               ///1    
+2214   3                                                      }
+2215   2                                              else if(com[0]==0x31&&(com[1]==0x33))   
+2216   2                                                              {
+2217   3                                                              Send_Camera_Press();
+2218   3                                                              //timerout3+=timerout4;
+2219   3                                                              //CB_flag=1;//timerout3=get_delay;
+2220   3                                                              //get_data_addr=2; ///Send_Camera_Press();              ///2    
+2221   3                                                      }
+2222   2                                              else if(com[0]==0x31&&(com[1]==0x34))
+2223   2                                                              {
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 37  
 
-2224   3                                                              //timerout3+=timerout4;
-2225   3                                                              //CB_flag=1;//timerout3=get_delay;
-2226   3                                                              //get_data_addr=3;///    Sent_Camera_Ang(); //camera angle.///3 
-2227   3                                                              }
-2228   2                                              else if(com[0]==0x31&&(com[1]==0x35))
-2229   2                                                              {
-2230   3                                                              Sent_Camera_RAng();
-2231   3                                                              //timerout3+=timerout4;
-2232   3                                                              //CB_flag=1;//timerout3=get_delay;
-2233   3                                                              //get_data_addr=4;      /// Sent_Camera_RAng();  //camera Rangle.///4
-2234   3                                                              }
-2235   2                                              #if 1//not check IRD
-2236   2                                              else if(com[0]==0x31&&com[1]>=0x41&&com[1]<=0x47) 
-2237   2                                                      {
-2238   3                                                      Sent_Camera_IRD(0);
-2239   3                                                      //timerout3+=timerout4;
-2240   3                                                      //CB_flag=1;//timerout3=get_delay;
-2241   3                                                      //get_data_addr=5;      ///Sent_Camera_IRD(com[1]);  //camera IRD.///5  
-2242   3                                                      //get_data_val=com[1];
-2243   3                                                      }
-2244   2                                              #endif
-2245   2                                              else if(com[0]==0x33&&(com[1]==0x31))
-2246   2                                                              {
-2247   3                                                              Sent_DVR_temp();
-2248   3                                                              //timerout3+=timerout4;
-2249   3                                                              //CB_flag=1;//timerout3=get_delay;
-2250   3                                                              //get_data_addr=6;/// Sent_DVR_temp();  //DVR_tempe.///6
-2251   3                                                      }
-2252   2                                              else if(com[0]==0x31&&com[1]==0x50) 
-2253   2                                                              {
-2254   3                                                              Version_check();
-2255   3                                                              //timerout3+=timerout4;
-2256   3                                                              //CB_flag=1;//timerout3=get_delay;
-2257   3                                                              //get_data_addr=7;//// Version_check();                 ///megawin cpu version  ///7    
-2258   3                                                              }
-2259   2                                              else if(com[0]==0x31&&com[1]==0x4f) //Send_Camera_Ver();
-2260   2                                                      {
-2261   3                                                      Camera_Version_check();
-2262   3                                                      //timerout3+=timerout4; 
-2263   3                                                      //CB_flag=1;//timerout3=get_delay;
-2264   3                                                      //get_data_addr=8;//// Version_check();                 ///PIC cpu s/w version  ///8
-2265   3                                                      }
-2266   2                               #else
+2224   3                                                              Sent_Camera_Ang();
+2225   3                                                              //timerout3+=timerout4;
+2226   3                                                              //CB_flag=1;//timerout3=get_delay;
+2227   3                                                              //get_data_addr=3;///    Sent_Camera_Ang(); //camera angle.///3 
+2228   3                                                              }
+2229   2                                              else if(com[0]==0x31&&(com[1]==0x35))
+2230   2                                                              {
+2231   3                                                              Sent_Camera_RAng();
+2232   3                                                              //timerout3+=timerout4;
+2233   3                                                              //CB_flag=1;//timerout3=get_delay;
+2234   3                                                              //get_data_addr=4;      /// Sent_Camera_RAng();  //camera Rangle.///4
+2235   3                                                              }
+2236   2                                              #if 1//not check IRD
+2237   2                                              else if(com[0]==0x31&&com[1]>=0x41&&com[1]<=0x47) 
+2238   2                                                      {
+2239   3                                                      Sent_Camera_IRD(0);
+2240   3                                                      //timerout3+=timerout4;
+2241   3                                                      //CB_flag=1;//timerout3=get_delay;
+2242   3                                                      //get_data_addr=5;      ///Sent_Camera_IRD(com[1]);  //camera IRD.///5  
+2243   3                                                      //get_data_val=com[1];
+2244   3                                                      }
+2245   2                                              #endif
+2246   2                                              else if(com[0]==0x33&&(com[1]==0x31))
+2247   2                                                              {
+2248   3                                                              Sent_DVR_temp();
+2249   3                                                              //timerout3+=timerout4;
+2250   3                                                              //CB_flag=1;//timerout3=get_delay;
+2251   3                                                              //get_data_addr=6;/// Sent_DVR_temp();  //DVR_tempe.///6
+2252   3                                                      }
+2253   2                                              else if(com[0]==0x31&&com[1]==0x50) 
+2254   2                                                              {
+2255   3                                                              Version_check();
+2256   3                                                              //timerout3+=timerout4;
+2257   3                                                              //CB_flag=1;//timerout3=get_delay;
+2258   3                                                              //get_data_addr=7;//// Version_check();                 ///megawin cpu version  ///7    
+2259   3                                                              }
+2260   2                                              else if(com[0]==0x31&&com[1]==0x4f) //Send_Camera_Ver();
+2261   2                                                      {
+2262   3                                                      Camera_Version_check();
+2263   3                                                      //timerout3+=timerout4; 
+2264   3                                                      //CB_flag=1;//timerout3=get_delay;
+2265   3                                                      //get_data_addr=8;//// Version_check();                 ///PIC cpu s/w version  ///8
+2266   3                                                      }
+2267   2                               #else
                                                       else if((com[0]==0x31)&&(com[1]==0x31)) Send_Camera_Temp();             ///1                  
                                                       else if(com[0]==0x31&&(com[1]==0x33))    Send_Camera_Press();           ///2
                                                       #if 1//ryan@20150804
@@ -2358,178 +2359,178 @@ line level    source
                                                       else if(com[0]==0x31&&com[1]==0x50)  Version_check();           ///megawin cpu version  ///7                    
                                                       //else if(com[0]==0x31&&com[1]==0x4f) Send_Camera_Ver();
                                               #endif
-2278   2                                                                      else 
-2279   2                                                                      {                                                               
-2280   3      
-2281   3                      
-2282   3                                                                              
-2283   3                                                                              #if 1//ryan@20150602
-2284   3                                                                              ///check all of command
-2285   3                                                                              if(Check_other_Com())
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 38  
+2279   2                                                                      else 
+2280   2                                                                      {                                                               
+2281   3      
+2282   3                      
+2283   3                                                                              
+2284   3                                                                              #if 1//ryan@20150602
+2285   3                                                                              ///check all of command
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 38  
 
-2286   3                                                                              {
-2287   4                                                                              
-2288   4                                                                              for(loop=0;loop<=Com_pos;loop++)                        
-2289   4                                                                              SC16_SendData(SC16_Com[loop]); 
-2290   4      
-2291   4                                                                              user_timer[5]=4;//ryan@20151130
-2292   4                                                                              user_timer[3]=(20);//reset polling time..
-2293   4                                                                              
-2294   4                                                                              //printf("\r\n Sent COM to Camera");//ryan@20150908
-2295   4                                                                              #ifdef power_startup_check
+2286   3                                                                              if(Check_other_Com())
+2287   3                                                                              {
+2288   4                                                                              
+2289   4                                                                              for(loop=0;loop<=Com_pos;loop++)                        
+2290   4                                                                              SC16_SendData(SC16_Com[loop]); 
+2291   4      
+2292   4                                                                              user_timer[5]=4;//ryan@20151130
+2293   4                                                                              user_timer[3]=(20);//reset polling time..
+2294   4                                                                              
+2295   4                                                                              //printf("\r\n Sent COM to Camera");//ryan@20150908
+2296   4                                                                              #ifdef power_startup_check
                                                                                       if((Com_flag==dvr_com_flag)&&(DVR_startup_flag==0))
                                                                                       RS_tx(NAK);
               
                                                                                       if((Com_flag==camera_com_flag)&&(Cam_startup_flag==0))
                                                                                       RS_tx(NAK);
                                                                                       #endif
-2302   4                                                                              
-2303   4                                                                              }
-2304   3                                                                              else
-2305   3                                                                                      {
-2306   4                                                                                      RS_tx(NAK);
-2307   4                                                                                      #ifdef  SC16IS750_DEBUG_PRINT 
+2303   4                                                                              
+2304   4                                                                              }
+2305   3                                                                              else
+2306   3                                                                                      {
+2307   4                                                                                      RS_tx(NAK);
+2308   4                                                                                      #ifdef  SC16IS750_DEBUG_PRINT 
                                                                                               printf("\r\nCommand_Check fail");
                                                                                               #endif          
-2310   4                      
-2311   4                                                                                      }
-2312   3                                                                              #endif
-2313   3                                                                              
-2314   3                                                                      return FALSE;
-2315   3                                                                      }
-2316   2                                                              
-2317   2                              #ifdef  SC16IS750_DEBUG_PRINT 
+2311   4                      
+2312   4                                                                                      }
+2313   3                                                                              #endif
+2314   3                                                                              
+2315   3                                                                      return FALSE;
+2316   3                                                                      }
+2317   2                                                              
+2318   2                              #ifdef  SC16IS750_DEBUG_PRINT 
                                       printf("\r\nSC16_BCC_Check pass");
                                       #endif
-2320   2                              return TRUE;
-2321   2                                                      
-2322   2                      }
-2323   1                      else
-2324   1                      {
-2325   2                              RS_tx(NAK);
-2326   2                              #ifdef  SC16IS750_DEBUG_PRINT 
+2321   2                              return TRUE;
+2322   2                                                      
+2323   2                      }
+2324   1                      else
+2325   1                      {
+2326   2                              RS_tx(NAK);
+2327   2                              #ifdef  SC16IS750_DEBUG_PRINT 
                                       printf("\r\nSC16_BCC_Check fail");
                                       #endif          
-2329   2                            return FALSE;
-2330   2                      }
-2331   1      
-2332   1                      
+2330   2                            return FALSE;
+2331   2                      }
+2332   1      
 2333   1                      
-2334   1      }
-2335          
-2336          //-----------------------------------------
-2337          
-2338          U8 Check_other_Com(void)
-2339          {
-2340   1      
-2341   1      if((SC16_Com[1]==0xff)){ //ryan@20150415
-2342   2              Com_flag=camera_com_flag;  
-2343   2              return TRUE;
-2344   2      }
-2345   1      
-2346   1      //02,37,53,03,65, Camera Stop cammand..
-2347   1      
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 39  
+2334   1                      
+2335   1      }
+2336          
+2337          //-----------------------------------------
+2338          
+2339          U8 Check_other_Com(void)
+2340          {
+2341   1      
+2342   1      if((SC16_Com[1]==0xff)){ //ryan@20150415
+2343   2              Com_flag=camera_com_flag;  
+2344   2              return TRUE;
+2345   2      }
+2346   1      
+2347   1      //02,37,53,03,65, Camera Stop cammand..
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 39  
 
-2348   1      if((SC16_Com[1]==0x37)&&((SC16_Com[2]==0x31)||(SC16_Com[2]==0x34)||(SC16_Com[2]==0x53))){
-2349   2      
-2350   2                      if(SC16_Com[2]==0x31) //ryan@20150416
-2351   2                              {
-2352   3                              Camera_flag=((Camera_flag&0x30)|0x01);//set/clear  up move
-2353   3                              RS_tx(ACK);
-2354   3                              }
-2355   2                      else if(SC16_Com[2]==0x34)
-2356   2                              {
-2357   3                              Camera_flag=((Camera_flag&0x30)|0x02);//set/clear down move
-2358   3                              RS_tx(ACK);                     
-2359   3                              }
-2360   2                      else
-2361   2                              Camera_flag=0x00; //clear all move
-2362   2      
-2363   2                      
-2364   2              Com_flag=camera_com_flag;  
-2365   2              return TRUE;
-2366   2      }
-2367   1      
-2368   1      if((SC16_Com[1]==0x37)&&(SC16_Com[2]>=0x41)&&(SC16_Com[2]<=0x47)) {
-2369   2      
-2370   2                      if(SC16_Com[2]==0x41)//ryan@20150416
-2371   2                              {
-2372   3                              Camera_flag=((Camera_flag&0x03)|0x10);//set/clear CCW move
-2373   3                              RS_tx(ACK);
-2374   3                              }
-2375   2                      else if(SC16_Com[2]==0x42)
-2376   2                              {
-2377   3                              Camera_flag=((Camera_flag&0x03)|0x20);//set/clear CW move
-2378   3                              RS_tx(ACK);
-2379   3                              }
-2380   2      
-2381   2                              
-2382   2              Com_flag=camera_com_flag;  
-2383   2              return TRUE;
-2384   2      }
-2385   1      
-2386   1      if((SC16_Com[1]==0x31)&&(SC16_Com[2]>=0x57&&SC16_Com[2]<=0x5c))
-2387   1                              {
-2388   2                              RS_tx(ACK);
-2389   2                              Set_Video((SC16_Com[2]-0x57),SC16_Com[3]);//for TW2835 video set
-2390   2                              return TRUE;
-2391   2                              }
-2392   1      
+2348   1      
+2349   1      if((SC16_Com[1]==0x37)&&((SC16_Com[2]==0x31)||(SC16_Com[2]==0x34)||(SC16_Com[2]==0x53))){
+2350   2      
+2351   2                      if(SC16_Com[2]==0x31) //ryan@20150416
+2352   2                              {
+2353   3                              Camera_flag=((Camera_flag&0x30)|0x01);//set/clear  up move
+2354   3                              RS_tx(ACK);
+2355   3                              }
+2356   2                      else if(SC16_Com[2]==0x34)
+2357   2                              {
+2358   3                              Camera_flag=((Camera_flag&0x30)|0x02);//set/clear down move
+2359   3                              RS_tx(ACK);                     
+2360   3                              }
+2361   2                      else
+2362   2                              Camera_flag=0x00; //clear all move
+2363   2      
+2364   2                      
+2365   2              Com_flag=camera_com_flag;  
+2366   2              return TRUE;
+2367   2      }
+2368   1      
+2369   1      if((SC16_Com[1]==0x37)&&(SC16_Com[2]>=0x41)&&(SC16_Com[2]<=0x47)) {
+2370   2      
+2371   2                      if(SC16_Com[2]==0x41)//ryan@20150416
+2372   2                              {
+2373   3                              Camera_flag=((Camera_flag&0x03)|0x10);//set/clear CCW move
+2374   3                              RS_tx(ACK);
+2375   3                              }
+2376   2                      else if(SC16_Com[2]==0x42)
+2377   2                              {
+2378   3                              Camera_flag=((Camera_flag&0x03)|0x20);//set/clear CW move
+2379   3                              RS_tx(ACK);
+2380   3                              }
+2381   2      
+2382   2                              
+2383   2              Com_flag=camera_com_flag;  
+2384   2              return TRUE;
+2385   2      }
+2386   1      
+2387   1      if((SC16_Com[1]==0x31)&&(SC16_Com[2]>=0x57&&SC16_Com[2]<=0x5c))
+2388   1                              {
+2389   2                              RS_tx(ACK);
+2390   2                              Set_Video((SC16_Com[2]-0x57),SC16_Com[3]);//for TW2835 video set
+2391   2                              return TRUE;
+2392   2                              }
 2393   1      
 2394   1      
-2395   1      return TRUE;//ryan@21050602
-2396   1      
-2397   1      if((SC16_Com[1]==0x37)&&(SC16_Com[2]>=0x50)&&(SC16_Com[2]<=0x52)) {
-2398   2              Com_flag=dvr_com_flag;  
-2399   2              return TRUE;
-2400   2      }
-2401   1      
-2402   1      if((SC16_Com[1]==0x38)&&(SC16_Com[2]>=0x31)&&(SC16_Com[2]<=0x3c)) {
-2403   2              Com_flag=camera_com_flag;  
-2404   2              return TRUE;
-2405   2      }
-2406   1      
-2407   1      if((SC16_Com[1]==0x31)&&((SC16_Com[2]==0x34)||(SC16_Com[2]==0x35))){
-2408   2              Com_flag=camera_com_flag;  
-2409   2              return TRUE;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 40  
+2395   1      
+2396   1      return TRUE;//ryan@21050602
+2397   1      
+2398   1      if((SC16_Com[1]==0x37)&&(SC16_Com[2]>=0x50)&&(SC16_Com[2]<=0x52)) {
+2399   2              Com_flag=dvr_com_flag;  
+2400   2              return TRUE;
+2401   2      }
+2402   1      
+2403   1      if((SC16_Com[1]==0x38)&&(SC16_Com[2]>=0x31)&&(SC16_Com[2]<=0x3c)) {
+2404   2              Com_flag=camera_com_flag;  
+2405   2              return TRUE;
+2406   2      }
+2407   1      
+2408   1      if((SC16_Com[1]==0x31)&&((SC16_Com[2]==0x34)||(SC16_Com[2]==0x35))){
+2409   2              Com_flag=camera_com_flag;  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 40  
 
-2410   2      }
-2411   1      
-2412   1      if((SC16_Com[1]==0x31)&&(SC16_Com[2]>=0x41)&&(SC16_Com[2]<=0x47))  {
-2413   2              Com_flag=camera_com_flag;       
-2414   2              return TRUE;
-2415   2      }
-2416   1      if((SC16_Com[1]==0x31)&&(SC16_Com[2]>=0x4f)&&(SC16_Com[2]<=0x53)) {
-2417   2              Com_flag=camera_com_flag;               
-2418   2              return TRUE;
-2419   2      }
-2420   1      
+2410   2              return TRUE;
+2411   2      }
+2412   1      
+2413   1      if((SC16_Com[1]==0x31)&&(SC16_Com[2]>=0x41)&&(SC16_Com[2]<=0x47))  {
+2414   2              Com_flag=camera_com_flag;       
+2415   2              return TRUE;
+2416   2      }
+2417   1      if((SC16_Com[1]==0x31)&&(SC16_Com[2]>=0x4f)&&(SC16_Com[2]<=0x53)) {
+2418   2              Com_flag=camera_com_flag;               
+2419   2              return TRUE;
+2420   2      }
 2421   1      
-2422   1      if((SC16_Com[1]==0x33)&&((SC16_Com[2]==0x31)||(SC16_Com[2]==0x4f))) {
-2423   2              Com_flag=dvr_com_flag;                  
-2424   2              return TRUE;
-2425   2      }
-2426   1      
-2427   1      if((SC16_Com[1]==0x33)&&(SC16_Com[2]>=0x35)&&(SC16_Com[2]<=0x37)) {
-2428   2              Com_flag=dvr_com_flag;                  
-2429   2              return TRUE;
-2430   2      }
-2431   1      
-2432   1      #if 1//ryan@20151210
-2433   1      if((SC16_Com[1]==0x33)&&(SC16_Com[2]>=0x51)&&(SC16_Com[2]<=0x5b)){
-2434   2              Com_flag=dvr_com_flag;                  
-2435   2              return TRUE;
-2436   2      }
-2437   1      
-2438   1      if((SC16_Com[1]==0x33)&&((SC16_Com[2]>=0x5c)||(SC16_Com[2]==0x61))){
-2439   2              Com_flag=camera_com_flag;               
-2440   2              return TRUE;
-2441   2      }
-2442   1      
-2443   1      #else
+2422   1      
+2423   1      if((SC16_Com[1]==0x33)&&((SC16_Com[2]==0x31)||(SC16_Com[2]==0x4f))) {
+2424   2              Com_flag=dvr_com_flag;                  
+2425   2              return TRUE;
+2426   2      }
+2427   1      
+2428   1      if((SC16_Com[1]==0x33)&&(SC16_Com[2]>=0x35)&&(SC16_Com[2]<=0x37)) {
+2429   2              Com_flag=dvr_com_flag;                  
+2430   2              return TRUE;
+2431   2      }
+2432   1      
+2433   1      #if 1//ryan@20151210
+2434   1      if((SC16_Com[1]==0x33)&&(SC16_Com[2]>=0x51)&&(SC16_Com[2]<=0x5b)){
+2435   2              Com_flag=dvr_com_flag;                  
+2436   2              return TRUE;
+2437   2      }
+2438   1      
+2439   1      if((SC16_Com[1]==0x33)&&((SC16_Com[2]>=0x5c)||(SC16_Com[2]==0x61))){
+2440   2              Com_flag=camera_com_flag;               
+2441   2              return TRUE;
+2442   2      }
+2443   1      
+2444   1      #else
               if((SC16_Com[1]==0x33)&&(SC16_Com[2]>=0x51)&&(SC16_Com[2]<=0x53)){
                       Com_flag=dvr_com_flag;                  
                       return TRUE;
@@ -2540,28 +2541,28 @@ line level    source
                       return TRUE;
               }
               #endif
-2454   1      //if((SC16_Com[1]==0x32)&&((SC16_Com[2]==0x31)||(SC16_Com[2]==0x4f))) {
-2455   1      //      Com_flag=dvr_com_flag;                  
-2456   1      //      return TRUE;
-2457   1      //}
-2458   1      //if((SC16_Com[1]==0x32)&&(SC16_Com[2]>=0x33)&&(SC16_Com[2]<=0x35)) return TRUE;
-2459   1      //if((SC16_Com[1]==0x32)&&(SC16_Com[2]>=0x41)&&(SC16_Com[2]<=0x47)) return TRUE;
-2460   1      
+2455   1      //if((SC16_Com[1]==0x32)&&((SC16_Com[2]==0x31)||(SC16_Com[2]==0x4f))) {
+2456   1      //      Com_flag=dvr_com_flag;                  
+2457   1      //      return TRUE;
+2458   1      //}
+2459   1      //if((SC16_Com[1]==0x32)&&(SC16_Com[2]>=0x33)&&(SC16_Com[2]<=0x35)) return TRUE;
+2460   1      //if((SC16_Com[1]==0x32)&&(SC16_Com[2]>=0x41)&&(SC16_Com[2]<=0x47)) return TRUE;
 2461   1      
-2462   1      if((SC16_Com[1]==0x37)&&(SC16_Com[2]>=0x50)&&(SC16_Com[2]<=0x52)){
-2463   2              Com_flag=dvr_com_flag;                  
-2464   2              return TRUE;
-2465   2      }
-2466   1      
+2462   1      
+2463   1      if((SC16_Com[1]==0x37)&&(SC16_Com[2]>=0x50)&&(SC16_Com[2]<=0x52)){
+2464   2              Com_flag=dvr_com_flag;                  
+2465   2              return TRUE;
+2466   2      }
 2467   1      
-2468   1      return FALSE;
-2469   1      
-2470   1      }
-2471          
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 41  
+2468   1      
+2469   1      return FALSE;
+2470   1      
+2471   1      }
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 41  
 
-2472          //----------------------------------------
-2473          #if 0
+2472          
+2473          //----------------------------------------
+2474          #if 0
               U8 parity(U8 ino)
               {
                       U8 noofones = 0;
@@ -2584,15 +2585,15 @@ line level    source
               
               }
               #endif
-2496          //-----------------------------------------
-2497          //U8 Com_check(U8 com,U8 start, U8 count)
-2498          //{
-2499            
-2500          
-2501          //}
-2502          
-2503          //-----------------------------------------
-2504          #if 0
+2497          //-----------------------------------------
+2498          //U8 Com_check(U8 com,U8 start, U8 count)
+2499          //{
+2500            
+2501          
+2502          //}
+2503          
+2504          //-----------------------------------------
+2505          #if 0
               U8 ADT75_init(void)
               {
               
@@ -2620,227 +2621,227 @@ line level    source
               
               }
               #endif
-2532          //-----------------------------------------
-2533          
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 42  
+2533          //-----------------------------------------
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 42  
 
-2534          void ResetDevice(U8 addr)
-2535          {
-2536   1       register   U8 temp;
-2537   1          temp = ReadI2C(addr, IOContro);
-2538   1          temp |= 0x08;
-2539   1           WriteI2C(addr, IOContro, temp);
-2540   1            
-2541   1      //    WriteRegister(SC16IS750_REG_IOCONTROL, temp_iocontrol);   
-2542   1      //    temp_iocontrol = ReadRegister(SC16IS750_REG_IOCONTROL);
-2543   1      //    temp_iocontrol |= 0x08;
-2544   1      //    WriteRegister(SC16IS750_REG_IOCONTROL, temp_iocontrol); 
-2545   1          
-2546   1        //  return; 
-2547   1      }
-2548          //-----------------------------------------
-2549          U16 SetBaudrate(U8 addr, U32 baudrate) //return error of baudrate parts per thousand
-2550          {
-2551   1      
-2552   1      //register   U16 divisor;
-2553   1       U32 divisor;
-2554   1      
-2555   1       U8 prescaler;
-2556   1       U8 temp_lcr;//,temp_mcr;
-2557   1         
-2558   1         // uint32_t actual_baudrate;
-2559   1         //  int16_t error;
-2560   1          //uint16_t divisor;
-2561   1         // uint8_t prescaler;
-2562   1         // uint32_t actual_baudrate;
-2563   1        //  int16_t error;
-2564   1         // uint8_t temp_lcr;
-2565   1      
-2566   1          if ( (ReadI2C(addr,MCR)&0x80) == 0) { //if prescaler==1
-2567   2              prescaler = 1;
-2568   2          } else {
-2569   2              prescaler = 4;
-2570   2          }
-2571   1      
-2572   1              //baudrate=9600;
-2573   1      
-2574   1         divisor = (SC16IS750_CRYSTCAL_FREQ/prescaler)/(baudrate*16);
-2575   1      
+2534          
+2535          void ResetDevice(U8 addr)
+2536          {
+2537   1       register   U8 temp;
+2538   1          temp = ReadI2C(addr, IOContro);
+2539   1          temp |= 0x08;
+2540   1           WriteI2C(addr, IOContro, temp);
+2541   1            
+2542   1      //    WriteRegister(SC16IS750_REG_IOCONTROL, temp_iocontrol);   
+2543   1      //    temp_iocontrol = ReadRegister(SC16IS750_REG_IOCONTROL);
+2544   1      //    temp_iocontrol |= 0x08;
+2545   1      //    WriteRegister(SC16IS750_REG_IOCONTROL, temp_iocontrol); 
+2546   1          
+2547   1        //  return; 
+2548   1      }
+2549          //-----------------------------------------
+2550          U16 SetBaudrate(U8 addr, U32 baudrate) //return error of baudrate parts per thousand
+2551          {
+2552   1      
+2553   1      //register   U16 divisor;
+2554   1       U32 divisor;
+2555   1      
+2556   1       U8 prescaler;
+2557   1       U8 temp_lcr;//,temp_mcr;
+2558   1         
+2559   1         // uint32_t actual_baudrate;
+2560   1         //  int16_t error;
+2561   1          //uint16_t divisor;
+2562   1         // uint8_t prescaler;
+2563   1         // uint32_t actual_baudrate;
+2564   1        //  int16_t error;
+2565   1         // uint8_t temp_lcr;
+2566   1      
+2567   1          if ( (ReadI2C(addr,MCR)&0x80) == 0) { //if prescaler==1
+2568   2              prescaler = 1;
+2569   2          } else {
+2570   2              prescaler = 4;
+2571   2          }
+2572   1      
+2573   1              //baudrate=9600;
+2574   1      
+2575   1         divisor = (SC16IS750_CRYSTCAL_FREQ/prescaler)/(baudrate*16);
 2576   1      
 2577   1      
-2578   1      #ifdef SC16IS750_DEBUG_PRINT
+2578   1      
+2579   1      #ifdef SC16IS750_DEBUG_PRINT
               Printf("\r\n");
               Printf("SetBaudrate_Dev_addr=%x\r\n",(U16) addr);
               Printf("SetBaudrate_MCR=%x\r\n",(U16) ReadI2C(addr,MCR));
               Printf("SetBaudrate_prescaler=%x\r\n",(U16) prescaler);
               Printf("SetBaudrate_divisor=%x\r\n",(U16) divisor);
               #endif 
-2585   1                      
-2586   1              WriteI2C(addr, LCR, 0x00); /// WriteRegister(SC16IS750_REG_LCR,temp_lcr); 
-2587   1      
-2588   1          temp_lcr = ReadI2C(addr,LCR); ///ReadRegister(SC16IS750_REG_LCR);
-2589   1              
-2590   1          temp_lcr |= 0x80;
-2591   1              
-2592   1          WriteI2C(addr, LCR, temp_lcr); /// WriteRegister(SC16IS750_REG_LCR,temp_lcr); 
-2593   1          //write to DLL
-2594   1           WriteI2C(addr, DLL, (U8)divisor); ///WriteRegister(SC16IS750_REG_DLL,(uint8_t)divisor);
-2595   1          //write to DLH
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 43  
+2586   1                      
+2587   1              WriteI2C(addr, LCR, 0x00); /// WriteRegister(SC16IS750_REG_LCR,temp_lcr); 
+2588   1      
+2589   1          temp_lcr = ReadI2C(addr,LCR); ///ReadRegister(SC16IS750_REG_LCR);
+2590   1              
+2591   1          temp_lcr |= 0x80;
+2592   1              
+2593   1          WriteI2C(addr, LCR, temp_lcr); /// WriteRegister(SC16IS750_REG_LCR,temp_lcr); 
+2594   1          //write to DLL
+2595   1           WriteI2C(addr, DLL, (U8)divisor); ///WriteRegister(SC16IS750_REG_DLL,(uint8_t)divisor);
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 43  
 
-2596   1            WriteI2C(addr, DLH, (U8)(divisor>>8)); /// WriteRegister(SC16IS750_REG_DLH,(uint8_t)(divisor>>8));
-2597   1      
-2598   1      #ifdef SC16IS750_DEBUG_PRINT
+2596   1          //write to DLH
+2597   1            WriteI2C(addr, DLH, (U8)(divisor>>8)); /// WriteRegister(SC16IS750_REG_DLH,(uint8_t)(divisor>>8));
+2598   1      
+2599   1      #ifdef SC16IS750_DEBUG_PRINT
               Printf("SetBaudrate_DLL=%x\r\n",(U16) ReadI2C(addr,DLL));
               Printf("SetBaudrate_DLH=%x\r\n",(U16) ReadI2C(addr,DLH));
               #endif 
-2602   1      
-2603   1          temp_lcr &= 0x7F;
-2604   1         WriteI2C(addr, LCR, temp_lcr); ///WriteRegister(SC16IS750_REG_LCR,temp_lcr); 
-2605   1      
-2606   1      return 1;
-2607   1         /* 
-2608   1          actual_baudrate = (SC16IS750_CRYSTCAL_FREQ/prescaler)/(16*divisor);
-2609   1          error = ((float)actual_baudrate-baudrate)*1000/baudrate;
-2610   1      #ifdef  SC16IS750_DEBUG_PRINT   
-2611   1          Serial.print("Desired baudrate: ");
-2612   1          Serial.println(baudrate,DEC);
-2613   1          Serial.print("Calculated divisor: ");
-2614   1          Serial.println(divisor,DEC);
-2615   1          Serial.print("Actual baudrate: ");
-2616   1          Serial.println(actual_baudrate,DEC);    
-2617   1          Serial.print("Baudrate error: ");
-2618   1          Serial.println(error,DEC);    
-2619   1      #endif     
-2620   1          
-2621   1          return error;
-2622   1       */
-2623   1      }
-2624          //-----------------------------------------
-2625          void SetLine(U8 addr, U8 data_length, U8  parity_select, U8  stop_length )
-2626          {
-2627   1          U8 temp_lcr;
-2628   1          temp_lcr = ReadI2C(addr,LCR); ///ReadRegister(SC16IS750_REG_LCR);
-2629   1          temp_lcr &= 0xC0; //Clear the lower six bit of LCR (LCR[0] to LCR[5]
-2630   1      //#ifdef  SC16IS750_DEBUG_PRINT 
-2631   1      //    Serial.print("LCR Register:0x");
-2632   1      //    Serial.println(temp_lcr,DEC);
-2633   1      //#endif   
-2634   1          switch (data_length) {            //data length settings
-2635   2              case 5:
-2636   2                  break;
-2637   2              case 6:
-2638   2                  temp_lcr |= 0x01;
-2639   2                  break;
-2640   2              case 7:
-2641   2                  temp_lcr |= 0x02;
-2642   2                  break;
-2643   2              case 8:
-2644   2                  temp_lcr |= 0x03;
-2645   2                  break;
-2646   2              default:
-2647   2                  temp_lcr |= 0x03;
-2648   2                  break;
-2649   2          }
-2650   1      
-2651   1          if ( stop_length == 2 ) {
-2652   2              temp_lcr |= 0x04;
-2653   2          }
-2654   1          
-2655   1          switch (parity_select) {            //parity selection length settings
-2656   2              case 0:                         //no parity
-2657   2                   break;
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 44  
+2603   1      
+2604   1          temp_lcr &= 0x7F;
+2605   1         WriteI2C(addr, LCR, temp_lcr); ///WriteRegister(SC16IS750_REG_LCR,temp_lcr); 
+2606   1      
+2607   1      return 1;
+2608   1         /* 
+2609   1          actual_baudrate = (SC16IS750_CRYSTCAL_FREQ/prescaler)/(16*divisor);
+2610   1          error = ((float)actual_baudrate-baudrate)*1000/baudrate;
+2611   1      #ifdef  SC16IS750_DEBUG_PRINT   
+2612   1          Serial.print("Desired baudrate: ");
+2613   1          Serial.println(baudrate,DEC);
+2614   1          Serial.print("Calculated divisor: ");
+2615   1          Serial.println(divisor,DEC);
+2616   1          Serial.print("Actual baudrate: ");
+2617   1          Serial.println(actual_baudrate,DEC);    
+2618   1          Serial.print("Baudrate error: ");
+2619   1          Serial.println(error,DEC);    
+2620   1      #endif     
+2621   1          
+2622   1          return error;
+2623   1       */
+2624   1      }
+2625          //-----------------------------------------
+2626          void SetLine(U8 addr, U8 data_length, U8  parity_select, U8  stop_length )
+2627          {
+2628   1          U8 temp_lcr;
+2629   1          temp_lcr = ReadI2C(addr,LCR); ///ReadRegister(SC16IS750_REG_LCR);
+2630   1          temp_lcr &= 0xC0; //Clear the lower six bit of LCR (LCR[0] to LCR[5]
+2631   1      //#ifdef  SC16IS750_DEBUG_PRINT 
+2632   1      //    Serial.print("LCR Register:0x");
+2633   1      //    Serial.println(temp_lcr,DEC);
+2634   1      //#endif   
+2635   1          switch (data_length) {            //data length settings
+2636   2              case 5:
+2637   2                  break;
+2638   2              case 6:
+2639   2                  temp_lcr |= 0x01;
+2640   2                  break;
+2641   2              case 7:
+2642   2                  temp_lcr |= 0x02;
+2643   2                  break;
+2644   2              case 8:
+2645   2                  temp_lcr |= 0x03;
+2646   2                  break;
+2647   2              default:
+2648   2                  temp_lcr |= 0x03;
+2649   2                  break;
+2650   2          }
+2651   1      
+2652   1          if ( stop_length == 2 ) {
+2653   2              temp_lcr |= 0x04;
+2654   2          }
+2655   1          
+2656   1          switch (parity_select) {            //parity selection length settings
+2657   2              case 0:                         //no parity
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 44  
 
-2658   2              case 1:                         //odd parity
-2659   2                  temp_lcr |= 0x08;
-2660   2                  break;
-2661   2              case 2:                         //even parity
-2662   2                  temp_lcr |= 0x18;
-2663   2                  break;
-2664   2              case 3:                         //force '1' parity
-2665   2                  temp_lcr |= 0x03;
-2666   2                  break;
-2667   2              case 4:                         //force '0' parity
-2668   2                  break;
-2669   2              default:
-2670   2                  break;
-2671   2          } 
-2672   1          
-2673   1          WriteI2C(addr, LCR, temp_lcr);/// WriteRegister(SC16IS750_REG_LCR,temp_lcr);
-2674   1      }
-2675          //-----------------------------------------
-2676          /*
-2677          void GPIOSetPinMode(U8 addr,U8 pin_number, U8 i_o)
-2678          {
-2679              U8 temp_iodir;
-2680              
-2681              temp_iodir = ReadI2C(addr,IODir); ///ReadRegister(SC16IS750_REG_IODIR);
-2682              if ( i_o == OUTPUT ) {
-2683                temp_iodir |= (0x01 << pin_number);
-2684              } else {
-2685                temp_iodir &= (U8)~(0x01 << pin_number);
-2686              } 
-2687              
-2688              WriteI2C(addr, IODir, temp_iodir);///WriteRegister(SC16IS750_REG_IODIR, temp_iodir);
-2689              //return;
-2690          }
-2691          
-2692          void GPIOSetPinState(U8 addr,U8 pin_number, U8 pin_state)
-2693          {
-2694              U8 temp_iostate;
-2695              
-2696              temp_iostate =  ReadI2C(addr,IOState);///ReadRegister(SC16IS750_REG_IOSTATE);
-2697              if ( pin_state == 1 ) {
-2698                temp_iostate |= (0x01 << pin_number);
-2699              } else {
-2700                temp_iostate &= (U8)~(0x01 << pin_number);
-2701              } 
-2702              
-2703              WriteI2C(addr, IODir, IOState);///WriteRegister(SC16IS750_REG_IOSTATE, temp_iostate);
-2704            //  return;
-2705          }
-2706          
-2707          U8 GPIOGetPinState(U8 addr,U8 pin_number)
-2708          {
-2709               uint8_t temp_iostate;
-2710              
-2711              temp_iostate = ReadI2C(addr,IOState);///ReadRegister(SC16IS750_REG_IOSTATE);
-2712              if ( temp_iostate & (0x01 << pin_number)== 0 ) {
-2713                return 0;
-2714              } 
-2715              return 1;
-2716             // return;
-2717          }
-2718          
-2719          */
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 45  
+2658   2                   break;
+2659   2              case 1:                         //odd parity
+2660   2                  temp_lcr |= 0x08;
+2661   2                  break;
+2662   2              case 2:                         //even parity
+2663   2                  temp_lcr |= 0x18;
+2664   2                  break;
+2665   2              case 3:                         //force '1' parity
+2666   2                  temp_lcr |= 0x03;
+2667   2                  break;
+2668   2              case 4:                         //force '0' parity
+2669   2                  break;
+2670   2              default:
+2671   2                  break;
+2672   2          } 
+2673   1          
+2674   1          WriteI2C(addr, LCR, temp_lcr);/// WriteRegister(SC16IS750_REG_LCR,temp_lcr);
+2675   1      }
+2676          //-----------------------------------------
+2677          /*
+2678          void GPIOSetPinMode(U8 addr,U8 pin_number, U8 i_o)
+2679          {
+2680              U8 temp_iodir;
+2681              
+2682              temp_iodir = ReadI2C(addr,IODir); ///ReadRegister(SC16IS750_REG_IODIR);
+2683              if ( i_o == OUTPUT ) {
+2684                temp_iodir |= (0x01 << pin_number);
+2685              } else {
+2686                temp_iodir &= (U8)~(0x01 << pin_number);
+2687              } 
+2688              
+2689              WriteI2C(addr, IODir, temp_iodir);///WriteRegister(SC16IS750_REG_IODIR, temp_iodir);
+2690              //return;
+2691          }
+2692          
+2693          void GPIOSetPinState(U8 addr,U8 pin_number, U8 pin_state)
+2694          {
+2695              U8 temp_iostate;
+2696              
+2697              temp_iostate =  ReadI2C(addr,IOState);///ReadRegister(SC16IS750_REG_IOSTATE);
+2698              if ( pin_state == 1 ) {
+2699                temp_iostate |= (0x01 << pin_number);
+2700              } else {
+2701                temp_iostate &= (U8)~(0x01 << pin_number);
+2702              } 
+2703              
+2704              WriteI2C(addr, IODir, IOState);///WriteRegister(SC16IS750_REG_IOSTATE, temp_iostate);
+2705            //  return;
+2706          }
+2707          
+2708          U8 GPIOGetPinState(U8 addr,U8 pin_number)
+2709          {
+2710               uint8_t temp_iostate;
+2711              
+2712              temp_iostate = ReadI2C(addr,IOState);///ReadRegister(SC16IS750_REG_IOSTATE);
+2713              if ( temp_iostate & (0x01 << pin_number)== 0 ) {
+2714                return 0;
+2715              } 
+2716              return 1;
+2717             // return;
+2718          }
+2719          
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 45  
 
-2720          //-----------------------------------------
-2721          void GPIOSetPortMode(U8 addr,U8 port_io)
-2722          {
-2723   1      
-2724   1       WriteI2C(addr, IODir, port_io); ///WriteRegister(SC16IS750_REG_IODIR, port_io);
-2725   1        //  return;
-2726   1      
-2727   1      }
-2728          //-----------------------------------------
-2729          void GPIOSetPortState(U8 addr,U8 port_state)
-2730          {
-2731   1       WriteI2C(addr, IOState, port_state); /// WriteRegister(SC16IS750_REG_IOSTATE, port_state);
-2732   1      }
-2733          //-----------------------------------------
-2734          U8 GPIOGetPortState(U8 addr)
-2735          {
-2736   1      //#ifdef  SC16IS750_DEBUG_PRINT 
-2737   1       //   printf("\r\n**Addr=%X PortState=%X\r\n",(U16)addr,(U16) ReadI2C(addr,IOState));
-2738   1          //Serial.println(ReadRegister(SC16IS750_REG_RXLVL), DEC);
-2739   1      //#endif    
-2740   1          return  ReadI2C(addr,IOState);////ReadRegister(SC16IS750_REG_IOSTATE);
-2741   1      
-2742   1      }
-2743          //-----------------------------------------
-2744          #if 0
+2720          */
+2721          //-----------------------------------------
+2722          void GPIOSetPortMode(U8 addr,U8 port_io)
+2723          {
+2724   1      
+2725   1       WriteI2C(addr, IODir, port_io); ///WriteRegister(SC16IS750_REG_IODIR, port_io);
+2726   1        //  return;
+2727   1      
+2728   1      }
+2729          //-----------------------------------------
+2730          void GPIOSetPortState(U8 addr,U8 port_state)
+2731          {
+2732   1       WriteI2C(addr, IOState, port_state); /// WriteRegister(SC16IS750_REG_IOSTATE, port_state);
+2733   1      }
+2734          //-----------------------------------------
+2735          U8 GPIOGetPortState(U8 addr)
+2736          {
+2737   1      //#ifdef  SC16IS750_DEBUG_PRINT 
+2738   1       //   printf("\r\n**Addr=%X PortState=%X\r\n",(U16)addr,(U16) ReadI2C(addr,IOState));
+2739   1          //Serial.println(ReadRegister(SC16IS750_REG_RXLVL), DEC);
+2740   1      //#endif    
+2741   1          return  ReadI2C(addr,IOState);////ReadRegister(SC16IS750_REG_IOSTATE);
+2742   1      
+2743   1      }
+2744          //-----------------------------------------
+2745          #if 0
               U8 FIFOAvailableData(U8 addr)
               {
               #ifdef  SC16IS750_DEBUG_PRINT 
@@ -2877,10 +2878,10 @@ line level    source
                   //return;
               }
               #endif
-2781          //-----------------------------------------
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 46  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 46  
 
-2782          #if 0
+2782          //-----------------------------------------
+2783          #if 0
               void flush(U8 addr)  //Transmit Holding Register Empty indicator.
               {
                       U8 tmp_lsr;
@@ -2897,8 +2898,8 @@ line level    source
               
               }
               #endif
-2799          //---------------------------------------------------------
-2800          #if 0
+2800          //---------------------------------------------------------
+2801          #if 0
               U8 ping(U8 addr)
               {
               
@@ -2928,49 +2929,49 @@ line level    source
               
               }
               #endif
-2830          //-----------------------------------------
-2831          
-2832          //-----------------------------------------
-2833          
-2834          void WriteByte(U8 addr, U8 val)
-2835          {
-2836   1      
-2837   1       /*  
-2838   1              U8 tmp_lsr;
-2839   1              while ( FIFOAvailableSpace() == 0 ){
-2840   1      #ifdef  SC16IS750_DEBUG_PRINT 
-2841   1                      Serial.println("No available space");
-2842   1      #endif          
-2843   1              
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 47  
+2831          //-----------------------------------------
+2832          
+2833          //-----------------------------------------
+2834          
+2835          void WriteByte(U8 addr, U8 val)
+2836          {
+2837   1      
+2838   1       /*  
+2839   1              U8 tmp_lsr;
+2840   1              while ( FIFOAvailableSpace() == 0 ){
+2841   1      #ifdef  SC16IS750_DEBUG_PRINT 
+2842   1                      Serial.println("No available space");
+2843   1      #endif          
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 47  
 
-2844   1              };
-2845   1      
-2846   1      #ifdef  SC16IS750_DEBUG_PRINT 
-2847   1          Serial.println("++++++++++++Data sent");
-2848   1      #endif          
-2849   1          WriteRegister(SC16IS750_REG_THR,val);
-2850   1      */
-2851   1      
-2852   1      //      do { 
-2853   1      //              tmp_lsr = ReadI2C(addr,LSR);///ReadRegister(SC16IS750_REG_LSR);
-2854   1      //      } while ((tmp_lsr&0x20) ==0);
-2855   1      
-2856   1              
-2857   1              WriteI2C(addr, THR, val);///WriteRegister(SC16IS750_REG_THR,val);
-2858   1              
-2859   1      
-2860   1          
-2861   1      }
-2862          
-2863          U8 ReadByte(U8 addr)
-2864          {
-2865   1      //      volatile U8 val;
-2866   1              U8 val;
-2867   1              #if 1
-2868   1              val = ReadI2C(addr,RHR);///ReadRegister(SC16IS750_REG_RHR);    
-2869   1                return val;
-2870   1              #else
+2844   1              
+2845   1              };
+2846   1      
+2847   1      #ifdef  SC16IS750_DEBUG_PRINT 
+2848   1          Serial.println("++++++++++++Data sent");
+2849   1      #endif          
+2850   1          WriteRegister(SC16IS750_REG_THR,val);
+2851   1      */
+2852   1      
+2853   1      //      do { 
+2854   1      //              tmp_lsr = ReadI2C(addr,LSR);///ReadRegister(SC16IS750_REG_LSR);
+2855   1      //      } while ((tmp_lsr&0x20) ==0);
+2856   1      
+2857   1              
+2858   1              WriteI2C(addr, THR, val);///WriteRegister(SC16IS750_REG_THR,val);
+2859   1              
+2860   1      
+2861   1          
+2862   1      }
+2863          
+2864          U8 ReadByte(U8 addr)
+2865          {
+2866   1      //      volatile U8 val;
+2867   1              U8 val;
+2868   1              #if 1
+2869   1              val = ReadI2C(addr,RHR);///ReadRegister(SC16IS750_REG_RHR);    
+2870   1                return val;
+2871   1              #else
                       if (FIFOAvailableData(addr) == 0)
                       {
               
@@ -2993,10 +2994,10 @@ line level    source
                       }
               
                       #endif
-2893   1              
-2894   1      
-2895   1      }
-2896          #if 0
+2894   1              
+2895   1      
+2896   1      }
+2897          #if 0
               void TW2835_get(U8 page)
               {
               U8 x,loop=0,step=0;
@@ -3005,9 +3006,9 @@ line level    source
               
               step=0;
               val=0;
-              
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 48  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 48  
 
+              
               /*
               for(x=0;x<=2;x++)
               {
@@ -3069,11 +3070,11 @@ line level    source
               
               }
               #endif
-2967          
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 49  
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 49  
 
-2968          //-----------------------------------------
-2969          #if 0
+2968          
+2969          //-----------------------------------------
+2970          #if 0
               U16 peek(void)
               {
                       /*
@@ -3088,8 +3089,8 @@ line level    source
                               
               }
               #endif
-2984          //-----------------------------------------
-2985          #if 0
+2985          //-----------------------------------------
+2986          #if 0
               void Set_INT(void)
               {
               //INT_flag=0;
@@ -3107,59 +3108,59 @@ line level    source
               IE2=0;    //flag
               }
               #endif
-3003          //----------------------------------------
-3004          
-3005          void MCTRL_set(void)
-3006          {
-3007   1      
-3008   1      //... P[7:4]:INT[5:2], P2_3:HALE, P2_2:HRDB, P2_1:HWRB, P2_0:HSPB
-3009   1      P2_0=0;///HSPB=0;
-3010   1      P2_1=1;///HWRB=1;
-3011   1      P2_2=1;///HRDB=1;
-3012   1      P2_3=0;///HALE=0;
-3013   1      }
-3014          //-----------------------------------------
-3015          /*
-3016          //-----------------------------------------
-3017          
-3018          void Int0_interrupt(void) interrupt 0 using 1
-3019          {
-3020          
-3021          IE0=0;
-3022          EA=0;
-3023          
+3004          //----------------------------------------
+3005          
+3006          void MCTRL_set(void)
+3007          {
+3008   1      
+3009   1      //... P[7:4]:INT[5:2], P2_3:HALE, P2_2:HRDB, P2_1:HWRB, P2_0:HSPB
+3010   1      P2_0=0;///HSPB=0;
+3011   1      P2_1=1;///HWRB=1;
+3012   1      P2_2=1;///HRDB=1;
+3013   1      P2_3=0;///HALE=0;
+3014   1      }
+3015          //-----------------------------------------
+3016          /*
+3017          //-----------------------------------------
+3018          
+3019          void Int0_interrupt(void) interrupt 0 using 1
+3020          {
+3021          
+3022          IE0=0;
+3023          EA=0;
 3024          
-3025          EA=1;
-3026          
+3025          
+3026          EA=1;
 3027          
-3028          }
-3029          
-C51 COMPILER V9.01   NED                                                                   12/17/2018 16:46:13 PAGE 50  
+3028          
+3029          }
+C51 COMPILER V9.01   NED                                                                   12/25/2018 16:49:28 PAGE 50  
 
-3030          void Int1_interrupt(void) interrupt 2 using 1
-3031          {
-3032          IE1=0;
-3033          EA=0;
-3034          
+3030          
+3031          void Int1_interrupt(void) interrupt 2 using 1
+3032          {
+3033          IE1=0;
+3034          EA=0;
 3035          
-3036          EA=1;
-3037          
+3036          
+3037          EA=1;
 3038          
-3039          }
-3040          
-3041          void Int2_interrupt(void) interrupt 6 using 1
-3042          {
-3043          
-3044          IE2=0;
-3045          EA=0;
-3046          
+3039          
+3040          }
+3041          
+3042          void Int2_interrupt(void) interrupt 6 using 1
+3043          {
+3044          
+3045          IE2=0;
+3046          EA=0;
 3047          
-3048          EA=1;
-3049          
+3048          
+3049          EA=1;
 3050          
-3051          }
-3052          */
-3053          
+3051          
+3052          }
+3053          */
+3054          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

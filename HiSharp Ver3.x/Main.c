@@ -936,7 +936,6 @@ char conf9[38]={"hscom 2 2 ch2:10 ch1:10 ch2:00 ch3:00 "};  // RD
 
 char conf10[38]={"hscom 3 3 ch0:10 ch1:10 ch2:10 ch3:00 "};
 
-
 #else
 char conf1[38]={"hscom 1 1 ch0:12 ch1:02 ch2:02 ch3:03 "};   // C
 char conf2[38]={"hscom 1 1 ch2:12 ch1:02 ch0:02 ch3:03 "};   // R
@@ -1088,23 +1087,34 @@ else
 	
 if(boot_flag)
 {  
-	//InitialCommShell();
-	PCT_InitialTW2835();	// Initial RssetN for TW2835
-	//ResetCommSell();
+
+//InitialCommShell();
+PCT_InitialTW2835();	// Initial RssetN for TW2835
+//ResetCommSell();
+
 #if 0///ryan@20181217
+
+//printf("(A)");
 memcpy ((RScommand.commBuf), busw1, sizeof(busw1) );
 PCT_RunCommShell(RScommand.commBuf); 
-
+//printf("(B)");
 memcpy ((RScommand.commBuf), busw2, sizeof(busw2) );
 PCT_RunCommShell(RScommand.commBuf); 
-
-//memcpy ((RScommand.commBuf), yvmix, sizeof(yvmix) );
-//PCT_RunCommShell(RScommand.commBuf); 
-
+//printf("(C)");
 memcpy ((RScommand.commBuf), mode, sizeof(mode)  );
-//printf("RScommand.commBuf=%s\r\n",RScommand.commBuf);  //ryan
 PCT_RunCommShell(RScommand.commBuf); 
+//printf("(D)");
+
 #endif
+
+TW28_WriteByte(1, 0xA1, 0x11);
+TW28_WriteByte(1, 0xA2, 0xD7);
+
+//printf("(0xA1=%x)", (U16)TW28_ReadByte(1, 0xA1));
+//printf("(0xA2=%x)", (U16)TW28_ReadByte(1, 0xA2));
+
+
+
 }
 else
 {

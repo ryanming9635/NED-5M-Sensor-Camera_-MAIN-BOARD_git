@@ -236,9 +236,6 @@ void PCT_EnfalshVLoss(void)
 //
 void PCT_GetVideoSignalStatus(void)
 {	
-
-
-	
 	MSGVDOSGL = ReadSignalSta(0x01, 0x78)&0x0F;
 
 	if(SYSVDOSGL == MSGVDOSGL) return;				// Check Video Loss

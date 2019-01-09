@@ -1251,6 +1251,7 @@ Power_EN1=sel;
 Power_EN2=sel;
 Power_EN3=sel;
  Wait_ms(100);
+
 //P2_4=1;
 //P2_7=1;
 //printf("power on");

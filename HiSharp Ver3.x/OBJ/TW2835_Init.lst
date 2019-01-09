@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   TW2835_INIT                                                           12/17/2018 16:46:13 PAGE 1   
+C51 COMPILER V9.01   TW2835_INIT                                                           12/25/2018 16:49:28 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE TW2835_INIT
@@ -62,7 +62,7 @@ line level    source
   52          //      ------------------------------------
   53           #define NED
   54          
-C51 COMPILER V9.01   TW2835_INIT                                                           12/17/2018 16:46:13 PAGE 2   
+C51 COMPILER V9.01   TW2835_INIT                                                           12/25/2018 16:49:28 PAGE 2   
 
   55          #ifdef NED
   56          sbit RSTn = P4 ^ 0;
@@ -89,27 +89,27 @@ line level    source
   77          void PCT_InitialTW2835(void)
   78          {
   79   1              PCT_TW2835ResetN();
-  80   1              SYSTYPE = DEF_SYSTEM;
-  81   1      
-  82   1              // Waitting Color Lock
-  83   1              EnUserTimer(USERTMID1,10);
-  84   1              while(USERTMVAL1!=1) {
-  85   2                        
-  86   2                              if( (TW28_ReadByte(0, SENSORCHANNEL<<4)&0x0F) == 0x0F) 
-  87   2                               {
-  88   3                                      SYSTYPE = PCT_DetectVideoFormat(SENSORCHANNEL);
-  89   3                             // printf("Video_lock=%X",(TW28_ReadByte(0, SENSORCHANNEL<<4)&0x0F));  //ryan..
-  90   3                            //  printf(" SYSTYPE=%X\r\n",SYSTYPE);  //ryan..
-  91   3                             
-  92   3                                     break;
-  93   3                                   }
-  94   2                  
-  95   2                  Wait_ms(10);
-  96   2      
-  97   2                //printf("PCT_InitialTW2835_loop\r\n");  //ryan..
-  98   2      
-  99   2              
- 100   2              }
+  80   1              
+  81   1              SYSTYPE = DEF_SYSTEM;
+  82   1              /*
+  83   1              // Waitting Color Lock
+  84   1              EnUserTimer(USERTMID1,10);
+  85   1              while(USERTMVAL1!=1) {
+  86   1                        
+  87   1                              if( (TW28_ReadByte(0, SENSORCHANNEL<<4)&0x0F) == 0x0F) 
+  88   1                               {
+  89   1                                      SYSTYPE = PCT_DetectVideoFormat(SENSORCHANNEL);
+  90   1                             // printf("Video_lock=%X",(TW28_ReadByte(0, SENSORCHANNEL<<4)&0x0F));  //ryan..
+  91   1                            //  printf(" SYSTYPE=%X\r\n",SYSTYPE);  //ryan..
+  92   1                             
+  93   1                                     break;
+  94   1                                   }
+  95   1                  
+  96   1                  Wait_ms(10);
+  97   1      
+  98   1                //printf("PCT_InitialTW2835_loop\r\n");  //ryan..       
+  99   1              }
+ 100   1              */
  101   1              DisUserTimer(USERTMID1);
  102   1              
  103   1              PCT_TW2835_Initial();
@@ -126,7 +126,7 @@ line level    source
  114          {
  115   1              register U16 _delay; 
  116   1      //Kane @HS 2007 0723 Ver3.4>>>>
-C51 COMPILER V9.01   TW2835_INIT                                                           12/17/2018 16:46:13 PAGE 3   
+C51 COMPILER V9.01   TW2835_INIT                                                           12/25/2018 16:49:28 PAGE 3   
 
  117   1      #if 0
                       // Initial RssetN for TW2835
@@ -190,7 +190,7 @@ line level    source
  176          //
  177          //
  178          
-C51 COMPILER V9.01   TW2835_INIT                                                           12/17/2018 16:46:13 PAGE 4   
+C51 COMPILER V9.01   TW2835_INIT                                                           12/25/2018 16:49:28 PAGE 4   
 
  179          
  180          // ===========================================================================
@@ -199,7 +199,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    314    ----
+   CODE SIZE        =    265    ----
    CONSTANT SIZE    =   1024    ----
    XDATA SIZE       =   ----       4
    PDATA SIZE       =   ----    ----

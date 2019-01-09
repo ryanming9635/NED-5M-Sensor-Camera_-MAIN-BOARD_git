@@ -77,8 +77,9 @@ sbit RSTn = P3 ^ 4;
 void PCT_InitialTW2835(void)
 {
 	PCT_TW2835ResetN();
+	
 	SYSTYPE = DEF_SYSTEM;
-
+	/*
 	// Waitting Color Lock
 	EnUserTimer(USERTMID1,10);
 	while(USERTMVAL1!=1) {
@@ -94,10 +95,9 @@ void PCT_InitialTW2835(void)
             
             Wait_ms(10);
 
-          //printf("PCT_InitialTW2835_loop\r\n");  //ryan..
-
-        
+          //printf("PCT_InitialTW2835_loop\r\n");  //ryan..       
 	}
+	*/
 	DisUserTimer(USERTMID1);
 	
 	PCT_TW2835_Initial();

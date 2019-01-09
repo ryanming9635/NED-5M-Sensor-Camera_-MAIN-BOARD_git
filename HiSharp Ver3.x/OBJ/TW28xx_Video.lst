@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/17/2018 16:46:13 PAGE 1   
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/25/2018 16:49:28 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE TW28XX_VIDEO
@@ -62,7 +62,7 @@ line level    source
   52          //      ------------------------------------
   53          //                      Variables Definitions
   54          //      ------------------------------------
-C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/17/2018 16:46:13 PAGE 2   
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/25/2018 16:49:28 PAGE 2   
 
   55          code U16 XWinAttr_RegAddr[]     = {0x0111, 0x0119, 0x0121, 0x0129, 
   56                                                                     0x0114, 0x011C, 0x0124, 0x012C };
@@ -126,7 +126,7 @@ line level    source
                       register U8 tmpSta, addr;
                       
                       _dvc = 0;
-C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/17/2018 16:46:13 PAGE 3   
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/25/2018 16:49:28 PAGE 3   
 
                       addr = _ch << 4 | 0x01;
                       tmpSta = TW28_ReadByte(0, addr);
@@ -190,7 +190,7 @@ line level    source
  176   2                              hdelay |= (_cattr[0]&0x01)<<1;
  177   2                              if(_winch[0]&0x01)
  178   2                                      hdelay |= WIN_RIGHT;    // Signal Channel 1,3
-C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/17/2018 16:46:13 PAGE 4   
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/25/2018 16:49:28 PAGE 4   
 
  179   2                              else
  180   2                                      hdelay |= WIN_LEFT;             // Signal Channel 0,2
@@ -254,7 +254,7 @@ line level    source
  238   2                      case VMIX_TYPE_P31:
  239   2                              // Type N,L,R
  240   2                              hdelay = 0x08|WIN_RIGHT|SYSTYPE;        // WIN_RIGHT for Y Channel LEFT
-C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/17/2018 16:46:13 PAGE 5   
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/25/2018 16:49:28 PAGE 5   
 
  241   2                              hdelay |= (_cattr[0]&0x01)<<1;
  242   2                              if(TW28_ReadByte(0, (_winch[0]<<4)|0x02) != Video_HDelay[hdelay])//Kane @HS 2007 0808 Ver3.4
@@ -318,7 +318,7 @@ line level    source
  300   2                      case VMIX_TYPE_N41:
  301   2                      case VMIX_TYPE_P41:
  302   2                              // Type L,R,L,R
-C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/17/2018 16:46:13 PAGE 6   
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/25/2018 16:49:28 PAGE 6   
 
  303   2                              // LEFT 
  304   2                              hdelay = WIN_LEFT|SYSTYPE;
@@ -382,7 +382,7 @@ line level    source
  362   2                      case VMIX_TYPE_P22:
  363   2                              wregptr = Init_Vido_W2+SYSTYPE*TYPE2_OFSET*2;
  364   2                              wregptr += ((_typ&0x0F)-1)*TYPE2_OFSET;
-C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/17/2018 16:46:13 PAGE 7   
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/25/2018 16:49:28 PAGE 7   
 
  365   2                                              
  366   2              PCT_SetChanelScale(_winch[0], wregptr);
@@ -446,7 +446,7 @@ line level    source
              - Ver3.4
  423   2                              TW28_WriteByte(0x00, 0x12, Video_HDelay[WIN_RIGHT+((_chmiro[1]&BIT0)<<1)+SYSTYPE]);
  424   2                      if(TW28_ReadByte(0, 0x22) != Video_HDelay[WIN_LEFT+((_chmiro[2]&BIT0)<<1)+SYSTYPE])//Kane @HS 2007 0808 
-C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/17/2018 16:46:13 PAGE 8   
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/25/2018 16:49:28 PAGE 8   
 
              -Ver3.4
  425   2                              TW28_WriteByte(0x00, 0x22, Video_HDelay[WIN_LEFT+((_chmiro[2]&BIT0)<<1)+SYSTYPE]);
@@ -510,7 +510,7 @@ line level    source
                                       else
                                               TW28_WriteSTable(0, VidoW2_ModifyACHM_PAL);
                                       break;
-C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/17/2018 16:46:13 PAGE 9   
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/25/2018 16:49:28 PAGE 9   
 
               
                               case 0x13:
@@ -574,7 +574,7 @@ line level    source
                       #define ADDR GETLBYTE(XWinAttr_RegAddr[_wid])
               
                       register  U8 _wid;
-C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/17/2018 16:46:13 PAGE 10  
+C51 COMPILER V9.01   TW28XX_VIDEO                                                          12/25/2018 16:49:28 PAGE 10  
 
                       register  U8 dat;
               
