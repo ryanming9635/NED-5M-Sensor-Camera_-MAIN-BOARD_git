@@ -1,10 +1,10 @@
-C51 COMPILER V9.01   TW28XX_AUDIO                                                          12/25/2018 16:49:28 PAGE 1   
+C51 COMPILER V9.50a   TW28XX_AUDIO                                                         01/29/2019 14:30:14 PAGE 1   
 
 
-C51 COMPILER V9.01, COMPILATION OF MODULE TW28XX_AUDIO
+C51 COMPILER V9.50a, COMPILATION OF MODULE TW28XX_AUDIO
 OBJECT MODULE PLACED IN .\OBJ\TW28xx_Audio.obj
 COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE TW28xx_Audio.c LARGE OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\OB
-                    -J\TW28xx_Audio.lst) OBJECT(.\OBJ\TW28xx_Audio.obj)
+                    -J\TW28xx_Audio.lst) TABS(2) OBJECT(.\OBJ\TW28xx_Audio.obj)
 
 line level    source
 
@@ -31,169 +31,169 @@ line level    source
   21          //  --------------------------------------------------------------------------
   22          //  Modification:
   23          //
-  24          //      R0.01 2006/10/25 09:05¤W¤È Phoenix Chuang
-  25          //      Reason:
-  26          //              1. Original.
-  27          //      Solution:
-  28          //      
+  24          //  R0.01 2006/10/25 09:05¤W¤È Phoenix Chuang
+  25          //  Reason:
+  26          //    1. Original.
+  27          //  Solution:
+  28          //  
   29          //  **************************************************************************
-  30          //      -----------------------------------
-  31          //                      Header Files
-  32          //      ----------------------------------- 
+  30          //  -----------------------------------
+  31          //      Header Files
+  32          //  ----------------------------------- 
   33          #include "types.h"
   34          #include "TW28xx_Audio.h"
   35          #include "BusCtrl.h"
   36          
   37          
-  38          //      ------------------------------------
-  39          //                      Macro Definitions
-  40          //      ------------------------------------ 
+  38          //  ------------------------------------
+  39          //      Macro Definitions
+  40          //  ------------------------------------ 
   41          
   42          
-  43          //      ------------------------------------
-  44          //                      Type Definitions
-  45          //      ------------------------------------
+  43          //  ------------------------------------
+  44          //      Type Definitions
+  45          //  ------------------------------------
   46          
   47          
-  48          //      ------------------------------------
-  49          //                      Variables Definitions
-  50          //      ------------------------------------
+  48          //  ------------------------------------
+  49          //      Variables Definitions
+  50          //  ------------------------------------
   51          
   52          
-  53          //      ------------------------------------
-  54          //                      Function Prototypes
-C51 COMPILER V9.01   TW28XX_AUDIO                                                          12/25/2018 16:49:28 PAGE 2   
+  53          //  ------------------------------------
+  54          //      Function Prototypes
+C51 COMPILER V9.50a   TW28XX_AUDIO                                                         01/29/2019 14:30:14 PAGE 2   
 
-  55          //      ------------------------------------
+  55          //  ------------------------------------
   56          
   57          
   58          // ===========================================================================
   59          //                      Parallel function description
   60          #if 0
               void PCT_AudioRegList(void)
-              {       
-                      printf("***** %bx == %bx *****\n",0x4c, TW28_ReadByte(0, 0x4c) );
-                      printf("***** %bx == %bx *****\n",0x60, TW28_ReadByte(0, 0x60) );
-                      printf("***** %bx == %bx *****\n",0x61, TW28_ReadByte(0, 0x61) );
-                      printf("***** %bx == %bx *****\n",0x62, TW28_ReadByte(0, 0x62) );
-                      printf("***** %bx == %bx *****\n",0x63, TW28_ReadByte(0, 0x63) );
+              { 
+                printf("***** %bx == %bx *****\n",0x4c, TW28_ReadByte(0, 0x4c) );
+                printf("***** %bx == %bx *****\n",0x60, TW28_ReadByte(0, 0x60) );
+                printf("***** %bx == %bx *****\n",0x61, TW28_ReadByte(0, 0x61) );
+                printf("***** %bx == %bx *****\n",0x62, TW28_ReadByte(0, 0x62) );
+                printf("***** %bx == %bx *****\n",0x63, TW28_ReadByte(0, 0x63) );
               
-                      printf("***** %bx == %bx *****\n",0x64, TW28_ReadByte(0, 0x64) );
-                      printf("***** %bx == %bx *****\n",0x65, TW28_ReadByte(0, 0x65) );
-                      printf("***** %bx == %bx *****\n",0x66, TW28_ReadByte(0, 0x66) );
-                      printf("***** %bx == %bx *****\n",0x67, TW28_ReadByte(0, 0x67) );
-                      printf("***** %bx == %bx *****\n",0x68, TW28_ReadByte(0, 0x68) );
-                      printf("***** %bx == %bx *****\n",0x69, TW28_ReadByte(0, 0x69) );
-                      printf("***** %bx == %bx *****\n",0x6A, TW28_ReadByte(0, 0x6A) );
-                      printf("***** %bx == %bx *****\n",0x6B, TW28_ReadByte(0, 0x6B) );
+                printf("***** %bx == %bx *****\n",0x64, TW28_ReadByte(0, 0x64) );
+                printf("***** %bx == %bx *****\n",0x65, TW28_ReadByte(0, 0x65) );
+                printf("***** %bx == %bx *****\n",0x66, TW28_ReadByte(0, 0x66) );
+                printf("***** %bx == %bx *****\n",0x67, TW28_ReadByte(0, 0x67) );
+                printf("***** %bx == %bx *****\n",0x68, TW28_ReadByte(0, 0x68) );
+                printf("***** %bx == %bx *****\n",0x69, TW28_ReadByte(0, 0x69) );
+                printf("***** %bx == %bx *****\n",0x6A, TW28_ReadByte(0, 0x6A) );
+                printf("***** %bx == %bx *****\n",0x6B, TW28_ReadByte(0, 0x6B) );
               
-                      printf("***** %bx == %bx *****\n",0x6C, TW28_ReadByte(0, 0x6C) );
-                      printf("***** %bx == %bx *****\n",0x6D, TW28_ReadByte(0, 0x6D) );
-                      printf("***** %bx == %bx *****\n",0x6E, TW28_ReadByte(0, 0x6E) );
-                      printf("***** %bx == %bx *****\n",0x6F, TW28_ReadByte(0, 0x6F) );
-                      printf("***** %bx == %bx *****\n",0x70, TW28_ReadByte(0, 0x70) );
+                printf("***** %bx == %bx *****\n",0x6C, TW28_ReadByte(0, 0x6C) );
+                printf("***** %bx == %bx *****\n",0x6D, TW28_ReadByte(0, 0x6D) );
+                printf("***** %bx == %bx *****\n",0x6E, TW28_ReadByte(0, 0x6E) );
+                printf("***** %bx == %bx *****\n",0x6F, TW28_ReadByte(0, 0x6F) );
+                printf("***** %bx == %bx *****\n",0x70, TW28_ReadByte(0, 0x70) );
               
-                      printf("***** %bx == %bx *****\n",0x71, TW28_ReadByte(0, 0x71) );
-                      printf("***** %bx == %bx *****\n",0x72, TW28_ReadByte(0, 0x72) );
-                      printf("***** %bx == %bx *****\n",0x73, TW28_ReadByte(0, 0x73) );
-                      printf("***** %bx == %bx *****\n",0x74, TW28_ReadByte(0, 0x74) );
+                printf("***** %bx == %bx *****\n",0x71, TW28_ReadByte(0, 0x71) );
+                printf("***** %bx == %bx *****\n",0x72, TW28_ReadByte(0, 0x72) );
+                printf("***** %bx == %bx *****\n",0x73, TW28_ReadByte(0, 0x73) );
+                printf("***** %bx == %bx *****\n",0x74, TW28_ReadByte(0, 0x74) );
               }
               #endif
   90          // ===========================================================================
   91          //
-  92          //              Audio Inputer & Output Gain Control
+  92          //    Audio Inputer & Output Gain Control
   93          //
   94          #if 0
               BYTE PCT_AudioGainCtrl(U8 _dvc, U8 _channel, U8 _gain)
               {
-                      register U8     dat;
-                      register U8 result;
+                register U8 dat;
+                register U8 result;
               
-                      code RW_REG_DATA chanData[]= {
-                              {AIGAIN_CH01_ADDR, AIGAIN_CH00_MASK, 0},
-                              {AIGAIN_CH01_ADDR, AIGAIN_CH01_MASK, 4},
-                              {AIGAIN_CH23_ADDR, AIGAIN_CH03_MASK, 0},
-                              {AIGAIN_CH23_ADDR, AIGAIN_CH04_MASK, 4},
-                              {AIGAIN_CHAO_ADDR, AIGAIN_CHAO_MASK, 4}, 
-                      };
-                      
-                      #define AGAIN_PAGE      GETHBYTE(chanData[_channel].addr)
-                      #define AGAIN_ADDR      GETLBYTE(chanData[_channel].addr)
-                      #define AGAIN_MASK      chanData[_channel].mask
+                code RW_REG_DATA chanData[]= {
+                  {AIGAIN_CH01_ADDR, AIGAIN_CH00_MASK, 0},
+                  {AIGAIN_CH01_ADDR, AIGAIN_CH01_MASK, 4},
+                  {AIGAIN_CH23_ADDR, AIGAIN_CH03_MASK, 0},
+                  {AIGAIN_CH23_ADDR, AIGAIN_CH04_MASK, 4},
+                  {AIGAIN_CHAO_ADDR, AIGAIN_CHAO_MASK, 4}, 
+                };
+                
+                #define AGAIN_PAGE  GETHBYTE(chanData[_channel].addr)
+                #define AGAIN_ADDR  GETLBYTE(chanData[_channel].addr)
+                #define AGAIN_MASK  chanData[_channel].mask
               
-                      _dvc = 0;
-                      dat = TW28_ReadByte(AGAIN_PAGE, AGAIN_ADDR );
-                              
-                      dat &= AGAIN_MASK;
-                      dat |= _gain<<chanData[_channel].offset;
-C51 COMPILER V9.01   TW28XX_AUDIO                                                          12/25/2018 16:49:28 PAGE 3   
+                _dvc = 0;
+                dat = TW28_ReadByte(AGAIN_PAGE, AGAIN_ADDR );
+                  
+                dat &= AGAIN_MASK;
+                dat |= _gain<<chanData[_channel].offset;
+C51 COMPILER V9.50a   TW28XX_AUDIO                                                         01/29/2019 14:30:14 PAGE 3   
 
-                      
-                      TW28_WriteByte(AGAIN_PAGE, AGAIN_ADDR, dat);
-                      result = TW28_ReadByte(AGAIN_PAGE, AGAIN_ADDR );
-                      return true;
+                
+                TW28_WriteByte(AGAIN_PAGE, AGAIN_ADDR, dat);
+                result = TW28_ReadByte(AGAIN_PAGE, AGAIN_ADDR );
+                return true;
               }
               #endif
  123          
  124          // ===========================================================================
  125          //
- 126          //      Audio Miaxing Ratio Control
+ 126          //  Audio Miaxing Ratio Control
  127          //
  128          #if 0
               BYTE PCT_AudioMixCtrl(U8 _dvc, U8 _channel, U8 _gain)
               {
-                      register U8     dat;
-                      register U8 result;
+                register U8 dat;
+                register U8 result;
               
-                      code RW_REG_DATA chanData[]= {
-                              {MIXRATIO_CH01_ADDR,MIXRATIO_CH00_MASK, 0},
-                              {MIXRATIO_CH01_ADDR,MIXRATIO_CH01_MASK, 4},
-                              {MIXRATIO_CH23_ADDR,MIXRATIO_CH02_MASK, 0},
-                              {MIXRATIO_CH23_ADDR,MIXRATIO_CH03_MASK, 4},
-                              {MIXRATIO_CHAO_ADDR,MIXRATIO_CHAO_MASK, 0}, 
-                      };
-                      
-                      #define AMIX_PAGE       GETHBYTE(chanData[_channel].addr)
-                      #define AMIX_ADDR       GETLBYTE(chanData[_channel].addr)
-                      #define AMIX_MASK       chanData[_channel].mask
+                code RW_REG_DATA chanData[]= {
+                  {MIXRATIO_CH01_ADDR,MIXRATIO_CH00_MASK, 0},
+                  {MIXRATIO_CH01_ADDR,MIXRATIO_CH01_MASK, 4},
+                  {MIXRATIO_CH23_ADDR,MIXRATIO_CH02_MASK, 0},
+                  {MIXRATIO_CH23_ADDR,MIXRATIO_CH03_MASK, 4},
+                  {MIXRATIO_CHAO_ADDR,MIXRATIO_CHAO_MASK, 0}, 
+                };
+                
+                #define AMIX_PAGE   GETHBYTE(chanData[_channel].addr)
+                #define AMIX_ADDR   GETLBYTE(chanData[_channel].addr)
+                #define AMIX_MASK   chanData[_channel].mask
               
-                      _dvc = 0;
-                      dat = TW28_ReadByte(AMIX_PAGE, AMIX_ADDR );
-                              
-                      dat &= AMIX_MASK;
-                      dat |= _gain<<chanData[_channel].offset;
-                      
-                      TW28_WriteByte(AMIX_PAGE, AMIX_ADDR, dat);
-                      result = TW28_ReadByte(AMIX_PAGE, AMIX_ADDR );
+                _dvc = 0;
+                dat = TW28_ReadByte(AMIX_PAGE, AMIX_ADDR );
+                  
+                dat &= AMIX_MASK;
+                dat |= _gain<<chanData[_channel].offset;
+                
+                TW28_WriteByte(AMIX_PAGE, AMIX_ADDR, dat);
+                result = TW28_ReadByte(AMIX_PAGE, AMIX_ADDR );
               
-                      PCT_AudioSelLive(_dvc, 0xFF);
-                      return true;
+                PCT_AudioSelLive(_dvc, 0xFF);
+                return true;
               }
               #endif
  159          // ===========================================================================
  160          //
- 161          //      Audio Mixing Mute Control
+ 161          //  Audio Mixing Mute Control
  162          //
  163          #if 0
               BYTE PCT_AudioMixMute(U8 _dvc, U8 _ch, U8 _ctrl)
               {
-                      data U8 dat;
+                data U8 dat;
               
-                      #define MIXMUTE_PAGE GETHBYTE(ADO_MIX_MUTE_ADDR)
-                      #define MIXMUTE_ADDR GETLBYTE(ADO_MIX_MUTE_ADDR)
-                      
-                      _dvc = 0;
-                      dat = TW28_ReadByte(MIXMUTE_PAGE, MIXMUTE_ADDR );
-                      if( _ctrl==ON ) {
-                              dat &= ~_ch;
-                      } else  {
-                              dat |=  _ch;
-                      }
-                      TW28_WriteByte(MIXMUTE_PAGE, MIXMUTE_ADDR, dat);
-C51 COMPILER V9.01   TW28XX_AUDIO                                                          12/25/2018 16:49:28 PAGE 4   
+                #define MIXMUTE_PAGE GETHBYTE(ADO_MIX_MUTE_ADDR)
+                #define MIXMUTE_ADDR GETLBYTE(ADO_MIX_MUTE_ADDR)
+                
+                _dvc = 0;
+                dat = TW28_ReadByte(MIXMUTE_PAGE, MIXMUTE_ADDR );
+                if( _ctrl==ON ) {
+                  dat &= ~_ch;
+                } else  {
+                  dat |=  _ch;
+                }
+                TW28_WriteByte(MIXMUTE_PAGE, MIXMUTE_ADDR, dat);
+C51 COMPILER V9.50a   TW28XX_AUDIO                                                         01/29/2019 14:30:14 PAGE 4   
 
-                      
-                      return true;
+                
+                return true;
               }
               
               // ===========================================================================
@@ -202,18 +202,18 @@ line level    source
               //
               BYTE PCT_AudioSelLive(U8 _dvc, U8 _chan)
               {
-                      #define SEL_LMMOD_PAGE GETHBYTE(ADO_SEL_LMMOD_ADDR)
-                      #define SEL_LMMOD_ADDR GETLBYTE(ADO_SEL_LMMOD_ADDR)
+                #define SEL_LMMOD_PAGE GETHBYTE(ADO_SEL_LMMOD_ADDR)
+                #define SEL_LMMOD_ADDR GETLBYTE(ADO_SEL_LMMOD_ADDR)
               
-                      _dvc = 0;
-                      if( _chan==0xFF ) {
-                              TW28_WriteByte(SEL_LMMOD_PAGE, SEL_LMMOD_ADDR, ADO_MIX_MODE);
-                              return true;
-                      }
-                              
-                      _chan |= ADO_LIVE_MODE;
-                      TW28_WriteByte(SEL_LMMOD_PAGE, SEL_LMMOD_ADDR, _chan);
-                      return 0;
+                _dvc = 0;
+                if( _chan==0xFF ) {
+                  TW28_WriteByte(SEL_LMMOD_PAGE, SEL_LMMOD_ADDR, ADO_MIX_MODE);
+                  return true;
+                }
+                  
+                _chan |= ADO_LIVE_MODE;
+                TW28_WriteByte(SEL_LMMOD_PAGE, SEL_LMMOD_ADDR, _chan);
+                return 0;
               }
               #endif
  203          

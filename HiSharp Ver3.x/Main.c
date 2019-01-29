@@ -929,7 +929,11 @@ char conf4[38]={"hscom 2 2 ch2:10 ch0:10 ch1:00 ch3:00 "};   //CR
 char conf5[38]={"hscom 2 2 ch0:10 ch2:10 ch1:00 ch3:00 "};  //RC
 
 char conf6[38]={"hscom 2 2 ch1:10 ch0:10 ch2:00 ch3:00 "};  // DC
+#ifdef recorder_video_only
+char conf7[38]={"hscom 1 1 ch1:10 ch0:00 ch2:00 ch3:00 "};  // D
+#else
 char conf7[38]={"hscom 2 2 ch0:10 ch1:10 ch2:00 ch3:00 "};  // CD
+#endif
 
 char conf8[38]={"hscom 2 2 ch1:10 ch2:10 ch0:00 ch3:00 "};  // DR
 char conf9[38]={"hscom 2 2 ch2:10 ch1:10 ch2:00 ch3:00 "};  // RD

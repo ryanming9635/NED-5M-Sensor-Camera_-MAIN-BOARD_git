@@ -1304,15 +1304,21 @@ U8 error=0;
 	
 #else
 
-WriteByte(DRP_ID[0], val);
+	#ifdef recoder_disable_AWB 
+			if((SC16_Com[1]==0x31)&&(SC16_Com[2]==0x53)&&((SC16_Com[3]==0x31)||(SC16_Com[3]==0x32)))
+			{
+			WriteByte(DRP_ID[2], val);///PIC
+			}
+			else
+			{
+			WriteByte(DRP_ID[0], val);///DVR
+			WriteByte(DRP_ID[2], val);///PIC
+			}
 
-//if((SC16_Com[1]==0x37)&&((SC16_Com[2]==0x31)|| (SC16_Com[2]==0x34)||(SC16_Com[2]==0x53)||
-//	(SC16_Com[2]==0x41)||(SC16_Com[2]==0x42)));
-//else
-WriteByte(DRP_ID[2], val);
-
-//#if 1//ryan@20151216
-//if(Com_flag==camera_com_flag) user_timer[3]=(40+40);//reset polling timer..
+	#else
+			WriteByte(DRP_ID[0], val);///DVR
+			WriteByte(DRP_ID[2], val);///PIC
+	#endif
 
 
 #endif

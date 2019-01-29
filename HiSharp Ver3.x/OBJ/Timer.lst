@@ -1,10 +1,10 @@
-C51 COMPILER V9.01   TIMER                                                                 12/25/2018 16:49:28 PAGE 1   
+C51 COMPILER V9.50a   TIMER                                                                01/29/2019 14:30:14 PAGE 1   
 
 
-C51 COMPILER V9.01, COMPILATION OF MODULE TIMER
+C51 COMPILER V9.50a, COMPILATION OF MODULE TIMER
 OBJECT MODULE PLACED IN .\OBJ\Timer.obj
 COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Timer.c LARGE OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\OBJ\Timer
-                    -.lst) OBJECT(.\OBJ\Timer.obj)
+                    -.lst) TABS(2) OBJECT(.\OBJ\Timer.obj)
 
 line level    source
 
@@ -31,44 +31,44 @@ line level    source
   21          //  --------------------------------------------------------------------------
   22          //  Modification:
   23          //
-  24          //      R0.01 2007/4/27 04:27¤U¤È Phoenix Chuang
-  25          //      Reason:
-  26          //              1. Original.
-  27          //      Solution:
-  28          //      
+  24          //  R0.01 2007/4/27 04:27¤U¤È Phoenix Chuang
+  25          //  Reason:
+  26          //    1. Original.
+  27          //  Solution:
+  28          //  
   29          //  **************************************************************************
-  30          //      -----------------------------------
-  31          //                      Header Files
-  32          //      ----------------------------------- 
+  30          //  -----------------------------------
+  31          //      Header Files
+  32          //  ----------------------------------- 
   33          #include "Types.h"
   34          #include "UART.h"
   35          #include "Timer.h"
   36          
   37          
-  38          //      ------------------------------------
-  39          //                      Macro Definitions
-  40          //      ------------------------------------ 
+  38          //  ------------------------------------
+  39          //      Macro Definitions
+  40          //  ------------------------------------ 
   41          
   42          
-  43          //      ------------------------------------
-  44          //                      Type Definitions
-  45          //      ------------------------------------
+  43          //  ------------------------------------
+  44          //      Type Definitions
+  45          //  ------------------------------------
   46          
   47          
-  48          //      ------------------------------------
-  49          //                      Variables Definitions
-  50          //      ------------------------------------
+  48          //  ------------------------------------
+  49          //      Variables Definitions
+  50          //  ------------------------------------
   51          data user_timer[TIMER_NUM];
   52          extern U8 timer2_loop;
   53          extern U8 get_data_addr;
   54          extern U8 get_data_val;
-C51 COMPILER V9.01   TIMER                                                                 12/25/2018 16:49:28 PAGE 2   
+C51 COMPILER V9.50a   TIMER                                                                01/29/2019 14:30:14 PAGE 2   
 
   55          extern void Get_Data(U8 addr, U8 val);
   56          extern U8 Temp_timeout;
-  57          //      ------------------------------------
-  58          //                      Function Prototypes
-  59          //      ------------------------------------
+  57          //  ------------------------------------
+  58          //      Function Prototypes
+  59          //  ------------------------------------
   60          
   61          
   62          
@@ -77,27 +77,27 @@ line level    source
   65          // ===========================================================================
   66          // ===========================================================================
   67          //
-  68          //              Interrupt Initial
+  68          //    Interrupt Initial
   69          //
   70          void InitialTimer0(void){
-  71   1      //      U8 i;
-  72   1              
-  73   1              //PT0=1;
-  74   1              //ET0=1;
-  75   1              //TH0 = 0;      // SET TIMER0 TH0
-  76   1              //TL0 = 0;      // SET TIMER0 TL0
-  77   1              //TH0 = TIME0H; // SET TIMER0 TH0
-  78   1              //TL0 = TIME0L; // SET TIMER0 TL0
-  79   1              //TH0 = (65536-10)>>8;  // SET TIMER0 TH0
-  80   1              //TL0 =  (65536-10)&0xff;       // SET TIMER0 TL0
+  71   1      //  U8 i;
+  72   1        
+  73   1        //PT0=1;
+  74   1        //ET0=1;
+  75   1        //TH0 = 0;  // SET TIMER0 TH0
+  76   1        //TL0 = 0;  // SET TIMER0 TL0
+  77   1        //TH0 = TIME0H; // SET TIMER0 TH0
+  78   1        //TL0 = TIME0L; // SET TIMER0 TL0
+  79   1        //TH0 = (65536-10)>>8;  // SET TIMER0 TH0
+  80   1        //TL0 =  (65536-10)&0xff; // SET TIMER0 TL0
   81   1      
-  82   1              TR0 = 1;                // SET ON TIMER0
+  82   1        TR0 = 1;    // SET ON TIMER0
   83   1            
   84   1          //TMOD|=0x02;  //8bit
   85   1         //TH0=184;    //TH0 184 for 100Hz 
   86   1      #if 1
   87   1         // TH0=(184-100)+100;    //for 1.2KHz of PWM. 
-  88   1      #if 1           //ryan@20151019
+  88   1      #if 1   //ryan@20151019
   89   1      TH0=239;    //for 5.08KHz of PWM. 
   90   1      #else
               TH0=(184-100)+87;    //171//for 1KHz of PWM. 
@@ -107,26 +107,26 @@ line level    source
   95   1      #else
                   TH0=184-100;    //TH0 84 for 500Hz 
               #endif
-  98   1              
+  98   1        
   99   1        //  TH0=0;    //TH0 84 for 500Hz 
  100   1      
  101   1              TL0=0;
  102   1      
  103   1            //  TL0=0;
  104   1             //TMOD=0x01;    //16bit
- 105   1              //TMOD=0x00;   ///  13bit
+ 105   1        //TMOD=0x00;   ///  13bit
  106   1      
- 107   1              //for(i=0; i<TIMER_NUM; i++)
- 108   1              //      DisUserTimer(i);
+ 107   1        //for(i=0; i<TIMER_NUM; i++)
+ 108   1        //  DisUserTimer(i);
  109   1      }
  110          
  111          
  112          
  113          void InitialTimer2(void)
  114          {
- 115   1              U8 i;
+ 115   1        U8 i;
  116   1      
-C51 COMPILER V9.01   TIMER                                                                 12/25/2018 16:49:28 PAGE 3   
+C51 COMPILER V9.50a   TIMER                                                                01/29/2019 14:30:14 PAGE 3   
 
  117   1              TR2 =1;
  118   1              ET2=1;
@@ -135,11 +135,11 @@ line level    source
  121   1              T2CON=0x04;   // SET ON TIMER2
  122   1      
  123   1            TF2=0;
- 124   1              TH2 = TIME2H;   // SET TIMER0 TH0
- 125   1              TL2 = TIME2L;   // SET TIMER0 TL0
- 126   1                              
- 127   1              for(i=0; i<TIMER_NUM; i++)
- 128   1                      DisUserTimer(i);
+ 124   1        TH2 = TIME2H; // SET TIMER0 TH0
+ 125   1        TL2 = TIME2L; // SET TIMER0 TL0
+ 126   1            
+ 127   1        for(i=0; i<TIMER_NUM; i++)
+ 128   1          DisUserTimer(i);
  129   1      
  130   1      }
  131          
@@ -150,66 +150,66 @@ line level    source
  136          
  137          // ===========================================================================
  138          //
- 139          //              Timer/Counter 0 Interrupt
+ 139          //    Timer/Counter 0 Interrupt
  140          //
  141          void Timer0_interrupt(void) interrupt 1 using 1
  142          {
  143   1          
- 144   1              EA = OFF;               // Disable All Interrupt
- 145   1              TH0 = TIME0H;   // SET TIMER0 TH0
- 146   1              TL0 = TIME0L;   // SET TIMER0 TL0
- 147   1              TF0 = OFF;
+ 144   1        EA = OFF;   // Disable All Interrupt
+ 145   1        TH0 = TIME0H; // SET TIMER0 TH0
+ 146   1        TL0 = TIME0L; // SET TIMER0 TL0
+ 147   1        TF0 = OFF;
  148   1      
  149   1             // P0_0^=1;
  150   1      
- 151   1              //if(USERTMVAL0>1) USERTMVAL0--;
- 152   1              //if(USERTMVAL1>1) USERTMVAL1--;
- 153   1              //if(USERTMVAL2>1) USERTMVAL2--;
+ 151   1        //if(USERTMVAL0>1) USERTMVAL0--;
+ 152   1        //if(USERTMVAL1>1) USERTMVAL1--;
+ 153   1        //if(USERTMVAL2>1) USERTMVAL2--;
  154   1      
- 155   1              EA = ON;                // Enable All Interrupt
+ 155   1        EA = ON;    // Enable All Interrupt
  156   1      }
  157          //-------------------------------------
  158          extern U16 timerout3; 
  159          extern U16 timerout4;
- 160          void Timer2_interrupt(void) interrupt 5 using 1         
+ 160          void Timer2_interrupt(void) interrupt 5 using 1   
  161          {
  162   1      
- 163   1              EA = OFF;               // Disable All Interrupt
- 164   1              TH2 = TIME2H;   // SET TIMER0 TH0
- 165   1              TL2 = TIME2L;   // SET TIMER0 TL0
- 166   1      //      TH2 = (65535-180)>>8;   // SET TIMER0 TH0
- 167   1      //      TL2 = ((65535-180)&0x00ff);     // SET TIMER0 TL0
+ 163   1        EA = OFF;   // Disable All Interrupt
+ 164   1        TH2 = TIME2H; // SET TIMER0 TH0
+ 165   1        TL2 = TIME2L; // SET TIMER0 TL0
+ 166   1      //  TH2 = (65535-180)>>8; // SET TIMER0 TH0
+ 167   1      //  TL2 = ((65535-180)&0x00ff); // SET TIMER0 TL0
  168   1      
  169   1      
  170   1             TF2 = OFF;
  171   1      
  172   1         // P0_0^=1;
  173   1      
- 174   1              if(USERTMVAL0>1) USERTMVAL0--;
- 175   1              if(USERTMVAL1>1) USERTMVAL1--;
- 176   1              if(USERTMVAL2>1) USERTMVAL2--;
+ 174   1        if(USERTMVAL0>1) USERTMVAL0--;
+ 175   1        if(USERTMVAL1>1) USERTMVAL1--;
+ 176   1        if(USERTMVAL2>1) USERTMVAL2--;
  177   1      
- 178   1              if(USERTMVAL3>1) USERTMVAL3--;
-C51 COMPILER V9.01   TIMER                                                                 12/25/2018 16:49:28 PAGE 4   
+ 178   1        if(USERTMVAL3>1) USERTMVAL3--;
+C51 COMPILER V9.50a   TIMER                                                                01/29/2019 14:30:14 PAGE 4   
 
  179   1      
- 180   1              if(USERTMVAL4>1) USERTMVAL4--;
- 181   1              if(USERTMVAL5>1) USERTMVAL5--;
- 182   1              
- 183   1              if(timerout1>1) timerout1--;    
- 184   1              if(timerout2>1) timerout2--;
+ 180   1        if(USERTMVAL4>1) USERTMVAL4--;
+ 181   1        if(USERTMVAL5>1) USERTMVAL5--;
+ 182   1        
+ 183   1        if(timerout1>1) timerout1--;  
+ 184   1        if(timerout2>1) timerout2--;
  185   1      #if 0//ryan@20151106
-                      //if(timerout3>1) timerout3--;
-                      if(timerout3<=CB_delay) timerout3++;
-                      if(timerout4<=CB_delay) timerout4++;
+                //if(timerout3>1) timerout3--;
+                if(timerout3<=CB_delay) timerout3++;
+                if(timerout4<=CB_delay) timerout4++;
               #endif
- 190   1              if(Temp_timeout>1)Temp_timeout--;//ryan@20150908
- 191   1              EA = ON;                // Enable All Interrupt
+ 190   1        if(Temp_timeout>1)Temp_timeout--;//ryan@20150908
+ 191   1        EA = ON;    // Enable All Interrupt
  192   1      }
  193          
  194          // ===========================================================================
  195          //
- 196          //              
+ 196          //    
  197          //
  198          
  199          

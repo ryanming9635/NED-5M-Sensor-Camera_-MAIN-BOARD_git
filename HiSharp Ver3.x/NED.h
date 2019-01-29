@@ -70,7 +70,8 @@
 //#define Ver2   (0x37)//20180731   V0.a.7//ryan@20180731
 //#define Ver2   (0x38)//20180731   V0.a.8//ryan@20180921
 //#define Ver2   (0x39)//20180731   V0.a.9//ryan@20181204
-#define Ver2   (0x61)//V0.a.a//ryan@20181217
+//#define Ver2   (0x61)//V0.a.a//ryan@20181217
+#define Ver2   (0x62)//V0.a.b//ryan@20190129
 //#warning "NED-5M-Sensor-Camera V0.a.9"
 
 #define _LED_PWM_HALF 1 ////ryan@20180731 奈良要求LED PWM 變成一半?
@@ -124,7 +125,8 @@
 //#define press_debug
 //#define camera_speed
 #define Camera_test 1
-
+#define recorder_video_only  1 //0x02, 0x37, 0x55, 0x03, 0x63傳訊時只顯示Recorder的Shrink影像  //ryan@20190129
+#define recoder_disable_AWB  1  //ryan@20190129
 
 U16 ADC_read(U8 sel);
 
