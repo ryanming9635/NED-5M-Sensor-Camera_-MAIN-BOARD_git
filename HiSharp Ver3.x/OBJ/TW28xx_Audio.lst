@@ -1,4 +1,4 @@
-C51 COMPILER V9.50a   TW28XX_AUDIO                                                         01/29/2019 14:30:14 PAGE 1   
+C51 COMPILER V9.50a   TW28XX_AUDIO                                                         02/01/2019 11:31:46 PAGE 1   
 
 
 C51 COMPILER V9.50a, COMPILATION OF MODULE TW28XX_AUDIO
@@ -62,7 +62,7 @@ line level    source
   52          
   53          //  ------------------------------------
   54          //      Function Prototypes
-C51 COMPILER V9.50a   TW28XX_AUDIO                                                         01/29/2019 14:30:14 PAGE 2   
+C51 COMPILER V9.50a   TW28XX_AUDIO                                                         02/01/2019 11:31:46 PAGE 2   
 
   55          //  ------------------------------------
   56          
@@ -126,7 +126,7 @@ line level    source
                   
                 dat &= AGAIN_MASK;
                 dat |= _gain<<chanData[_channel].offset;
-C51 COMPILER V9.50a   TW28XX_AUDIO                                                         01/29/2019 14:30:14 PAGE 3   
+C51 COMPILER V9.50a   TW28XX_AUDIO                                                         02/01/2019 11:31:46 PAGE 3   
 
                 
                 TW28_WriteByte(AGAIN_PAGE, AGAIN_ADDR, dat);
@@ -190,7 +190,7 @@ line level    source
                   dat |=  _ch;
                 }
                 TW28_WriteByte(MIXMUTE_PAGE, MIXMUTE_ADDR, dat);
-C51 COMPILER V9.50a   TW28XX_AUDIO                                                         01/29/2019 14:30:14 PAGE 4   
+C51 COMPILER V9.50a   TW28XX_AUDIO                                                         02/01/2019 11:31:46 PAGE 4   
 
                 
                 return true;

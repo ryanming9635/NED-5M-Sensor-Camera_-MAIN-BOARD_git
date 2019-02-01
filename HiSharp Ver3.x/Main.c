@@ -83,6 +83,7 @@ extern U8 Monitor_state;
 extern U8 Back_f;
 extern U8 Shrink_f;
 extern  U8 Crop_f;//20150413
+extern U8 Shrink_only_f;
 extern  U8 DRP_ID[9];
 extern BYTE RsRxRp,RsRxWp;
 extern U8 Camera_temp0;
@@ -979,26 +980,47 @@ else
 switch(ch)
 {
 case 0:	 PIP_flag=1; break;
-case 1:  PIP_flag=0; break;
+case 1:  PIP_flag=0;
+		Shrink_only_f=0;
+		break;
 case 2: 
+		if(Shrink_only_f)
+		{
+		Back_f=1;			
+		}
+		else		
+		{
 		Back_f=0;			
 	      Main_f=1;  
+		}
 		  break;		
-case 3: 	Back_f=1;  
+case 3: 	
+		if(Shrink_only_f)
+		{
+		Back_f=0;
+		}
+		else
+		{
+		Back_f=1;  
 	      Main_f=2;
+		}
  		  break;		
 case 4: 	Shrink_f=1;
-		Main_f=4; 
+		Main_f=4;
+		Shrink_only_f=0;
 		break;		
 case 5:  Shrink_f=0;  
 		Main_f=1;
+		Shrink_only_f=0;
 	      break;
 #ifdef Crop_Shrink_flag//ryan@20150413
 case 6:	      //crop+shrink
 	Crop_f=0x14;
+	Shrink_only_f=0;
 	    break;
 case 7:		 //shrink+crop
-	Crop_f=0x41;	
+	Crop_f=0x41;
+	Shrink_only_f=1;
 	    break;
 #endif
 default: 	Main_f=1; break;
@@ -1007,36 +1029,54 @@ default: 	Main_f=1; break;
 
 if(Crop_f>=1)
 {
-m_current=Crop_f;//ryan@20150413
+m_current=Crop_f;//ryan@20150413	
 }
 else if(PIP_flag==1)
 	{
 		if(Back_f)
 			{
+
+				if(Shrink_only_f)
+				{
+				Main_f=4;
+				Small_f=2;	
+				}
+				else
+				{
+
 						if(Shrink_f==1)
-						{
-						Main_f=2;
-						Small_f=4;
+						{							
+							Main_f=2;
+							Small_f=4;
 						}
 						else
-						{
-						Main_f=2;
-						Small_f=1;						
+						{	
+							Main_f=2;
+							Small_f=1;						
 						}
+				}
 			}
 		else
 			{
+				if(Shrink_only_f)
+				{
+				Main_f=2;
+				Small_f=4;	
+				}
+				else
+				{
 						if(Shrink_f==1)
 						{
-						Main_f=4;
-						Small_f=2;
+							Main_f=4;
+							Small_f=2;
 						}
 						else
 						{
-						Main_f=1;
-						Small_f=2;						
+							Main_f=1;
+							Small_f=2;						
+						
 						}
-
+				}
 			}
 
 		m_current=(Main_f<<4)|Small_f;
@@ -1157,8 +1197,20 @@ case 0x12: memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); break;  //CR
 case 0x21: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); break;  //RC
 case 0x14: memcpy ((RScommand.commBuf), conf6, sizeof(conf6) ); break;  //DC
 case 0x41: memcpy ((RScommand.commBuf), conf7, sizeof(conf7) ); break;  //CD
-case 0x24: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); break;  //DR
-case 0x42: memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); break;  //RD
+case 0x24: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); 
+				if(Shrink_only_f)
+				memcpy ((RScommand.commBuf), conf8, sizeof(conf8) ); 
+				else
+				memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); 
+				break;  //DR
+
+case 0x42: 
+				if(Shrink_only_f)
+				memcpy ((RScommand.commBuf), conf9, sizeof(conf9) ); 
+				else
+				memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); 
+			
+				break;  //RD
 
 	#else
 case 0x10: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); TW28_WriteByte(1,0x0f,0x03);break;  //C

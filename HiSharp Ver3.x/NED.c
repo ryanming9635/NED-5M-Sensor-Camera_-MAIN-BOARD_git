@@ -36,7 +36,7 @@ U8 Monitor_state=Monitor_offset;
 U8 Monitor_current=1;  //CR
 U8 Back_f=0;
 U8 Shrink_f=0;
-
+U8 Shrink_only_f=0;
 U8 Crop_f=0;//ryan@21050413
 //U8 Main_p=Camera_p;
 //U8 Small_p=Rear_p;
