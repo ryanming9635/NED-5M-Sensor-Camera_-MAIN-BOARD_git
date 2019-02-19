@@ -971,19 +971,21 @@ ch=(val-Monitor_offset);
 if(ch>=10)
 	ch=ch-4;
 else
+{
 	Crop_f=0;//clear Crop_f	  
-
+}
 #endif
 
  Monitor_state=val;  
 
 switch(ch)
 {
-case 0:	 PIP_flag=1; break;
-case 1:  PIP_flag=0;
-		Shrink_only_f=0;
+case 0:	PIP_flag=1;    		//PinP[ON]
 		break;
-case 2: 
+case 1:  PIP_flag=0;			//PinP[OFF]
+		break;
+case 2: 						//[Front]
+		/*
 		if(Shrink_only_f)
 		{
 		Back_f=1;			
@@ -993,8 +995,20 @@ case 2:
 		Back_f=0;			
 	      Main_f=1;  
 		}
-		  break;		
-case 3: 	
+		*/
+			//if(Shrink_only_f==1)
+		//	{
+			//Back_f=0;			
+			//}
+			//else
+			//{
+			Back_f=0;			
+		      Main_f=1;  
+			//Shrink_only_f=0;
+			//}
+		break;		
+case 3: 						//[Rear]
+/*
 		if(Shrink_only_f)
 		{
 		Back_f=0;
@@ -1004,24 +1018,35 @@ case 3:
 		Back_f=1;  
 	      Main_f=2;
 		}
- 		  break;		
-case 4: 	Shrink_f=1;
+		*/
+			//if((Shrink_only_f==1)&&(PIP_flag==1))
+			//{
+			//Back_f=1;			
+			//}
+			//else
+			//{
+			Back_f=1;  
+	      		Main_f=2;
+			//Shrink_only_f=0;
+			//}
+ 		break;		
+case 4: 	Shrink_f=1;			///[Shrink]
 		Main_f=4;
 		Shrink_only_f=0;
 		break;		
-case 5:  Shrink_f=0;  
+case 5:  Shrink_f=0;  			////[Crop]	
 		Main_f=1;
 		Shrink_only_f=0;
 	      break;
-#ifdef Crop_Shrink_flag//ryan@20150413
-case 6:	      //crop+shrink
+#ifdef Crop_Shrink_flag			//ryan@20150413
+case 6:	     					 //crop+shrink
 	Crop_f=0x14;
 	Shrink_only_f=0;
 	    break;
-case 7:		 //shrink+crop
+case 7:						 //shrink+crop
 	Crop_f=0x41;
 	Shrink_only_f=1;
-	    break;
+	 break;
 #endif
 default: 	Main_f=1; break;
 }
@@ -1033,13 +1058,16 @@ m_current=Crop_f;//ryan@20150413
 }
 else if(PIP_flag==1)
 	{
-		if(Back_f)
+		if(Back_f==1)
 			{
 
-				if(Shrink_only_f)
+				if(Shrink_only_f==1)
 				{
-				Main_f=4;
-				Small_f=2;	
+				//Main_f=4;
+				//Small_f=2;	
+
+				Main_f=2;
+				Small_f=4;	
 				}
 				else
 				{
@@ -1058,10 +1086,13 @@ else if(PIP_flag==1)
 			}
 		else
 			{
-				if(Shrink_only_f)
+				if(Shrink_only_f==1)
 				{
-				Main_f=2;
-				Small_f=4;	
+				//Main_f=2;
+				//Small_f=4;	
+
+				Main_f=4;
+				Small_f=2;				
 				}
 				else
 				{
@@ -1074,7 +1105,6 @@ else if(PIP_flag==1)
 						{
 							Main_f=1;
 							Small_f=2;						
-						
 						}
 				}
 			}
@@ -1088,25 +1118,41 @@ else
 			if(Back_f)
 			{
 						Main_f=2;
+						
+								m_current=Main_f<<4;//add
+
 			}
 			else
 			{
+			
 						if(Shrink_f==1)
 						{
 						Main_f=4;
 						Small_f=2;
+						m_current=Main_f<<4;//add
 						}
 						else
-						{
-						Main_f=1;
-						Small_f=2;						
+						{								
+						//Main_f=1;
+						//Small_f=2;							
+	
+								if(Shrink_only_f)
+									{
+									m_current=0x41;
+									}
+								else
+								{
+								Main_f=1;
+								Small_f=2;
+								m_current=Main_f<<4;//add
+								}
 						}
-
+				
 			}
 				
-		m_current=Main_f<<4;
-
-}
+		//m_current=Main_f<<4;
+		
+}					
 /*
 if(boot_flag==2)
 {
@@ -1198,17 +1244,24 @@ case 0x21: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); break;  //RC
 case 0x14: memcpy ((RScommand.commBuf), conf6, sizeof(conf6) ); break;  //DC
 case 0x41: memcpy ((RScommand.commBuf), conf7, sizeof(conf7) ); break;  //CD
 case 0x24: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); 
+
 				if(Shrink_only_f)
-				memcpy ((RScommand.commBuf), conf8, sizeof(conf8) ); 
-				else
-				memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); 
+	//			memcpy ((RScommand.commBuf), conf8, sizeof(conf8) ); 
+				memcpy ((RScommand.commBuf), conf9, sizeof(conf9) ); 
+
+				//else
+				//memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); 
+				
 				break;  //DR
 
-case 0x42: 
+case 0x42:		 memcpy ((RScommand.commBuf), conf4, sizeof(conf4) );
+		
 				if(Shrink_only_f)
-				memcpy ((RScommand.commBuf), conf9, sizeof(conf9) ); 
-				else
-				memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); 
+	//			memcpy ((RScommand.commBuf), conf9, sizeof(conf9) ); 
+				memcpy ((RScommand.commBuf), conf8, sizeof(conf8) ); 
+
+				//else
+				//memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); 
 			
 				break;  //RD
 
@@ -1276,6 +1329,7 @@ default:
 TW28_WriteByte(0,0xc3,0x01);
 TW28_WriteByte(0,0xc4,0x00);
 #endif
+
 
 		#ifdef  Monitor_debug
 	printf("\r\nMonitor mode=%x, m_current=%x ",(U16)ch, (U16)m_current);	

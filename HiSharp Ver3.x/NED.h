@@ -72,7 +72,9 @@
 //#define Ver2   (0x39)//20180731   V0.a.9//ryan@20181204
 //#define Ver2   (0x61)//V0.a.a//ryan@20181217
 //#define Ver2   (0x62)//V0.a.b//ryan@20190129
-#define Ver2   (0x63)//V0.a.c//ryan@20190201
+//#define Ver2   (0x63)//V0.a.c//ryan@20190201
+#define Ver2   (0x64)//V0.a.d//ryan@20190218
+
 
 //#warning "NED-5M-Sensor-Camera V0.a.9"
 

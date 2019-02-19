@@ -1,11 +1,8 @@
----- Shrink_only_f Matches (10 in 2 files) ----
-Main.c (hisharp ver3.x):extern U8 Shrink_only_f;
-Main.c (hisharp ver3.x):		Shrink_only_f=0;
-Main.c (hisharp ver3.x):		Shrink_only_f=0;
-Main.c (hisharp ver3.x):	Shrink_only_f=0;
-Main.c (hisharp ver3.x):	Shrink_only_f=1;
-Main.c (hisharp ver3.x):				if(Shrink_only_f)
-Main.c (hisharp ver3.x):				if(Shrink_only_f)
-Main.c (hisharp ver3.x):				if(Shrink_only_f)
-Main.c (hisharp ver3.x):				if(Shrink_only_f)
-NED.c (hisharp ver3.x):U8 Shrink_only_f=0;
+---- Crop_f Matches (8 in 2 files) ----
+Main.c (hisharp ver3.x):extern  U8 Crop_f;//20150413
+Main.c (hisharp ver3.x):	Crop_f=0;//clear Crop_f	  
+Main.c (hisharp ver3.x):	Crop_f=0x14;
+Main.c (hisharp ver3.x):	Crop_f=0x41;
+Main.c (hisharp ver3.x):if(Crop_f>=1)
+Main.c (hisharp ver3.x):m_current=Crop_f;//ryan@20150413	
+NED.c (hisharp ver3.x):U8 Crop_f=0;//ryan@21050413
