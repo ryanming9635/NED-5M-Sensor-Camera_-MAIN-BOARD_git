@@ -1,4 +1,4 @@
-C51 COMPILER V9.50a   OSD_GRAPH                                                            02/18/2019 18:00:33 PAGE 1   
+C51 COMPILER V9.50a   OSD_GRAPH                                                            02/19/2019 11:34:31 PAGE 1   
 
 
 C51 COMPILER V9.50a, COMPILATION OF MODULE OSD_GRAPH
@@ -62,7 +62,7 @@ line level    source
   52          
   53          
   54          //  ------------------------------------
-C51 COMPILER V9.50a   OSD_GRAPH                                                            02/18/2019 18:00:33 PAGE 2   
+C51 COMPILER V9.50a   OSD_GRAPH                                                            02/19/2019 11:34:31 PAGE 2   
 
   55          //      Variables Definitions
   56          //  ------------------------------------
@@ -126,7 +126,7 @@ line level    source
  114   3            WriteByteOSD(0x05, posx);
  115   3            WriteByteOSD(0x07, _posy&0xff);
  116   3        
-C51 COMPILER V9.50a   OSD_GRAPH                                                            02/18/2019 18:00:33 PAGE 3   
+C51 COMPILER V9.50a   OSD_GRAPH                                                            02/19/2019 11:34:31 PAGE 3   
 
  117   3            WriteByteOSD(0x09, ((_posy)>>8)<<2 );             //... start: OSD_POS_V_ODD, end: OSD_POS_V_ODD
  118   3            WriteByteOSD(0x0A, 0x80|(ReadByteOSD(0x0A)&0x3F));        //... x path

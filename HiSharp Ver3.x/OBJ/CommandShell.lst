@@ -1,4 +1,4 @@
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 1   
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 1   
 
 
 C51 COMPILER V9.50a, COMPILATION OF MODULE COMMANDSHELL
@@ -62,7 +62,7 @@ line level    source
   52          //  ------------------------------------ 
   53          #define WINCH     sysdat.channel_link
   54          #define RECWINTYPE  sysdat.video_mix_type
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 2   
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 2   
 
   55          #define RECLKTP   sysdat.link_type
   56          #define OSDREFALSH  msg.osd_falsh
@@ -126,7 +126,7 @@ line level    source
  114   1        data U16 ret=0;
  115   1        
  116   1        while(*Str != '\0' ) ret+=*Str++;
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 3   
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 3   
 
  117   1        return ret;
  118   1      }
@@ -190,7 +190,7 @@ line level    source
               
                 do {
                   printf("\n<R>%02bx[%02bx]=%02bx", page, start, TW28_ReadByte(page, start) );
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 4   
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 4   
 
                   start++;
                 }while(start != end);
@@ -254,7 +254,7 @@ line level    source
               }
               #endif
  240          // ***************************************************************************
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 5   
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 5   
 
  241          //
  242          // Monitor Audio Mixing 
@@ -318,7 +318,7 @@ line level    source
               
                 case 5:
                   sscanf(szParam,"ch%bd:%bd ch%bd:%bd ch%bd:%bd ch%bd:%bd ch%bd:%bd ", \
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 6   
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 6   
 
                     &selch0, &valch0, &selch1, &valch1, &selch2, &valch2, &selch3, &valch3,  &selch4, &valch4 );
                   PCT_AudioMixCtrl(0, selch0, valch0);
@@ -382,7 +382,7 @@ line level    source
                   PCT_AudioGainCtrl(0, selch0, ch0val);
                   PCT_AudioGainCtrl(0, selch1, ch1val);
                   PCT_AudioGainCtrl(0, selch2, ch2val);
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 7   
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 7   
 
                   break;
                 
@@ -446,7 +446,7 @@ line level    source
               
               // ***************************************************************************
               //
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 8   
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 8   
 
               // video signal mixing to windows
               //
@@ -510,7 +510,7 @@ line level    source
                   setval  = OFF;
                 } else if ( chose==PCT_StrToCommCode("disfreeze") ) {
                   attrsel = WIN_FREEZE;
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 9   
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 9   
 
                   setval  = OFF;
                 } else if ( chose==PCT_StrToCommCode("dishmirror") ) {
@@ -574,7 +574,7 @@ line level    source
                     PCT_DetectVideoFormat(0x01), \
                     PCT_DetectVideoFormat(0x02), \
                     PCT_DetectVideoFormat(0x03) \
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 10  
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 10  
 
                 );
               }
@@ -638,7 +638,7 @@ line level    source
  610   1        
  611   1        PCT_GetFirstStr(&getStr,&szParam);
  612   1        addrx=atoi(getStr);
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 11  
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 11  
 
  613   1        PCT_GetFirstStr(&getStr,&szParam);
  614   1        addry=atoi(getStr);
@@ -702,7 +702,7 @@ line level    source
  671   1        SYSCHATTR[WINCH[2]]=SYSWINATTR[2];
  672   1        SYSCHATTR[WINCH[3]]=SYSWINATTR[3];
  673   1      
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 12  
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 12  
 
  674   1        PCT_WinAttrCtrlY(0, WIN_HMIRROR, SYSCHATTR[0]&BIT0);  
  675   1        PCT_WinAttrCtrlY(1, WIN_HMIRROR, SYSCHATTR[1]&BIT0);  
@@ -766,7 +766,7 @@ line level    source
  733   1        //Kane add>>>>
  734   1        char TempSystem;
  735   1        TempSystem = PCT_DetectVideoFormat(SENSORCHANNEL);
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 13  
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 13  
 
  736   1        //if(SYSTYPE == PCT_DetectVideoFormat(SENSORCHANNEL)) return true;//Kane canceled
  737   1        if(TempSystem == NONE_SYSTEM)
@@ -830,7 +830,7 @@ line level    source
               #endif
  796          
  797          // ***************************************************************************
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 14  
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 14  
 
  798          //
  799          // Runing Command Shell
@@ -894,7 +894,7 @@ line level    source
                   // ===== Audio Mute =======
                   //printf("Command is Audio Mute");
                   MoniAudioMute();
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 15  
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 15  
 
                 } else if (commcode == PCT_StrToCommCode("adump")) {
                   // ===== List Audio Register Value =======
@@ -958,7 +958,7 @@ line level    source
                   MoniShowSODStr(strptr);
               // --------------------------------------------------------------------------------
               
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 16  
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 16  
 
                 }
               #endif  
@@ -1022,7 +1022,7 @@ line level    source
  981   2              }
  982   1                else if(commcode == PCT_StrToCommCode("0123456789ABCDEF"))
  983   1                  {
-C51 COMPILER V9.50a   COMMANDSHELL                                                         02/18/2019 18:00:32 PAGE 17  
+C51 COMPILER V9.50a   COMMANDSHELL                                                         02/19/2019 11:34:31 PAGE 17  
 
  984   2            MoniShowSODStr(strptr);///re-build warning issue add by ryan@20181204
  985   2                  }

@@ -985,50 +985,12 @@ case 0:	PIP_flag=1;    		//PinP[ON]
 case 1:  PIP_flag=0;			//PinP[OFF]
 		break;
 case 2: 						//[Front]
-		/*
-		if(Shrink_only_f)
-		{
-		Back_f=1;			
-		}
-		else		
-		{
 		Back_f=0;			
-	      Main_f=1;  
-		}
-		*/
-			//if(Shrink_only_f==1)
-		//	{
-			//Back_f=0;			
-			//}
-			//else
-			//{
-			Back_f=0;			
-		      Main_f=1;  
-			//Shrink_only_f=0;
-			//}
+		Main_f=1;  
 		break;		
 case 3: 						//[Rear]
-/*
-		if(Shrink_only_f)
-		{
-		Back_f=0;
-		}
-		else
-		{
 		Back_f=1;  
-	      Main_f=2;
-		}
-		*/
-			//if((Shrink_only_f==1)&&(PIP_flag==1))
-			//{
-			//Back_f=1;			
-			//}
-			//else
-			//{
-			Back_f=1;  
-	      		Main_f=2;
-			//Shrink_only_f=0;
-			//}
+	      	Main_f=2;
  		break;		
 case 4: 	Shrink_f=1;			///[Shrink]
 		Main_f=4;
@@ -1040,12 +1002,13 @@ case 5:  Shrink_f=0;  			////[Crop]
 	      break;
 #ifdef Crop_Shrink_flag			//ryan@20150413
 case 6:	     					 //crop+shrink
-	Crop_f=0x14;
-	Shrink_only_f=0;
+		Crop_f=0x14;
+		Shrink_only_f=0;
 	    break;
 case 7:						 //shrink+crop
-	Crop_f=0x41;
-	Shrink_only_f=1;
+		Crop_f=0x41;
+		Shrink_only_f=1;
+		Back_f=0;			////因為有問題所以要增加
 	 break;
 #endif
 default: 	Main_f=1; break;
@@ -1063,9 +1026,6 @@ else if(PIP_flag==1)
 
 				if(Shrink_only_f==1)
 				{
-				//Main_f=4;
-				//Small_f=2;	
-
 				Main_f=2;
 				Small_f=4;	
 				}
@@ -1088,9 +1048,6 @@ else if(PIP_flag==1)
 			{
 				if(Shrink_only_f==1)
 				{
-				//Main_f=2;
-				//Small_f=4;	
-
 				Main_f=4;
 				Small_f=2;				
 				}
@@ -1118,8 +1075,7 @@ else
 			if(Back_f)
 			{
 						Main_f=2;
-						
-								m_current=Main_f<<4;//add
+						m_current=Main_f<<4;//add
 
 			}
 			else
@@ -1133,8 +1089,6 @@ else
 						}
 						else
 						{								
-						//Main_f=1;
-						//Small_f=2;							
 	
 								if(Shrink_only_f)
 									{
@@ -1246,24 +1200,14 @@ case 0x41: memcpy ((RScommand.commBuf), conf7, sizeof(conf7) ); break;  //CD
 case 0x24: memcpy ((RScommand.commBuf), conf5, sizeof(conf5) ); 
 
 				if(Shrink_only_f)
-	//			memcpy ((RScommand.commBuf), conf8, sizeof(conf8) ); 
-				memcpy ((RScommand.commBuf), conf9, sizeof(conf9) ); 
-
-				//else
-				//memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); 
-				
-				break;  //DR
+				memcpy ((RScommand.commBuf), conf8, sizeof(conf8) ); //RD		
+				break;  
 
 case 0x42:		 memcpy ((RScommand.commBuf), conf4, sizeof(conf4) );
 		
 				if(Shrink_only_f)
-	//			memcpy ((RScommand.commBuf), conf9, sizeof(conf9) ); 
-				memcpy ((RScommand.commBuf), conf8, sizeof(conf8) ); 
-
-				//else
-				//memcpy ((RScommand.commBuf), conf4, sizeof(conf4) ); 
-			
-				break;  //RD
+				memcpy ((RScommand.commBuf), conf9, sizeof(conf9) );//DR 
+				break;
 
 	#else
 case 0x10: memcpy ((RScommand.commBuf), conf1, sizeof(conf1) ); TW28_WriteByte(1,0x0f,0x03);break;  //C
